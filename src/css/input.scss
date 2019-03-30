@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$basecolor :#9effd6 ;
+$grey:grey;
+$hitam:black;
+$colorpage:#f4f5f7;
+
+
+@mixin fontSW ($size, $weight){
+    font-size: $size;
+    font-weight: $weight;   
+}
+
+@mixin fontSWF ($size, $weight, $family){
+    font-size: $size;
+    font-weight: $weight;
+    font-family: $family;
+}
+
+@mixin fontSWFC ($size, $weight, $family, $color){
+    font-size: $size;
+    font-weight: $weight;
+    font-family: $family;
+    color:$color;
+}
+
+@mixin fontSFC ($size, $family, $color){
+    font-size: $size;
+    font-family: $family;
+    color:$color;
+}
+
+@mixin fontSF ($size, $family){
+    font-size: $size;
+    font-family: $family;  
+}
+
+@mixin paddingTB ($top, $bottom){
+    padding-top: $top;
+    padding-bottom: $bottom;
+}
+
+@mixin HW ($height, $weight){
+    height: $height;
+    width: $weight;  
+}
+
+@mixin posFloat ($position, $float){
+    position: $position;
+    float: $float;
+}
+
+.posMasuk{
+    @include posFloat(relative, right);
+    margin-top: 20px;
+    margin-right:30px;
+}
+
+.navheader{
+    @include fontSF(25,('Roboto', 'sans-serif'));
+    color: $grey;
+}
+
+.fontHeaderLogin{
+    @include fontSWF(20px !important,bold !important,('Roboto', 'sans-serif'));
+    color: grey;
+    padding-top: 7px !important;
+    padding-left: 35px !important;
+}
+
+.imglogo{
+    @include HW(50px,70px );
+}
+
+.basecolor{
+    background-color: $basecolor;
+}
+
+.textleft{
+    text-align:left;
+}
+
+.fontFooter{
+    @include fontSFC(18 , ('Roboto', 'sans-serif'), black);
+    text-decoration:none;
+    list-style-type: none;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.paddingTB20{
+    @include paddingTB(20px,20px);
+}
+
+.paddingB20{
+    @include paddingTB(10px,20px);
+}
+
+.linefooter{
+    height: 2px;
+    background-color:black;
+}
+
+.daftar{
+    @include fontSF(35px, ('Roboto', 'sans-serif'));
+    padding-left: 20px;
+    padding-top: 4px;
+    color:$grey;
+}
+
+.pad20grey{
+    padding-left: 20px;
+    @include fontSFC(14px, ('Roboto', 'sans-serif'), grey);
+}
+.grey{
+    color:grey;
+}
+
+.colorsubmit{
+    background-color: $basecolor !important;
+    border-color: grey !important;
+    color:grey !important;
+}
+
+.fontcolorbase{
+    color:$basecolor;
+}
+
+.fontroboto{
+    font-family: "roboto", sans-serif;
+}
+
+.font14px{
+    font-size:14px;
+}
+
+.paddingleft30{
+    padding-left: 30px;
+}
+
+.paddingtop100{
+    padding-top: 100px;
+}
+.paddingTB30{
+    @include paddingTB(30px, 30px)
+}
+
+.backgroundPage{
+    background-color: $colorpage;
+}
