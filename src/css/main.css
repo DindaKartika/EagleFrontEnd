@@ -147,4 +147,22 @@
   padding-left: 30px;
 }
 
+.margintTB20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.margintop-100 {
+  margin-top: -100px;
+  padding-bottom: 40px;
+}
+
+.paddingtop40 {
+  padding-top: 40px;
+}
+
+.height200 {
+  height: 200px;
+}
+
 /*# sourceMappingURL=main.css.map */
