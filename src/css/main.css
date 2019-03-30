@@ -38,8 +38,8 @@
   font-size: 18;
   font-family: "Roboto", "sans-serif";
   color: black;
-  text-decoration: none;
-  list-style-type: none;
+  text-decoration: none !important;
+  list-style-type: none !important;
 }
 
 .bold {
@@ -82,7 +82,7 @@
 
 .colorsubmit {
   background-color: #9effd6 !important;
-  border-color: grey !important;
+  border-color: #9effd6 !important;
   color: grey !important;
 }
 
@@ -95,7 +95,8 @@
 }
 
 .font14px {
-  font-size: 14px;
+  font-size: 14px !important;
+  font-family: "roboto", sans-serif;
 }
 
 .paddingleft30 {
@@ -113,6 +114,37 @@
 
 .backgroundPage {
   background-color: #f4f5f7;
+}
+
+.paddingTB10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.blue {
+  color: blue;
+}
+
+.paddingB100 {
+  padding-bottom: 100px;
+}
+
+.paddingTB20 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.profildev {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  margin-bottom: 10px;
+}
+
+.titlecontent {
+  font-size: 28px;
+  color: #d12366;
+  padding-left: 30px;
 }
 
 /*# sourceMappingURL=main.css.map */

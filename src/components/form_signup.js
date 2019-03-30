@@ -74,7 +74,7 @@ class FormRegister extends Component {
                                 </span><br/>
                             </div>
                             <div className="row justify-content-center">
-                                <span className="grey">login <Link to ="/" className="fontcolorbase">disini</Link></span>
+                                <span className="grey">login <Link to ="/" className="blue">disini</Link></span>
                             </div>
                         </form>
                     </div>
