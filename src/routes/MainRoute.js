@@ -9,6 +9,7 @@ import Keamanan from "../pages/keamanan";
 import Karir from "../pages/karir";
 import Iklan from "../pages/iklan";
 import PasangIklan from "../pages/pasang_iklan";
+import NewsFeed from "../pages/newsfeed";
 // const MainRoute = () => {
 class MainRoute extends Component {
     render() {
