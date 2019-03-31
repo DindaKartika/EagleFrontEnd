@@ -399,7 +399,12 @@ $colorbluegreen : #00CED1;
     position: fixed;
     background-color: white;
     height: 100vh;
-    border: 1px solid $basecolor
+    border: 1px solid $basecolor;
+    padding: 5px;
+    
+    label{
+        font-size: 12px;
+    }
 }
 
 //styling input_field

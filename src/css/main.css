@@ -325,6 +325,10 @@
   background-color: white;
   height: 100vh;
   border: 1px solid #9effd6;
+  padding: 5px;
+}
+.sidebar label {
+  font-size: 12px;
 }
 
 .InputField .mapboxgl-ctrl-top-right {
