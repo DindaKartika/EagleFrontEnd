@@ -51,6 +51,11 @@ $colortitle:#d12366;
     float: $float;
 }
 
+@mixin marginTB ($top, $down){
+    margin-top: $top;
+    margin-bottom: $down;
+}
+
 .posMasuk{
     @include posFloat(relative, right);
     margin-top: 20px;
@@ -299,3 +304,19 @@ $colortitle:#d12366;
 
 
 // Profile page end here
+.margintTB20{
+    @include marginTB(20px,20px )
+}
+
+.margintop-100{
+    margin-top: -100px;
+    padding-bottom: 40px;
+}
+
+.paddingtop40{
+    padding-top: 40px;
+}
+
+.height200{
+    height:200px;
+}

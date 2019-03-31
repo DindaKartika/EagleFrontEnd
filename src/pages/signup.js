@@ -18,8 +18,8 @@ class SignUp extends Component {
         <div>
             <Header />
             <div className="container-fluid">
-                <div className="row basecolor paddingTB10">
-                    <div className="col-md-6 col-12 paddingleft30 fontroboto">
+                <div className="row basecolor paddingTB10 height200">
+                    <div className="col-md-6 col-12 paddingleft30 paddingtop40 fontroboto ">
                         {/* <div className="row"> */}
                             <h5> Media sosial agrikultur Indonesia</h5>
                             <span>Gabung sekarang juga dengan mudah dan cepat untuk mendapatkan keuntungan-keuntungannya!</span>
@@ -55,7 +55,7 @@ class SignUp extends Component {
                             </div>    
                         </div>
                     </div>
-                    <div className="col-md-6 col-12 paddingTB30">
+                    <div className="col-md-6 col-12 margintop-100">
                     <FormRegister/>
                     </div>
                 </div>

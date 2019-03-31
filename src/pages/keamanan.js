@@ -41,7 +41,16 @@ class Keamanan extends Component {
                 <div className="row justify-content-center">
                 <div className="col-md-3 col-12"></div>
                 <div className="col-md-6 col-12 text-center">
-                    <span>Fokus pada pertumbuhan sekaligus memelihara platform yang terbuka memerlukan tim eksekutif terampil yang memanfaatkan tantangan.</span>
+                    <div className="card marginTB20">
+                        <div className="card-body">
+                            <span>Kami akan terus melanjutkan pekerjaan kami untuk membuat Tanah air lebih aman dan nyaman</span>
+                        </div>
+                    </div><br/>
+                    <div className="card marginTB20">
+                        <div className="card-body">
+                            <span>Ketika Anda melaporkan pelanggaran terhadap kebijakan kami, kami dapat menggunakan berbagai opsi penegakan</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="col-md-3 col-12"></div>
                 </div>
