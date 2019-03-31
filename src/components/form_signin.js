@@ -11,7 +11,7 @@ class FormSignIn extends Component {
     doLogin = ()  =>{
         this.props.signIn().then(() =>{
             console.log("looogiiin", this);
-            this.props.history.push("/perusahaan");
+            this.props.history.push("/landingpage");
         });
     };
   render() {
@@ -52,7 +52,7 @@ class FormSignIn extends Component {
                                 </span><br/>
                             </div>
                             <div className="row justify-content-center">
-                                <span className="grey">Daftar <Link to ="/" className="blue">disini</Link></span>
+                                <span className="grey">Daftar <Link to ="/signup" className="blue">disini</Link></span>
                             </div>
                         </form>
                     </div>
