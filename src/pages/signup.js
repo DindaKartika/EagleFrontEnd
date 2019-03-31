@@ -1,7 +1,7 @@
 import '../css/main.css';
 import '../css/bootstrap.min.css';
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import Footer from '../components/footer';
 import {Redirect} from "react-router-dom";
 import {connect} from "unistore/react";
