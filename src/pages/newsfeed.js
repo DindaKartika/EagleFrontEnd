@@ -15,54 +15,48 @@ class NewsFeed extends Component {
 //         test: ""
 //       };
 //   };
-
   render() {
     return (
         <div>
             <Header />
-            <div className="cover-photo">
-                {/* Cover Photo goes here! */}
-            </div>
-            <div className="container-fluid row justify-content-end">
-                <button className="btn btn-outline-success addpost-btn">Tambahkan post</button>
-            </div>
+            {/* <div className="cover-photo">
+            </div> */}
             <div className="container-fluid content-section">
                 <div className="container row container-profile">
                     <div className="col-md-3">
-                        <div className="profile-photo">
+                        <div className="profile-photo-news">
                             {/* Profile image goes here! */}
                         </div>
                         <div className="side-detail-profile">
                             <div>Display Name</div>
                             <div>@username</div>
-                            <div>Alamat</div>
-                            <div>Bergabung Dengan</div>
-                            <div>email@domain.com</div>
                             <br />
-                            <div><button className="btn btn-success">Perbarui profil</button></div>
                         </div>
                     </div>
                     <div className="col-md-9 feed-post">
                         <div className="container">
                             <div className="display" style={{ display: "block" }}>
-                                <div className="row">
-                                    <button className="btn btn-outline-success profile-content-controller active">Postingan</button>
-                                    <button className="btn btn-outline-success profile-content-controller">Info lahan</button>
-                                    <button className="btn btn-outline-success profile-content-controller" disabled>Produk</button>
+                                <form>
+                                    <div className="form-group">
+                                        <input className="form-control input-lg size-input-feed" id="inputlg" type="text"/>
+                                    </div>
+                                </form> 
+                                <div className="container-fluid row justify-content-end">
+                                    <button className="btn btn-outline-success addpost-btn">Bagikan</button>
                                 </div>
-                                <hr />
                                 <div className="profile-post" style={{ display: "block" }}>
                                     {/* Display Post  */}
                                     <div className="post-item">
-                                        <div className="row">
-                                            Postingan
-                                        </div>
                                         <hr />
                                         {/* Loop content post start here */}
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <span className="displayname-text">Display Name</span>
-                                                <span className="username-text">@username</span>
+                                                <div className="row">
+                                                    <div className="col-md-2 col-12"><img src={require('../images/img/profil.jpeg')} className="img-photo-news margin-bottom-5" alt=""/></div>
+                                                    <div className="col-md-4 col-12 margin-auto"><span className="displayname-text ">DisplayName</span></div>
+                                                    <div className="col-md-4 col-12 margin-auto"><span className="username-text">@username</span></div>
+                                                    <div className="col-md-2 col-12"></div>
+                                                </div>
                                             </div>
                                             <div className="col-md-6 date-container-text">
                                                 <span className="date-text">Date | </span>
@@ -83,8 +77,12 @@ class NewsFeed extends Component {
                                                 {/* Loop content comment start here */}
                                                 <div className="row">
                                                     <div className="col-md-6">
-                                                        <span className="displayname-text">Display Name</span>
-                                                        <span className="username-text">@username</span>
+                                                        <div className="row">
+                                                            <div className="col-md-2 col-12"><img src={require('../images/img/profil.jpeg')} className="img-photo-news margin-bottom-5" alt=""/></div>
+                                                            <div className="col-md-4 col-12 margin-auto"><span className="displayname-text ">DisplayName</span></div>
+                                                            <div className="col-md-4 col-12 margin-auto"><span className="username-text">@username</span></div>
+                                                            <div className="col-md-2 col-12"></div>
+                                                        </div>
                                                     </div>
                                                     <div className="col-md-6 date-container-text">
                                                         <span className="date-text">Date | </span>
@@ -95,14 +93,19 @@ class NewsFeed extends Component {
                                                     <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
                                                 </div>
                                                 <div className="row justify-content-end">
+                                                    <span className="attribute-text margin-right-20">Tag</span>
                                                     <span className="attribute-text">Likes</span>
                                                 </div>
                                                 {/* Loop content comment end here */}
                                                 {/* Loop content comment start here */}
                                                 <div className="row">
                                                     <div className="col-md-6">
-                                                        <span className="displayname-text">Display Name</span>
-                                                        <span className="username-text">@username</span>
+                                                        <div className="row">
+                                                            <div className="col-md-2 col-12"><img src={require('../images/img/profil.jpeg')} className="img-photo-news margin-bottom-5" alt=""/></div>
+                                                            <div className="col-md-4 col-12 margin-auto"><span className="displayname-text ">DisplayName</span></div>
+                                                            <div className="col-md-4 col-12 margin-auto"><span className="username-text">@username</span></div>
+                                                            <div className="col-md-2 col-12"></div>
+                                                        </div>
                                                     </div>
                                                     <div className="col-md-6 date-container-text">
                                                         <span className="date-text">Date | </span>
@@ -113,6 +116,7 @@ class NewsFeed extends Component {
                                                     <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
                                                 </div>
                                                 <div className="row justify-content-end">
+                                                    <span className="attribute-text margin-right-20">Tag</span>
                                                     <span className="attribute-text">Likes</span>
                                                 </div>
                                                 {/* Loop content comment end here */}
@@ -121,87 +125,8 @@ class NewsFeed extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="profile-farm" style={{ display: "block" }}>
-                                    <div>
-                                        <div className="row">
-                                            Info Kebun
-                                        </div>
-                                        <hr />
-                                        {/* Loop Content farm start here */}
-                                        <div className="row farm-item">
-                                            <div className="col-md-6">
-                                                <div className="name-text">Kebun Tersayang kampung Tidar</div>
-                                                <div className="address-text">Jl. Raya Tidar No 10 Malang</div>
-                                                <div className="info-text">
-                                                    <div>Tanaman: Melon</div>
-                                                    <div>Luas tanah: 999 m2</div>
-                                                    <div>Estimasi panen: 11-04-2019</div>
-                                                </div>
-                                                <div><button className="btn btn-success">Lihat di peta</button></div>
-                                            </div>
-                                        </div>
-                                        {/* Loop Content farm start here */}
-                                        {/* Loop Content farm start here */}
-                                        <div className="row farm-item">
-                                            <div className="col-md-6">
-                                                <div className="name-text">Kebun kedua Tidar</div>
-                                                <div className="address-text">Jl. Raya Tidar No 20 Malang</div>
-                                                <div className="info-text">
-                                                    <div>Tanaman: Semangka</div>
-                                                    <div>Luas tanah: 777 m2</div>
-                                                    <div>Estimasi panen: 21-04-2019</div>
-                                                </div>
-                                                <div><button className="btn btn-success">Lihat di peta</button></div>
-                                            </div>
-                                        </div>
-                                        {/* Loop Content farm start here */}
-                                    </div>
-                                </div>
                             </div>
-                            <div className="edit" style={{ display: "block" }}>
-                                <div className="row">
-                                    Edit Profil
-                                </div>
-                                <hr />
-                                <form>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nama Profil</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Jenis Kelamin</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Tanggal Lahir</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nomor Handphone</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Pekerjaan saat ini</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Alamat tinggal</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div><button className="btn btn-outline-success">Simpan</button></div>
-                                </form>
+                            <div className="edit" style={{ display: "block" }}>                                
                             </div>
                         </div>
                     </div>

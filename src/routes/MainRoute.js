@@ -25,7 +25,7 @@ class MainRoute extends Component {
                 <Route exact path="/karir" component={Karir}/>
                 <Route exact path="/iklan" component={Iklan}/>
                 <Route exact path="/pasangiklan" component={PasangIklan}/>
-                {/* <Route exact path = "/allproduct" component={AllProduct}/> */}
+                <Route exact path="/newsfeed" component={NewsFeed}/>
             </Switch>
         );
     }
