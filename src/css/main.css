@@ -187,6 +187,7 @@
 }
 .content-section .container-profile .feed-post .profile-post .post-item .date-container-text {
   text-align: right;
+  font-size: 14px;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .content-text {
   padding-top: 10px;
@@ -224,6 +225,16 @@
   font-size: 16px;
   margin-bottom: 10px;
 }
+.content-section .container-profile .feed-post .profile-post .post-item .feed-item {
+  background-color: #e2e2e2;
+  padding-top: 10px;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .feed-item .row {
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+}
 .content-section .container-profile .feed-post .profile-farm .farm-item {
   margin-bottom: 20px;
   background-color: #e2e2e2;
@@ -246,6 +257,9 @@
   background-color: green;
   margin-top: -200px;
   margin-bottom: 40px;
+}
+.content-section .container-profile .profile-photo img {
+  max-width: 100%;
 }
 .content-section .container-profile .side-detail-profile {
   font-size: 20px;
