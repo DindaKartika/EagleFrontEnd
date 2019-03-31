@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.1.1",
     "axios": "^0.18.0",
     "i": "^0.3.6",
+    "mapbox-gl": "^0.53.1",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
+    "react-datetime": "^2.16.3",
     "react-dom": "^16.8.6",
+    "react-mapbox-gl": "^3.0",
+    "react-mapbox-gl-draw": "^1.0.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
     "unistore": "^3.4.1"
