@@ -322,6 +322,35 @@ $colorbluegreen : #00CED1;
     height:200px;
 }
 
+.profile-photo-news {
+    @include HW(200px, 200px);
+    background-color: green;
+    // margin-top: -200px;
+    margin-bottom: 40px;
+}
+
+.size-input-feed{
+    height: 150px !important;
+    margin-top: 20px;
+}
+
+.img-photo-news{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.margin-right-20{
+    margin-right: 20px;
+}
+
+.margin-auto{
+    margin:auto;
+}
+.margin-bottom-5{
+    margin-bottom: 5px;
+}
 //styling map
 
 .search{

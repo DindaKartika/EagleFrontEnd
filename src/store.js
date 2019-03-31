@@ -45,6 +45,8 @@ const initialState = {
     is_login: false,
     product_state: "home",
 
+    is_register:false,
+
     email: "",
     email_confirmation: "",
     password_confirmation: "",
@@ -82,5 +84,72 @@ export const actions = store => ({
     setField: (state, event) => {
         // console.log("cek respond_offer", store.respond_offer)
         return { [event.target.name]: event.target.value };
-    }
+    },
+
+    signOut: state => {
+        return {is_login:false};
+    },
+    
+    signIn:  async state => {
+        const self = this;
+        const urlLogin="http://localhost:8010/proxy/login";
+        // const urlLogin="localhost:5000/login";
+        const data = {username:state.username, password:state.password}
+        let signIn = {
+            method:'post',
+            url: urlLogin,
+            data: data
+        };
+        console.log("test fungsi login", data)
+        console.log("test isi sign in", signIn)
+        await axios(signIn)
+        .then(function(response){
+            console.log(response.data);
+                store.setState({
+                    "is_login": true,
+                    "token":response.data.token,
+                    "username": response.data.data.username,
+                    "email": response.data.data.email       
+                    });
+       })
+        .catch(function(error){
+            console.log(error);
+        })
+    },
+
+    register:  async state => {
+        const self = this;
+        const urlLogin="http://localhost:8010/proxy/users/register";
+        // const urlLogin="localhost:5000/login";
+        const data = {username:state.username, password:state.password, email:state.email}
+        let signIn = {
+            method:'post',
+            url: urlLogin,
+            data: data
+        };
+        const email1=state.email;
+        const email2=state.email_confirmation;
+
+        const password1=state.password;
+        const password2=state.password_confirmation;
+
+        if (email1 != email2){ return alert("email dan konfirmasi email tidak sama")}
+        else if (password1 != password2){return alert("password dan konfirmasi password tidak sama")}
+        else{
+            await axios(signIn)
+            .then(function(response){
+                console.log(response.data);
+                    store.setState({
+                        "is_register": true,
+                        // "token":response.data.token,
+                        // "username": response.data.data.username,
+                        // "email": response.data.data.email       
+                        });
+           })
+            .catch(function(error){
+                console.log(error);
+            })
+        }
+    },
+
 })
