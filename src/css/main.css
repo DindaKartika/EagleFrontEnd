@@ -165,4 +165,41 @@
   height: 200px;
 }
 
+.search {
+  z-index: 1;
+  position: fixed;
+  top: 90px;
+  right: 2%;
+}
+.search input {
+  border-radius: 5px 0 0 5px;
+}
+.search button {
+  background-color: #00CED1;
+  padding: 2px 5px;
+  border-radius: 0 5px 5px 0;
+}
+.search button img {
+  width: 20px;
+  height: 20px;
+}
+.search .filters {
+  padding: 5px 10px;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+.search .filters button {
+  background-color: white;
+  color: grey;
+  border-radius: 3px;
+  width: 200px;
+  text-align: left;
+  margin: 5px 0;
+}
+.search .filters .btn.btn-secondary.dropdown-toggle {
+  background-color: white;
+  color: grey;
+}
+
 /*# sourceMappingURL=main.css.map */

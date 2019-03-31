@@ -7,6 +7,7 @@ import Keamanan from "../pages/keamanan";
 import Karir from "../pages/karir";
 import Iklan from "../pages/iklan";
 import PasangIklan from "../pages/pasang_iklan";
+import Map from '../pages/map';
 // const MainRoute = () => {
 class MainRoute extends Component {
     render() {
@@ -20,6 +21,7 @@ class MainRoute extends Component {
                 <Route exact path="/karir" component={Karir}/>
                 <Route exact path="/iklan" component={Iklan}/>
                 <Route exact path="/pasangiklan" component={PasangIklan}/>
+                <Route exact path="/map" component={Map}/>
                 {/* <Route exact path = "/allproduct" component={AllProduct}/> */}
     
             </Switch>
