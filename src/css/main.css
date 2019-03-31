@@ -147,6 +147,110 @@
   padding-left: 30px;
 }
 
+.cover-photo {
+  height: 400px;
+  width: 100%;
+  background-color: grey;
+}
+
+.addpost-btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.content-section {
+  background-color: #e2e2e2;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+.content-section .container-profile {
+  margin-right: auto;
+  margin-left: auto;
+}
+.content-section .container-profile .feed-post {
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+.content-section .container-profile .feed-post .profile-content-controller {
+  margin-right: 10px;
+}
+.content-section .container-profile .feed-post .container {
+  width: 90%;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .displayname-text {
+  font-weight: bold;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .username-text {
+  color: green;
+  margin-left: 20px;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .date-container-text {
+  text-align: right;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .content-text {
+  padding-top: 10px;
+  text-align: justify;
+  font-size: 16px;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .attribute-text {
+  text-align: right;
+  font-size: 16px;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .comment-area {
+  padding-top: 10px;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .comment-area .displayname-text {
+  font-weight: bold;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .comment-area .username-text {
+  color: green;
+  margin-left: 20px;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .comment-area .date-container-text {
+  text-align: right;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .comment-area .content-text {
+  text-align: justify;
+  font-size: 16px;
+  background-color: #e2e2e2;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+.content-section .container-profile .feed-post .profile-post .post-item .comment-area .attribute-text {
+  text-align: right;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.content-section .container-profile .feed-post .profile-farm .farm-item {
+  margin-bottom: 20px;
+  background-color: #e2e2e2;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.content-section .container-profile .feed-post .profile-farm .farm-item .name-text {
+  font-weight: bold;
+}
+.content-section .container-profile .feed-post .profile-farm .farm-item .address-text {
+  font-size: 14px;
+}
+.content-section .container-profile .feed-post .profile-farm .farm-item .info-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.content-section .container-profile .profile-photo {
+  height: 200px;
+  width: 200px;
+  background-color: green;
+  margin-top: -200px;
+  margin-bottom: 40px;
+}
+.content-section .container-profile .side-detail-profile {
+  font-size: 20px;
+}
+
 .margintTB20 {
   margin-top: 20px;
   margin-bottom: 20px;

@@ -188,6 +188,122 @@ $colortitle:#d12366;
     padding-left:30px;
 }
 
+// Profile page start here
+
+.cover-photo {
+    height: 400px;
+    width: 100%;
+    background-color: $grey;
+}
+
+.addpost-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.content-section {
+    background-color: rgb(226, 226, 226);
+    padding-top: 50px;
+    padding-bottom: 100px;
+    .container-profile {
+        margin-right: auto;
+        margin-left: auto;
+        .feed-post {
+            background-color: white;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            .profile-content-controller {
+                margin-right: 10px;
+            }
+            .container {
+                width: 90%;
+            }
+            .profile-post {
+                .post-item {
+                    .displayname-text {
+                        font-weight: bold;
+                    }
+                    .username-text {
+                        color: green;
+                        margin-left: 20px;
+                    }
+                    .date-container-text {
+                        text-align: right;
+                    }
+                    .content-text {
+                        padding-top: 10px;
+                        text-align: justify;
+                        font-size: 16px;
+                    }
+                    .attribute-text {
+                        text-align: right;
+                        font-size: 16px;
+                    }
+                    .comment-area {
+                        padding-top: 10px;
+                        .displayname-text {
+                            font-weight: bold;
+                        }
+                        .username-text {
+                            color: green;
+                            margin-left: 20px;
+                        }
+                        .date-container-text {
+                            text-align: right;
+                        }
+                        .content-text {
+                            text-align: justify;
+                            font-size: 16px;
+                            background-color: rgb(226, 226, 226);
+                            padding: 10px;
+                            padding-right: 20px;
+                            padding-left: 20px;
+                            margin-bottom: 0;
+                        }
+                        .attribute-text {
+                            text-align: right;
+                            font-size: 16px;
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+            .profile-farm {
+                .farm-item {
+                    margin-bottom: 20px;
+                    background-color: rgb(226, 226, 226);
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    .name-text {
+                        font-weight: bold;
+                    }
+                    .address-text {
+                        font-size: 14px;
+                    }
+                    .info-text {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+        .profile-photo {
+            height: 200px;
+            width: 200px;
+            background-color: green;
+            margin-top: -200px;
+            margin-bottom: 40px;
+        }
+        .side-detail-profile {
+            // text-align: right;
+            font-size: 20px;
+        }
+    }
+}
+
+
+
+// Profile page end here
 .margintTB20{
     @include marginTB(20px,20px )
 }
