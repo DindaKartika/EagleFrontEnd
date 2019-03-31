@@ -269,6 +269,37 @@
   height: 200px;
 }
 
+.profile-photo-news {
+  height: 200px;
+  width: 200px;
+  background-color: green;
+  margin-bottom: 40px;
+}
+
+.size-input-feed {
+  height: 150px !important;
+  margin-top: 20px;
+}
+
+.img-photo-news {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.margin-right-20 {
+  margin-right: 20px;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5px;
+}
+
 .search {
   z-index: 1;
   position: fixed;
@@ -335,6 +366,10 @@
   position: fixed;
   top: 120px;
   right: 2%;
+}
+
+.height700px {
+  height: 700px;
 }
 
 /*# sourceMappingURL=main.css.map */
