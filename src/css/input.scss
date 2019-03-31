@@ -391,6 +391,8 @@ $colorbluegreen : #00CED1;
     }
 }
 
+//styling sidebar map
+
 .sidebar{
     width: 20%;
     z-index : 1;
@@ -398,4 +400,14 @@ $colorbluegreen : #00CED1;
     background-color: white;
     height: 100vh;
     border: 1px solid $basecolor
+}
+
+//styling input_field
+
+.InputField{
+    .mapboxgl-ctrl-top-right{
+        position: fixed;
+        top: 120px;
+        right: 2%;
+    }
 }

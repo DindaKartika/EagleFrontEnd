@@ -327,4 +327,10 @@
   border: 1px solid #9effd6;
 }
 
+.InputField .mapboxgl-ctrl-top-right {
+  position: fixed;
+  top: 120px;
+  right: 2%;
+}
+
 /*# sourceMappingURL=main.css.map */

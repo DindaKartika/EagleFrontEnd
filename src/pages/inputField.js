@@ -4,7 +4,7 @@ import ReactMapboxGl from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import Header from '../components/header_signin'
-import SidebarMap from '../components/sidebarMap'
+import SidebarField from '../components/sidebarField'
 import FilterMap from '../components/filter'
 
 const Map = ReactMapboxGl({
@@ -14,33 +14,42 @@ const Map = ReactMapboxGl({
 
 
 
-class App extends Component {
+class InputField extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			filter: false,
-			date : new Date(),
-			kota : "",
-			tanaman : "",
 			sidebar : false
 		};
 
 		this.viewFilter = this.viewFilter.bind(this);
-		this.viewSidebar = this.viewSidebar.bind(this);
 	}
+
+	onDrawCreate = ({ features }) => {
+    console.log(features);
+		console.log(features['0'].geometry.coordinates)
+		this.setState({sidebar:true})
+
+		if (data.features.length > 0) {
+			var area = turf.area(data);
+			// restrict to area to 2 decimal points
+			var rounded_area = Math.round(area * 100) / 100;
+			this.setState
+		}
+		console.log()
+  };
+
+  onDrawUpdate = ({ features }) => {
+    console.log({ features });
+  };
 	
 	viewFilter(){
 		this.setState({filter:true})
 	}
 
-	viewSidebar(){
-		this.setState({sidebar:true})
-	}
-
   render() {
 		console.log(this.state.sidebar)
     return (
-      <div className="App">
+      <div className="InputField">
 				<div className="header">
 					<Header/>
 				</div>
@@ -48,10 +57,9 @@ class App extends Component {
 					<form onSubmit={e => e.preventDefault()}>
 						<input type="search" onFocus={this.viewFilter} placeholder="Cari" name="search"/>
 						<button type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
-						{this.state.filter && <FilterMap/>}
 					</form>
 				</div>
-				{this.state.sidebar && <SidebarMap/>}
+				{this.state.sidebar && <SidebarField/>}
 				<div>
 					<Map
 						style="mapbox://styles/mapbox/streets-v9"
@@ -62,7 +70,7 @@ class App extends Component {
 						center={[112.63396597896462, -7.97718148341032]}
 						zoom={[12]}
 					>
-						{/* <DrawControl
+						<DrawControl
 							position="top-right"
 							displayControlsDefault = {false}
 							controls={{
@@ -71,7 +79,7 @@ class App extends Component {
 							}}
 							onDrawCreate={this.onDrawCreate}
 							onDrawUpdate={this.onDrawUpdate}
-						/> */}
+						/>
 					</Map>
 				</div>
       </div>
@@ -79,4 +87,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default InputField;
