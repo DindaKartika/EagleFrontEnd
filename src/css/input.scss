@@ -420,13 +420,30 @@ $colorbluegreen : #00CED1;
     }
 }
 
+//styling sidebar map
+
 .sidebar{
     width: 20%;
     z-index : 1;
     position: fixed;
     background-color: white;
     height: 100vh;
-    border: 1px solid $basecolor
+    border: 1px solid $basecolor;
+    padding: 5px;
+    
+    label{
+        font-size: 12px;
+    }
+}
+
+//styling input_field
+
+.InputField{
+    .mapboxgl-ctrl-top-right{
+        position: fixed;
+        top: 120px;
+        right: 2%;
+    }
 }
 
 .height700px{
