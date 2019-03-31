@@ -269,4 +269,62 @@
   height: 200px;
 }
 
+.search {
+  z-index: 1;
+  position: fixed;
+  top: 90px;
+  right: 2%;
+}
+.search input {
+  border-radius: 5px 0 0 5px;
+}
+.search button {
+  background-color: #00CED1;
+  padding: 2px 5px;
+  border-radius: 0 5px 5px 0;
+}
+.search button img {
+  width: 20px;
+  height: 20px;
+}
+.search .filters {
+  padding: 7px 10px;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+.search .filters label {
+  margin-bottom: 0;
+  font-size: 12px;
+}
+.search .filters .css-10nd86i {
+  background-color: white;
+  color: grey;
+  border-radius: 3px;
+  width: 200px;
+  text-align: left;
+  margin: 3px 0;
+}
+.search .filters .btn.btn-secondary.dropdown-toggle {
+  background-color: white;
+  color: grey;
+}
+.search .filters .react-datetime-picker__wrapper {
+  border: thin solid lightgrey;
+  border-radius: 3px;
+  width: 200px;
+}
+.search .filters .react-datetime-picker__wrapper button {
+  display: none;
+}
+
+.sidebar {
+  width: 20%;
+  z-index: 1;
+  position: fixed;
+  background-color: white;
+  height: 100vh;
+  border: 1px solid #9effd6;
+}
+
 /*# sourceMappingURL=main.css.map */
