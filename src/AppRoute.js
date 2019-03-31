@@ -7,7 +7,7 @@ import {actions} from './store';
 
 class AppRoute extends Component {
 
-    render(){
+  	render(){
         // console.log("test")
         return(
             <div className ="App">
