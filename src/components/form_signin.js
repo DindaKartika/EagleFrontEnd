@@ -70,3 +70,5 @@ class FormSignIn extends Component {
 export default connect(
     "is_login", actions
 )(withRouter(FormSignIn))
+
+

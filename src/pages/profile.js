@@ -6,6 +6,7 @@ import { actions } from '../store';
 import { withRouter } from "react-router-dom";
 import Header from '../components/header_signin'
 import Footer from '../components/footer';
+import ListFeed from '../components/list_feed'
 
 //MAIN CLASS
 class Profile extends Component {
@@ -13,24 +14,111 @@ class Profile extends Component {
     super(props);
         this.state = {
             edit: false,
-            show: "post"
+            show: "post",
+
+            id: 0,
+            username: "",
+            email: "",
+            display_name: "",
+            headline: "",
+            profile_picture: "",
+            gender: "",
+            date_of_birth: "",
+            address: "",
+            phone_number: "",
+            facebook_link: "",
+            instagram_link: "",
+            twitter_link: "",
+            other_link: "",
+            created_at: "",
+            updated_at: "",
+            post_count: 0,
+            job: "",
+            status: "",
+
+            listFeed: []
         };
     };
 
+    componentDidMount = async () => {
+        this.getIdentity().then(()=> {
+            this.getFeed();
+        });
+    }
+
+    getIdentity = async () => {
+        const self = this
+        const token = localStorage.getItem("token")
+        await axios({
+            method: 'get',
+            url: 'http://localhost:5000/users/profile',
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+        }).then(function(response) {
+            if (response.data.status === "Success") {
+                // console.log("login berhasil", response.data.data.id)
+                self.setState({
+                    id: response.data.data.id,
+                    username: response.data.data.username,
+                    email: response.data.data.email,
+                    display_name: response.data.data.display_name,
+                    headline: response.data.data.headline,
+                    profile_picture: response.data.data.profile_picture,
+                    gender: response.data.data.gender,
+                    date_of_birth: response.data.data.date_of_birth,
+                    address: response.data.data.address,
+                    phone_number: response.data.data.phone_number,
+                    facebook_link: response.data.data.facebook_link,
+                    instagram_link: response.data.data.instagram_link,
+                    twitter_link: response.data.data.twitter_link,
+                    other_link: response.data.data.other_link,
+                    created_at: response.data.data.created_at,
+                    updated_at: response.data.data.updated_at,
+                    post_count: response.data.data.post_count,
+                    job: response.data.data.job,
+                    status: response.data.data.state
+                })
+            } else {
+                // console.log("login gagal")
+                self.props.history.replace("/signin");
+            }
+            // console.log("Sukses get identity", response.data.status)
+        }).catch(function(error) {
+        console.log("Gagal get identity", error);
+        });
+    };
+
+    getFeed = async () => {
+        const self = this
+        const token = localStorage.getItem("token")
+        const url = "http://localhost:5000/feeds?id_user=" + self.state.id
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+        }).then(function(response) {
+            console.log("Get feeds berhasil", response.data)
+            self.setState({
+                listFeed: response.data
+            })
+        }).catch(function(error) {
+        console.log("Gagal get feeds", error);
+        });
+        console.log("cek after get feed", self.state)
+    }
+
     changeEditState = async () => {
-        // console.log("Test state edit")
         const self = this;
-        await self.setState({edit: !self.state.edit});
-        // console.log(this.props.auth_state)
-        // console.log(self.state.edit)
+        self.setState({edit: !self.state.edit});
+        console.log("cek state", self.state)
         };
     
     changeShowState = async (value) => {
-        // console.log("Test state edit")
         const self = this;
-        await self.setState({show: value});
-        // console.log(this.props.auth_state)
-        // console.log(self.state.edit)
+        self.setState({show: value});
         };
     
 
@@ -47,22 +135,23 @@ class Profile extends Component {
                 <div className="container-fluid content-section">
                     <div className="container row container-profile">
                         <div className="col-md-3">
-                            <div className="profile-photo">
+                            <div className="profile-photo" style={{backgroundImage: "url(" + this.state.profile_picture + ")", backgroundSize: "cover"}}>
                                 {/* Profile image goes here! */}
+                                {/* <img className="img" src={this.state.profile_picture} /> */}
                             </div>
                             <div className="side-detail-profile">
-                                <div>Display Name</div>
-                                <div>@username</div>
-                                <div>Alamat</div>
-                                <div>Bergabung Dengan</div>
-                                <div>email@domain.com</div>
+                                <div>{this.state.display_name}</div>
+                                <div>@{this.state.username}</div>
+                                <div>{this.state.address}</div>
+                                <div>{this.state.created_at.slice(0, 10)}</div>
+                                <div>{this.state.email}</div>
                                 <br />
                                 <div><button className="btn btn-success" onClick={() => this.changeEditState()}>Perbarui profil</button></div>
                             </div>
                         </div>
                         <div className="col-md-9 feed-post">
                             <div className="container">
-                                <div className="display" style={{ display: this.state.edit ? "block" : "none" }}>
+                                <div className="display" style={{ display: this.state.edit ? "none" : "block" }}>
                                     <div className="row">
                                         <button className={(this.state.show === "post") ? "btn btn-outline-success profile-content-controller active" : "btn btn-outline-success profile-content-controller" } onClick={() => this.changeShowState("post")}>Postingan</button>
                                         <button className={(this.state.show === "farm") ? "btn btn-outline-success profile-content-controller active" : "btn btn-outline-success profile-content-controller" } onClick={() => this.changeShowState("farm")}>Info lahan</button>
@@ -77,66 +166,11 @@ class Profile extends Component {
                                             </div>
                                             <hr />
                                             {/* Loop content post start here */}
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    <span className="displayname-text">Display Name</span>
-                                                    <span className="username-text">@username</span>
-                                                </div>
-                                                <div className="col-md-6 date-container-text">
-                                                    <span className="date-text">Date | </span>
-                                                    <span className="date-text">Time</span>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
-                                            </div>
-                                            <div className="row justify-content-between">
-                                                <span className="attribute-text">Tag</span>
-                                                <span className="attribute-text">Comments</span>
-                                                <span className="attribute-text">Likes</span>
-                                            </div>
-                                            <div className="row comment-area">
-                                                <div className="col-md-2"></div>
-                                                <div className="col-md-10">
-                                                    {/* Loop content comment start here */}
-                                                    <div className="row">
-                                                        <div className="col-md-6">
-                                                            <span className="displayname-text">Display Name</span>
-                                                            <span className="username-text">@username</span>
-                                                        </div>
-                                                        <div className="col-md-6 date-container-text">
-                                                            <span className="date-text">Date | </span>
-                                                            <span className="date-text">Time</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
-                                                    </div>
-                                                    <div className="row justify-content-end">
-                                                        <span className="attribute-text">Likes</span>
-                                                    </div>
-                                                    {/* Loop content comment end here */}
-                                                    {/* Loop content comment start here */}
-                                                    <div className="row">
-                                                        <div className="col-md-6">
-                                                            <span className="displayname-text">Display Name</span>
-                                                            <span className="username-text">@username</span>
-                                                        </div>
-                                                        <div className="col-md-6 date-container-text">
-                                                            <span className="date-text">Date | </span>
-                                                            <span className="date-text">Time</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
-                                                    </div>
-                                                    <div className="row justify-content-end">
-                                                        <span className="attribute-text">Likes</span>
-                                                    </div>
-                                                    {/* Loop content comment end here */}
-                                                    {/* Loop content post end here */}
-                                                </div>
-                                            </div>
+                                            {this.state.listFeed.map((item, key) => {
+                                                // console.log("cek mapping function", item.content)
+                                                return <ListFeed key={key} data={item}/>
+                                            })}
+                                            {/* Loop content post end here */}
                                         </div>
                                     </div>
                                     <div className="profile-farm" style={{ display: (this.state.show === "farm") ? "block" : "none" }}>
@@ -176,7 +210,7 @@ class Profile extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="edit" style={{ display: this.state.edit ? "none" : "block" }}>
+                                <div className="edit" style={{ display: this.state.edit ? "block" : "none" }}>
                                     <div className="row">
                                         Edit Profil
                                     </div>
