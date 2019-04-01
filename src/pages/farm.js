@@ -24,7 +24,7 @@ const optionsPlant = [
 
 const Map = ReactMapboxGl({
   accessToken:
-    "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0d3NocmEzMDB0ejN5bWhkb2l2Zm92diJ9.OmM7fJbSBdSGfHQG4BH-qw"
+    "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0eWVobmZ1MGdrdzRkbWhoaHRvOG1uciJ9.921TLCVIBcweDV-xoUiNeQ"
 });
 
 const polygonPaint = {

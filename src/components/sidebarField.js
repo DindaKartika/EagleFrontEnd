@@ -38,7 +38,7 @@ class SidebarField extends Component {
     console.log('ready', dateReady)
     console.log('plant', datePlant)
     const data={
-      deskripsi: deskripsi,
+      description: deskripsi,
       plant_type: plant_type,
       planted_at: datePlant.toISOString(),
       ready_at: dateReady.toISOString(),
