@@ -447,9 +447,36 @@ $colorbluegreen : #00CED1;
     height: 100vh;
     border: 1px solid $basecolor;
     padding: 5px;
+    left: 0;
     
     label{
         font-size: 12px;
+    }
+
+    .sidebar-item{
+        border: 1px solid $basecolor;
+        padding: 5px;
+        margin : 5px;
+        width: 90%;
+
+        h4{
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+
+    .react-datetime-picker__wrapper{
+        border: thin solid lightgrey;
+        border-radius: 3px;
+        width: 200px;
+
+        button{
+            display: none;
+        }
+
+        // .react-datetime-picker__inputGroup__amPm{
+        //     disabled : true
+        // }
     }
 }
 

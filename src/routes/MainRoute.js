@@ -15,6 +15,7 @@ import BlogDetail from '../pages/blog_detail';
 import Blog from '../pages/blog';
 import InputField from '../pages/inputField'
 import LandingPage from '../pages/landingpage'
+import Farm from '../pages/farm'
 // const MainRoute = () => {
 class MainRoute extends Component {
     render() {
@@ -34,6 +35,7 @@ class MainRoute extends Component {
                 <Route exact path="/map" component={Map}/>
                 <Route exact path="/input-field" component={InputField}/>
                 <Route exact path="/landingpage" component={LandingPage}/>
+                <Route exact path="/farm/:id_farm" component={Farm}/>
                 <Route exact path="/blogdetail" component={BlogDetail}/>
                 <Route exact path="/blog" component={Blog}/>
                 {/* <Route exact path = "/allproduct" component={AllProduct}/> */}

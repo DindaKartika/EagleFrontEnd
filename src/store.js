@@ -92,7 +92,7 @@ export const actions = store => ({
     
     signIn:  async state => {
         const self = this;
-        const urlLogin="http://localhost:8010/proxy/login";
+        const urlLogin="http://localhost:5000/login";
         // const urlLogin="localhost:5000/login";
         const data = {username:state.username, password:state.password}
         let signIn = {
@@ -119,7 +119,7 @@ export const actions = store => ({
 
     register:  async state => {
         const self = this;
-        const urlLogin="http://localhost:8010/proxy/users/register";
+        const urlLogin="http://localhost:5000/users/register";
         // const urlLogin="localhost:5000/login";
         const data = {username:state.username, password:state.password, email:state.email}
         let signIn = {
