@@ -210,6 +210,7 @@ $colorbluegreen : #00CED1;
         margin-right: auto;
         margin-left: auto;
         .feed-post {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             background-color: white;
             padding-top: 20px;
             padding-bottom: 50px;
@@ -222,11 +223,12 @@ $colorbluegreen : #00CED1;
             .profile-post {
                 .post-item {
                     .displayname-text {
-                        font-weight: bold;
+                        font-weight:bold;
+                        font-size: 18px;
                     }
                     .username-text {
-                        color: green;
-                        margin-left: 20px;
+                        font-size: 16px;
+                        color: darkgreen;
                     }
                     .date-container-text {
                         text-align: right;
@@ -239,16 +241,17 @@ $colorbluegreen : #00CED1;
                     }
                     .attribute-text {
                         text-align: right;
-                        font-size: 16px;
+                        font-size: 14px;
                     }
                     .comment-area {
                         padding-top: 10px;
                         .displayname-text {
-                            font-weight: bold;
+                            font-weight:bold;
+                            font-size: 18px;
                         }
                         .username-text {
-                            color: green;
-                            margin-left: 20px;
+                            font-size: 16px;
+                            color: darkgreen;
                         }
                         .date-container-text {
                             text-align: right;
@@ -264,8 +267,9 @@ $colorbluegreen : #00CED1;
                         }
                         .attribute-text {
                             text-align: right;
-                            font-size: 16px;
+                            font-size: 14px;
                             margin-bottom: 10px;
+                            color: darkgreen;
                         }
                     }
                     .feed-item {
@@ -330,9 +334,91 @@ $colorbluegreen : #00CED1;
         .display-date {
             font-size: 16px;
         }
+        .display-email {
+            font-size: 16px;
+            color: darkgreen;
+        }
     }
 }
 
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.form-container {
+    margin: 20px auto;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 40px;
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+    
+    .col-75 {
+        float: left;
+        width: 50%;
+        margin-top: 6px;
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    h1 {
+        margin-bottom: 30px;
+    }
+    
+    input[type=password], input[type=text], input[type=email], select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+        font-size: 16px;
+    }
+    
+    input[type=submit] {
+        float: right;
+        color: #f2f2f2;
+        cursor: pointer;
+        margin: 20px 25px 0 25px;
+        padding: 15px 40px;
+        font-size: 16px;
+        background-color: #747474;
+        border-radius: 50px;
+        border: 1px solid #747474;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, .5);
+    }
+    
+    input[type=submit]:hover {
+        background: #151719;
+        box-shadow: none;
+    }
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75 {
+        width: 100%;
+        margin-top: 0;
+    }
+    input[type=submit] {
+        width: 100%;
+        margin: 30px auto;
+    }
+}
 
 
 // Profile page end here

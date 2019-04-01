@@ -168,6 +168,7 @@
   margin-left: auto;
 }
 .content-section .container-profile .feed-post {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: white;
   padding-top: 20px;
   padding-bottom: 50px;
@@ -180,10 +181,11 @@
 }
 .content-section .container-profile .feed-post .profile-post .post-item .displayname-text {
   font-weight: bold;
+  font-size: 18px;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .username-text {
-  color: green;
-  margin-left: 20px;
+  font-size: 16px;
+  color: darkgreen;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .date-container-text {
   text-align: right;
@@ -196,17 +198,18 @@
 }
 .content-section .container-profile .feed-post .profile-post .post-item .attribute-text {
   text-align: right;
-  font-size: 16px;
+  font-size: 14px;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .comment-area {
   padding-top: 10px;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .comment-area .displayname-text {
   font-weight: bold;
+  font-size: 18px;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .comment-area .username-text {
-  color: green;
-  margin-left: 20px;
+  font-size: 16px;
+  color: darkgreen;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .comment-area .date-container-text {
   text-align: right;
@@ -222,8 +225,9 @@
 }
 .content-section .container-profile .feed-post .profile-post .post-item .comment-area .attribute-text {
   text-align: right;
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 10px;
+  color: darkgreen;
 }
 .content-section .container-profile .feed-post .profile-post .post-item .feed-item {
   background-color: #e2e2e2;
@@ -278,7 +282,82 @@
 .content-section .container-profile .display-date {
   font-size: 16px;
 }
+.content-section .container-profile .display-email {
+  font-size: 16px;
+  color: darkgreen;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.form-container {
+  margin: 20px auto;
+  border-radius: 5px;
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 40px;
+  /* Clear floats after the columns */
+}
+.form-container .col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+.form-container .col-75 {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+}
+.form-container .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.form-container h1 {
+  margin-bottom: 30px;
+}
+.form-container input[type=password], .form-container input[type=text], .form-container input[type=email], .form-container select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form-container label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+  font-size: 16px;
+}
+.form-container input[type=submit] {
+  float: right;
+  color: #f2f2f2;
+  cursor: pointer;
+  margin: 20px 25px 0 25px;
+  padding: 15px 40px;
+  font-size: 16px;
+  background-color: #747474;
+  border-radius: 50px;
+  border: 1px solid #747474;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+.form-container input[type=submit]:hover {
+  background: #151719;
+  box-shadow: none;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75 {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  input[type=submit] {
+    width: 100%;
+    margin: 30px auto;
+  }
+}
 .margintTB20 {
   margin-top: 20px;
   margin-bottom: 20px;
