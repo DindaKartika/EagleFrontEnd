@@ -140,13 +140,13 @@ class Profile extends Component {
                                 {/* <img className="img" src={this.state.profile_picture} /> */}
                             </div>
                             <div className="side-detail-profile">
-                                <div>{this.state.display_name}</div>
-                                <div>@{this.state.username}</div>
-                                <div>{this.state.address}</div>
-                                <div>{this.state.created_at.slice(0, 10)}</div>
-                                <div>{this.state.email}</div>
+                                <div className="display-name">{this.state.display_name}</div>
+                                <div className="display-username">@{this.state.username}</div>
+                                <div className="display-address">{this.state.address}</div>
+                                <div className="display-date">{this.state.created_at.slice(0, 10)}</div>
+                                <div className="display-email">{this.state.email}</div>
                                 <br />
-                                <div><button className="btn btn-success" onClick={() => this.changeEditState()}>Perbarui profil</button></div>
+                                <div className="display-edit"><button className="btn btn-success" onClick={() => this.changeEditState()}>Perbarui profil</button></div>
                             </div>
                         </div>
                         <div className="col-md-9 feed-post">

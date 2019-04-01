@@ -316,6 +316,20 @@ $colorbluegreen : #00CED1;
             // text-align: right;
             font-size: 20px;
         }
+        .display-name {
+            font-weight:bold;
+            font-size: 18px;
+        }
+        .display-username {
+            font-size: 16px;
+            color: darkgreen;
+        }
+        .display-address {
+            font-size: 16px;
+        }
+        .display-date {
+            font-size: 16px;
+        }
     }
 }
 

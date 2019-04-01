@@ -264,6 +264,20 @@
 .content-section .container-profile .side-detail-profile {
   font-size: 20px;
 }
+.content-section .container-profile .display-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+.content-section .container-profile .display-username {
+  font-size: 16px;
+  color: darkgreen;
+}
+.content-section .container-profile .display-address {
+  font-size: 16px;
+}
+.content-section .container-profile .display-date {
+  font-size: 16px;
+}
 
 .margintTB20 {
   margin-top: 20px;
