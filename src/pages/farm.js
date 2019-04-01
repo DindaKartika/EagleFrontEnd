@@ -29,7 +29,7 @@ const Map = ReactMapboxGl({
 
 const polygonPaint = {
   'fill-color': '#6F788A',
-  'fill-opacity': 0.7
+  'fill-opacity': 0.8
 };
 
 const AllShapesPolygonCoords = [
@@ -51,16 +51,16 @@ class Farm extends Component {
 			date : new Date(),
 			kota : "",
 			tanaman : "",
-			sidebar : false,
-			center : [],
-			koordinat : []
+			sidebar : false
+			// center : [],
+			// koordinat : []
 		};
 
 		this.viewFilter = this.viewFilter.bind(this);
 		this.viewSidebar = this.viewSidebar.bind(this);
     }
     
-    componentDidMount = () =>{
+    UNSAFE_componentWillMount () {
 			const self = this;
 			console.log(window.location.pathname.slice(6))
 			axios
@@ -68,7 +68,8 @@ class Farm extends Component {
 			.then(function(response){
 				self.setState({Farms: response.data});
 				console.log('Farms', response.data);
-				const koordinat = JSON.parse(response.data.coordinates)
+				const koordinat = []
+				koordinat.push(JSON.parse(response.data.coordinates))
 				console.log('coord jadi', koordinat)
 				self.setState({koordinat: koordinat})
 				const centers = JSON.parse(response.data.center)
@@ -113,6 +114,7 @@ class Farm extends Component {
 		const {center, koordinat} = this.state
 		console.log('center', center)
 		console.log('koordinat', koordinat)
+		// if (!this.state.loaded) return <Loading />
     return (
       <div className="App">
 				<div className="header">
@@ -149,7 +151,7 @@ class Farm extends Component {
 							width: "100vw"
 						}}
 						center={center}
-						zoom={[12]}
+						zoom={[15]}
 					>
 						<Layer type="fill" paint={polygonPaint}>
 							<Feature coordinates={koordinat} />
