@@ -38,6 +38,8 @@ class App extends Component {
 			sidebar : false
 		};
 
+		localStorage.setItem('search', '')
+
 		this.viewFilter = this.viewFilter.bind(this);
 		this.viewSidebar = this.viewSidebar.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -45,9 +47,11 @@ class App extends Component {
 	
 	viewFilter(){
 		this.setState({filter:true})
+		console.log('true')
 	}
 
 	viewSidebar(){
+		// localStorage.setItem('search', )
 		this.setState({sidebar:true})
 	}
 
@@ -68,14 +72,27 @@ class App extends Component {
 		localStorage.setItem('tanaman', event.value)
 		console.log(event.value)
   }
-  
+	
+	changeSearch(event) {
+		this.setState({
+			search: event.value
+		});
+
+		localStorage.setItem('search', event.value)
+		console.log('search', event.value)
+  }
+
 	// onChange = date => this.setState({ date })
 	
 	handleChange(date) {
     this.setState({
       startDate: date
     });
-}
+	}
+
+	changeInput = e =>{
+		localStorage.setItem('search', e.target.value);
+	};
 
   render() {
 		console.log(this.state.sidebar)
@@ -88,9 +105,10 @@ class App extends Component {
 				</div>
 				<div className="search">
 					<form onSubmit={e => e.preventDefault()}>
-						<input type="search" onFocus={this.viewFilter} placeholder="Cari" name="search"/>
+						<input type="search" onClick={this.viewFilter} placeholder="Cari" name="search" onChange={e => this.changeInput(e)}/>
 						<button type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
-						<div className="filters">
+						{this.state.filter && <FilterMap/>}
+						{/* <div className="filters">
 							<label>Filter berdasarkan :</label>
 							<br/>
 							<label>Kota :</label>
@@ -99,18 +117,18 @@ class App extends Component {
 							<Select options={optionsPlant} onChange={e => this.changePlant(e)}/>
 							<label>Waktu panen :</label>
 							<br/>
-							{/* <DateTimePicker
+							<DateTimePicker
 								onChange={this.onChange}
 								value={this.state.date}
 								disableClock={true}
 								// minDate={new Date()}
-							/> */}
+							/>
 							<DatePicker
 								selected={startDate}
 								onChange={this.handleChange}
 								value ={startDate}
 							/>
-						</div>
+						</div> */}
 					</form>
 				</div>
 				{this.state.sidebar && <SidebarMap/>}
