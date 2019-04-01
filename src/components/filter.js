@@ -36,9 +36,12 @@ class FilterMap extends Component {
 			tanaman: event.value
 		});
 		console.log(event.value)
-	}
+  }
+  
+  onChange = date => this.setState({ date })
 	
   render() {
+    console.log(this.state.date)
     return (
     <div className="filters">
         <label>Filter berdasarkan :</label>
@@ -49,7 +52,7 @@ class FilterMap extends Component {
         <Select options={options} onChange={e => this.changePlant(e)}/>
         <label>Waktu panen :</label>
         <br/>
-        <DateTimePicker className="css-10nd86i"
+        <DateTimePicker
             onChange={this.onChange}
             value={this.state.date}
             disableClock={true}

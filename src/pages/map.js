@@ -9,7 +9,7 @@ import FilterMap from '../components/filter'
 
 const Map = ReactMapboxGl({
   accessToken:
-    "pk.eyJ1IjoiZmFrZXVzZXJnaXRodWIiLCJhIjoiY2pwOGlneGI4MDNnaDN1c2J0eW5zb2ZiNyJ9.mALv0tCpbYUPtzT7YysA2g"
+    "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0d3NocmEzMDB0ejN5bWhkb2l2Zm92diJ9.OmM7fJbSBdSGfHQG4BH-qw"
 });
 
 
@@ -35,7 +35,6 @@ class App extends Component {
 
 	viewSidebar(){
 		this.setState({sidebar:true})
-		;
 	}
 
   render() {
