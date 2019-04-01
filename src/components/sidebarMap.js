@@ -13,7 +13,7 @@ class SidebarMap extends Component {
 			};
 		}
 
-	componentDidMount = (selectedPage) =>{
+	componentDidMount = () =>{
 		const self = this;
 		axios
 		.get('http://0.0.0.0:5000/farms')

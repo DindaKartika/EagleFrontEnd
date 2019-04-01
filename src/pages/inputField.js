@@ -16,6 +16,9 @@ const Map = ReactMapboxGl({
 
 const turf = require("@turf/turf")
 
+
+const tokens = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTQwNDgwMTcsIm5iZiI6MTU1NDA0ODAxNywianRpIjoiNWZlNGQ4ZTMtYjFjNi00OGE4LTg0YjEtNTFkNTVmYjllOWNiIiwiZXhwIjoxNTU0MTM0NDE3LCJpZGVudGl0eSI6eyJpZCI6MSwidXNlcm5hbWUiOiJEaW5kYSIsImVtYWlsIjoiZGluZGFAeHl6LmNvbSIsImRpc3BsYXlfbmFtZSI6IiIsImhlYWRsaW5lIjoiIiwicHJvZmlsZV9waWN0dXJlIjoiaHR0cHM6Ly9jZG4ucGl4YWJheS5jb20vcGhvdG8vMjAxNS8xMC8wNS8yMi8zNy9ibGFuay1wcm9maWxlLXBpY3R1cmUtOTczNDYwXzk2MF83MjAucG5nIiwiZ2VuZGVyIjoiIiwiZGF0ZV9vZl9iaXJ0aCI6IiIsImFkZHJlc3MiOiIiLCJwaG9uZV9udW1iZXIiOiIiLCJmYWNlYm9va19saW5rIjoiIiwiaW5zdGFncmFtX2xpbmsiOiIiLCJ0d2l0dGVyX2xpbmsiOiIiLCJvdGhlcl9saW5rIjoiIiwiY3JlYXRlZF9hdCI6IjIwMTktMDMtMzEgMjM6MDA6MDguNzMyMzQxIiwidXBkYXRlZF9hdCI6IjIwMTktMDMtMzEgMjM6MDA6MDguNzMyMzUxIiwicG9zdF9jb3VudCI6MCwiam9iIjoiIiwic3RhdHVzIjoiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyIsInVzZXJfY2xhaW1zIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkRpbmRhIiwiZW1haWwiOiJkaW5kYUB4eXouY29tIiwiZGlzcGxheV9uYW1lIjoiIiwiaGVhZGxpbmUiOiIiLCJwcm9maWxlX3BpY3R1cmUiOiJodHRwczovL2Nkbi5waXhhYmF5LmNvbS9waG90by8yMDE1LzEwLzA1LzIyLzM3L2JsYW5rLXByb2ZpbGUtcGljdHVyZS05NzM0NjBfOTYwXzcyMC5wbmciLCJnZW5kZXIiOiIiLCJkYXRlX29mX2JpcnRoIjoiIiwiYWRkcmVzcyI6IiIsInBob25lX251bWJlciI6IiIsImZhY2Vib29rX2xpbmsiOiIiLCJpbnN0YWdyYW1fbGluayI6IiIsInR3aXR0ZXJfbGluayI6IiIsIm90aGVyX2xpbmsiOiIiLCJjcmVhdGVkX2F0IjoiMjAxOS0wMy0zMSAyMzowMDowOC43MzIzNDEiLCJ1cGRhdGVkX2F0IjoiMjAxOS0wMy0zMSAyMzowMDowOC43MzIzNTEiLCJwb3N0X2NvdW50IjowLCJqb2IiOiIiLCJzdGF0dXMiOiIifX0.HiAc34liDjz5MAWvY8W4de-rZMotKz6-rdSXblEHQDM'
+
 class InputField extends Component {
 	constructor(props) {
 		super(props);
@@ -52,15 +55,16 @@ class InputField extends Component {
 			localStorage.setItem('center', pusat)
 			const data={
 				coordinates: rows,
-				farm_size: rounded_area
+				farm_size: rounded_area,
+				center: pusat
 			};
 
 			axios
-			.post('http://0.0.0.0:5000/farms', data
-				// headers:{
-				// 		'Authorization' : 'Bearer ' + tokens
-				// }
-			)
+			.post('http://0.0.0.0:5000/farms', data, {
+				headers:{
+						'Authorization' : 'Bearer ' + tokens
+				}
+			})
 			.then(function(response){
 				// this.setState({Farms: response.data});
 				localStorage.setItem('id_farm', response.data.id_farm)
