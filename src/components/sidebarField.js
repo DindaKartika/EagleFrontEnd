@@ -5,6 +5,10 @@ import{ Link } from "react-router-dom";
 import axios from 'axios';
 import ListFarm from './listSidebar'
 import DateTimePicker from 'react-datetime-picker'
+import DatePicker from 'react-datepicker'
+import {withRouter} from 'react-router-dom';
+
+const tokens = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTQwOTU2OTgsIm5iZiI6MTU1NDA5NTY5OCwianRpIjoiMWRjZTg1NjktMGU5My00MDY3LTk0NWMtNGE1YTFiZDA4NWE5IiwiZXhwIjoxNTU0MTgyMDk4LCJpZGVudGl0eSI6eyJpZCI6MSwidXNlcm5hbWUiOiJEaW5kYSIsImVtYWlsIjoiZGluZGFAeHl6LmNvbSIsImRpc3BsYXlfbmFtZSI6IiIsImhlYWRsaW5lIjoiIiwicHJvZmlsZV9waWN0dXJlIjoiaHR0cHM6Ly9jZG4ucGl4YWJheS5jb20vcGhvdG8vMjAxNS8xMC8wNS8yMi8zNy9ibGFuay1wcm9maWxlLXBpY3R1cmUtOTczNDYwXzk2MF83MjAucG5nIiwiY292ZXJfcGhvdG8iOiJodHRwczovL3d3dy5xbWF0Y2h1cC5jb20vaW1hZ2VzL2RlZmF1bHQtY292ZXIuanBnIiwiZ2VuZGVyIjoiIiwiZGF0ZV9vZl9iaXJ0aCI6IiIsImFkZHJlc3MiOiIiLCJwaG9uZV9udW1iZXIiOiIiLCJmYWNlYm9va19saW5rIjoiIiwiaW5zdGFncmFtX2xpbmsiOiIiLCJ0d2l0dGVyX2xpbmsiOiIiLCJvdGhlcl9saW5rIjoiIiwiY3JlYXRlZF9hdCI6IjIwMTktMDQtMDEgMTI6MTM6MDYuNDMxNzU2IiwidXBkYXRlZF9hdCI6IjIwMTktMDQtMDEgMTI6MTM6MDYuNDMxNzY4IiwicG9zdF9jb3VudCI6MCwiam9iIjoiIiwic3RhdHVzIjoiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyIsInVzZXJfY2xhaW1zIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkRpbmRhIiwiZW1haWwiOiJkaW5kYUB4eXouY29tIiwiZGlzcGxheV9uYW1lIjoiIiwiaGVhZGxpbmUiOiIiLCJwcm9maWxlX3BpY3R1cmUiOiJodHRwczovL2Nkbi5waXhhYmF5LmNvbS9waG90by8yMDE1LzEwLzA1LzIyLzM3L2JsYW5rLXByb2ZpbGUtcGljdHVyZS05NzM0NjBfOTYwXzcyMC5wbmciLCJjb3Zlcl9waG90byI6Imh0dHBzOi8vd3d3LnFtYXRjaHVwLmNvbS9pbWFnZXMvZGVmYXVsdC1jb3Zlci5qcGciLCJnZW5kZXIiOiIiLCJkYXRlX29mX2JpcnRoIjoiIiwiYWRkcmVzcyI6IiIsInBob25lX251bWJlciI6IiIsImZhY2Vib29rX2xpbmsiOiIiLCJpbnN0YWdyYW1fbGluayI6IiIsInR3aXR0ZXJfbGluayI6IiIsIm90aGVyX2xpbmsiOiIiLCJjcmVhdGVkX2F0IjoiMjAxOS0wNC0wMSAxMjoxMzowNi40MzE3NTYiLCJ1cGRhdGVkX2F0IjoiMjAxOS0wNC0wMSAxMjoxMzowNi40MzE3NjgiLCJwb3N0X2NvdW50IjowLCJqb2IiOiIiLCJzdGF0dXMiOiIifX0.nmw38CpI3rftfEj5LYhOXdO-ESXuhjDRqbtDWJmMqzo'
 
 class SidebarField extends Component {
 	constructor(props){
@@ -36,8 +40,8 @@ class SidebarField extends Component {
     const data={
       deskripsi: deskripsi,
       plant_type: plant_type,
-      planted_at: datePlant,
-      ready_at: dateReady,
+      planted_at: datePlant.toISOString(),
+      ready_at: dateReady.toISOString(),
       address: address,
       city: city,
       photos: photos
@@ -46,12 +50,16 @@ class SidebarField extends Component {
 
     const self = this;
     axios
-      .put('http://0.0.0.0:5000/farms/' + id, data)
-      .then(function(response){
-          console.log(response.data);
-          self.props.history.push('/');
+      .put('http://0.0.0.0:5000/farms/' + id, data, {
+				headers:{
+						'Authorization' : 'Bearer ' + tokens
+				}
+			})
+      .then(response => {
+          console.log("testtt dooooooooooooooooooooooooooong", response.data);
+          this.props.history.push('/maps/' + id);
       })
-      .catch(function(error){
+      .catch(error => {
           console.log(error);
       });
   };
@@ -74,19 +82,29 @@ class SidebarField extends Component {
         <br/>
         <label for="planted_at">Tanggal ditanam:</label>
         <br/>
-        <DateTimePicker
+        {/* <DateTimePicker
           onChange={this.onChangePlant}
           value={this.state.datePlant}
           disableClock={true}
+        /> */}
+        <DatePicker
+          selected={this.state.datePlant}
+          onChange={this.onChangePlant}
+          value ={this.state.datePlant}
         />
         <br/>
         <label for="ready_at">Perkiraan tanggal panen:</label>
         <br/>
-        <DateTimePicker className="css-10nd86i"
+        {/* <DateTimePicker className="css-10nd86i"
             onChange={this.onChangeReady}
             value={this.state.dateReady}
             disableClock={true}
             // minDate={new Date()}
+        /> */}
+        <DatePicker
+          selected={this.state.dateReady}
+          onChange={this.onChangeReady}
+          value ={this.state.dateReady}
         />
         <br/>
         <label for="address">Alamat lengkap:</label>
@@ -108,4 +126,4 @@ class SidebarField extends Component {
   }
 }
 
-export default SidebarField;
+export default withRouter(SidebarField);

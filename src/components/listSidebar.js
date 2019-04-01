@@ -7,8 +7,8 @@ import "./../css/main.css";
 
 const ListFarm = props => {
 	return (
-		<div className="sidebar">
-			<Link to={"/farm/" + props.id}>
+		<div className="sidebar-item">
+			<Link to={"/maps/" + props.id}>
 				<label>Kebun {props.id}</label>
 				<h4>{props.user.username}</h4>
 				<h4>{props.plant}</h4>

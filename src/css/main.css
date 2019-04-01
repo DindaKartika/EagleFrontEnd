@@ -461,12 +461,32 @@
   z-index: 1;
   position: fixed;
   background-color: white;
-  height: 100vh;
   border: 1px solid #9effd6;
   padding: 5px;
+  left: 0;
+  overflow-y: scroll !important;
+  height: 87vh;
 }
 .sidebar label {
   font-size: 12px;
+}
+.sidebar .sidebar-item {
+  border: 1px solid #9effd6;
+  padding: 5px;
+  margin: 5px;
+  width: 90%;
+}
+.sidebar .sidebar-item h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+.sidebar .react-datetime-picker__wrapper {
+  border: thin solid lightgrey;
+  border-radius: 3px;
+  width: 200px;
+}
+.sidebar .react-datetime-picker__wrapper button {
+  display: none;
 }
 
 .InputField .mapboxgl-ctrl-top-right {
@@ -477,6 +497,21 @@
 
 .height700px {
   height: 700px;
+}
+
+.width18 {
+  width: 18rem;
+}
+
+.margin20px {
+  margin: 20px;
+}
+
+.title-blogs {
+  font-size: 30px;
+  font-family: "Roboto", "sans-serif";
+  color: grey;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=main.css.map */
