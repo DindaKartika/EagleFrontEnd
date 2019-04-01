@@ -4,6 +4,7 @@ import '../css/bootstrap.min.css'
 import{ Link } from "react-router-dom";
 import axios from 'axios';
 import ListFarm from './listSidebar'
+import queryString from 'query-string';
 
 class SidebarMap extends Component {
 	constructor(props){
@@ -15,8 +16,18 @@ class SidebarMap extends Component {
 
 	componentDidMount = () =>{
 		const self = this;
+		const data={
+			// 'city' : localStorage.getItem('kota'),
+			// 'plant_type' : localStorage.getItem('tanaman'),
+			// 'ready_at' : localStorage.getItem('tanggal'),
+			'search' : localStorage.getItem('search')
+		}
+
+		console.log(data)
 		axios
-		.get('http://0.0.0.0:5000/farms')
+		.get('http://0.0.0.0:5000/farms', {
+			params:data
+	})
 		.then(function(response){
 			self.setState({Farms: response.data});
 			console.log('Farms', response.data);
