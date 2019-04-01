@@ -362,4 +362,31 @@
   height: 700px;
 }
 
+.width18 {
+  width: 18rem;
+}
+
+.margin20px {
+  margin: 20px;
+}
+
+.title-blogs {
+  font-size: 30px;
+  font-family: "Roboto", "sans-serif";
+  color: grey;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .width18 {
+    width: 12rem;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
+@media (max-width: 768px) {
+  .margintop-100 {
+    margin-top: 10px;
+    padding-bottom: 40px;
+  }
+}

@@ -432,3 +432,16 @@ $colorbluegreen : #00CED1;
 .height700px{
     height: 700px;
 }
+
+.width18{
+    width:18rem;
+}
+
+.margin20px{
+    margin:20px;
+}
+
+.title-blogs{
+    @include fontSFC(30px, ('Roboto', 'sans-serif'),grey );
+    font-weight:bold;
+}
