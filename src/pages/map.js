@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import Header from '../components/header_signin'
@@ -9,6 +9,7 @@ import FilterMap from '../components/filter'
 import Select from 'react-select'
 import DateTimePicker from 'react-datetime-picker'
 import DatePicker from 'react-datepicker'
+import axios from 'axios'
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -22,9 +23,14 @@ const optionsPlant = [
 	{ value: 'terong', label: 'terong' }
 ]
 
+const polygonPaint = {
+  'fill-color': '#00CED1',
+  'fill-opacity': 1
+};
+
 const Map = ReactMapboxGl({
   accessToken:
-    "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0d3NocmEzMDB0ejN5bWhkb2l2Zm92diJ9.OmM7fJbSBdSGfHQG4BH-qw"
+    "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0eWVobmZ1MGdrdzRkbWhoaHRvOG1uciJ9.921TLCVIBcweDV-xoUiNeQ"
 });
 
 class App extends Component {
@@ -43,6 +49,28 @@ class App extends Component {
 		this.viewFilter = this.viewFilter.bind(this);
 		this.viewSidebar = this.viewSidebar.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+	}
+
+	UNSAFE_componentWillMount () {
+		const self = this;
+		console.log(window.location.pathname.slice(6))
+		axios
+		.get('http://0.0.0.0:5000/farms/test')
+		.then(function(response){
+			self.setState({koordinat: response.data});
+			console.log('koordinat', response.data);
+			// self.setState({user : response.data.user})
+			// const koordinat = []
+			// koordinat.push(JSON.parse(response.data.coordinates))
+			// console.log('coord jadi', koordinat)
+			// self.setState({koordinat: koordinat})
+			// const centers = JSON.parse(response.data.center)
+			// console.log(centers)
+			// self.setState({center:centers})
+		})
+		.catch(function(error){
+			console.log('error', error);
+		})
 	}
 	
 	viewFilter(){
@@ -98,6 +126,8 @@ class App extends Component {
 		console.log(this.state.sidebar)
 		const {startDate} = this.state
 		console.log('tanggal', startDate.toISOString())
+		const {koordinat} = this.state
+		console.log('koord', koordinat)
     return (
       <div className="App">
 				<div className="header">
@@ -133,6 +163,7 @@ class App extends Component {
 				</div>
 				{this.state.sidebar && <SidebarMap/>}
 				<div>
+
 					<Map
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
@@ -140,8 +171,11 @@ class App extends Component {
 							width: "100vw"
 						}}
 						center={[112.63396597896462, -7.97718148341032]}
-						zoom={[12]}
+						zoom={[13]}
 					>
+						<Layer type="fill" paint={polygonPaint}>
+							<Feature coordinates={koordinat} />
+						</Layer>
 					</Map>
 				</div>
       </div>
