@@ -19,6 +19,7 @@ class MainRoute extends Component {
         // console.log("test")
         return (
             <Switch>
+                <Route exact path="/" component={LandingPage}/>
                 <Route exact path="/signup" component={SignUp}/>
                 <Route exact path="/signin" component={SignIn}/>
                 <Route exact path="/perusahaan" component={Perusahaan}/>
