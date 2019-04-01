@@ -439,15 +439,20 @@ $colorbluegreen : #00CED1;
 
 //styling sidebar map
 
+// .mapboxgl-map{
+//     position: absolute;
+// }
+
 .sidebar{
     width: 20%;
     z-index : 1;
     position: fixed;
     background-color: white;
-    height: 100vh;
     border: 1px solid $basecolor;
     padding: 5px;
     left: 0;
+    overflow-y : scroll !important;
+    height: 87vh;
     
     label{
         font-size: 12px;

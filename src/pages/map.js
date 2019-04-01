@@ -8,6 +8,9 @@ import SidebarMap from '../components/sidebarMap'
 import FilterMap from '../components/filter'
 import Select from 'react-select'
 import DateTimePicker from 'react-datetime-picker'
+import DatePicker from 'react-datepicker'
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const optionsCity = [
 	{ value: 'malang', label: 'malang' }
@@ -29,7 +32,7 @@ class App extends Component {
 		super(props);
 		this.state = {
 			filter: false,
-			date : new Date(),
+			startDate : new Date(),
 			kota : "",
 			tanaman : "",
 			sidebar : false
@@ -37,6 +40,7 @@ class App extends Component {
 
 		this.viewFilter = this.viewFilter.bind(this);
 		this.viewSidebar = this.viewSidebar.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 	
 	viewFilter(){
@@ -65,10 +69,18 @@ class App extends Component {
 		console.log(event.value)
   }
   
-  onChange = date => this.setState({ date })
+	// onChange = date => this.setState({ date })
+	
+	handleChange(date) {
+    this.setState({
+      startDate: date
+    });
+}
 
   render() {
 		console.log(this.state.sidebar)
+		const {startDate} = this.state
+		console.log('tanggal', startDate.toISOString())
     return (
       <div className="App">
 				<div className="header">
@@ -87,11 +99,16 @@ class App extends Component {
 							<Select options={optionsPlant} onChange={e => this.changePlant(e)}/>
 							<label>Waktu panen :</label>
 							<br/>
-							<DateTimePicker
+							{/* <DateTimePicker
 								onChange={this.onChange}
 								value={this.state.date}
 								disableClock={true}
 								// minDate={new Date()}
+							/> */}
+							<DatePicker
+								selected={startDate}
+								onChange={this.handleChange}
+								value ={startDate}
 							/>
 						</div>
 					</form>
@@ -101,7 +118,7 @@ class App extends Component {
 					<Map
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
-							height: "100vh",
+							height: "87vh",
 							width: "100vw"
 						}}
 						center={[112.63396597896462, -7.97718148341032]}

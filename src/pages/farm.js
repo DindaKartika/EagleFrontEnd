@@ -28,20 +28,9 @@ const Map = ReactMapboxGl({
 });
 
 const polygonPaint = {
-  'fill-color': '#6F788A',
-  'fill-opacity': 0.8
+  'fill-color': '#00CED1',
+  'fill-opacity': 1
 };
-
-const AllShapesPolygonCoords = [
-  [
-    [-0.13235092163085938, 51.518250335096376],
-    [-0.1174163818359375, 51.52433860667918],
-    [-0.10591506958007812, 51.51974577545329],
-    [-0.10831832885742188, 51.51429786349477],
-    [-0.12531280517578122, 51.51429786349477],
-    [-0.13200759887695312, 51.517823057404094]
-  ]
-];
 
 class Farm extends Component {
 	constructor(props) {
@@ -51,13 +40,12 @@ class Farm extends Component {
 			date : new Date(),
 			kota : "",
 			tanaman : "",
-			sidebar : false
+			sidebar : false,
+			Farms : "",
+			user : ""
 			// center : [],
 			// koordinat : []
 		};
-
-		this.viewFilter = this.viewFilter.bind(this);
-		this.viewSidebar = this.viewSidebar.bind(this);
     }
     
     UNSAFE_componentWillMount () {
@@ -68,6 +56,7 @@ class Farm extends Component {
 			.then(function(response){
 				self.setState({Farms: response.data});
 				console.log('Farms', response.data);
+				self.setState({user : response.data.user})
 				const koordinat = []
 				koordinat.push(JSON.parse(response.data.coordinates))
 				console.log('coord jadi', koordinat)
@@ -80,78 +69,47 @@ class Farm extends Component {
 				console.log('error', error);
 			})
 		}
-	
-	viewFilter(){
-		this.setState({filter:true})
-	}
-
-	viewSidebar(){
-		this.setState({sidebar:true})
-	}
-
-	changeCity(event) {
-		this.setState({
-			kota: event.value
-		});
-
-		localStorage.setItem('kota', event.value)
-		console.log(event.value)
-	}
-
-	changePlant(event) {
-		this.setState({
-			tanaman: event.value
-		});
-
-		localStorage.setItem('tanaman', event.value)
-		console.log(event.value)
-  }
-  
-  onChange = date => this.setState({ date })
 
   render() {
 		console.log(this.state.sidebar)
-		const {center, koordinat} = this.state
+		const {center, koordinat, Farms, user} = this.state
 		console.log('center', center)
 		console.log('koordinat', koordinat)
-		// if (!this.state.loaded) return <Loading />
     return (
       <div className="App">
 				<div className="header">
 					<Header/>
 				</div>
-				{/* <div className="search">
-					<form onSubmit={e => e.preventDefault()}>
-						<input type="search" onFocus={this.viewFilter} placeholder="Cari" name="search"/>
-						<button type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
-						<div className="filters">
-							<label>Filter berdasarkan :</label>
-							<br/>
-							<label>Kota :</label>
-							<Select options={optionsCity} onChange={e => this.changeCity(e)}/>
-							<label>Jenis Tanaman :</label>
-							<Select options={optionsPlant} onChange={e => this.changePlant(e)}/>
-							<label>Waktu panen :</label>
-							<br/>
-							<DateTimePicker
-								onChange={this.onChange}
-								value={this.state.date}
-								disableClock={true}
-								// minDate={new Date()}
-							/>
-						</div>
-					</form>
+				<div className="sidebar">
+					<h5>Informasi Lahan:</h5>
+					<label>Nama pemilik: </label>
+					<h5>{user.username}</h5>
+					<label>Deskripsi : </label>
+					<h5>{Farms.deskripsi}</h5>
+					<label>Jenis tanaman : </label>
+					<h5>{Farms.plant_type}</h5>
+					<label>Tanggal ditanam : </label>
+					<h5>{Farms.planted_at}</h5>
+					<label>Perkiraan tanggal panen : </label>
+					<h5>{Farms.ready_at}</h5>
+					<label>Alamat : </label>
+					<h5>{Farms.address}</h5>
+					<label>Kota : </label>
+					<h5>{Farms.city}</h5>
+					<label>Luas : </label>
+					<h5>{Farms.farm_size} m<sup>2</sup></h5>
+					<label>Kategori : </label>
+					<h5>{Farms.category}</h5>
 				</div>
-				{this.state.sidebar && <SidebarMap/>} */}
 				<div>
 					<Map
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
-							height: "100vh",
+							height: "87vh",
 							width: "100vw"
 						}}
 						center={center}
-						zoom={[15]}
+						zoom={[16.5]}
 					>
 						<Layer type="fill" paint={polygonPaint}>
 							<Feature coordinates={koordinat} />
