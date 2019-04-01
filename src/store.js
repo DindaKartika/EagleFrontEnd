@@ -24,6 +24,10 @@ const token = localStorage.getItem('token');
 
 // SET THE GLOBAL STATE VARIABLES
 const initialState = {
+    username: "",
+    password: "",
+    is_login: false,
+
     current_id: 0,
     current_email: "",
     current_username: "",
@@ -40,9 +44,7 @@ const initialState = {
     token: "",
     test: "",
     auth_state: true,
-    username: "",
-    password: "",
-    is_login: false,
+    
     product_state: "home",
 
     is_register:false,
@@ -55,21 +57,6 @@ const initialState = {
     url: base_url,
     current_username: "",
     current_userid: "",
-
-    offer_amount: 0,
-    offer_price: 0,
-    offer_description: "",
-    offer_destination: "",
-
-    add_name: "",
-    add_category: "",
-    add_type: "",
-    add_amount: "",
-    add_constanta: "",
-    add_price: "",
-    add_location: "",
-    add_description: "",
-    add_delivery: "",
 
     respond_offer: "",
 
@@ -87,11 +74,12 @@ export const actions = store => ({
     },
 
     signOut: state => {
-        return {is_login:false};
+        return {is_login: false};
     },
     
     signIn:  async state => {
         const self = this;
+        // const urlLogin="http://localhost:8010/proxy/login";
         const urlLogin="http://localhost:5000/login";
         // const urlLogin="localhost:5000/login";
         const data = {username:state.username, password:state.password}
@@ -104,17 +92,23 @@ export const actions = store => ({
         console.log("test isi sign in", signIn)
         await axios(signIn)
         .then(function(response){
-            console.log(response.data);
+            if (response.data.hasOwnProperty("token")) {
+                // console.log("cek token!", response.data.token)
+                localStorage.setItem('token', response.data.token)
                 store.setState({
-                    "is_login": true,
-                    "token":response.data.token,
-                    "username": response.data.data.username,
-                    "email": response.data.data.email       
-                    });
+                    is_login: true,
+                    token: response.data.token,
+                });
+                // localStorage.removeItem('token')
+                
+            } else {
+                console.log("Login Gagal");
+            }
        })
         .catch(function(error){
             console.log(error);
         })
+        console.log("Test store value store", store.is_login)
     },
 
     register:  async state => {

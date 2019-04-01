@@ -104,7 +104,7 @@ class InputField extends Component {
 					<Map
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
-							height: "87vh",
+							height: "90vh",
 							width: "100vw"
 						}}
 						center={[112.63396597896462, -7.97718148341032]}

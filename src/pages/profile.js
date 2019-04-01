@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from "unistore/react";
-import { actions } from '../store';
+import { actions, store } from '../store';
 import { withRouter } from "react-router-dom";
 import Header from '../components/header_signin'
 import Footer from '../components/footer';
@@ -22,6 +22,7 @@ class Profile extends Component {
             display_name: "",
             headline: "",
             profile_picture: "",
+            cover_photo: "",
             gender: "",
             date_of_birth: "",
             address: "",
@@ -58,6 +59,9 @@ class Profile extends Component {
         }).then(function(response) {
             if (response.data.status === "Success") {
                 // console.log("login berhasil", response.data.data.id)
+                store.setState({
+                    is_login: true
+                })
                 self.setState({
                     id: response.data.data.id,
                     username: response.data.data.username,
@@ -65,6 +69,7 @@ class Profile extends Component {
                     display_name: response.data.data.display_name,
                     headline: response.data.data.headline,
                     profile_picture: response.data.data.profile_picture,
+                    cover_photo: response.data.data.cover_photo,
                     gender: response.data.data.gender,
                     date_of_birth: response.data.data.date_of_birth,
                     address: response.data.data.address,
@@ -80,12 +85,13 @@ class Profile extends Component {
                     status: response.data.data.state
                 })
             } else {
-                // console.log("login gagal")
+                console.log("login gagal", response)
                 self.props.history.replace("/signin");
             }
             // console.log("Sukses get identity", response.data.status)
         }).catch(function(error) {
         console.log("Gagal get identity", error);
+        // self.props.history.replace("/signin");
         });
     };
 
@@ -100,20 +106,20 @@ class Profile extends Component {
               Authorization: 'Bearer ' + token
             }
         }).then(function(response) {
-            console.log("Get feeds berhasil", response.data)
+            // console.log("Get feeds berhasil", response.data)
             self.setState({
                 listFeed: response.data
             })
         }).catch(function(error) {
         console.log("Gagal get feeds", error);
         });
-        console.log("cek after get feed", self.state)
+        // console.log("cek after get feed", self.state)
     }
 
     changeEditState = async () => {
         const self = this;
         self.setState({edit: !self.state.edit});
-        console.log("cek state", self.state)
+        // console.log("cek state", self.state)
         };
     
     changeShowState = async (value) => {
@@ -126,7 +132,7 @@ class Profile extends Component {
         return (
             <div>
                 <Header />
-                <div className="cover-photo">
+                <div className="cover-photo" style={{backgroundImage: "url(" + this.state.cover_photo + ")", backgroundSize: "cover"}}>
                     {/* Cover Photo goes here! */}
                 </div>
                 <div className="container-fluid row justify-content-end">
@@ -140,13 +146,14 @@ class Profile extends Component {
                                 {/* <img className="img" src={this.state.profile_picture} /> */}
                             </div>
                             <div className="side-detail-profile">
-                                <div>{this.state.display_name}</div>
-                                <div>@{this.state.username}</div>
-                                <div>{this.state.address}</div>
-                                <div>{this.state.created_at.slice(0, 10)}</div>
-                                <div>{this.state.email}</div>
+                                <div className="display-name">{this.state.display_name}</div>
+                                <div className="display-username">@{this.state.username}</div>
+                                <div className="display-address">{this.state.address}</div>
+                                <div className="display-date">Bergabung pada {this.state.created_at.slice(0, 10)}</div>
+                                <div className="display-email">{this.state.email}</div>
                                 <br />
-                                <div><button className="btn btn-success" onClick={() => this.changeEditState()}>Perbarui profil</button></div>
+                                <div className="display-edit" style={{ display: this.state.edit ? "none" : "block" }}><button className="btn btn-success" onClick={() => this.changeEditState()}>Perbarui profil</button></div>
+                                <div className="display-edit" style={{ display: this.state.edit ? "block" : "none" }}><button className="btn btn-outline-success" onClick={() => this.changeEditState()}>Batalkan edit</button></div>
                             </div>
                         </div>
                         <div className="col-md-9 feed-post">
@@ -215,13 +222,121 @@ class Profile extends Component {
                                         Edit Profil
                                     </div>
                                     <hr />
-                                    <form>
+                                    <form class="form-container" action="" method="get">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="display_name">Nama *</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="display_name" name="display_name" placeholder="" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="headline">Deskripsi</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="headline" name="headline" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="profile_picture">Link foto profil</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="profile_picture" name="profile_picture" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="cover_photo">Link foto kover</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="cover_photo" name="cover_photo" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="gender">Jenis Kelamin</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <select id="gender" name="country">
+                                                    <option value=""></option>
+                                                    <option value="male">Laki-laki</option>
+                                                    <option value="female">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="date_of_birth">Tanggal lahir</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="date_of_birth" name="date_of_birth" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="address">Kota domisili</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="address" name="address" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="phone_number">Nomor telefon</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="phone_number" name="phone_number" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="job">Pekerjaan</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="job" name="job" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="facebook_link">Link akun Facebook</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="facebook_link" name="facebook_link" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="instagram_link">Link akun Instagram</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="instagram_link" name="instagram_link" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="twitter_link">Link akun Twitter</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="twitter_link" name="twitter_link" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            {/* <input type="submit" value="Submit" /> */}
+                                            <div><button className="btn btn-outline-success">Simpan</button></div>
+                                        </div>
+                                    </form>
+                                    {/* <form>
                                         <div class="form-group row">
-                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nama Profil</label>
+                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nama Profil</label> <br />
                                             <div class="col-sm-10">
                                                 <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group row">
                                             <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Jenis Kelamin</label>
                                             <div class="col-sm-10">
@@ -253,7 +368,7 @@ class Profile extends Component {
                                             </div>
                                         </div>
                                         <div><button className="btn btn-outline-success">Simpan</button></div>
-                                    </form>
+                                    </form> */}
                                 </div>
                             </div>
                         </div>
