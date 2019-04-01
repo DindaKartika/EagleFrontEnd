@@ -11,6 +11,8 @@ import Iklan from "../pages/iklan";
 import PasangIklan from "../pages/pasang_iklan";
 import NewsFeed from "../pages/newsfeed";
 import Map from '../pages/map';
+import BlogDetail from '../pages/blog_detail';
+import Blog from '../pages/blog';
 import InputField from '../pages/inputField'
 import LandingPage from '../pages/landingpage'
 // const MainRoute = () => {
@@ -32,6 +34,8 @@ class MainRoute extends Component {
                 <Route exact path="/map" component={Map}/>
                 <Route exact path="/input-field" component={InputField}/>
                 <Route exact path="/landingpage" component={LandingPage}/>
+                <Route exact path="/blogdetail" component={BlogDetail}/>
+                <Route exact path="/blog" component={Blog}/>
                 {/* <Route exact path = "/allproduct" component={AllProduct}/> */}
             </Switch>
         );
