@@ -1,0 +1,8 @@
+You're all set!
+You're ready to start developing!
+Client ID
+776063172831-m8d46m0ikr6np9p4tfoi0jvm3qr5j5gl.apps.googleusercontent.com
+Client Secret
+cKPYDFgqoqwDMjfrU9Vg_QJf
+info
+You can always manage your API credentials and usage later in the API Console.
