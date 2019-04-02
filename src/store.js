@@ -61,7 +61,14 @@ const initialState = {
     respond_offer: "",
 
     for_transaction_offer_id: 0,
-    for_transaction_offer_id: 0
+    for_transaction_offer_id: 0,
+
+    // newsfeed start here
+    content:"",
+    listAllFeed:[]
+    // listAllComment:[]
+
+    //news feed end here
 };
 
 export const store = createStore(initialState)
@@ -145,5 +152,26 @@ export const actions = store => ({
             })
         }
     },
+
+    getAllFeed : state => {
+        const token = state.token;
+        const allFeed = {
+            method: "get",
+            // url: "http://localhost:8010/proxy/user/product",
+            url: "http://localhost:5000/feeds?rp=100",
+            // headers: {
+            //     'Authorization':'Bearer ' + token
+            // }
+        };
+         axios(allFeed)
+        .then(function(response){
+            store.setState({listAllFeed: response.data});
+            // store.setState({datacart: response.data});
+            console.log(response.data);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+        },
 
 })

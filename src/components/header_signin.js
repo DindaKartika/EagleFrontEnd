@@ -25,8 +25,8 @@ class Header extends Component {
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li> */}
             <li className="nav-item ">
-                <Link to="/allproduct" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Tentang Kami</Link>
-                <Link to="/" className="btn btn-outline-success" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Beranda</span></Link>
+                <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Tentang Kami</Link>
+                <Link to="/newsfeed" className="btn btn-outline-success" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Beranda</span></Link>
             </li>
             <li className="nav-item ">
                 <Link to="/myproduct" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Blog</Link>
