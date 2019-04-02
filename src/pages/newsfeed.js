@@ -6,15 +6,46 @@ import { actions } from '../store';
 import { withRouter } from "react-router-dom";
 import Header from '../components/header_signin'
 import Footer from '../components/footer';
+import CommentComponent from '../components/comment_component';
+import FeedComponent from '../components/feed_component';
 
 //MAIN CLASS
 class NewsFeed extends Component {
-//   constructor (props) {
-//     super(props);
-//       this.state = {
-//         test: ""
-//       };
-//   };
+    componentDidMount = () => {
+        this.props.getAllFeed();
+        };
+    // componentDidUpdate = () => {
+    //         this.props.getAllFeed();
+    //         };
+    handleClick(e){
+        e.preventDefault();
+        const self = this;
+        const {content} = e.target;
+        var data ={};
+        
+        data.content = content.value;
+
+        const token = this.props.token;
+        console.log("test token post",token)
+        console.log("post content", data);
+        let postFeed = {
+            method:'post',
+            url:'http://localhost:5000/feeds',
+            headers: {
+                'Authorization':'Bearer ' + token
+            },
+            data : data
+        };
+        axios(postFeed)
+        .then(function(response){
+            console.log(response.data);
+            alert("post sukses")
+            self.props.getAllFeed();
+            self.props.history.push("/newsfeed");
+        });
+
+    };
+    
   render() {
     return (
         <div>
@@ -36,93 +67,23 @@ class NewsFeed extends Component {
                     <div className="col-md-9 feed-post">
                         <div className="container">
                             <div className="display" style={{ display: "block" }}>
-                                <form>
+                                <form onSubmit={e => this.handleClick(e)}>
                                     <div className="form-group">
-                                        <input className="form-control input-lg size-input-feed" id="inputlg" type="text"/>
+                                        <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
+                                    </div>
+                                    <div className="container-fluid row justify-content-end">
+                                        <button className="btn btn-outline-success addpost-btn" type="submit">Bagikan</button>
                                     </div>
                                 </form> 
-                                <div className="container-fluid row justify-content-end">
-                                    <button className="btn btn-outline-success addpost-btn">Bagikan</button>
-                                </div>
                                 <div className="profile-post" style={{ display: "block" }}>
                                     {/* Display Post  */}
                                     <div className="post-item">
                                         <hr />
-                                        {/* Loop content post start here */}
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="row">
-                                                    <div className="col-md-2 col-12"><img src={require('../images/img/profil.jpeg')} className="img-photo-news margin-bottom-5" alt=""/></div>
-                                                    <div className="col-md-4 col-12 margin-auto"><span className="displayname-text ">DisplayName</span></div>
-                                                    <div className="col-md-4 col-12 margin-auto"><span className="username-text">@username</span></div>
-                                                    <div className="col-md-2 col-12"></div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6 date-container-text">
-                                                <span className="date-text">Date | </span>
-                                                <span className="date-text">Time</span>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
-                                        </div>
-                                        <div className="row justify-content-between">
-                                            <span className="attribute-text">Tag</span>
-                                            <span className="attribute-text">Comments</span>
-                                            <span className="attribute-text">Likes</span>
-                                        </div>
-                                        <div className="row comment-area">
-                                            <div className="col-md-2"></div>
-                                            <div className="col-md-10">
-                                                {/* Loop content comment start here */}
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <div className="row">
-                                                            <div className="col-md-2 col-12"><img src={require('../images/img/profil.jpeg')} className="img-photo-news margin-bottom-5" alt=""/></div>
-                                                            <div className="col-md-4 col-12 margin-auto"><span className="displayname-text ">DisplayName</span></div>
-                                                            <div className="col-md-4 col-12 margin-auto"><span className="username-text">@username</span></div>
-                                                            <div className="col-md-2 col-12"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 date-container-text">
-                                                        <span className="date-text">Date | </span>
-                                                        <span className="date-text">Time</span>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
-                                                </div>
-                                                <div className="row justify-content-end">
-                                                    <span className="attribute-text margin-right-20">Tag</span>
-                                                    <span className="attribute-text">Likes</span>
-                                                </div>
-                                                {/* Loop content comment end here */}
-                                                {/* Loop content comment start here */}
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <div className="row">
-                                                            <div className="col-md-2 col-12"><img src={require('../images/img/profil.jpeg')} className="img-photo-news margin-bottom-5" alt=""/></div>
-                                                            <div className="col-md-4 col-12 margin-auto"><span className="displayname-text ">DisplayName</span></div>
-                                                            <div className="col-md-4 col-12 margin-auto"><span className="username-text">@username</span></div>
-                                                            <div className="col-md-2 col-12"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 date-container-text">
-                                                        <span className="date-text">Date | </span>
-                                                        <span className="date-text">Time</span>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <p className="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pharetra placerat leo, eget mattis sapien mollis consectetur. In hac habitasse platea dictumst. Etiam et ante diam. Pellentesque scelerisque sed ante ut egestas. Vivamus efficitur, lorem mattis varius convallis, nisi mauris convallis sapien, vitae ultrices urna ligula volutpat leo. Pellentesque vel urna felis. Proin fringilla metus sed tincidunt volutpat. Pellentesque vulputate nulla ut hendrerit dapibus. Vivamus enim ex, sollicitudin vel orci ac, ultricies laoreet augue. </p>
-                                                </div>
-                                                <div className="row justify-content-end">
-                                                    <span className="attribute-text margin-right-20">Tag</span>
-                                                    <span className="attribute-text">Likes</span>
-                                                </div>
-                                                {/* Loop content comment end here */}
-                                                {/* Loop content post end here */}
-                                            </div>
-                                        </div>
+                                        {this.props.listAllFeed.map((item, key) => {
+                                            // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
+                                            return <FeedComponent key={key} data={item}/>; }
+                                                    )}
+
                                     </div>
                                 </div>
                             </div>
@@ -139,5 +100,5 @@ class NewsFeed extends Component {
 }
 
 // export default Profile;
-export default connect( "", actions)
+export default connect( "listAllFeed, token", actions)
 (withRouter(NewsFeed));
