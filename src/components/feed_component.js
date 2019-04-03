@@ -3,7 +3,7 @@ import '../css/main.css';
 import '../css/bootstrap.min.css';
 import{ Link } from "react-router-dom";
 import { connect } from "unistore/react";
-import { actions } from '../store';
+import { actions, store } from '../store';
 import { withRouter } from "react-router-dom";
 import CommentComponent from './comment_component';
 import axios from "axios";
@@ -14,14 +14,14 @@ class FeedComponent extends Component {
         super(props);
             this.state = {  
                 dataComment: this.props.allComment,
-                listLike: this.props.dataLike,
-                is_like:false,
+                countLike: this.props.dataLike,
+                is_like:"false",
                 id_like:""
             };
         };
     componentDidMount = async () => {
         const self = this
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         const url = "http://localhost:5000/comments?id_feed=" + self.props.data.id_feed
         axios({
             method: 'get',
@@ -48,7 +48,7 @@ class FeedComponent extends Component {
             // }
         }).then(function(response) {
             self.setState({
-                listLike: response.data.total,
+                countLike: response.data.total,
                 id_like:response.data.data[0].id_like
             })
         }).catch(function(error) {
@@ -65,7 +65,7 @@ class FeedComponent extends Component {
         data.content = content.value;
         data.id_feed = self.props.data.id_feed;
 
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         console.log("test token post",token)
         console.log("post comment", data);
         let postComment = {
@@ -108,7 +108,7 @@ class FeedComponent extends Component {
         const self = this;
         const id_feed = e.target.name;
 
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         console.log("test token post",token)
         let postLike = {
             method:'post',
@@ -123,8 +123,9 @@ class FeedComponent extends Component {
         axios(postLike)
         .then(function(response){
             console.log("ceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeek", response.data)
+            // localStorage.setItem('is_like', true)
             self.setState({
-                listLike: response.data.total,
+                countLike: response.data.total,
                 is_like:true
             })
             console.log("cek clik like",response.data);
@@ -138,7 +139,7 @@ class FeedComponent extends Component {
                 // }
             }).then(function(response) {
                 self.setState({
-                    listLike: response.data.total,
+                    countLike: response.data.total,
                     id_like:response.data.data[0].id_like
                 })
             }).catch(function(error) {
@@ -159,7 +160,7 @@ class FeedComponent extends Component {
         const id_liked = e.target.name;
         console.log("id untuk like",id_liked)
 
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         console.log("test token post",token)
         let unlike = {
             method:'delete',
@@ -173,10 +174,8 @@ class FeedComponent extends Component {
         //get all like
         axios(unlike)
         .then(function(response){
-            self.setState({
-                listLike: response.data.total,
-                is_like:false
-            })
+            this.props.statusUnlike();
+            alert("unlike sukses")
             console.log(response.data);
             axios({
                 method: 'get',
@@ -186,14 +185,13 @@ class FeedComponent extends Component {
                 // }
             }).then(function(response) {
                 self.setState({
-                    listLike: response.data.total,
+                    countLike: response.data.total,
                 })
             }).catch(function(error) {
             console.log("Gagal get like", error);
             });
             self.props.history.push("/newsfeed");
         });
-
     };
 
   render() {
@@ -219,19 +217,18 @@ class FeedComponent extends Component {
             </div>
             <div className="row justify-content-between">
                 <span className="attribute-text">{this.props.data.tag}</span>
-                <span>{this.state.listLike}</span>
-                <a type="btn" onClick={(e)=>this.handleClickLike(e)} style={{ display: this.state.is_like ? "none" : "block" }} name={this.props.data.id_feed} ><img src={require('../images/ico/likebefore.png')} className="imglike margin-bottom-5" alt=""/></a>
-                <a type="btn" onClick={(e)=>this.handleUnlike(e)} style={{ display: this.state.is_like ? "block" : "none" }} name={this.state.id_like} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
-                {/* <span className="attribute-text">Comments</span>
-                <span className="attribute-text">Likes</span> */}
+                <span>{this.state.countLike}</span>
+                {/* <a type="btn" onClick={(e)=>this.handleClickLike(e)} style={{ display: this.state.is_like ? "none" : "block" }} name={this.props.data.id_feed} ><img src={require('../images/ico/likebefore.png')} className="imglike margin-bottom-5" alt=""/></a> */}
+                <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likebefore.png')} className="imglike margin-bottom-5" alt=""/></a>
+                {/* <a type="btn" onClick={(e)=>this.handleUnlike(e)} style={{ display: this.state.is_like ? "block" : "none" }} name={this.state.id_like} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a> */}
             </div>
             <div className="row comment-area">
                 <div className="col-md-2"></div>
                 <div className="col-md-10 justify-content-end">
                 {this.state.dataComment.map((item, key) => {
-                return <CommentComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id}/>; }
+                return <CommentComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} id_user={item.id_user}/>; }
                         )}
-                    {/* <CommentComponent/> */}
+
                 </div>
             </div>
             <div class="input-group mb-3">
@@ -248,5 +245,5 @@ class FeedComponent extends Component {
 }
 
 // export default FeedComponent;
-export default connect( "token, allComment, dataLike", actions)
+export default connect( "token, allComment, dataLike, current_id", actions)
 (withRouter(FeedComponent))

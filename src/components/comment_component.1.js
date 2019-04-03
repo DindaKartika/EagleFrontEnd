@@ -3,7 +3,7 @@ import '../css/main.css';
 import '../css/bootstrap.min.css';
 import{ Link } from "react-router-dom";
 import { connect } from "unistore/react";
-import { actions , store} from '../store';
+import { actions } from '../store';
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -15,6 +15,41 @@ class CommentComponent extends Component {
             };
         };
 
+    // componentDidUpdate = async () => {
+    //     const self = this
+    //     const token = this.props.token;
+    //     const url = "http://localhost:5000/comments?id_feed=" + self.props.id_feed
+    //     axios({
+    //         method: 'get',
+    //         url: url
+    //         // headers: {
+    //         //   Authorization: 'Bearer ' + token
+    //         // }
+    //     }).then(function(response) {
+    //         console.log("cek feed id", self.props.id_feed)
+    //         console.log("Get comment berhasil", response.data)
+    //         self.setState({
+    //             updateComment: response.data
+    //         })
+    //     }).catch(function(error) {
+    //     console.log("Gagal get comment", error);
+    //     });
+        
+        // axios get like //
+        // axios({
+        //     method: 'get',
+        //     url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+        //     // headers: {s.
+        //     //   Authorization: 'Bearer ' + token
+        //     // }
+        // }).then(function(response) {
+        //     self.setState({
+        //         listLike: response.data.total
+        //     })
+        // }).catch(function(error) {
+        // console.log("Gagal get like", error);
+        // });
+    // };
 
     handleDeleteComment(e){
         e.preventDefault();
