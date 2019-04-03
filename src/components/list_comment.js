@@ -19,11 +19,11 @@ class ListComment extends Component {
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-6">
-                        <span className="displayname-text" style={{fontSize: "16px"}}>{this.props.data.user.display_name}</span>
+                    <div className="col-md-8">
+                        <span className="displayname-text" style={{fontSize: "16px"}}>{this.props.data.user.display_name}</span> <br />
                         <span className="username-text">@{this.props.data.user.username}</span>
                     </div>
-                    <div className="col-md-6 date-container-text">
+                    <div className="col-md-4 date-container-text">
                         <span className="date-text">{this.props.data.created_at.slice(4, 16)} | </span>
                         <span className="date-text">{this.props.data.created_at.slice(17, 22)}</span>
                     </div>
@@ -35,6 +35,7 @@ class ListComment extends Component {
                     <span className="attribute-text">{this.props.data.tag}</span>
                     <span className="attribute-text">Likes</span>
                 </div>
+                <hr />
             </div>
         )   
     }

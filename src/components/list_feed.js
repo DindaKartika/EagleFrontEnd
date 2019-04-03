@@ -27,26 +27,26 @@ class ListFeed extends Component {
               Authorization: 'Bearer ' + token
             }
         }).then(function(response) {
-            console.log("cek feed id", self.props.data.id_feed)
-            console.log("Get comment berhasil", response.data)
+            // console.log("cek feed id", self.props.data.id_feed)
+            // console.log("Get comment berhasil", response.data)
             self.setState({
                 listComment: response.data
             })
         }).catch(function(error) {
         console.log("Gagal get comment", error);
         });
-        console.log("cek after get comment", self.state)
+        // console.log("cek after get comment", self.state)
     }
 
     render() {
         return (
             <div className="feed-item">
                 <div className="row">
-                    <div className="col-md-6">
-                        <span className="displayname-text">{this.props.data.user.display_name}</span>
+                    <div className="col-md-8">
+                        <span className="displayname-text">{this.props.data.user.display_name}</span> <br />
                         <span className="username-text">@{this.props.data.user.username}</span>
                     </div>
-                    <div className="col-md-6 date-container-text">
+                    <div className="col-md-4 date-container-text">
                         <span className="date-text">{this.props.data.created_at.slice(4, 16)} | </span>
                         <span className="date-text">{this.props.data.created_at.slice(17, 22)}</span>
                     </div>
@@ -59,9 +59,10 @@ class ListFeed extends Component {
                     <span className="attribute-text">Comments</span>
                     <span className="attribute-text">Likes</span>
                 </div>
+                <hr />
                 <div className="row comment-area">
-                    <div className="col-md-2"></div>
-                    <div className="col-md-10">
+                    <div className="col-md-1"></div>
+                    <div className="col-md-11">
                         {this.state.listComment.map((item, key) => {
                             return <ListComment key={key} data={item}/>
                         })}

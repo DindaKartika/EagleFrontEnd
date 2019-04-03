@@ -105,7 +105,7 @@ class Farm extends Component {
 					<Map
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
-							height: "87vh",
+							height: "90vh",
 							width: "100vw"
 						}}
 						center={center}

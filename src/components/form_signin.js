@@ -11,7 +11,7 @@ class FormSignIn extends Component {
     doLogin = ()  =>{
         this.props.signIn().then(() =>{
             console.log("looogiiin", this);
-            this.props.history.push("/landingpage");
+            this.props.history.push("/profile");
         });
     };
   render() {
