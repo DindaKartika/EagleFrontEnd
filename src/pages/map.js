@@ -54,7 +54,8 @@ class App extends Component {
 			startDate : new Date(),
 			Farms : [],
 			koordinat : [],
-			number : null
+			number : null,
+			Center : [112.63396597896462, -7.97718148341032]
 		};
 
 		localStorage.setItem('search', '')
@@ -63,6 +64,7 @@ class App extends Component {
 		this.viewSidebar = this.viewSidebar.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this._onMouseLeave = this._onMouseLeave.bind(this)
+		this.onMapLoad = this.onMapLoad.bind(this)
 	}
 
 	UNSAFE_componentWillMount () {
@@ -144,15 +146,19 @@ class App extends Component {
 		// this.props.history.push('/maps/' + 1);
 	}
 
-	onMapLoad = (map) => {
-    map.addControl(new mapboxgl.GeolocateControl({
-			positionOptions: {
-			enableHighAccuracy: true
-			},
-			trackUserLocation: true
-			}));
+	onMapLoad() {
 
-			console.log('coba geolocate', new mapboxgl.GeolocateControl)
+		navigator.geolocation.getCurrentPosition(position =>{
+			const lng = position.coords.longitude
+			const lat = position.coords.latitude
+			console.log('longitude', lng)
+			console.log('latitude', lat)
+
+			const center = []
+			center.push(lng)
+			center.push(lat)
+			this.setState({Center : center})
+		})
 	};
 	
 	
@@ -187,7 +193,7 @@ class App extends Component {
 							height: "90vh",
 							width: "100vw"
 						}}
-						center={[112.63396597896462, -7.97718148341032]}
+						center={Center}
 						// zoom={[13]}
 					>
 						<Layer
