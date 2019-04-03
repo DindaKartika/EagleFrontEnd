@@ -41,6 +41,19 @@ const initialState = {
     current_status: "",
     current_updated_at: "",
 
+    edit_display_name: "",
+    edit_headline: "",
+    edit_profile_picture: "",
+    edit_cover_photo: "",
+    edit_gender: "",
+    edit_date_of_birth: "",
+    edit_address: "",
+    edit_phone_number: "",
+    edit_job: "",
+    edit_facebook_link: "",
+    edit_instagram_link: "",
+    edit_twitter_link: "",
+
     token: "",
     test: "",
     auth_state: true,
@@ -78,6 +91,10 @@ export const actions = store => ({
     setField: (state, event) => {
         // console.log("cek respond_offer", store.respond_offer)
         return { [event.target.name]: event.target.value };
+    },
+
+    setEditGender: (state, e) => {
+        store.setState({ edit_gender: e.target.value });
     },
 
     signOut: state => {
