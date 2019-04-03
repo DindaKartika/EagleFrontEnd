@@ -49,7 +49,11 @@ class Profile extends Component {
 
     getIdentity = async () => {
         const self = this
+        if (localStorage.getItem("token") === null) {
+            this.props.history.push("/signin");
+        }
         const token = localStorage.getItem("token")
+        console.log("Cekt token setelah login", token)
         await axios({
             method: 'get',
             url: 'http://localhost:5000/users/profile',
@@ -85,7 +89,7 @@ class Profile extends Component {
                     status: response.data.data.state
                 })
             } else {
-                console.log("login gagal", response)
+                console.log("identity unauthorized", response)
                 self.props.history.replace("/signin");
             }
             // console.log("Sukses get identity", response.data.status)
@@ -260,7 +264,7 @@ class Profile extends Component {
                                                 <label for="gender">Jenis Kelamin</label>
                                             </div>
                                             <div class="col-md-9">
-                                                <select id="gender" name="country">
+                                                <select id="gender" name="gender">
                                                     <option value=""></option>
                                                     <option value="male">Laki-laki</option>
                                                     <option value="female">Perempuan</option>
