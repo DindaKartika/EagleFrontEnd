@@ -11,6 +11,7 @@ import DateTimePicker from 'react-datetime-picker'
 import DatePicker from 'react-datepicker'
 import axios from 'axios'
 import PopUp from '../components/popup'
+import mapboxgl from "mapbox-gl"
 
 import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
@@ -143,6 +144,19 @@ class App extends Component {
 		// this.props.history.push('/maps/' + 1);
 	}
 
+	onMapLoad = (map) => {
+    map.addControl(new mapboxgl.GeolocateControl({
+			positionOptions: {
+			enableHighAccuracy: true
+			},
+			trackUserLocation: true
+			}));
+
+			console.log('coba geolocate', new mapboxgl.GeolocateControl)
+	};
+	
+	
+
   render() {
 		console.log(this.state.sidebar)
 		const {startDate} = this.state
@@ -151,6 +165,7 @@ class App extends Component {
 		console.log('koord', koordinat)
 		console.log('index popup', number)
 		console.log('buat popup', koordinat[number])
+		
     return (
       <div className="App">
 				<div className="header">
@@ -166,6 +181,7 @@ class App extends Component {
 				{this.state.sidebar && <SidebarMap/>}
 				<div>
 					<Map
+						onStyleLoad={this.onMapLoad}
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
 							height: "90vh",
