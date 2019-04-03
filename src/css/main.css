@@ -514,4 +514,26 @@
   font-weight: bold;
 }
 
+.imglike {
+  height: 30px;
+  width: 30px;
+}
+
+.mapboxgl-popup-content {
+  padding: 10px !important;
+}
+.mapboxgl-popup-content label {
+  font-size: 12px;
+  margin: 0 !important;
+  color: #008080;
+}
+.mapboxgl-popup-content span {
+  font-size: 12px;
+  margin: 0 !important;
+}
+.mapboxgl-popup-content h5 {
+  font-size: 18px;
+  color: #008080;
+}
+
 /*# sourceMappingURL=main.css.map */

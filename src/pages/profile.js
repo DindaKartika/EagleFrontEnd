@@ -47,55 +47,57 @@ class Profile extends Component {
     });
   };
 
-  getIdentity = async () => {
-    const self = this;
-    const token = localStorage.getItem("token");
-    await axios({
-      method: "get",
-      url: "http://localhost:5000/users/profile",
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    })
-      .then(function(response) {
-        if (response.data.status === "Success") {
-          // console.log("login berhasil", response.data.data.id)
-          store.setState({
-            is_login: true
-          });
-          self.setState({
-            id: response.data.data.id,
-            username: response.data.data.username,
-            email: response.data.data.email,
-            display_name: response.data.data.display_name,
-            headline: response.data.data.headline,
-            profile_picture: response.data.data.profile_picture,
-            cover_photo: response.data.data.cover_photo,
-            gender: response.data.data.gender,
-            date_of_birth: response.data.data.date_of_birth,
-            address: response.data.data.address,
-            phone_number: response.data.data.phone_number,
-            facebook_link: response.data.data.facebook_link,
-            instagram_link: response.data.data.instagram_link,
-            twitter_link: response.data.data.twitter_link,
-            other_link: response.data.data.other_link,
-            created_at: response.data.data.created_at,
-            updated_at: response.data.data.updated_at,
-            post_count: response.data.data.post_count,
-            job: response.data.data.job,
-            status: response.data.data.state
-          });
-        } else {
-          console.log("login gagal", response);
-          self.props.history.replace("/signin");
+    getIdentity = async () => {
+        const self = this
+        if (localStorage.getItem("token") === null) {
+            this.props.history.push("/signin");
         }
-        // console.log("Sukses get identity", response.data.status)
-      })
-      .catch(function(error) {
-        console.log("Gagal get identity", error);
-        // self.props.history.replace("/signin");
-      });
-  };
+        const token = localStorage.getItem("token")
+        console.log("Cekt token setelah login", token)
+        await axios({
+            method: 'get',
+            url: 'http://localhost:5000/users/profile',
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+        }).then(function(response) {
+            if (response.data.status === "Success") {
+                // console.log("login berhasil", response.data.data.id)
+                store.setState({
+                    is_login: true
+                })
+                self.setState({
+                    id: response.data.data.id,
+                    username: response.data.data.username,
+                    email: response.data.data.email,
+                    display_name: response.data.data.display_name,
+                    headline: response.data.data.headline,
+                    profile_picture: response.data.data.profile_picture,
+                    cover_photo: response.data.data.cover_photo,
+                    gender: response.data.data.gender,
+                    date_of_birth: response.data.data.date_of_birth,
+                    address: response.data.data.address,
+                    phone_number: response.data.data.phone_number,
+                    facebook_link: response.data.data.facebook_link,
+                    instagram_link: response.data.data.instagram_link,
+                    twitter_link: response.data.data.twitter_link,
+                    other_link: response.data.data.other_link,
+                    created_at: response.data.data.created_at,
+                    updated_at: response.data.data.updated_at,
+                    post_count: response.data.data.post_count,
+                    job: response.data.data.job,
+                    status: response.data.data.state
+                })
+            } else {
+                console.log("identity unauthorized", response)
+                self.props.history.replace("/signin");
+            }
+            // console.log("Sukses get identity", response.data.status)
+        }).catch(function(error) {
+            console.log("Gagal get identity", error);
+            self.props.history.replace("/signin");
+        });
+    };
 
   getFeed = async () => {
     const self = this;

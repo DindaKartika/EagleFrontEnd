@@ -14,18 +14,82 @@ const responseGoogle = (response) => {
     console.log(response);
   }
 
+// const onSuccess = (googleUser) => {
+//     const profile = googleUser.getBasicProfile();
+//     console.log(profile);
+//   }
+
+
 class FormSignIn extends Component {
     doLogin = ()  =>{
         this.props.signIn().then(() =>{
+            console.log("looogiiin", this);
             this.props.history.push("/profile");
         });
     };
-
     doLoginWithEmail = (data)  =>{
         this.signInEmail(data).then(() =>{
+            console.log("looogiiin email", this);
+            console.log("cek token sebelum redirect", localStorage.getItem('token'));
             this.props.history.push("/profile");
         });
     };
+    // onSignIn = (googleUser) => {
+    //     var profile = googleUser.getBasicProfile();
+    //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //     console.log('Name: ' + profile.getName());
+    //     console.log('Image URL: ' + profile.getImageUrl());
+    //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    //   }
+
+
+    // signInEmail = async (googleUser) => {
+    //     // onSignIn = async (googleUser) => {
+    //     const tokenGoogle = googleUser.tokenId;
+    //     // console.log("cek token sebelum axios", tokenGoogle)
+    //     const urlToken = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + tokenGoogle 
+    //     await axios({
+    //         method: 'get',
+    //         url: urlToken
+    //         // headers: {
+    //         //   Authorization: 'Bearer ' + token
+    //         // }
+    //     }).then(function(response) {
+    //         // console.log("Get identity google berhasil", response)
+    //         // console.log("Get identity google berhasil", response.data.email)
+    //         // console.log("Get identity google berhasil", response.data.name)
+    //         // console.log("Get identity google berhasil", response.data.picture)
+    //         // --------------------------------------------------------------------------
+    //         axios({
+    //             method: 'post',
+    //             url: "http://localhost:5000/login/email",
+    //             data: {
+    //                 email: response.data.email,
+    //                 display_name: response.data.name,
+    //                 profile_picture: response.data.picture
+    //             }
+    //         }).then(function(response) {
+    //             console.log("Login dengan identity google berhasil", response)
+    //             console.log("cek token sebelum dimasukkan ke localstorage", response.data.token)
+    //             localStorage.setItem('token', response.data.token)
+    //             store.setState({
+    //                 is_login: true,
+    //                 // token: response.data.token,
+    //             });
+    //             // const self = this;
+    //             // self.props.history.push("/profile");
+    //             // console.log("Get identity google berhasil", response.data.email)
+    //         }).catch(function(error) {
+    //             console.log("Login Gagal dengan identity google", error);
+    //         });
+    //         // --------------------------------------------------------------------------
+    //     }).catch(function(error) {
+    //         console.log("Gagal get identity google", error);
+    //     });
+    //     // console.log(googleUser);
+    //     // console.log(googleUser.tokenId);
+    //     // this.props.history.push("/profile");
+    // }
 
     signInEmail = async (googleUser) => {
         const tokenGoogle = googleUser.tokenId;
@@ -50,7 +114,8 @@ class FormSignIn extends Component {
             }).catch(function(error) {
                 console.log("Login Gagal dengan identity google", error);
             });
-        }).catch(function(error) {
+        }
+        ).catch(function(error) {
             console.log("Gagal get identity google", error);
         });
     }
@@ -96,10 +161,13 @@ class FormSignIn extends Component {
                                 <span className="grey">Daftar <Link to ="/signup" className="blue">disini</Link></span>
                             </div>
                             <div className="row justify-content-center">
+                                {/* <div class="g-signin2" data-onsuccess="onSignIn"></div> */}
                                 <GoogleLogin
                                     clientId="776063172831-jhej4256uqt8unt4itba1ceel0h06rr7.apps.googleusercontent.com"
                                     buttonText="Login"
                                     onSuccess={(e)=> this.doLoginWithEmail(e)}
+                                    // onSuccess={(e)=> this.onSignIn(e)}
+                                    // onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
                                     cookiePolicy={'single_host_origin'}
                                 />

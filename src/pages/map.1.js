@@ -10,10 +10,8 @@ import Select from 'react-select'
 import DateTimePicker from 'react-datetime-picker'
 import DatePicker from 'react-datepicker'
 import axios from 'axios'
-import PopUp from '../components/popup'
 
 import "react-datepicker/dist/react-datepicker.css";
-import { NONAME } from "dns";
 
 const optionsCity = [
 	{ value: 'malang', label: 'malang' }
@@ -23,14 +21,6 @@ const optionsPlant = [
 	{ value: 'cabe', label: 'cabe' },
 	{ value: 'tomat', label: 'tomat' },
 	{ value: 'terong', label: 'terong' }
-]
-
-const points= [
-  [112.62276702069872, -7.977665435743127],
-  [112.64844883185015, -7.960344081053911],
-  [112.6326591681588, -7.944989941985106],
-  [112.63150494892685, -7.989446961468076],
-  [112.6529458426674, -7.999874921672479]
 ]
 
 const polygonPaint = {
@@ -48,12 +38,10 @@ class App extends Component {
 		super(props);
 		this.state = {
 			filter: false,
-			sidebar : false,
-			popup : false,
 			startDate : new Date(),
-			Farms : [],
-			koordinat : [],
-			number : null
+			kota : "",
+			tanaman : "",
+			sidebar : false
 		};
 
 		localStorage.setItem('search', '')
@@ -61,7 +49,6 @@ class App extends Component {
 		this.viewFilter = this.viewFilter.bind(this);
 		this.viewSidebar = this.viewSidebar.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this._onMouseLeave = this._onMouseLeave.bind(this)
 	}
 
 	UNSAFE_componentWillMount () {
@@ -73,20 +60,31 @@ class App extends Component {
 			self.setState({Farms: response.data});
 			console.log('farms', response.data);
 			const Farms = response.data
+			// self.setState({user : response.data.user})
 			const rows = []
+			const rowCenter = []
 			for (const [index, value] of Farms.entries()) {
+				const koordinat = JSON.parse(response.data[index].coordinates)
+				console.log(koordinat)
+				const rowCoord = []
+				rowCoord.push(koordinat)
+				rows.push(rowCoord)
+
 				const centers = JSON.parse(response.data[index].center)
-				console.log(centers)
-				const data = {}
-				data['center'] = centers
-				data['deskripsi'] = response.data[index].deskripsi
-				data['tanaman'] = response.data[index].plant_type
-				data['pemilik'] = response.data[index].user.display_name
-				data['username'] = response.data[index].user.username
-				rows.push(data)
+				rowCenter.push(centers)
 			}
 			console.log('koordinat jadi', rows)
 			self.setState({koordinat : rows})
+			console.log('center_jadi', rowCenter)
+			self.setState({Center : rowCenter})
+			
+			// const koordinat = []
+			// koordinat.push(JSON.parse(response.data.coordinates))
+			// console.log('coord jadi', koordinat)
+			// self.setState({koordinat: koordinat})
+			// const centers = JSON.parse(response.data.center)
+			// console.log(centers)
+			// self.setState({center:centers})
 		})
 		.catch(function(error){
 			console.log('error', error);
@@ -102,6 +100,24 @@ class App extends Component {
 		// localStorage.setItem('search', )
 		this.setState({sidebar:true})
 	}
+
+	changeCity(event) {
+		this.setState({
+			kota: event.value
+		});
+
+		localStorage.setItem('kota', event.value)
+		console.log(event.value)
+	}
+
+	changePlant(event) {
+		this.setState({
+			tanaman: event.value
+		});
+
+		localStorage.setItem('tanaman', event.value)
+		console.log(event.value)
+  }
 	
 	changeSearch(event) {
 		this.setState({
@@ -124,33 +140,16 @@ class App extends Component {
 		localStorage.setItem('search', e.target.value);
 	};
 
-	_onClickMap = key =>{
-		// console.log(key)
-		const indeks = key['key'] + 1
-		this.props.history.push('/maps/' + indeks);
-	}
-
-	_onMouseEnter = key =>{
-		console.log('mouseenter', key)
-		this.setState({number : key['key']})
-		this.setState({popup : true})
-		// this.props.history.push('/maps/' + 1);
-	}
-
-	_onMouseLeave(){
-		this.setState({popup : false})
-		this.setState({number : null})
-		// this.props.history.push('/maps/' + 1);
+	_onClickMap() {
+		console.log('success');
 	}
 
   render() {
 		console.log(this.state.sidebar)
 		const {startDate} = this.state
 		console.log('tanggal', startDate.toISOString())
-		const {koordinat, Center, Farms, number} = this.state
+		const {koordinat, Center} = this.state
 		console.log('koord', koordinat)
-		console.log('index popup', number)
-		console.log('buat popup', koordinat[number])
     return (
       <div className="App">
 				<div className="header">
@@ -161,6 +160,27 @@ class App extends Component {
 						<input type="search" onClick={this.viewFilter} placeholder="Cari" name="search" onChange={e => this.changeInput(e)}/>
 						<button type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
 						{this.state.filter && <FilterMap/>}
+						{/* <div className="filters">
+							<label>Filter berdasarkan :</label>
+							<br/>
+							<label>Kota :</label>
+							<Select options={optionsCity} onChange={e => this.changeCity(e)}/>
+							<label>Jenis Tanaman :</label>
+							<Select options={optionsPlant} onChange={e => this.changePlant(e)}/>
+							<label>Waktu panen :</label>
+							<br/>
+							<DateTimePicker
+								onChange={this.onChange}
+								value={this.state.date}
+								disableClock={true}
+								// minDate={new Date()}
+							/>
+							<DatePicker
+								selected={startDate}
+								onChange={this.handleChange}
+								value ={startDate}
+							/>
+						</div> */}
 					</form>
 				</div>
 				{this.state.sidebar && <SidebarMap/>}
@@ -168,29 +188,17 @@ class App extends Component {
 					<Map
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
-							height: "90vh",
+							height: "87vh",
 							width: "100vw"
 						}}
 						center={[112.63396597896462, -7.97718148341032]}
-						// zoom={[13]}
+						zoom={[13]}
 					>
-						<Layer
-              type="symbol"
-              id="points"
-              layout={{ "icon-image": "circle-11", "icon-allow-overlap": true }}
-              // images={images}
-            >
-							{koordinat.map((item, key) => 
-								<Feature key={key} 
-								coordinates={item.center} 
-								onClick ={() => this._onClickMap({key})}
-								onMouseEnter ={() => this._onMouseEnter({key})}
-								onMouseLeave ={this._onMouseLeave}
-								/>
-								)}
-							{/* {points.map((point, i) => <Feature key={i} coordinates={point} />)} */}
-            </Layer>
-						{this.state.popup && <PopUp center={koordinat[number].center} deskripsi={koordinat[number].deskripsi} tanaman={koordinat[number].tanaman} username={koordinat[number].username} pemilik={koordinat[number].pemilik}/>}
+						<Layer type="fill" paint={polygonPaint}>
+							<Feature 
+							coordinates={koordinat} 
+							onClick ={this._onClickMap}/>
+						</Layer>
 					</Map>
 				</div>
       </div>

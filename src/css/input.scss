@@ -6,6 +6,7 @@ $hitam:black;
 $colorpage:#f4f5f7;
 $colortitle:#d12366;
 $colorbluegreen : #00CED1;
+$popupcolor : #008080;
 
 
 @mixin fontSW ($size, $weight){
@@ -611,3 +612,31 @@ $colorbluegreen : #00CED1;
     @include fontSFC(30px, ('Roboto', 'sans-serif'),grey );
     font-weight:bold;
 }
+
+.imglike{
+    height: 30px;
+    width: 30px;
+}
+.mapboxgl-popup-content{
+    padding: 10px !important;
+
+    label{
+        font-size: 12px;
+        margin: 0 !important;
+        color: $popupcolor;
+    }
+
+    span{
+        font-size: 12px;
+        margin: 0 !important;
+    }
+
+    h5{
+        font-size: 18px;
+        color: $popupcolor;
+    }
+}
+
+// .mapboxgl-popup-content{
+//     padding: 0 !important;
+// }
