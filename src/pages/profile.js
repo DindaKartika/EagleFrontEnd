@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import Header from "../components/header_signin";
 import Footer from "../components/footer";
 import ListFeed from "../components/list_feed";
+import { storage } from "../firebase";
 
 //MAIN CLASS
 class Profile extends Component {
@@ -37,7 +38,13 @@ class Profile extends Component {
       job: "",
       status: "",
 
-      listFeed: []
+      listFeed: [],
+
+      image1: null,
+      progressProfilePicture: 0,
+
+      image2: null,
+      progressCoverPhoto: 0
     };
   }
 
@@ -47,57 +54,59 @@ class Profile extends Component {
     });
   };
 
-    getIdentity = async () => {
-        const self = this
-        if (localStorage.getItem("token") === null) {
-            this.props.history.push("/signin");
+  getIdentity = async () => {
+    const self = this;
+    if (localStorage.getItem("token") === null) {
+      this.props.history.push("/signin");
+    }
+    const token = localStorage.getItem("token");
+    console.log("Cekt token setelah login", token);
+    await axios({
+      method: "get",
+      url: "http://localhost:5000/users/profile",
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+      .then(function(response) {
+        if (response.data.status === "Success") {
+          // console.log("login berhasil", response.data.data.id)
+          store.setState({
+            is_login: true
+          });
+          self.setState({
+            id: response.data.data.id,
+            username: response.data.data.username,
+            email: response.data.data.email,
+            display_name: response.data.data.display_name,
+            headline: response.data.data.headline,
+            profile_picture: response.data.data.profile_picture,
+            cover_photo: response.data.data.cover_photo,
+            gender: response.data.data.gender,
+            date_of_birth: response.data.data.date_of_birth,
+            address: response.data.data.address,
+            phone_number: response.data.data.phone_number,
+            facebook_link: response.data.data.facebook_link,
+            instagram_link: response.data.data.instagram_link,
+            twitter_link: response.data.data.twitter_link,
+            other_link: response.data.data.other_link,
+            created_at: response.data.data.created_at,
+            updated_at: response.data.data.updated_at,
+            post_count: response.data.data.post_count,
+            job: response.data.data.job,
+            status: response.data.data.state
+          });
+        } else {
+          console.log("identity unauthorized", response);
+          self.props.history.replace("/signin");
         }
-        const token = localStorage.getItem("token")
-        console.log("Cekt token setelah login", token)
-        await axios({
-            method: 'get',
-            url: 'http://localhost:5000/users/profile',
-            headers: {
-              Authorization: 'Bearer ' + token
-            }
-        }).then(function(response) {
-            if (response.data.status === "Success") {
-                // console.log("login berhasil", response.data.data.id)
-                store.setState({
-                    is_login: true
-                })
-                self.setState({
-                    id: response.data.data.id,
-                    username: response.data.data.username,
-                    email: response.data.data.email,
-                    display_name: response.data.data.display_name,
-                    headline: response.data.data.headline,
-                    profile_picture: response.data.data.profile_picture,
-                    cover_photo: response.data.data.cover_photo,
-                    gender: response.data.data.gender,
-                    date_of_birth: response.data.data.date_of_birth,
-                    address: response.data.data.address,
-                    phone_number: response.data.data.phone_number,
-                    facebook_link: response.data.data.facebook_link,
-                    instagram_link: response.data.data.instagram_link,
-                    twitter_link: response.data.data.twitter_link,
-                    other_link: response.data.data.other_link,
-                    created_at: response.data.data.created_at,
-                    updated_at: response.data.data.updated_at,
-                    post_count: response.data.data.post_count,
-                    job: response.data.data.job,
-                    status: response.data.data.state
-                })
-            } else {
-                console.log("identity unauthorized", response)
-                self.props.history.replace("/signin");
-            }
-            // console.log("Sukses get identity", response.data.status)
-        }).catch(function(error) {
-            console.log("Gagal get identity", error);
-            self.props.history.replace("/signin");
-        });
-    };
+        // console.log("Sukses get identity", response.data.status)
+      })
+      .catch(function(error) {
+        console.log("Gagal get identity", error);
+        self.props.history.replace("/signin");
+      });
+  };
 
   getFeed = async () => {
     const self = this;
@@ -132,10 +141,6 @@ class Profile extends Component {
     const self = this;
     self.setState({ show: value });
   };
-
-  //   doEdit = () => {
-  //     this.checkForm().then(() => {
-  //   };
 
   updateProfile = async () => {
     const self = this;
@@ -200,11 +205,9 @@ class Profile extends Component {
         edit_twitter_link: self.state.twitter_link
       });
     }
-
     await axios({
       method: "get",
       url: "http://localhost:5000/users/profile",
-      //   data: data,
       headers: {
         Authorization: "Bearer " + token
       }
@@ -234,44 +237,81 @@ class Profile extends Component {
         }).then(function(response) {
           console.log("SUCCESS");
         });
-
-        // if (response.data.status === "Success") {
-        //   // console.log("login berhasil", response.data.data.id)
-        //   store.setState({
-        //     is_login: true
-        //   });
-        //   store.setState({
-        //     id: response.data.data.id,
-        //     username: response.data.data.username,
-        //     email: response.data.data.email,
-        //     display_name: response.data.data.display_name,
-        //     headline: response.data.data.headline,
-        //     profile_picture: response.data.data.profile_picture,
-        //     cover_photo: response.data.data.cover_photo,
-        //     gender: response.data.data.gender,
-        //     date_of_birth: response.data.data.date_of_birth,
-        //     address: response.data.data.address,
-        //     phone_number: response.data.data.phone_number,
-        //     facebook_link: response.data.data.facebook_link,
-        //     instagram_link: response.data.data.instagram_link,
-        //     twitter_link: response.data.data.twitter_link,
-        //     other_link: response.data.data.other_link,
-        //     created_at: response.data.data.created_at,
-        //     updated_at: response.data.data.updated_at,
-        //     post_count: response.data.data.post_count,
-        //     job: response.data.data.job,
-        //     status: response.data.data.state
-        //   });
-        // } else {
-        //   console.log("login gagal", response);
-        //   self.props.history.replace("/signin");
-        // }
-        // console.log("Sukses get identity", response.data.status)
       })
       .catch(function(error) {
         console.log("Gagal Update identity", error);
         // self.props.history.replace("/signin");
       });
+  };
+
+  handleProfilePictureChange = event => {
+    this.setState({
+      image1: event.target.files[0]
+    });
+    // console.log(event.target.files);
+  };
+
+  handleUploadProfilePicture = () => {
+    const { image1 } = this.state;
+
+    const uploadTask = storage.ref(`images/${image1.name}`).put(image1);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        //   progress function
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progressProfilePicture: progress });
+      },
+      error => {
+        //   error function
+        console.log(error);
+      },
+      () => {
+        //   complete function
+        storage
+          .ref("images")
+          .child(image1.name)
+          .getDownloadURL()
+          .then(uerel => store.setState({ edit_profile_picture: uerel }));
+      }
+    );
+  };
+
+  handleCoverPhotoChange = event => {
+    this.setState({
+      image2: event.target.files[0]
+    });
+    // console.log(event.target.files);
+  };
+
+  handleUploadCoverPhoto = () => {
+    const { image2 } = this.state;
+
+    const uploadTask = storage.ref(`images/${image2.name}`).put(image2);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        //   progress function
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progressCoverPhoto: progress });
+      },
+      error => {
+        //   error function
+        console.log(error);
+      },
+      () => {
+        //   complete function
+        storage
+          .ref("images")
+          .child(image2.name)
+          .getDownloadURL()
+          .then(uerel => store.setState({ edit_cover_photo: uerel }));
+      }
+    );
   };
 
   render() {
@@ -458,21 +498,39 @@ class Profile extends Component {
                     method="post"
                     onSubmit={e => e.preventDefault()}
                   >
-                    <div class="row">
-                      <div class="col-md-3">
-                        <label for="edit_display_name">Nama *</label>
+                    {this.props.current_display_name == "" && (
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="edit_display_name">Nama *</label>
+                        </div>
+                        <div class="col-md-9">
+                          <input
+                            required
+                            type="text"
+                            id="edit_display_name"
+                            name="edit_display_name"
+                            placeholder={this.state.display_name}
+                            onChange={e => this.props.setField(e)}
+                          />
+                        </div>
                       </div>
-                      <div class="col-md-9">
-                        <input
-                          required
-                          type="text"
-                          id="edit_display_name"
-                          name="edit_display_name"
-                          placeholder={this.state.display_name}
-                          onChange={e => this.props.setField(e)}
-                        />
+                    )}
+                    {this.props.current_display_name != "" && (
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="edit_display_name">Nama</label>
+                        </div>
+                        <div class="col-md-9">
+                          <input
+                            type="text"
+                            id="edit_display_name"
+                            name="edit_display_name"
+                            placeholder={this.state.display_name}
+                            onChange={e => this.props.setField(e)}
+                          />
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div class="row">
                       <div class="col-md-3">
                         <label for="edit_headline">Deskripsi</label>
@@ -494,13 +552,21 @@ class Profile extends Component {
                         </label>
                       </div>
                       <div class="col-md-9">
+                        <progress
+                          value={this.state.progressProfilePicture}
+                          max="100"
+                        />
+                        <br />
                         <input
-                          type="text"
+                          type="file"
                           id="edit_profile_picture"
                           name="edit_profile_picture"
                           placeholder={this.state.profile_picture}
-                          onChange={e => this.props.setField(e)}
+                          onChange={this.handleProfilePictureChange}
                         />
+                        <button onClick={this.handleUploadProfilePicture}>
+                          Upload
+                        </button>
                       </div>
                     </div>
                     <div class="row">
@@ -508,13 +574,28 @@ class Profile extends Component {
                         <label for="edit_cover_photo">Link foto kover</label>
                       </div>
                       <div class="col-md-9">
+                        <progress
+                          value={this.state.progressCoverPhoto}
+                          max="100"
+                        />
+                        <br />
                         <input
+                          type="file"
+                          id="edit_cover_photo"
+                          name="edit_cover_photo"
+                          placeholder={this.state.cover_photo}
+                          onChange={this.handleCoverPhotoChange}
+                        />
+                        <button onClick={this.handleUploadCoverPhoto}>
+                          Upload
+                        </button>
+                        {/* <input
                           type="text"
                           id="edit_cover_photo"
                           name="edit_cover_photo"
                           placeholder={this.state.cover_photo}
                           onChange={e => this.props.setField(e)}
-                        />
+                        /> */}
                       </div>
                     </div>
                     <div class="row">
@@ -648,46 +729,6 @@ class Profile extends Component {
                       </div>
                     </div>
                   </form>
-                  {/* <form>
-                                        <div class="form-group row">
-                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nama Profil</label> <br />
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Jenis Kelamin</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Tanggal Lahir</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nomor Handphone</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Pekerjaan saat ini</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Alamat tinggal</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div><button className="btn btn-outline-success">Simpan</button></div>
-                                    </form> */}
                 </div>
               </div>
             </div>
@@ -701,6 +742,6 @@ class Profile extends Component {
 
 // export default Profile;
 export default connect(
-  "edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link",
+  "current_display_name, edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link",
   actions
 )(withRouter(Profile));
