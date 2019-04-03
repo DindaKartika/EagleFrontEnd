@@ -11,6 +11,7 @@ import DateTimePicker from 'react-datetime-picker'
 import DatePicker from 'react-datepicker'
 import axios from 'axios'
 import PopUp from '../components/popup'
+import mapboxgl from "mapbox-gl"
 
 import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
@@ -53,7 +54,8 @@ class App extends Component {
 			startDate : new Date(),
 			Farms : [],
 			koordinat : [],
-			number : null
+			number : null,
+			Center : [112.63396597896462, -7.97718148341032]
 		};
 
 		localStorage.setItem('search', '')
@@ -62,6 +64,7 @@ class App extends Component {
 		this.viewSidebar = this.viewSidebar.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this._onMouseLeave = this._onMouseLeave.bind(this)
+		this.onMapLoad = this.onMapLoad.bind(this)
 	}
 
 	UNSAFE_componentWillMount () {
@@ -143,6 +146,23 @@ class App extends Component {
 		// this.props.history.push('/maps/' + 1);
 	}
 
+	onMapLoad() {
+
+		navigator.geolocation.getCurrentPosition(position =>{
+			const lng = position.coords.longitude
+			const lat = position.coords.latitude
+			console.log('longitude', lng)
+			console.log('latitude', lat)
+
+			const center = []
+			center.push(lng)
+			center.push(lat)
+			this.setState({Center : center})
+		})
+	};
+	
+	
+
   render() {
 		console.log(this.state.sidebar)
 		const {startDate} = this.state
@@ -151,6 +171,7 @@ class App extends Component {
 		console.log('koord', koordinat)
 		console.log('index popup', number)
 		console.log('buat popup', koordinat[number])
+		
     return (
       <div className="App">
 				<div className="header">
@@ -166,12 +187,13 @@ class App extends Component {
 				{this.state.sidebar && <SidebarMap/>}
 				<div>
 					<Map
+						onStyleLoad={this.onMapLoad}
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
 							height: "90vh",
 							width: "100vw"
 						}}
-						center={[112.63396597896462, -7.97718148341032]}
+						center={Center}
 						// zoom={[13]}
 					>
 						<Layer

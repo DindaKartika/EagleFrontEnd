@@ -24,7 +24,8 @@ class InputField extends Component {
 		super(props);
 		this.state = {
 			sidebar : false,
-			koordinat : ""
+			koordinat : "",
+			center : [112.63396597896462, -7.97718148341032]
 		};
 
 		this.viewFilter = this.viewFilter.bind(this);
@@ -86,8 +87,34 @@ class InputField extends Component {
 		this.setState({filter:true})
 	}
 
+	changeInput = e =>{
+		localStorage.setItem('search', e.target.value);
+		console.log(e.target.value)
+	};
+
+	flyToCity = () =>{
+    const search = localStorage.getItem('search')
+		console.log(search)
+
+		const basicURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + search + ".json?access_token=pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0ejY1c3FmMzExejQxcGNmcmZoaGhtMCJ9.FnTBMWoUi17BhvjRQ0e2mw"
+
+		console.log(basicURL)
+    const self = this;
+    axios
+      .get(basicURL)
+      .then(response => {
+					console.log("kota", response.data.features[0]);
+					this.setState({center : response.data.features[0].center})
+          // this.props.history.push('/maps/' + id);
+      })
+      .catch(error => {
+          console.log(error);
+      });
+  };
+
   render() {
 		console.log(this.state.sidebar)
+		const {center} = this.state
     return (
       <div className="InputField">
 				<div className="header">
@@ -95,8 +122,8 @@ class InputField extends Component {
 				</div>
 				<div className="search">
 					<form onSubmit={e => e.preventDefault()}>
-						<input type="search" onFocus={this.viewFilter} placeholder="Cari" name="search"/>
-						<button type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
+						<input type="search" onFocus={this.viewFilter} placeholder="Masukkan kota" name="search" onChange={e => this.changeInput(e)}/>
+						<button type="submit" onClick={() =>this.flyToCity()}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
 					</form>
 				</div>
 				{this.state.sidebar && <SidebarField/>}
@@ -107,7 +134,7 @@ class InputField extends Component {
 							height: "90vh",
 							width: "100vw"
 						}}
-						center={[112.63396597896462, -7.97718148341032]}
+						center={center}
 						zoom={[12]}
 					>
 						<DrawControl

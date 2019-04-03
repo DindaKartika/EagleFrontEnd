@@ -10,6 +10,7 @@ import Select from 'react-select'
 import DateTimePicker from 'react-datetime-picker'
 import DatePicker from 'react-datepicker'
 import axios from 'axios'
+import mapboxgl from "mapbox-gl"
 
 import "react-datepicker/dist/react-datepicker.css";
 
