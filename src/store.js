@@ -82,7 +82,9 @@ const initialState = {
 
     // newsfeed start here
     content:"",
-    listAllFeed:[]
+    listAllFeed:[],
+    allComment: [],
+    dataLike:[]
     // listAllComment:[]
 
     //news feed end here
