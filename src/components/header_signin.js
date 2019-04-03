@@ -34,7 +34,7 @@ class Header extends Component {
             </li>
           </ul>
           <Link to="/signin" className="btn btn-outline-success" style={{ display: this.props.is_login ? "none" : "block" }}><span className="cwhite">Masuk</span></Link>
-          <Link to="/signin" className="btn btn-outline-warning" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Keluar</span></Link>
+          <Link to="/" onClick={() => this.props.postLogout()} className="btn btn-outline-warning" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Keluar</span></Link>
         </div>
       </nav>
     );

@@ -27,41 +27,48 @@ const initialState = {
     username: "",
     password: "",
     is_login: false,
-
-    current_id: 0,
-    current_email: "",
-    current_username: "",
-    current_password: "",
-    current_date_of_birth: "",
-    current_address: "",
-    current_created_at: "",
-    current_display_fullname: "",
-    current_gender: "",
-    current_phone: "",
-    current_status: "",
-    current_updated_at: "",
-
     token: "",
-    test: "",
-    auth_state: true,
-    
-    product_state: "home",
 
-    is_register:false,
+    test: "",
+
+    // current_id: 0,
+    // current_username: response.data.data.username,
+    // current_email: response.data.data.email,
+    // current_display_name: response.data.data.display_name,
+    // current_headline: response.data.data.headline,
+    // current_profile_picture: response.data.data.profile_picture,
+    // current_cover_photo: response.data.data.cover_photo,
+    // current_gender: response.data.data.gender,
+    // current_date_of_birth: response.data.data.date_of_birth,
+    // current_address: response.data.data.address,
+    // current_phone_number: response.data.data.phone_number,
+    // current_facebook_link: response.data.data.facebook_link,
+    // current_instagram_link: response.data.data.instagram_link,
+    // current_twitter_link: response.data.data.twitter_link,
+    // current_other_link: response.data.data.other_link,
+    // current_created_at: response.data.data.created_at,
+    // current_updated_at: response.data.data.updated_at,
+    // current_post_count: response.data.data.post_count,
+    // current_job: response.data.data.job,
+    // current_status: response.data.data.state,
+    
+    display_name: "",
+    headline: "",
+    profile_picture: "",
+    cover_photo: "",
+    gender: "",
+    date_of_birth: "",
+    address: "",
+    phone_number: "",
+    job: "",
+    facebook_link: "",
+    instagram_link: "",
+    twitter_link: "",
+    
 
     email: "",
     email_confirmation: "",
     password_confirmation: "",
-
-    page: 1,
-    url: base_url,
-    current_username: "",
-    current_userid: "",
-
-    respond_offer: "",
-
-    for_transaction_offer_id: 0,
-    for_transaction_offer_id: 0
 };
 
 export const store = createStore(initialState)
@@ -73,8 +80,12 @@ export const actions = store => ({
         return { [event.target.name]: event.target.value };
     },
 
-    signOut: state => {
-        return {is_login: false};
+    // signOut: state => {
+    //     return {is_login: false};
+    // },
+    postLogout: state => {
+        localStorage.removeItem('token')
+        return { is_login: false };
     },
     
     signIn:  async state => {
@@ -89,7 +100,7 @@ export const actions = store => ({
             data: data
         };
         console.log("test fungsi login", data)
-        console.log("test isi sign in", signIn)
+        // console.log("test isi sign in", signIn)
         await axios(signIn)
         .then(function(response){
             if (response.data.hasOwnProperty("token")) {
@@ -146,4 +157,29 @@ export const actions = store => ({
         }
     },
 
+    editProfile:  async state => {
+        const self = this;
+        const url="/users/profile/";
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+        }).then(function(response) {
+            // console.log("Get feeds berhasil", response.data)
+            self.setState({
+                listFeed: response.data
+            })
+        }).catch(function(error) {
+        console.log("Gagal get feeds", error);
+        });
+    },
+
 })
+
+
+
+
+
+
