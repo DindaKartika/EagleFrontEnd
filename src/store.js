@@ -31,26 +31,26 @@ const initialState = {
 
     test: "",
 
-    // current_id: 0,
-    // current_username: response.data.data.username,
-    // current_email: response.data.data.email,
-    // current_display_name: response.data.data.display_name,
-    // current_headline: response.data.data.headline,
-    // current_profile_picture: response.data.data.profile_picture,
-    // current_cover_photo: response.data.data.cover_photo,
-    // current_gender: response.data.data.gender,
-    // current_date_of_birth: response.data.data.date_of_birth,
-    // current_address: response.data.data.address,
-    // current_phone_number: response.data.data.phone_number,
-    // current_facebook_link: response.data.data.facebook_link,
-    // current_instagram_link: response.data.data.instagram_link,
-    // current_twitter_link: response.data.data.twitter_link,
-    // current_other_link: response.data.data.other_link,
-    // current_created_at: response.data.data.created_at,
-    // current_updated_at: response.data.data.updated_at,
-    // current_post_count: response.data.data.post_count,
-    // current_job: response.data.data.job,
-    // current_status: response.data.data.state,
+    current_id: 0,
+    current_username: "",
+    current_email: "",
+    current_display_name: "",
+    current_headline: "",
+    current_profile_picture: "",
+    current_cover_photo: "",
+    current_gender: "",
+    current_date_of_birth: "",
+    current_address: "",
+    current_phone_number: "",
+    current_facebook_link: "",
+    current_instagram_link: "",
+    current_twitter_link: "",
+    current_other_link: "",
+    current_created_at: "",
+    current_updated_at: "",
+    current_post_count: "",
+    current_job: "",
+    current_status: "",
     
     display_name: "",
     headline: "",
@@ -212,6 +212,52 @@ export const actions = store => ({
         .catch(function(error){
             console.log(error);
         })
-        },
+    },
+
+    getIdentity : async state => {
+        const self = this
+        if (localStorage.getItem("token") === null) {
+            this.props.history.push("/signin");
+        }
+        const token = localStorage.getItem("token")
+        console.log("Cekt token setelah login", token)
+        await axios({
+            method: 'get',
+            url: 'http://localhost:5000/users/profile',
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+        }).then(function(response) {
+            if (response.data.status === "Success") {
+                store.setState({
+                    is_login: true,
+                    current_id: response.data.data.id,
+                    current_username: response.data.data.username,
+                    current_email: response.data.data.email,
+                    current_display_name: response.data.data.display_name,
+                    current_headline: response.data.data.headline,
+                    current_profile_picture: response.data.data.profile_picture,
+                    current_cover_photo: response.data.data.cover_photo,
+                    current_gender: response.data.data.gender,
+                    current_date_of_birth: response.data.data.date_of_birth,
+                    current_address: response.data.data.address,
+                    current_phone_number: response.data.data.phone_number,
+                    current_facebook_link: response.data.data.facebook_link,
+                    current_instagram_link: response.data.data.instagram_link,
+                    current_twitter_link: response.data.data.twitter_link,
+                    current_other_link: response.data.data.other_link,
+                    current_created_at: response.data.data.created_at,
+                    current_updated_at: response.data.data.updated_at,
+                    current_post_count: response.data.data.post_count,
+                    current_job: response.data.data.job,
+                    current_status: response.data.data.state
+                })
+            } else {
+                self.props.history.replace("/signin");
+            }
+        }).catch(function(error) {
+            self.props.history.replace("/signin");
+        });
+    },
 
 })

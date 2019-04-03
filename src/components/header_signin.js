@@ -11,6 +11,10 @@ class Header extends Component {
     //     this.props.is_login=false;
     //     this.props.history.push("/");
     // };
+  componentDidMount() {
+    this.props.getIdentity();
+  }
+
   render() {
       console.log("cek is login", this.props.is_login)
     return (

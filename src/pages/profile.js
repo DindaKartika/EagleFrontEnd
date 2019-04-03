@@ -94,8 +94,8 @@ class Profile extends Component {
             }
             // console.log("Sukses get identity", response.data.status)
         }).catch(function(error) {
-        console.log("Gagal get identity", error);
-        // self.props.history.replace("/signin");
+            console.log("Gagal get identity", error);
+            self.props.history.replace("/signin");
         });
     };
 
