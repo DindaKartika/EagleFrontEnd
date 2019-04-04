@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import ReactMapboxGl, {Layer, Feature, Popup} from "react-mapbox-gl";
-import DrawControl from "react-mapbox-gl-draw";
+import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import Header from '../components/header_signin'
-import SidebarMap from '../components/sidebarMap'
 import FilterMap from '../components/filter'
-import Select from 'react-select'
-import DateTimePicker from 'react-datetime-picker'
-import DatePicker from 'react-datepicker'
 import axios from 'axios'
 import PopUp from '../components/popup'
-import mapboxgl from "mapbox-gl"
 import KontenSidebar from '../components/kontenSidebar'
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -59,7 +52,6 @@ class App extends Component {
 
 	UNSAFE_componentWillMount () {
 		const self = this;
-		console.log(window.location.pathname.slice(6))
 		axios
 		.get('http://0.0.0.0:5000/farms')
 		.then(function(response){
@@ -276,7 +268,7 @@ class App extends Component {
 						<Layer
               type="symbol"
               id="points"
-							layout={{ "icon-image": "circle-11", "icon-allow-overlap": true }}
+							layout={{ "icon-image": "garden-15", "icon-allow-overlap": true }}
             >
 							{koordinat.map((item, key) => 
 								<Feature key={key} 
