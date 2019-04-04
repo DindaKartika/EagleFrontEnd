@@ -875,7 +875,13 @@ input, select, textarea {
         color: white !important;
     }
 }
-}    
+
+
+
+}   
+.container-fluid.row.justify-content-end.strip {
+    background-color: white;
+} 
 // =================================================================
 
 @-moz-keyframes bg {
