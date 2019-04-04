@@ -136,7 +136,7 @@ class App extends Component {
 				console.log('cekdata', localStorage.getItem('datas'))
 			}
 			else{
-				const rows = {'center' : center, 'deckripsi' : "", "tanaman" : "", "pemilik" : "", "username" : ""}
+				const rows = {'center' : center, 'deskripsi' : "", "tanaman" : "", "pemilik" : "", "username" : ""}
 			}
 		})
 		.catch(function(error){
