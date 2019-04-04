@@ -3,8 +3,11 @@ import{ Link } from "react-router-dom";
 
 import DateTime from "react-datetime";
 import AsyncSelect from 'react-select/lib/Async';
+import '../css/main.css';
+import '../css/bootstrap.min.css'
 import Select from 'react-select'
-import DateTimePicker from 'react-datetime-picker'
+import DatePicker from 'react-datepicker'
+// import DateTimePicker from 'react-datetime-picker'
 
 const optionCity = [
     { value: 'Malang', label: 'Malang' },
@@ -14,8 +17,7 @@ const optionCity = [
 
 const optionPlant = [
   { value: 'Tomat', label: 'Tomat' },
-  { value: 'Cabai', label: 'Cabai' },
-  { value: 'Terong', label: 'Terong' }
+  { value: 'Cabai', label: 'Cabai' }
 ]
 
 class FilterMap extends Component {
@@ -48,8 +50,10 @@ class FilterMap extends Component {
   }
   
   onChange = date => {
+    // const tanggal = date.toISOstring()
     this.setState({ date })
     localStorage.setItem('tanggal', date)
+    console.log('tanggal di filter', date.toUTCString())
   }
 	
   render() {
@@ -64,11 +68,10 @@ class FilterMap extends Component {
         <Select options={optionPlant} onChange={e => this.changePlant(e)}/>
         <label>Waktu panen :</label>
         <br/>
-        <DateTimePicker
-            onChange={this.onChange}
-            value={this.state.date}
-            disableClock={true}
-            // minDate={new Date()}
+        <DatePicker
+          selected={this.state.date}
+          onChange={this.onChange}
+          value ={this.state.date}
         />
     </div>
     );

@@ -48,6 +48,23 @@ const initialState = {
     current_other_link: "",
     current_created_at: "",
     current_updated_at: "",
+
+    edit_display_name: "",
+    edit_headline: "",
+    edit_profile_picture: "",
+    edit_cover_photo: "",
+    edit_gender: "",
+    edit_date_of_birth: "",
+    edit_address: "",
+    edit_phone_number: "",
+    edit_job: "",
+    edit_facebook_link: "",
+    edit_instagram_link: "",
+    edit_twitter_link: "",
+
+    token: "",
+    test: "",
+    auth_state: true,
     current_post_count: "",
     current_job: "",
     current_status: "",
@@ -72,17 +89,17 @@ const initialState = {
 
     page: 1,
     url: base_url,
-    current_username: "",
     current_userid: "",
 
     respond_offer: "",
 
     for_transaction_offer_id: 0,
-    for_transaction_offer_id: 0,
 
     // newsfeed start here
     content:"",
-    listAllFeed:[]
+    listAllFeed:[],
+    allComment: [],
+    dataLike:[]
     // listAllComment:[]
 
     //news feed end here
@@ -95,6 +112,10 @@ export const actions = store => ({
     setField: (state, event) => {
         // console.log("cek respond_offer", store.respond_offer)
         return { [event.target.name]: event.target.value };
+    },
+
+    setEditGender: (state, e) => {
+        store.setState({ edit_gender: e.target.value });
     },
 
     // signOut: state => {

@@ -2,12 +2,93 @@ import React, { Component } from 'react';
 import { connect } from "unistore/react";
 import { actions } from '../store';
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 class CommentComponent extends Component {
-    // postSignout = () => {
-    //     this.props.is_login=false;
-    //     this.props.history.push("/");
+    constructor (props) {
+        super(props);
+            this.state = {  
+                updateComment: this.props.allComment
+                // listLike: this.props.dataLike
+            };
+        };
+
+    // componentDidUpdate = async () => {
+    //     const self = this
+    //     const token = this.props.token;
+    //     const url = "http://localhost:5000/comments?id_feed=" + self.props.id_feed
+    //     axios({
+    //         method: 'get',
+    //         url: url
+    //         // headers: {
+    //         //   Authorization: 'Bearer ' + token
+    //         // }
+    //     }).then(function(response) {
+    //         console.log("cek feed id", self.props.id_feed)
+    //         console.log("Get comment berhasil", response.data)
+    //         self.setState({
+    //             updateComment: response.data
+    //         })
+    //     }).catch(function(error) {
+    //     console.log("Gagal get comment", error);
+    //     });
+        
+        // axios get like //
+        // axios({
+        //     method: 'get',
+        //     url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+        //     // headers: {s.
+        //     //   Authorization: 'Bearer ' + token
+        //     // }
+        // }).then(function(response) {
+        //     self.setState({
+        //         listLike: response.data.total
+        //     })
+        // }).catch(function(error) {
+        // console.log("Gagal get like", error);
+        // });
     // };
+
+    handleDeleteComment(e){
+        e.preventDefault();
+        const self = this;
+        const id_feed = e.target.name;
+
+        const token = this.props.token;
+        console.log("test token post",token)
+        let deleteComment = {
+            method:'delete',
+            url:'http://localhost:5000/comments/' + self.props.id,
+            headers: {
+                'Authorization':'Bearer ' + token,
+                "Content-Type":"application/json"
+            }
+        };
+        console.log("cek delete comment", deleteComment);
+        //get all like
+        axios(deleteComment)
+        .then(function(response){
+            
+            const url = "http://localhost:5000/comments?id_feed=" + self.props.id_feed
+            axios({
+                method: 'get',
+                url: url
+                // headers: {
+                //   Authorization: 'Bearer ' + token
+                // }
+            }).then(function(response) {
+                console.log("cek feed id", self.props.id_feed)
+                console.log("Get comment berhasil", response.data)
+                self.setState({
+                    updateComment: response.data
+                })
+            }).catch(function(error) {
+            console.log("Gagal get comment", error);
+            });
+            self.props.history.push("/newsfeed");
+        });
+
+    };
   render() {
     return (
 
@@ -31,6 +112,7 @@ class CommentComponent extends Component {
             </div>
             <div className="row justify-content-end">
                 <span className="attribute-text margin-right-20">{this.props.tag}</span>
+                <a className="attribute-text margin-right-20" onClick={(e)=>this.handleDeleteComment(e)} name={this.props.id}>Delete</a>
                 <span className="attribute-text">Likes</span>
             </div>
         </div>
@@ -39,5 +121,5 @@ class CommentComponent extends Component {
 }
 
 // export default CommentComponent;
-export default connect( "", actions)
+export default connect( "token, allComment, dataLike", actions)
 (withRouter(CommentComponent))

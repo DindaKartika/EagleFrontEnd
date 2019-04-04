@@ -6,8 +6,8 @@ import { actions } from '../store';
 import { withRouter } from "react-router-dom";
 import Header from '../components/header_signin'
 import Footer from '../components/footer';
-import CommentComponent from '../components/comment_component';
 import FeedComponent from '../components/feed_component';
+import CommentComponent from '../components/comment_component';
 
 //MAIN CLASS
 class NewsFeed extends Component {
@@ -83,6 +83,10 @@ class NewsFeed extends Component {
                                             // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
                                             return <FeedComponent key={key} data={item}/>; }
                                                     )}
+                                        {/* {this.props.listAllFeed.map((item, key) => {
+                                            // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
+                                            return <CommentComponent key={key} data={item}/>; }
+                                                    )} */}
 
                                     </div>
                                 </div>
