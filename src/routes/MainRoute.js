@@ -15,6 +15,7 @@ import Blog from '../pages/blog';
 import InputField from '../pages/inputField'
 import LandingPage from '../pages/landingpage'
 import Farm from '../pages/farm'
+import LandingInfo from '../pages/landinginfo';
 // const MainRoute = () => {
 class MainRoute extends Component {
     render() {
@@ -37,6 +38,8 @@ class MainRoute extends Component {
                 <Route exact path="/maps/:id_farm" component={Farm}/>
                 <Route exact path="/blogdetail" component={BlogDetail}/>
                 <Route exact path="/blog" component={Blog}/>
+                <Route exact path="/landing" component={LandingPage}/>
+                <Route exact path="/landinginfo" component={LandingInfo}/>
                 {/* <Route exact path = "/allproduct" component={AllProduct}/> */}
             </Switch>
         );
