@@ -13,7 +13,7 @@ const KontenSidebar = props => {
             <div className="sidebar-item">
             <h4>{props.pemilik}</h4>
             <label>@{props.username}</label>
-            <hr/>
+            <br/>
             <span>Tipe tanaman pada lahan:</span>
             <h5>{props.tanaman}</h5>
             <label>{props.deskripsi}</label>

@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import ReactMapboxGl, {Layer, Feature, Popup} from "react-mapbox-gl";
-import DrawControl from "react-mapbox-gl-draw";
+import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import Header from '../components/header_signin'
-import SidebarMap from '../components/sidebarMap'
 import FilterMap from '../components/filter'
-import Select from 'react-select'
-import DateTimePicker from 'react-datetime-picker'
-import DatePicker from 'react-datepicker'
 import axios from 'axios'
 import PopUp from '../components/popup'
-import mapboxgl from "mapbox-gl"
 import KontenSidebar from '../components/kontenSidebar'
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -59,7 +52,6 @@ class App extends Component {
 
 	UNSAFE_componentWillMount () {
 		const self = this;
-		console.log(window.location.pathname.slice(6))
 		axios
 		.get('http://0.0.0.0:5000/farms')
 		.then(function(response){
@@ -94,8 +86,62 @@ class App extends Component {
 	}
 
 	viewSidebar(){
-		// localStorage.setItem('search', )
-		this.setState({sidebar:true})
+		const data = {}
+		if (localStorage.getItem('kota') !== ""){
+			data['city'] = localStorage.getItem('kota')
+		}
+		if (localStorage.getItem('tanaman') !== ""){
+			data['plant_type'] = localStorage.getItem('tanaman')
+		}
+		if (localStorage.getItem('tanggal') !== ""){
+			const date = localStorage.getItem('tanggal')
+			const tanggal = new Date(date).toISOString()
+			console.log('tanggalISO', tanggal)
+			data['ready_at'] = tanggal
+		}
+		if (localStorage.getItem('search') !== ""){
+			data['search'] = localStorage.getItem('search')
+		}
+
+		console.log('data search', data)
+
+		const self = this
+
+		axios
+		.get('http://0.0.0.0:5000/farms', {
+			params:data
+			})
+		.then(function(response){
+			self.setState({Farms: response.data});
+			console.log('farms', response.data);
+			const Farms = response.data
+			const rows = []
+			const center = self.state.Center
+			for (const [index, value] of Farms.entries()) {
+				const centers = JSON.parse(response.data[index].center)
+				console.log(centers)
+				const data = {}
+				data['center'] = centers
+				data['deskripsi'] = response.data[index].deskripsi
+				data['tanaman'] = response.data[index].plant_type
+				data['pemilik'] = response.data[index].user.display_name
+				data['username'] = response.data[index].user.username
+				rows.push(data)
+			}
+
+			if (rows != []){
+				console.log('koordinat jadi', rows)
+				self.setState({koordinat : rows})
+				localStorage.setItem('datas', JSON.stringify(rows))
+				console.log('cekdata', localStorage.getItem('datas'))
+			}
+			else{
+				const rows = {'center' : center, 'deckripsi' : "", "tanaman" : "", "pemilik" : "", "username" : ""}
+			}
+		})
+		.catch(function(error){
+			console.log('error', error);
+		})
 	}
 	
 	changeSearch(event) {
@@ -222,7 +268,7 @@ class App extends Component {
 						<Layer
               type="symbol"
               id="points"
-							layout={{ "icon-image": "circle-11", "icon-allow-overlap": true }}
+							layout={{ "icon-image": "garden-15", "icon-allow-overlap": true }}
             >
 							{koordinat.map((item, key) => 
 								<Feature key={key} 
