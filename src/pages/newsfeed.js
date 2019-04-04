@@ -8,6 +8,7 @@ import Header from '../components/header_signin'
 import Footer from '../components/footer';
 import FeedComponent from '../components/feed_component';
 import CommentComponent from '../components/comment_component';
+import{ Link } from "react-router-dom";
 
 //MAIN CLASS
 class NewsFeed extends Component {
@@ -45,6 +46,8 @@ class NewsFeed extends Component {
         });
 
     };
+
+
     
   render() {
     return (
@@ -56,11 +59,11 @@ class NewsFeed extends Component {
                 <div className="container row container-profile">
                     <div className="col-md-3">
                         <div className="profile-photo-news">
-                            {/* Profile image goes here! */}
+                        <Link to="/profile"><img src={this.props.current_profile_picture} className="profile-photo-news" alt=""/></Link>
                         </div>
                         <div className="side-detail-profile">
-                            <div>Display Name</div>
-                            <div>@username</div>
+                            <div>{this.props.current_display_name}</div>
+                            <div>@{this.props.current_username}</div>
                             <br />
                         </div>
                     </div>
@@ -104,5 +107,5 @@ class NewsFeed extends Component {
 }
 
 // export default Profile;
-export default connect( "listAllFeed, token", actions)
+export default connect( "listAllFeed, token, current_display_name, current_username, current_profile_picture", actions)
 (withRouter(NewsFeed));
