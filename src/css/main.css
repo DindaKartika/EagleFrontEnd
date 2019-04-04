@@ -12,6 +12,10 @@
   color: grey;
 }
 
+.navbar-wrapper {
+  background-color: #f8f9fa !important;
+}
+
 .fontHeaderLogin {
   font-size: 20px !important;
   font-weight: bold !important;
@@ -24,6 +28,11 @@
 .imglogo {
   height: 50px;
   width: 70px;
+}
+
+.logo-navbar {
+  width: 150px;
+  margin-right: 50px;
 }
 
 .basecolor {
