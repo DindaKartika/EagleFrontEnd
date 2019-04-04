@@ -99,10 +99,11 @@ const initialState = {
     content:"",
     listAllFeed:[],
     allComment: [],
-    dataLike:[]
+    dataLike:[],
     // listAllComment:[]
 
     //news feed end here
+
 };
 
 export const store = createStore(initialState)
