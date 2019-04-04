@@ -43,14 +43,13 @@ class LandingInfo extends Component {
           <div class="row justify-content-center">
             <div class="col-md-8 col-lg-8 col-xs-12 text-center">
               <h6 class="subtitle">
-                What We Do
+                Apa itu Lahanku
               </h6>
               <h2 class="section-title">
-                We Provide Creative Solutions
+                kami berdedikasi untuk memajukan industri pertanian Indonesia
               </h2>
               <div class="section-info">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed nulla neque 
-                tempore rerum dolore accusamus, eum, officia nostrum sequi explicabo aspernatur asperiores.
+                Membantu menyelesaikan permasalahan ketidak seimbangan antara stok dan permintaan pasar pangan (supply and demand) di seluruh daerah Indonesia
               </div>
             </div>            
           </div>
@@ -61,8 +60,8 @@ class LandingInfo extends Component {
                 <div class="icon">
                   <i class="lni-brush"></i>
                 </div>
-                <h3><a href="#">Web Design</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores incidunt laboriosam harum, voluptatem fugiat perspiciatis.</p>
+                <h3><a href="#">Membuka Ruang Pasar</a></h3>
+                <p>Membantu petani untuk mempublikasi aktifitas bercocok tanam, dari jenis tanaman yang ditanam hingga waktu estimasi panen.</p>
               </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-xs-12 fadeInUp" data-animation="fadeInUp" data-delay="300">
@@ -70,8 +69,8 @@ class LandingInfo extends Component {
                 <div class="icon">
                   <i class="lni-mobile"></i>
                 </div>
-                <h3><a href="#">App Development</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores incidunt laboriosam harum, voluptatem fugiat perspiciatis.</p>
+                <h3><a href="#">Tukar Teknologi</a></h3>
+                <p>Membantu petani untuk mendapatkan ruang khusus dalam berbagi teknologi tani dan berdiskusi satu sama lain</p>
               </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-xs-12 fadeInUp" data-animation="fadeInUp" data-delay="600">
@@ -79,8 +78,8 @@ class LandingInfo extends Component {
                 <div class="icon">
                   <i class="lni-bullhorn"></i>
                 </div>
-                <h3><a href="#">Internet Marketing</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores incidunt laboriosam harum, voluptatem fugiat perspiciatis.</p>
+                <h3><a href="#">Tukar Data</a></h3>
+                <p>Menyediakan informasi aktual data aktifitas pengolahan lahan tani untuk seluruh masyarakat</p>
               </div>
             </div>
           </div>
@@ -93,14 +92,13 @@ class LandingInfo extends Component {
           <div class="row justify-content-center">
             <div class="col-md-8 col-lg-8 col-xs-12 text-center">
               <h6 class="subtitle">
-                Meet Our
+                Siapa di balik Lahanku
               </h6>
               <h2 class="section-title">
-                Our awesome team
+                Tim pengembang Aplikasi
               </h2>
               <div class="section-info">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed nulla neque 
-                tempore rerum dolore accusamus, eum, officia nostrum sequi explicabo aspernatur asperiores.
+                Fokus pada pertumbuhan sekaligus memelihara platform yang terbuka memerlukan tim eksekutif terampil yang memanfaatkan tantangan.
               </div>
             </div>            
           </div>
@@ -109,7 +107,7 @@ class LandingInfo extends Component {
               {/* <!-- Team Item Starts --> */}
               <div class="team-item text-center">
                 <div class="team-img">
-                  <img class="img-fluid" src="assets/img/team/team-01.jpg" alt="" />
+                  <img class="img-fluid" src={require("../images/profile/mae1.jpg")} alt="" />
                   <div class="team-overlay">
                     <div class="overlay-social-icon text-center">
                       <ul class="social-icons">
@@ -121,8 +119,8 @@ class LandingInfo extends Component {
                   </div>
                 </div>
                 <div class="info-text">
-                  <h3><a href="#">Emilly Williams</a></h3>
-                  <p>Product Designer</p>
+                  <h3><a href="#">Mae</a></h3>
+                  <p>UI/UX & Front-end Developer</p>
                 </div>
               </div>
               {/* <!-- Team Item Ends --> */}
@@ -131,7 +129,7 @@ class LandingInfo extends Component {
               {/* <!-- Team Item Starts --> */}
               <div class="team-item text-center">
                 <div class="team-img">
-                  <img class="img-fluid" src="assets/img/team/team-02.jpg" alt="" />
+                  <img class="img-fluid" src={require("../images/profile/dzinsyah.jpg")} alt="" />
                   <div class="team-overlay">
                     <div class="overlay-social-icon text-center">
                       <ul class="social-icons">
@@ -143,7 +141,7 @@ class LandingInfo extends Component {
                   </div>
                 </div>
                 <div class="info-text">
-                  <h3><a href="#">Patric Green</a></h3>
+                  <h3><a href="#">Dzinsyah</a></h3>
                   <p>Front-end Developer</p>
                 </div>
               </div>
@@ -153,7 +151,7 @@ class LandingInfo extends Component {
               {/* <!-- Team Item Starts --> */}
               <div class="team-item text-center">
                 <div class="team-img">
-                  <img class="img-fluid" src="assets/img/team/team-03.jpg" alt="" />
+                  <img class="img-fluid" src={require("../images/profile/dinda.jpg")} alt="" />
                   <div class="team-overlay">
                     <div class="overlay-social-icon text-center">
                       <ul class="social-icons">
@@ -165,8 +163,8 @@ class LandingInfo extends Component {
                   </div>
                 </div>
                 <div class="info-text">
-                  <h3><a href="#">Paul Kowalsy</a></h3>
-                  <p>Lead Designer</p>
+                  <h3><a href="#">Dinda</a></h3>
+                  <p>Back-end Developer & Scientist</p>
                 </div>
               </div>
               {/* <!-- Team Item Ends --> */}
@@ -175,7 +173,7 @@ class LandingInfo extends Component {
               {/* <!-- Team Item Starts --> */}
               <div class="team-item text-center">
                 <div class="team-img">
-                  <img class="img-fluid" src="assets/img/team/team-04.jpg" alt="" />
+                  <img class="img-fluid" src={require("../images/profile/ilham.jpg")} alt="" />
                   <div class="team-overlay">
                     <div class="overlay-social-icon text-center">
                       <ul class="social-icons">
@@ -187,7 +185,7 @@ class LandingInfo extends Component {
                   </div>
                 </div>
                 <div class="info-text">
-                  <h3><a href="#">Jhon Doe</a></h3>
+                  <h3><a href="#">Ilham</a></h3>
                   <p>Back-end Developer</p>
                 </div>
               </div>
@@ -204,10 +202,10 @@ class LandingInfo extends Component {
           <div class="row justify-content-center">
             <div class="col-md-8 col-lg-8 col-xs-12 text-center">
               <h6 class="subtitle">
-                Connect With Us
+                Kami masih banyak butuh kritik dan saran
               </h6>
               <h2 class="section-title">
-                Get in Touch
+                Hubungi Kami
               </h2>
               <div class="section-info">
                 Lorem ipsum dolor sit amet, ut consul mediocrem abhorreant cum. Id eum dolores.
@@ -222,26 +220,26 @@ class LandingInfo extends Component {
               <div class="col-md-8">
                 <div class="row">
                   <div class="col-md-6">
-                    <label>Your Name</label>
+                    <label>Nama Anda</label>
                     <input type="text" class="form-control" id="name" name="email" required data-error="Please enter your name" />
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="col-md-6">
-                    <label>Your E-mail</label>
+                    <label>Alamat surel</label>
                     <input type="email" class="form-control" id="email" name="email" required data-error="Please enter your Email" />
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>  
                 <div class="row">
                   <div class="col-md-12">
-                    <label>Your Message</label>
+                    <label>Pesan Anda untuk kami</label>
                     <textarea class="form-control" rows="4" id="message" name="message" required data-error="Write your message"></textarea>
                   </div>
                 </div>
                 {/* <!-- Submit Button --> */}
                 <div class="row">
                   <div class="col-md-12">
-                    <button type="submit" class="btn btn-common" id="form-submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
+                    <button type="submit" class="btn btn-common" id="form-submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Kirim pesan</button>
                     <div id="msgSubmit" class="h3 text-center hidden"></div>
                   </div>
                 </div>
@@ -250,19 +248,19 @@ class LandingInfo extends Component {
               {/* <!-- Contact info --> */}
               <div class="col-md-4 contact-right">
                 <div class="contact-box">
-                  <h4>Address</h4>
+                  <h4>Alamat</h4>
                   <p>
-                    1900 Pico Blvd, New York <br /> Centernial, colorado
+                    Malang <br /> Jawa Timur, Indonesia
                   </p>
                 </div>
                 <div class="contact-box">
-                  <h4>Call Us</h4>
-                  <p>+48 123 456 789</p>
+                  <h4>Hubungi kami</h4>
+                  <p>+62 898 465 0802</p>
                 </div>
                 <div class="contact-box">
-                  <h4>Say Hello</h4>
+                  <h4>Sapa kami</h4>
                   <p>
-                    <a href="#">info@example.com</a>
+                    <a href="#">info@lahanku.com</a>
                   </p>
                 </div>
               </div>

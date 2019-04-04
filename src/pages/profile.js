@@ -330,7 +330,7 @@ class Profile extends Component {
         >
           {/* Cover Photo goes here! */}
         </div>
-        <div className="container-fluid row justify-content-end">
+        <div className="container-fluid row justify-content-end strip">
           <button className="btn btn-outline-success addpost-btn">
             Tambahkan post
           </button>
