@@ -99,7 +99,9 @@ const initialState = {
     content:"",
     listAllFeed:[],
     allComment: [],
-    dataLike:[]
+    dataLike:[],
+    id_userComment:""
+    // is_like:false
     // listAllComment:[]
 
     //news feed end here
@@ -280,5 +282,10 @@ export const actions = store => ({
             self.props.history.replace("/signin");
         });
     },
+
+    // statusUnlike: state => {
+    //     localStorage.removeItem('is_like')
+    //     return { is_like: false };
+    // },
 
 })

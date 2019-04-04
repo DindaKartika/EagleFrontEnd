@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import{ Link } from "react-router-dom";
 import { connect } from "unistore/react";
-import { actions } from '../store';
+import { actions, store } from '../store';
 import { withRouter } from "react-router-dom";
 import CommentComponent from './comment_component';
 import axios from "axios";
@@ -12,14 +12,14 @@ class FeedComponent extends Component {
         super(props);
             this.state = {  
                 dataComment: this.props.allComment,
-                listLike: this.props.dataLike,
-                is_like:false,
+                countLike: this.props.dataLike,
+                is_like:"false",
                 id_like:""
             };
         };
     componentDidMount = async () => {
         const self = this
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         const url = "http://localhost:5000/comments?id_feed=" + self.props.data.id_feed
         axios({
             method: 'get',
@@ -46,7 +46,7 @@ class FeedComponent extends Component {
             // }
         }).then(function(response) {
             self.setState({
-                listLike: response.data.total,
+                countLike: response.data.total,
                 id_like:response.data.data[0].id_like
             })
         }).catch(function(error) {
@@ -63,7 +63,7 @@ class FeedComponent extends Component {
         data.content = content.value;
         data.id_feed = self.props.data.id_feed;
 
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         console.log("test token post",token)
         console.log("post comment", data);
         let postComment = {
@@ -106,7 +106,7 @@ class FeedComponent extends Component {
         const self = this;
         const id_feed = e.target.name;
 
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         console.log("test token post",token)
         let postLike = {
             method:'post',
@@ -121,8 +121,9 @@ class FeedComponent extends Component {
         axios(postLike)
         .then(function(response){
             console.log("ceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeek", response.data)
+            // localStorage.setItem('is_like', true)
             self.setState({
-                listLike: response.data.total,
+                countLike: response.data.total,
                 is_like:true
             })
             console.log("cek clik like",response.data);
@@ -136,7 +137,7 @@ class FeedComponent extends Component {
                 // }
             }).then(function(response) {
                 self.setState({
-                    listLike: response.data.total,
+                    countLike: response.data.total,
                     id_like:response.data.data[0].id_like
                 })
             }).catch(function(error) {
@@ -157,7 +158,7 @@ class FeedComponent extends Component {
         const id_liked = e.target.name;
         console.log("id untuk like",id_liked)
 
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         console.log("test token post",token)
         let unlike = {
             method:'delete',
@@ -171,10 +172,8 @@ class FeedComponent extends Component {
         //get all like
         axios(unlike)
         .then(function(response){
-            self.setState({
-                listLike: response.data.total,
-                is_like:false
-            })
+            this.props.statusUnlike();
+            alert("unlike sukses")
             console.log(response.data);
             axios({
                 method: 'get',
@@ -184,67 +183,98 @@ class FeedComponent extends Component {
                 // }
             }).then(function(response) {
                 self.setState({
-                    listLike: response.data.total,
+                    countLike: response.data.total,
                 })
             }).catch(function(error) {
             console.log("Gagal get like", error);
             });
             self.props.history.push("/newsfeed");
         });
-
     };
 
   render() {
     return (
         <div className="container-fluid">
         <hr/>
-            <div className="row">
-                <div className="col-md-6">
-                    <div className="row">
-                        <div className="col-md-2 col-12"><img src={require('../images/img/profil.jpeg')} className="img-photo-news margin-bottom-5" alt=""/></div>
-                        <div className="col-md-4 col-12 margin-auto"><span className="displayname-text ">{this.props.data.user.display_name}</span></div>
-                        <div className="col-md-4 col-12 margin-auto"><span className="username-text"><span>@</span>{this.props.data.user.username}</span></div>
-                        <div className="col-md-2 col-12"></div>
+        <div className="card gedf-card">
+                    <div className="card-header header-feed-color">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div className="mr-2">
+                                    <img className="rounded-circle" width="45" src={this.props.data.user.profile_picture} />
+                                </div>
+                                <div className="ml-2">
+                                    <div className="h5 m-0 color-username">@{this.props.data.user.username}</div>
+                                    <div className="h7 text-muted">{this.props.data.user.display_name}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="dropdown">
+                                    <button className="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="fa fa-ellipsis-h"></i>
+                                    </button>
+                                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                        <div className="h6 dropdown-header">Configuration</div>
+                                        <a className="dropdown-item" href="#">Save</a>
+                                        <a className="dropdown-item" href="#">Hide</a>
+                                        <a className="dropdown-item" href="#">Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className="card-body">
+                        <div className="text-muted h7 mb-2"> <i className="fa fa-clock-o"></i>{this.props.data.created_at.slice(4, 16)} | {this.props.data.created_at.slice(17, 22)}</div>
+
+                        <p className="card-text">
+                        {this.props.data.content}
+                        </p>
+                    </div>
+                    <div className="card-body header-feed-color">
+                        <span className="format-likes">{this.state.countLike}</span>
+                        <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
+                        {/* <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a> */}
+                        {/* <a href="#" className="card-link"><i className="fa fa-comment"></i> Comment</a> */}
+                        {/* <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> */}
+                    </div>
+                    {/* comment section start here */}
+                <div className="card-footer ">
+                    <div class="row bootstrap snippets justify-content-end">
+                        <div className="col-md-10 col-md-offset-2 col-sm-12">
+                            <div className="comment-wrapper">
+                                <div className="panel panel-info">
+                                    <div className="panel-heading text-right">
+                                        Comment panel
+                                    </div>
+                                    <div className="panel-body">
+                                        <hr/>
+                                        <ul className="media-list">
+                                        {this.state.dataComment.map((item, key) => {
+                                        return <CommentComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} 
+                                                profile_picture={item.user.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} id_user={item.id_user}/>; }
+                                            )}
+                                        <form onSubmit={e => this.handleSubmitComment(e)}>
+                                            <textarea className="form-control" name="content" placeholder="write a comment..." rows="3"></textarea>
+                                            <br/>
+                                            <button class="btn btn-outline-secondary position-right" type="submit">Comment</button>
+                                            {/* <button type="button" className="btn btn-info pull-right">Post</button> */}
+                                            <div className="clearfix"></div>
+                                        </form>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="col-md-6 date-container-text">
-                    <span className="date-text">{this.props.data.created_at.slice(17, 22)} | </span>
-                    <span className="date-text">{this.props.data.created_at.slice(4, 16)}</span>
+                        {/* comment section end here */}
                 </div>
-            </div>
-            <div className="row">
-                <p className="content-text">{this.props.data.content} </p>
-            </div>
-            <div className="row justify-content-between">
-                <span className="attribute-text">{this.props.data.tag}</span>
-                <span>{this.state.listLike}</span>
-                <a type="btn" onClick={(e)=>this.handleClickLike(e)} style={{ display: this.state.is_like ? "none" : "block" }} name={this.props.data.id_feed} ><img src={require('../images/ico/likebefore.png')} className="imglike margin-bottom-5" alt=""/></a>
-                <a type="btn" onClick={(e)=>this.handleUnlike(e)} style={{ display: this.state.is_like ? "block" : "none" }} name={this.state.id_like} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
-                {/* <span className="attribute-text">Comments</span>
-                <span className="attribute-text">Likes</span> */}
-            </div>
-            <div className="row comment-area">
-                <div className="col-md-2"></div>
-                <div className="col-md-10 justify-content-end">
-                {this.state.dataComment.map((item, key) => {
-                return <CommentComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id}/>; }
-                        )}
-                    {/* <CommentComponent/> */}
-                </div>
-            </div>
-            <div class="input-group mb-3">
-                <form onSubmit={e => this.handleSubmitComment(e)}>
-                    <input type="text" class="form-control" placeholder="Tulis komentar ..." aria-label="Recipient's username" name="content" aria-describedby="basic-addon2"/>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">Comment</button>
-                    </div>
-                </form>
-            </div>
         </div>
     );
   }
 }
 
 // export default FeedComponent;
-export default connect( "token, allComment, dataLike", actions)
+export default connect( "token, allComment, dataLike, current_id", actions)
 (withRouter(FeedComponent))
