@@ -8,6 +8,7 @@ import Header from "../components/header_signin";
 import Footer from "../components/footer";
 import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
+import Kebun from "../components/kebun"
 
 //MAIN CLASS
 class Profile extends Component {
@@ -96,6 +97,7 @@ class Profile extends Component {
             job: response.data.data.job,
             status: response.data.data.state
           });
+          localStorage.setItem('id', response.data.data.id)
         } else {
           console.log("identity unauthorized", response);
           self.props.history.replace("/signin");
@@ -441,8 +443,9 @@ class Profile extends Component {
                     <div>
                       <div className="row">Info Kebun</div>
                       <hr />
+                      <Kebun/>
                       {/* Loop Content farm start here */}
-                      <div className="row farm-item">
+                      {/* <div className="row farm-item">
                         <div className="col-md-6">
                           <div className="name-text">
                             Kebun Tersayang kampung Tidar
@@ -461,10 +464,10 @@ class Profile extends Component {
                             </button>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       {/* Loop Content farm start here */}
                       {/* Loop Content farm start here */}
-                      <div className="row farm-item">
+                      {/* <div className="row farm-item">
                         <div className="col-md-6">
                           <div className="name-text">Kebun kedua Tidar</div>
                           <div className="address-text">
@@ -481,7 +484,7 @@ class Profile extends Component {
                             </button>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       {/* Loop Content farm start here */}
                     </div>
                   </div>
