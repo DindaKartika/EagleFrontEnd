@@ -1293,3 +1293,11 @@ a.back-to-top:hover, a.back-to-top:focus {
 #copyright p a:hover {
   color: #1fcaa7;
 }
+
+.landing-info {
+  background-color: white;
+}
+
+.landing-info h2 {
+  color: black;
+}

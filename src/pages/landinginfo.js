@@ -6,7 +6,7 @@ import '../fonts/line-icons.css'
 class LandingInfo extends Component {
   render() {
     return (
-      <div>
+      <div className="landing-info">
     {/* <!-- Header Area wrapper Starts --> */}
       <Header />
       
