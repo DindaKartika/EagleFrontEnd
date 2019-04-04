@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import "./../css/bootstrap.min.css";
-import "./../css/main.css";
 
 const ListFarm = props => {
 	return (

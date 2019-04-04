@@ -11,6 +11,8 @@ import DateTimePicker from 'react-datetime-picker'
 import DatePicker from 'react-datepicker'
 import axios from 'axios'
 import PopUp from '../components/popup'
+import mapboxgl from "mapbox-gl"
+import KontenSidebar from '../components/kontenSidebar'
 
 import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
@@ -25,18 +27,6 @@ const optionsPlant = [
 	{ value: 'terong', label: 'terong' }
 ]
 
-const points= [
-  [112.62276702069872, -7.977665435743127],
-  [112.64844883185015, -7.960344081053911],
-  [112.6326591681588, -7.944989941985106],
-  [112.63150494892685, -7.989446961468076],
-  [112.6529458426674, -7.999874921672479]
-]
-
-const polygonPaint = {
-  'fill-color': '#00CED1',
-  'fill-opacity': 1
-};
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -53,7 +43,9 @@ class App extends Component {
 			startDate : new Date(),
 			Farms : [],
 			koordinat : [],
-			number : null
+			number : null,
+			Center : [112.63396597896462, -7.97718148341032],
+			uniquefeatures : []
 		};
 
 		localStorage.setItem('search', '')
@@ -62,6 +54,7 @@ class App extends Component {
 		this.viewSidebar = this.viewSidebar.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this._onMouseLeave = this._onMouseLeave.bind(this)
+		this.onMapLoad = this.onMapLoad.bind(this)
 	}
 
 	UNSAFE_componentWillMount () {
@@ -87,6 +80,8 @@ class App extends Component {
 			}
 			console.log('koordinat jadi', rows)
 			self.setState({koordinat : rows})
+			localStorage.setItem('datas', JSON.stringify(rows))
+			console.log('cekdata', localStorage.getItem('datas'))
 		})
 		.catch(function(error){
 			console.log('error', error);
@@ -143,14 +138,66 @@ class App extends Component {
 		// this.props.history.push('/maps/' + 1);
 	}
 
+	_onMoveEnd= (map,evt) => {
+		console.log('Map clicked!');
+		const features = map.queryRenderedFeatures(evt.point);
+		console.log(features);
+
+		if (features) {
+			const uniqueFeatures = this.getUniqueFeatures(features, "id");
+			const ids = []
+			for (const [index, value] of uniqueFeatures.entries()) {
+				if (value.properties.id !== undefined){
+					console.log(value.properties.id)
+					ids.push(value.properties.id)
+				}
+			}
+
+			console.log(ids)
+			this.setState({uniquefeatures : ids})
+			
+			}
+		}
+
+		getUniqueFeatures(array, comparatorProperty) {
+			var existingFeatureKeys = {};
+			var uniqueFeatures = array.filter(function(el) {
+			if (existingFeatureKeys[el.properties[comparatorProperty]]) {
+				return false;
+			} else {
+				existingFeatureKeys[el.properties[comparatorProperty]] = true;
+				return true;
+			}
+			});
+			return uniqueFeatures;
+		}
+
+	onMapLoad() {
+
+		navigator.geolocation.getCurrentPosition(position =>{
+			const lng = position.coords.longitude
+			const lat = position.coords.latitude
+			console.log('longitude', lng)
+			console.log('latitude', lat)
+
+			const center = []
+			center.push(lng)
+			center.push(lat)
+			this.setState({Center : center})
+		})
+	};
+	
+	
+
   render() {
 		console.log(this.state.sidebar)
 		const {startDate} = this.state
 		console.log('tanggal', startDate.toISOString())
-		const {koordinat, Center, Farms, number} = this.state
+		const {koordinat, Center, Farms, number, uniquefeatures} = this.state
 		console.log('koord', koordinat)
 		console.log('index popup', number)
 		console.log('buat popup', koordinat[number])
+		
     return (
       <div className="App">
 				<div className="header">
@@ -164,20 +211,31 @@ class App extends Component {
 					</form>
 				</div>
 				{this.state.sidebar && <SidebarMap/>}
+				<div className="sidebar">
+					{uniquefeatures.map((item, key) => 
+					// console.log(koordinat[item].pemilik)
+							<KontenSidebar key={key} id={item} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
+							/>
+					)}
+				</div>
 				<div>
 					<Map
+						onStyleLoad={this.onMapLoad}
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
 							height: "90vh",
 							width: "100vw"
 						}}
-						center={[112.63396597896462, -7.97718148341032]}
+						center={Center}
 						// zoom={[13]}
+						// minZoom={[10]}
+						onMoveEnd ={this._onMoveEnd}
 					>
 						<Layer
               type="symbol"
               id="points"
-              layout={{ "icon-image": "circle-11", "icon-allow-overlap": true }}
+							layout={{ "icon-image": "circle-11", "icon-allow-overlap": true }}
+							
               // images={images}
             >
 							{koordinat.map((item, key) => 

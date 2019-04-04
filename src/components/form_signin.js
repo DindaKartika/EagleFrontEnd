@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import '../css/main.css';
-import '../css/bootstrap.min.css'
 import{ Link } from "react-router-dom";
 import {Redirect} from "react-router-dom";
 import {connect} from "unistore/react";
@@ -70,7 +68,7 @@ class FormSignIn extends Component {
                                 <label for="username" className="cols-sm-2 control-label grey bold">Username</label>
                                 <div className="cols-sm-10">
                                     <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-users fa" aria-hidden="true"></i></span>
+                                        {/* <span className="input-group-addon"><i className="fa fa-users fa" aria-hidden="true"></i></span> */}
                                         <input type="text" className="form-control font14px" name="username" id="username" placeholder="Enter your Username" onChange= {e => this.props.setField(e)} required autofocus/>
                                     </div>
                                 </div>
@@ -79,7 +77,7 @@ class FormSignIn extends Component {
                                 <label for="password" className="cols-sm-2 control-label grey bold">Password</label>
                                 <div className="cols-sm-10">
                                     <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        {/* <span className="input-group-addon"><i className="fa fa-lock fa-lg" aria-hidden="true"></i></span> */}
                                         <input type="password" className="form-control font14px" name="password" id="password" placeholder="Enter your Password" onChange= {e => this.props.setField(e)} required/>
                                     </div>
                                 </div>
