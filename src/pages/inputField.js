@@ -16,15 +16,13 @@ const Map = ReactMapboxGl({
 
 const turf = require("@turf/turf")
 
-
-const tokens = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTQwOTU2OTgsIm5iZiI6MTU1NDA5NTY5OCwianRpIjoiMWRjZTg1NjktMGU5My00MDY3LTk0NWMtNGE1YTFiZDA4NWE5IiwiZXhwIjoxNTU0MTgyMDk4LCJpZGVudGl0eSI6eyJpZCI6MSwidXNlcm5hbWUiOiJEaW5kYSIsImVtYWlsIjoiZGluZGFAeHl6LmNvbSIsImRpc3BsYXlfbmFtZSI6IiIsImhlYWRsaW5lIjoiIiwicHJvZmlsZV9waWN0dXJlIjoiaHR0cHM6Ly9jZG4ucGl4YWJheS5jb20vcGhvdG8vMjAxNS8xMC8wNS8yMi8zNy9ibGFuay1wcm9maWxlLXBpY3R1cmUtOTczNDYwXzk2MF83MjAucG5nIiwiY292ZXJfcGhvdG8iOiJodHRwczovL3d3dy5xbWF0Y2h1cC5jb20vaW1hZ2VzL2RlZmF1bHQtY292ZXIuanBnIiwiZ2VuZGVyIjoiIiwiZGF0ZV9vZl9iaXJ0aCI6IiIsImFkZHJlc3MiOiIiLCJwaG9uZV9udW1iZXIiOiIiLCJmYWNlYm9va19saW5rIjoiIiwiaW5zdGFncmFtX2xpbmsiOiIiLCJ0d2l0dGVyX2xpbmsiOiIiLCJvdGhlcl9saW5rIjoiIiwiY3JlYXRlZF9hdCI6IjIwMTktMDQtMDEgMTI6MTM6MDYuNDMxNzU2IiwidXBkYXRlZF9hdCI6IjIwMTktMDQtMDEgMTI6MTM6MDYuNDMxNzY4IiwicG9zdF9jb3VudCI6MCwiam9iIjoiIiwic3RhdHVzIjoiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyIsInVzZXJfY2xhaW1zIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkRpbmRhIiwiZW1haWwiOiJkaW5kYUB4eXouY29tIiwiZGlzcGxheV9uYW1lIjoiIiwiaGVhZGxpbmUiOiIiLCJwcm9maWxlX3BpY3R1cmUiOiJodHRwczovL2Nkbi5waXhhYmF5LmNvbS9waG90by8yMDE1LzEwLzA1LzIyLzM3L2JsYW5rLXByb2ZpbGUtcGljdHVyZS05NzM0NjBfOTYwXzcyMC5wbmciLCJjb3Zlcl9waG90byI6Imh0dHBzOi8vd3d3LnFtYXRjaHVwLmNvbS9pbWFnZXMvZGVmYXVsdC1jb3Zlci5qcGciLCJnZW5kZXIiOiIiLCJkYXRlX29mX2JpcnRoIjoiIiwiYWRkcmVzcyI6IiIsInBob25lX251bWJlciI6IiIsImZhY2Vib29rX2xpbmsiOiIiLCJpbnN0YWdyYW1fbGluayI6IiIsInR3aXR0ZXJfbGluayI6IiIsIm90aGVyX2xpbmsiOiIiLCJjcmVhdGVkX2F0IjoiMjAxOS0wNC0wMSAxMjoxMzowNi40MzE3NTYiLCJ1cGRhdGVkX2F0IjoiMjAxOS0wNC0wMSAxMjoxMzowNi40MzE3NjgiLCJwb3N0X2NvdW50IjowLCJqb2IiOiIiLCJzdGF0dXMiOiIifX0.nmw38CpI3rftfEj5LYhOXdO-ESXuhjDRqbtDWJmMqzo'
-
 class InputField extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			sidebar : false,
-			koordinat : ""
+			koordinat : "",
+			center : [112.63396597896462, -7.97718148341032]
 		};
 
 		this.viewFilter = this.viewFilter.bind(this);
@@ -48,6 +46,7 @@ class InputField extends Component {
 
 			const center = turf.center(polygons)
 			const pusat = center.geometry.coordinates
+			const tokens = localStorage.getItem('token')
 			// this.setState()
 			console.log('luas', rounded_area)
 			console.log('pusat', pusat)
@@ -86,8 +85,32 @@ class InputField extends Component {
 		this.setState({filter:true})
 	}
 
+	changeInput = e =>{
+		localStorage.setItem('search', e.target.value);
+		console.log(e.target.value)
+	};
+
+	flyToCity = () =>{
+    const search = localStorage.getItem('search')
+
+		const basicURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + search + ".json?access_token=pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0ejY1c3FmMzExejQxcGNmcmZoaGhtMCJ9.FnTBMWoUi17BhvjRQ0e2mw"
+
+    const self = this;
+    axios
+      .get(basicURL)
+      .then(response => {
+					console.log("kota", response.data.features[0]);
+					this.setState({center : response.data.features[0].center})
+          // this.props.history.push('/maps/' + id);
+      })
+      .catch(error => {
+          console.log(error);
+      });
+  };
+
   render() {
 		console.log(this.state.sidebar)
+		const {center} = this.state
     return (
       <div className="InputField">
 				<div className="header">
@@ -95,8 +118,8 @@ class InputField extends Component {
 				</div>
 				<div className="search">
 					<form onSubmit={e => e.preventDefault()}>
-						<input type="search" onFocus={this.viewFilter} placeholder="Cari" name="search"/>
-						<button type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
+						<input type="search" onFocus={this.viewFilter} placeholder="Masukkan kota" name="search" onChange={e => this.changeInput(e)}/>
+						<button type="submit" onClick={() =>this.flyToCity()}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
 					</form>
 				</div>
 				{this.state.sidebar && <SidebarField/>}
@@ -107,7 +130,7 @@ class InputField extends Component {
 							height: "90vh",
 							width: "100vw"
 						}}
-						center={[112.63396597896462, -7.97718148341032]}
+						center={center}
 						zoom={[12]}
 					>
 						<DrawControl

@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import ReactMapboxGl, {Layer, Feature, Popup} from "react-mapbox-gl";
-import DrawControl from "react-mapbox-gl-draw";
+import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import Header from '../components/header_signin'
-import SidebarMap from '../components/sidebarMap'
 import FilterMap from '../components/filter'
-import Select from 'react-select'
-import DateTimePicker from 'react-datetime-picker'
-import DatePicker from 'react-datepicker'
 import axios from 'axios'
 import PopUp from '../components/popup'
+import KontenSidebar from '../components/kontenSidebar'
 
 import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
@@ -25,18 +20,6 @@ const optionsPlant = [
 	{ value: 'terong', label: 'terong' }
 ]
 
-const points= [
-  [112.62276702069872, -7.977665435743127],
-  [112.64844883185015, -7.960344081053911],
-  [112.6326591681588, -7.944989941985106],
-  [112.63150494892685, -7.989446961468076],
-  [112.6529458426674, -7.999874921672479]
-]
-
-const polygonPaint = {
-  'fill-color': '#00CED1',
-  'fill-opacity': 1
-};
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -53,7 +36,9 @@ class App extends Component {
 			startDate : new Date(),
 			Farms : [],
 			koordinat : [],
-			number : null
+			number : null,
+			Center : [112.63396597896462, -7.97718148341032],
+			uniquefeatures : []
 		};
 
 		localStorage.setItem('search', '')
@@ -62,11 +47,11 @@ class App extends Component {
 		this.viewSidebar = this.viewSidebar.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this._onMouseLeave = this._onMouseLeave.bind(this)
+		this.onMapLoad = this.onMapLoad.bind(this)
 	}
 
 	UNSAFE_componentWillMount () {
 		const self = this;
-		console.log(window.location.pathname.slice(6))
 		axios
 		.get('http://0.0.0.0:5000/farms')
 		.then(function(response){
@@ -87,6 +72,8 @@ class App extends Component {
 			}
 			console.log('koordinat jadi', rows)
 			self.setState({koordinat : rows})
+			localStorage.setItem('datas', JSON.stringify(rows))
+			console.log('cekdata', localStorage.getItem('datas'))
 		})
 		.catch(function(error){
 			console.log('error', error);
@@ -99,8 +86,62 @@ class App extends Component {
 	}
 
 	viewSidebar(){
-		// localStorage.setItem('search', )
-		this.setState({sidebar:true})
+		const data = {}
+		if (localStorage.getItem('kota') !== ""){
+			data['city'] = localStorage.getItem('kota')
+		}
+		if (localStorage.getItem('tanaman') !== ""){
+			data['plant_type'] = localStorage.getItem('tanaman')
+		}
+		if (localStorage.getItem('tanggal') !== ""){
+			const date = localStorage.getItem('tanggal')
+			const tanggal = new Date(date).toISOString()
+			console.log('tanggalISO', tanggal)
+			data['ready_at'] = tanggal
+		}
+		if (localStorage.getItem('search') !== ""){
+			data['search'] = localStorage.getItem('search')
+		}
+
+		console.log('data search', data)
+
+		const self = this
+
+		axios
+		.get('http://0.0.0.0:5000/farms', {
+			params:data
+			})
+		.then(function(response){
+			self.setState({Farms: response.data});
+			console.log('farms', response.data);
+			const Farms = response.data
+			const rows = []
+			const center = self.state.Center
+			for (const [index, value] of Farms.entries()) {
+				const centers = JSON.parse(response.data[index].center)
+				console.log(centers)
+				const data = {}
+				data['center'] = centers
+				data['deskripsi'] = response.data[index].deskripsi
+				data['tanaman'] = response.data[index].plant_type
+				data['pemilik'] = response.data[index].user.display_name
+				data['username'] = response.data[index].user.username
+				rows.push(data)
+			}
+
+			if (rows != []){
+				console.log('koordinat jadi', rows)
+				self.setState({koordinat : rows})
+				localStorage.setItem('datas', JSON.stringify(rows))
+				console.log('cekdata', localStorage.getItem('datas'))
+			}
+			else{
+				const rows = {'center' : center, 'deskripsi' : "", "tanaman" : "", "pemilik" : "", "username" : ""}
+			}
+		})
+		.catch(function(error){
+			console.log('error', error);
+		})
 	}
 	
 	changeSearch(event) {
@@ -111,8 +152,6 @@ class App extends Component {
 		localStorage.setItem('search', event.value)
 		console.log('search', event.value)
   }
-
-	// onChange = date => this.setState({ date })
 	
 	handleChange(date) {
     this.setState({
@@ -125,7 +164,6 @@ class App extends Component {
 	};
 
 	_onClickMap = key =>{
-		// console.log(key)
 		const indeks = key['key'] + 1
 		this.props.history.push('/maps/' + indeks);
 	}
@@ -134,23 +172,70 @@ class App extends Component {
 		console.log('mouseenter', key)
 		this.setState({number : key['key']})
 		this.setState({popup : true})
-		// this.props.history.push('/maps/' + 1);
 	}
 
 	_onMouseLeave(){
 		this.setState({popup : false})
 		this.setState({number : null})
-		// this.props.history.push('/maps/' + 1);
 	}
+
+	_onMoveEnd= (map,evt) => {
+		console.log('Map clicked!');
+		const features = map.queryRenderedFeatures(evt.point);
+		console.log(features);
+
+		if (features) {
+			const uniqueFeatures = this.getUniqueFeatures(features, "id");
+			const ids = []
+			for (const [index, value] of uniqueFeatures.entries()) {
+				if (value.properties.id !== undefined){
+					console.log(value.properties.id)
+					ids.push(value.properties.id)
+				}
+			}
+			console.log(ids)
+			this.setState({uniquefeatures : ids})
+			}
+		}
+
+		getUniqueFeatures(array, comparatorProperty) {
+			var existingFeatureKeys = {};
+			var uniqueFeatures = array.filter(function(el) {
+			if (existingFeatureKeys[el.properties[comparatorProperty]]) {
+				return false;
+			} else {
+				existingFeatureKeys[el.properties[comparatorProperty]] = true;
+				return true;
+			}
+			});
+			return uniqueFeatures;
+		}
+
+	onMapLoad() {
+		navigator.geolocation.getCurrentPosition(position =>{
+			const lng = position.coords.longitude
+			const lat = position.coords.latitude
+			console.log('longitude', lng)
+			console.log('latitude', lat)
+
+			const center = []
+			center.push(lng)
+			center.push(lat)
+			this.setState({Center : center})
+		})
+	};
+	
+	
 
   render() {
 		console.log(this.state.sidebar)
 		const {startDate} = this.state
 		console.log('tanggal', startDate.toISOString())
-		const {koordinat, Center, Farms, number} = this.state
+		const {koordinat, Center, Farms, number, uniquefeatures} = this.state
 		console.log('koord', koordinat)
 		console.log('index popup', number)
 		console.log('buat popup', koordinat[number])
+		
     return (
       <div className="App">
 				<div className="header">
@@ -163,22 +248,27 @@ class App extends Component {
 						{this.state.filter && <FilterMap/>}
 					</form>
 				</div>
-				{this.state.sidebar && <SidebarMap/>}
+				<div className="sidebar">
+					{uniquefeatures.map((item, key) => 
+							<KontenSidebar key={key} id={item} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
+							/>
+					)}
+				</div>
 				<div>
 					<Map
+						onStyleLoad={this.onMapLoad}
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
 							height: "90vh",
 							width: "100vw"
 						}}
-						center={[112.63396597896462, -7.97718148341032]}
-						// zoom={[13]}
+						center={Center}
+						onMoveEnd ={this._onMoveEnd}
 					>
 						<Layer
               type="symbol"
               id="points"
-              layout={{ "icon-image": "circle-11", "icon-allow-overlap": true }}
-              // images={images}
+							layout={{ "icon-image": "garden-15", "icon-allow-overlap": true }}
             >
 							{koordinat.map((item, key) => 
 								<Feature key={key} 
@@ -188,7 +278,6 @@ class App extends Component {
 								onMouseLeave ={this._onMouseLeave}
 								/>
 								)}
-							{/* {points.map((point, i) => <Feature key={i} coordinates={point} />)} */}
             </Layer>
 						{this.state.popup && <PopUp center={koordinat[number].center} deskripsi={koordinat[number].deskripsi} tanaman={koordinat[number].tanaman} username={koordinat[number].username} pemilik={koordinat[number].pemilik}/>}
 					</Map>
