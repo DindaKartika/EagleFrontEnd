@@ -8,6 +8,10 @@ import Header from '../components/header_signin'
 import Footer from '../components/footer';
 import{ Link } from "react-router-dom";
 import '../css/landing.css';
+import '../css/main2.css'
+import '../fonts/line-icons.css'
+import '../css/main.css';
+import '../css/bootstrap.min.css';
 
 //MAIN CLASS
 class LandingPage extends Component {
@@ -37,9 +41,13 @@ class LandingPage extends Component {
                   var settings = {
                     // Images (in the format of 'url': 'alignment').
                         images: {
-                            'images/bg01.jpg': 'center',
-                            'images/bg02.jpg': 'center',
-                            'images/bg03.jpg': 'center'
+                            // 'images/bg01.jpg': 'center',
+                            // 'images/bg02.jpg': 'center',
+                            // 'images/bg03.jpg': 'center'
+                            'images/map1.png': 'center',
+                            'images/map2.png': 'center',
+                            'images/map3.png': 'center',
+                            'images/map4.png': 'center',
                         },
                         // Delay.
                         delay: 6000

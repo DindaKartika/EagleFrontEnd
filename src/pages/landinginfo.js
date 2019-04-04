@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from "../components/header_signin";
-import '../css/main2.css'
-import '../fonts/line-icons.css'
+
 
 class LandingInfo extends Component {
   render() {
@@ -16,16 +15,16 @@ class LandingInfo extends Component {
           <div class="row text-center">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="heading-count">
-                <h2>Coming Soon</h2>
-                <p>Our exciting new website is coming soon! Check back later...</p>
+                <h2><img className="" src={require("../images/logo/testlogo3.png")} alt="" /></h2>
+                <p>Tempat berbagi aktivitas mengenai lahan milik Anda</p>
               </div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="row countdown justify-content-center">
                 <div id="clock" class="time-count"></div>
               </div>
-              <a href="#contact" class="btn btn-common">Contact Us</a>
-              <a href="#team" class="btn btn-border">About Us</a>
+              <a href="#contact" class="btn btn-common">Hubungi Kami</a>
+              <a href="#team" class="btn btn-border">Tentang Kami</a>
               <div class="social mt-4">
                 <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
                 <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>

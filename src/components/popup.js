@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ReactMapboxGl, {Layer, Feature, Popup} from "react-mapbox-gl";
 
-import "./../css/bootstrap.min.css";
-import "./../css/main.css";
 
 const ListFarm = props => {
     console.log(props.center)

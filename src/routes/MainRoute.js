@@ -16,6 +16,13 @@ import InputField from '../pages/inputField'
 import LandingPage from '../pages/landingpage'
 import Farm from '../pages/farm'
 import LandingInfo from '../pages/landinginfo';
+
+import '../css/landing.css';
+import '../css/main2.css';
+import '../fonts/line-icons.css';
+import '../css/bootstrap.min.css';
+import '../css/main.css';
+
 // const MainRoute = () => {
 class MainRoute extends Component {
     render() {
