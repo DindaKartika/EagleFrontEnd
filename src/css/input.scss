@@ -69,6 +69,11 @@ $popupcolor : #008080;
     color: $grey;
 }
 
+.navbar-wrapper {
+    background-color: #f8f9fa !important;
+}
+
+
 .fontHeaderLogin{
     @include fontSWF(20px !important,bold !important,('Roboto', 'sans-serif'));
     color: grey;
@@ -78,6 +83,11 @@ $popupcolor : #008080;
 
 .imglogo{
     @include HW(50px,70px );
+}
+
+.logo-navbar {
+    width: 150px;
+    margin-right: 50px;
 }
 
 .basecolor{
