@@ -9,6 +9,9 @@ import Footer from "../components/footer";
 import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
+import { Link } from "react-router-dom";
+
+const waUrl = "https://web.whatsapp.com/send?phone=";
 
 //MAIN CLASS
 class Profile extends Component {
@@ -50,6 +53,36 @@ class Profile extends Component {
   }
 
   componentDidMount = async () => {
+    // var $ = require("jquery");
+
+    // const script = document.createElement("script");
+    // script.src = "../js/wa.js";
+    // script.async = true;
+    // document.body.appendChild(script);
+
+    // const s = document.createElement('script');
+    // s.type = 'text/javascript';
+    // s.async = true;
+    // s.src = "../js/wa.js";
+    // s.innerHTML = "document.write('TESSSSSSSSSTTT')";
+    // this.instance.appendChild(s);
+
+    // $(function() {
+    //     $(".floating-wpp").floatingWhatsApp({
+    //       phone: "6289687251865",
+    //       popupMessage: "Welcome to Alphatech",
+    //       showPopup: true,
+    //       position: "right",
+    //       autoOpen: false,
+    //       //autoOpenTimer: 4000,
+    //       message: "Hello how are you my name is Mentee ...",
+    //       //headerColor: 'orange',
+    //       headerTitle: "Whatsapp Message Box",
+    //       buttonImage:
+    //         '<img src="https://cdn0.iconfinder.com/data/icons/social-media-2091/100/social-11-512.png" />'
+    //     });
+    //   });
+
     this.getIdentity().then(() => {
       this.getFeed();
     });
@@ -321,6 +354,17 @@ class Profile extends Component {
     return (
       <div>
         <Header />
+        {/* <div class="floating-wpp">Test</div> */}
+        <a
+          href={waUrl + this.props.current_phone_number}
+          class="wa-float"
+          target="_blank"
+        >
+          <i class="fa fa-whatsapp my-wa-float" />
+        </a>
+        {/* <a href={waUrl + this.props.current_phone_number} target="_blank">
+          Whatsapp
+        </a> */}
         <div
           className="cover-photo"
           style={{
@@ -334,6 +378,11 @@ class Profile extends Component {
           <button className="btn btn-outline-success addpost-btn">
             Tambahkan post
           </button>
+          <Link to="/input-field">
+          <button className="btn btn-outline-success addpost-btn">
+            Tambahkan lahan
+          </button>
+          </Link>
         </div>
         <div className="container-fluid content-section">
           <div className="container row container-profile">
@@ -568,7 +617,7 @@ class Profile extends Component {
                           onChange={this.handleProfilePictureChange}
                         />
                         <button onClick={this.handleUploadProfilePicture}>
-                          Upload
+                          Upload foto profil
                         </button>
                       </div>
                     </div>
@@ -590,15 +639,8 @@ class Profile extends Component {
                           onChange={this.handleCoverPhotoChange}
                         />
                         <button onClick={this.handleUploadCoverPhoto}>
-                          Upload
+                          Upload foto kover
                         </button>
-                        {/* <input
-                          type="text"
-                          id="edit_cover_photo"
-                          name="edit_cover_photo"
-                          placeholder={this.state.cover_photo}
-                          onChange={e => this.props.setField(e)}
-                        /> */}
                       </div>
                     </div>
                     <div class="row">
@@ -719,6 +761,7 @@ class Profile extends Component {
                         />
                       </div>
                     </div>
+                    <div ref={el => (this.instance = el)} />
                     <div class="row">
                       {/* <input type="submit" value="Submit" /> */}
                       <div>
@@ -745,6 +788,6 @@ class Profile extends Component {
 
 // export default Profile;
 export default connect(
-  "current_display_name, edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link",
+  "current_display_name, current_phone_number, edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link",
   actions
 )(withRouter(Profile));

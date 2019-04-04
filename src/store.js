@@ -105,6 +105,7 @@ const initialState = {
     // listAllComment:[]
 
     //news feed end here
+
 };
 
 export const store = createStore(initialState)

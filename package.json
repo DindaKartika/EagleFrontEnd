@@ -9,6 +9,7 @@
     "deck.gl": "^6.4.9",
     "firebase": "^5.9.2",
     "i": "^0.3.6",
+    "jquery": "^3.3.1",
     "leaflet": "^1.4.0",
     "mapbox-gl": "^0.53.1",
     "moment": "^2.24.0",
@@ -20,6 +21,7 @@
     "react-datetime-picker": "^2.3.0",
     "react-dom": "^16.8.6",
     "react-google-login": "^5.0.3",
+    "react-inline-script": "^1.2.0",
     "react-leaflet": "^2.2.1",
     "react-map-gl": "^4.1.1",
     "react-mapbox-gl": "^3.0",
@@ -30,6 +32,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-select": "^2.4.2",
+    "typekit": "^0.1.1",
     "unistore": "^3.4.1"
   },
   "scripts": {
