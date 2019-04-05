@@ -1,72 +1,75 @@
-import '../css/main.css';
-import '../css/bootstrap.min.css';
 import React, { Component } from 'react';
-// import axios from 'axios';
-import Footer from '../components/footer';
-import {Redirect} from "react-router-dom";
-import {connect} from "unistore/react";
-// import {actions} from './store';
-import {withRouter} from "react-router-dom";
 import Header from "../components/header_signin";
-import FormRegister from "../components/form_signup";
+import FormSignIn from "../components/form_signin";
+import Footer from '../components/footer_styled';
 import{ Link } from "react-router-dom";
+import FormRegister from '../components/form_signup';
 
-class SignUp extends Component {
-    render() {
-        console.log("Test page signup")
-            return (
-        <div>
-            <Header />
-            <div className="container-fluid">
-                <div className="row basecolor paddingTB10 height200">
-                    <div className="col-md-6 col-12 paddingleft30 paddingtop40 fontroboto ">
-                        {/* <div className="row"> */}
-                            <h5> Media sosial agrikultur Indonesia</h5>
-                            <span>Gabung sekarang juga dengan mudah dan cepat untuk mendapatkan keuntungan-keuntungannya!</span>
-                        {/* </div> */}
-                    </div>
-                    <div className="col-md-6 col-12">
 
-                    </div>
-                </div>
-                <div className="row backgroundPage">
-                    <div className="col-md-6 col-12 paddingtop100 fontroboto">
-                        {/* <div className="row">
-                            <h5> Media sosial agrikultur Indonesia</h5><br/>
-                            <span>Gabung sekarang juga dengan mudah dan cepat untuk mendapatkan keuntungan-keuntungannya!</span>
-                        </div> */}
-                        <div className="row">
-                            <div className="col-md-6 col-12">
-                                <Link to="/" className="nav-link cwhite"><img src={require('../images/logo/logo1.png')} className="imglogo" alt=""/></Link><br/>
-                                <h5>Update status</h5><br/>
-                                <span>Ikuti perkembangan berita seputar teknologi bercocok-tanam terkini dari seluruh pelosok Indonesia</span>
-                            </div>
-                            <div className="col-md-6 col-12">
-                                <Link to="/" className="nav-link cwhite"><img src={require('../images/logo/logo1.png')} className="imglogo" alt=""/></Link><br/>
-                                <h5>Daftarkan Lahan</h5><br/>
-                                <span>Tunjukan di mana lahan anda dan bagikan aktifitas terkini bercocok tanam anda supaya kami yang membutuhkan tahu bahwa Anda adalah orang yang tepat.</span>
-                            </div>
-                        </div>
-                        <div className="row paddingleft30">
-                            <Link to="/" className="nav-link cwhite"><img src={require('../images/logo/logo1.png')} className="imglogo" alt=""/></Link><br/><br/>    
-                            <div className="row">
-                            <h5>Untuk Indonesia Lebih Mandiri</h5><br/>
-                            <span>Kami berkomitmen untuk mengurangi nilai import. Mempertemukan konsumen untuk produsen dan mencarikan produsen untuk konsumen</span>
-                            </div>    
-                        </div>
-                    </div>
-                    <div className="col-md-6 col-12 margintop-100">
-                    <FormRegister/>
-                    </div>
-                </div>
+class SignIn extends Component {
+  render() {
+    return (
+      <div className="signin">
+    {/* <!-- Header Area wrapper Starts --> */}
+      <Header />
+      
+      {/* <!-- Intro Section Start --> */}
+      <section class="intro">
+        <div class="container-fluid row to-middle-please">
+        <div className="col-md-6">
+          <div class="row text-center">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="heading-count">
+                <h2><img className="" src={require("../images/logo/testlogo3.png")} alt="" /></h2>
+                <p>Tempat berbagi aktivitas mengenai lahan milik Anda</p>
+              </div>
             </div>
-            <Footer />
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="row justify-content-center">
+                <div class="col-md-6 info-register">
+                    <i className="material-icons">pin_drop</i>
+                    <h5 className="bold">Daftarkan Lahan</h5>
+                    <span>Tunjukan di mana lahan anda dan bagikan aktifitas terkini bercocok tanam anda supaya kami yang membutuhkan tahu bahwa Anda adalah orang yang tepat.</span>
+                </div>
+                <div class="col-md-6 info-register">
+                    <i className="material-icons">info</i>
+                    <h5 className="bold">Update status</h5>
+                    <span>Ikuti perkembangan berita seputar teknologi bercocok-tanam terkini dari seluruh pelosok Indonesia</span>
+                </div>
+
+                {/* <div class="col-md-6 info-register">
+                    <i className="material-icons">accessibility_new</i>
+                    <h5 className="bold">Untuk Indonesia Lebih Mandiri</h5>
+                    <span>Kami berkomitmen untuk mengurangi nilai import. Mempertemukan konsumen untuk produsen dan mencarikan produsen untuk konsumen</span>
+                </div>
+                <div class="col-md-6 info-register">
+                    <i className="material-icons">accessibility_new</i>
+                    <h5 className="bold">Untuk Indonesia Lebih Mandiri</h5>
+                    <span>Kami berkomitmen untuk mengurangi nilai import. Mempertemukan konsumen untuk produsen dan mencarikan produsen untuk konsumen</span>
+                </div> */}
+              </div>
+              {/* <a href="#contact" class="btn btn-common">Hubungi Kami</a> */}
+              <Link to="/landinginfo"><a href="#team" class="btn btn-border">Tentang Kami</a></Link>
+              <div class="social mt-4">
+                <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
+                <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
+                <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
+                <a class="google" href="#"><i class="lni-google-plus"></i></a>
+              </div>
+              <a href="#services" class="target-scroll page-scroll"><i class="lni-chevron-down"></i></a>
+            </div>
+          </div>
         </div>
-
-                );
-        }
+        <div className="col-md-6">
+            <FormRegister />
+        </div>
+        </div>
+      </section>
+        <Footer/>
         
-    }
+    </div>
+    );
+  }
+}
 
-export default SignUp;
-// export default connect (withRouter(SignUp));
+export default SignIn;

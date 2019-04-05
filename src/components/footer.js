@@ -37,7 +37,7 @@ class Footer extends Component {
                             <td><Link to="/aboutus"><span className="fontFooter bold">Pusat Bantuan </span></Link></td>
                         </tr>
                         <tr className="">
-                            <td><Link to="/aboutus"><span className="fontFooter">Menggunakan (name)</span></Link></td>
+                            <td><Link to="/aboutus"><span className="fontFooter">Menggunakan Lahanku</span></Link></td>
                         </tr>
                         <tr className="">
                             <td><Link to="/contactus"><span className="fontFooter">Mengelola akun Anda</span></Link></td>
