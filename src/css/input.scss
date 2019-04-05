@@ -489,6 +489,7 @@ $popupcolor : #008080;
 
     input{
         border-radius: 5px 0 0 5px;
+        color: black;
     }
 
     button{
@@ -627,6 +628,12 @@ $popupcolor : #008080;
     height: 25px !important;
     width: 25px !important;
 }
+
+.mapboxgl-map{
+    left : 20%;
+    position: fixed;
+}
+
 .mapboxgl-popup-content{
     padding: 10px !important;
 

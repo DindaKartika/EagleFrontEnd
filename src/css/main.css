@@ -424,6 +424,7 @@
 }
 .search input {
   border-radius: 5px 0 0 5px;
+  color: black;
 }
 .search button {
   background-color: #00CED1;
@@ -526,6 +527,11 @@
 .imglike {
   height: 25px !important;
   width: 25px !important;
+}
+
+.mapboxgl-map {
+  left: 20%;
+  position: fixed;
 }
 
 .mapboxgl-popup-content {
