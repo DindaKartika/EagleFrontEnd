@@ -192,6 +192,12 @@ class FeedComponent extends Component {
         });
     };
 
+    handleProfile(e){
+        console.log(e)
+        this.props.handleDetailProfile(e);
+        this.props.history.push("/otherprofile");
+    };
+
   render() {
     return (
         <div className="container-fluid">
@@ -201,11 +207,11 @@ class FeedComponent extends Component {
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="mr-2">
-                                    <img className="rounded-circle" width="45" src={this.props.data.user.profile_picture} />
+                                    <img className="rounded-circle" width="45" onClick={()=>this.handleProfile(this.props.data.id_user)} src={this.props.data.user.profile_picture} />
                                 </div>
                                 <div className="ml-2">
-                                    <div className="h5 m-0 color-username">@{this.props.data.user.username}</div>
-                                    <div className="h7 text-muted">{this.props.data.user.display_name}</div>
+                                    <div className="h5 m-0 color-username" onClick={()=>this.handleProfile(this.props.data.id_user)}>@{this.props.data.user.username}</div>
+                                    <div className="h7 text-muted" onClick={()=>this.handleProfile(this.props.data.id_user)}>{this.props.data.user.display_name}</div>
                                 </div>
                             </div>
                             <div>
@@ -252,7 +258,7 @@ class FeedComponent extends Component {
                                         <ul className="media-list">
                                         {this.state.dataComment.map((item, key) => {
                                         return <CommentComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} 
-                                                profile_picture={item.user.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} id_user={item.id_user}/>; }
+                                                profile_picture={item.user.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}/>; }
                                             )}
                                         <form onSubmit={e => this.handleSubmitComment(e)}>
                                             <textarea className="form-control" name="content" placeholder="write a comment..." rows="3"></textarea>
