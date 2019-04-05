@@ -26,7 +26,7 @@ class NewsFeed extends Component {
         
         data.content = content.value;
 
-        const token = this.props.token;
+        const token = localStorage.getItem("token");
         console.log("test token post",token)
         console.log("post content", data);
         let postFeed = {

@@ -11,7 +11,8 @@ class CommentComponent extends Component {
                 updateComment: this.props.allComment,
                 countLikeComment: "",
                 is_like:"false",
-                id_like:""
+                id_like:"",
+                iduser:""
             };
         };
 
@@ -138,19 +139,27 @@ class CommentComponent extends Component {
 
     };
 
+    handleProfile(e){
+        // e.preventDefault();
+        // let iduser1=e.target.name;
+        // console.log("cekkkk id user", e)
+        this.props.handleDetailProfile(e);
+        this.props.history.push("/otherprofile");
+    };
+
   render() {
     return (
 
         <div className="container-fluid">
             <li className="media">
-                <a href="#" className="pull-left">
+                <a href="#" className="pull-left" onClick={()=>this.handleProfile(this.props.iduser)}>
                     <img src={this.props.profile_picture} className="img-photo-news margin-bottom-5" alt=""/>
                 </a>
                 <div className="media-body">
                     <span className="text-muted pull-right">
                         <small className="text-muted">{this.props.date} | {this.props.time}</small>
                     </span>
-                    <strong className="text-success ">@{this.props.username}</strong>
+                    <strong className="text-success" onClick={()=>this.handleProfile(this.props.iduser)} >@{this.props.username}</strong>
                     <p>
                     {this.props.content}
                     </p>

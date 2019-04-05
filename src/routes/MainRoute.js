@@ -16,6 +16,7 @@ import InputField from '../pages/inputField'
 import LandingPage from '../pages/landingpage'
 import Farm from '../pages/farm'
 import LandingInfo from '../pages/landinginfo';
+import OtherProfile from '../pages/other_profile_detail';
 
 import '../css/landing.css';
 import '../css/main2.css';
@@ -47,6 +48,7 @@ class MainRoute extends Component {
                 <Route exact path="/blog" component={Blog}/>
                 <Route exact path="/landing" component={LandingPage}/>
                 <Route exact path="/landinginfo" component={LandingInfo}/>
+                <Route exact path="/otherprofile" component={OtherProfile}/>
                 {/* <Route exact path = "/allproduct" component={AllProduct}/> */}
             </Switch>
         );

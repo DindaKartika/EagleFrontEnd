@@ -100,10 +100,13 @@ const initialState = {
     listAllFeed:[],
     allComment: [],
     dataLike:[],
-    id_userComment:""
+    id_userComment:"",
+    
     // is_like:false
     // listAllComment:[]
 
+    //profile
+    user_id:0
     //news feed end here
 
 };
@@ -277,11 +280,18 @@ export const actions = store => ({
                     current_status: response.data.data.state
                 })
             } else {
-                self.props.history.replace("/signin");
+                // self.props.history.replace("/signin");
             }
         }).catch(function(error) {
-            self.props.history.replace("/signin");
+            // self.props.history.replace("/signin");
         });
+    },
+
+
+    handleDetailProfile:(state, value)=>{
+        console.log("ceeeeeeeeeeeeek value id user", value)
+        const id = value;
+        return{user_id:id};
     },
 
     // statusUnlike: state => {
