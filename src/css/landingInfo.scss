@@ -20,7 +20,7 @@ body {
   overflow-x: hidden;
 }
 
-.landing-info {
+.landing-info, .signin {
 background-color: white;
 
 h1, h2, h3, h4 {
@@ -1312,3 +1312,70 @@ a.back-to-top:hover, a.back-to-top:focus {
     background: #f8f9fa;
   }
 }
+
+
+.signin {
+  height: 950px;
+  // p {
+  //   color: white;
+  // }
+
+  .intro {
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.8), 
+      rgba(255, 255, 255, 0.8)
+    ), url(../images/img/Sawah.jpg) no-repeat;
+    background-size: cover;
+    color: rgb(32, 99, 99);
+    padding: 150px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .card {
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+  }
+  .btn.btn-border {
+    border-color: rgb(32, 99, 99);
+    color: rgb(32, 99, 99);
+  }
+  .form-control {
+    margin-bottom: 0;
+  }
+  i {
+    color: rgb(32, 99, 99);
+  }
+  .daftar.bold {
+    color: rgb(32, 99, 99);
+  }
+  label {
+    color: rgb(32, 99, 99);
+  }
+  .container-fluid.row.to-middle-please {
+    width: 89%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .info-register {
+    margin-bottom: 20px;
+  }
+  .material-icons {
+    font-size: 50px;
+  }
+  .heading-count {
+    margin-bottom: 40px;
+  }
+}
+
+// .contact-left {
+//   background: linear-gradient(
+//       rgba(25, 52, 94, 0.8), 
+//       rgba(25, 52, 94, 0.8)
+//     ), url(../images/img/Sawah.jpg) no-repeat;
+//   background-size: cover;
+//   display: flex;
+//   align-items: center;
+// }

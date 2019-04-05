@@ -590,4 +590,36 @@
   color: #22c11d !important;
 }
 
+.footer {
+  background-color: #252525;
+  color: white;
+  padding-top: 50px;
+}
+.footer span {
+  color: white;
+}
+.footer span:hover {
+  text-decoration: none;
+}
+
+.footer-handler {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.menu-footer {
+  font-size: 14px;
+}
+
+.copyright-footer {
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-bottom: 0;
+}
+
+.logo-footer {
+  max-width: 80%;
+}
+
 /*# sourceMappingURL=main.css.map */
