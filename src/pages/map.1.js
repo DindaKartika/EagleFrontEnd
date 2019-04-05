@@ -1,32 +1,19 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import ReactMapboxGl, {Layer, Feature, Popup} from "react-mapbox-gl";
-import DrawControl from "react-mapbox-gl-draw";
+import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import Header from '../components/header_signin'
-import SidebarMap from '../components/sidebarMap'
 import FilterMap from '../components/filter'
-import Select from 'react-select'
-import DateTimePicker from 'react-datetime-picker'
-import DatePicker from 'react-datepicker'
 import axios from 'axios'
 import PopUp from '../components/popup'
-import mapboxgl from "mapbox-gl"
 import KontenSidebar from '../components/kontenSidebar'
 
 import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
 
-const optionsCity = [
-	{ value: 'malang', label: 'malang' }
-]
-	
-const optionsPlant = [
-	{ value: 'cabe', label: 'cabe' },
-	{ value: 'tomat', label: 'tomat' },
-	{ value: 'terong', label: 'terong' }
-]
-
+const polygonPaint = {
+  'fill-color': '#6F788A',
+  'fill-opacity': 0.7
+};
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -59,7 +46,6 @@ class App extends Component {
 
 	UNSAFE_componentWillMount () {
 		const self = this;
-		console.log(window.location.pathname.slice(6))
 		axios
 		.get('http://0.0.0.0:5000/farms')
 		.then(function(response){
@@ -94,8 +80,66 @@ class App extends Component {
 	}
 
 	viewSidebar(){
-		// localStorage.setItem('search', )
-		this.setState({sidebar:true})
+		console.log(localStorage.getItem('tanaman'))
+		console.log(localStorage.getItem('tanngal'))
+		console.log(localStorage.getItem('produk'))
+		console.log(localStorage.getItem('tanah'))
+		// const data = {}
+		// if (localStorage.getItem('kota') !== ""){
+		// 	data['city'] = localStorage.getItem('kota')
+		// }
+		// if (localStorage.getItem('tanaman') !== ""){
+		// 	data['plant_type'] = localStorage.getItem('tanaman')
+		// }
+		// if (localStorage.getItem('tanggal') !== ""){
+		// 	const date = localStorage.getItem('tanggal')
+		// 	const tanggal = new Date(date).toISOString()
+		// 	console.log('tanggalISO', tanggal)
+		// 	data['ready_at'] = tanggal
+		// }
+		// if (localStorage.getItem('search') !== ""){
+		// 	data['search'] = localStorage.getItem('search')
+		// }
+
+		// console.log('data search', data)
+
+		// const self = this
+
+		// axios
+		// .get('http://0.0.0.0:5000/farms', {
+		// 	params:data
+		// 	})
+		// .then(function(response){
+		// 	self.setState({Farms: response.data});
+		// 	console.log('farms', response.data);
+		// 	const Farms = response.data
+		// 	const rows = []
+		// 	const center = self.state.Center
+		// 	for (const [index, value] of Farms.entries()) {
+		// 		const centers = JSON.parse(response.data[index].center)
+		// 		console.log(centers)
+		// 		const data = {}
+		// 		data['center'] = centers
+		// 		data['deskripsi'] = response.data[index].deskripsi
+		// 		data['tanaman'] = response.data[index].plant_type
+		// 		data['pemilik'] = response.data[index].user.display_name
+		// 		data['username'] = response.data[index].user.username
+		// 		rows.push(data)
+		// 	}
+
+		// 	if (rows != []){
+		// 		console.log('koordinat jadi', rows)
+		// 		self.setState({koordinat : rows})
+		// 		localStorage.setItem('datas', JSON.stringify(rows))
+		// 		console.log('cekdata', localStorage.getItem('datas'))
+		// 	}
+		// 	else{
+		// 		const rows = {'center' : center, 'deskripsi' : "", "tanaman" : "", "pemilik" : "", "username" : ""}
+		// 	}
+		// })
+		// .catch(function(error){
+		// 	console.log('error', error);
+		// })
 	}
 	
 	changeSearch(event) {
@@ -106,8 +150,6 @@ class App extends Component {
 		localStorage.setItem('search', event.value)
 		console.log('search', event.value)
   }
-
-	// onChange = date => this.setState({ date })
 	
 	handleChange(date) {
     this.setState({
@@ -120,7 +162,6 @@ class App extends Component {
 	};
 
 	_onClickMap = key =>{
-		// console.log(key)
 		const indeks = key['key'] + 1
 		this.props.history.push('/maps/' + indeks);
 	}
@@ -129,13 +170,11 @@ class App extends Component {
 		console.log('mouseenter', key)
 		this.setState({number : key['key']})
 		this.setState({popup : true})
-		// this.props.history.push('/maps/' + 1);
 	}
 
 	_onMouseLeave(){
 		this.setState({popup : false})
 		this.setState({number : null})
-		// this.props.history.push('/maps/' + 1);
 	}
 
 	_onMoveEnd= (map,evt) => {
@@ -152,10 +191,8 @@ class App extends Component {
 					ids.push(value.properties.id)
 				}
 			}
-
 			console.log(ids)
 			this.setState({uniquefeatures : ids})
-			
 			}
 		}
 
@@ -173,7 +210,6 @@ class App extends Component {
 		}
 
 	onMapLoad() {
-
 		navigator.geolocation.getCurrentPosition(position =>{
 			const lng = position.coords.longitude
 			const lat = position.coords.latitude
@@ -210,10 +246,8 @@ class App extends Component {
 						{this.state.filter && <FilterMap/>}
 					</form>
 				</div>
-				{this.state.sidebar && <SidebarMap/>}
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
-					// console.log(koordinat[item].pemilik)
 							<KontenSidebar key={key} id={item} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
 							/>
 					)}
@@ -227,16 +261,12 @@ class App extends Component {
 							width: "100vw"
 						}}
 						center={Center}
-						// zoom={[13]}
-						// minZoom={[10]}
 						onMoveEnd ={this._onMoveEnd}
 					>
 						<Layer
               type="symbol"
               id="points"
-							layout={{ "icon-image": "circle-11", "icon-allow-overlap": true }}
-							
-              // images={images}
+							layout={{ "icon-image": "garden-15", "icon-allow-overlap": true }}
             >
 							{koordinat.map((item, key) => 
 								<Feature key={key} 
@@ -246,7 +276,6 @@ class App extends Component {
 								onMouseLeave ={this._onMouseLeave}
 								/>
 								)}
-							{/* {points.map((point, i) => <Feature key={i} coordinates={point} />)} */}
             </Layer>
 						{this.state.popup && <PopUp center={koordinat[number].center} deskripsi={koordinat[number].deskripsi} tanaman={koordinat[number].tanaman} username={koordinat[number].username} pemilik={koordinat[number].pemilik}/>}
 					</Map>

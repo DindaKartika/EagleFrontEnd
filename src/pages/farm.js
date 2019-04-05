@@ -32,6 +32,8 @@ const polygonPaint = {
   'fill-opacity': 1
 };
 
+const username  =localStorage.getItem('username')
+
 class Farm extends Component {
 	constructor(props) {
 		super(props);
@@ -46,6 +48,7 @@ class Farm extends Component {
 			// center : [],
 			// koordinat : []
 		};
+		
     }
     
     UNSAFE_componentWillMount () {
@@ -100,13 +103,16 @@ class Farm extends Component {
 					<h5>{Farms.farm_size} m<sup>2</sup></h5>
 					<label>Kategori : </label>
 					<h5>{Farms.category}</h5>
+					<button style={{display : (username == user.username ? 'block' : 'none')}}>
+						Edit
+					</button>
 				</div>
 				<div>
 					<Map
-						style="mapbox://styles/mapbox/streets-v9"
+						style="mapbox://styles/mapbox/satellite-v9"
 						containerStyle={{
 							height: "90vh",
-							width: "100vw"
+							width: "80vw"
 						}}
 						center={center}
 						zoom={[16.5]}

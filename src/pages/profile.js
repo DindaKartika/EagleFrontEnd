@@ -131,6 +131,7 @@ class Profile extends Component {
             status: response.data.data.state
           });
           localStorage.setItem('id', response.data.data.id)
+          localStorage.setItem('username', response.data.data.username)
         } else {
           console.log("identity unauthorized", response);
           self.props.history.replace("/signin");

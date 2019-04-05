@@ -9,15 +9,24 @@ import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 // import DateTimePicker from 'react-datetime-picker'
 
-const optionCity = [
-    { value: 'Malang', label: 'Malang' },
-    { value: 'Surabaya', label: 'Surabaya' },
-    { value: 'Solo', label: 'Solo' }
-  ]
-
 const optionPlant = [
-  { value: 'Tomat', label: 'Tomat' },
-  { value: 'Cabai', label: 'Cabai' }
+  {value:'Sayur', label:'---Sayur---', isDisabled:true},
+  {value:'Bayam', label:'Bayam'},
+  {value:'Cabai', label:'Cabai'},
+  {value:'Kangkung', label:'Kangkung'},
+  {value:'Mentimun', label:'Mentimun'},
+  {value:'Sawi', label:'Sawi'},
+  {value:'Terung', label:'Terung'},
+  {value:'Tomat', label:'Tomat'},
+  {value:'Buah', label:'---Buah---', isDisabled:true},
+  {value:'Apel', label:'Apel'},
+  {value:'Durian', label:'Durian'},
+  {value:'Jeruk', label:'Jeruk'},
+  {value:'Mangga', label:'Mangga'},
+  {value:'Melon', label:'Melon'},
+  {value:'Nangka', label:'Nangka'},
+  {value:'Pisang', label:'Pisang'},
+  {value:'Semangka', label:'Semangka'}
 ]
 
 class FilterMap extends Component {
@@ -25,22 +34,16 @@ class FilterMap extends Component {
 		super(props);
 		this.state = {
 			date : new Date(),
-			kota : "",
-			tanaman : "",
+      tanaman : "",
+      tanah: false
     };
     localStorage.setItem('kota', '')
     localStorage.setItem('tanaman', '')
     localStorage.setItem('tanggal', '')
+    localStorage.setItem('tanah', false)
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
   
-  changeCity(event) {
-		this.setState({
-			kota: event.value
-		});
-    console.log(event.value)
-    localStorage.setItem('kota', event.value)
-	}
-
 	changePlant(event) {
 		this.setState({
 			tanaman: event.value
@@ -55,6 +58,19 @@ class FilterMap extends Component {
     localStorage.setItem('tanggal', date)
     console.log('tanggal di filter', date.toUTCString())
   }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+
+    console.log('filtertanah', value)
+    localStorage.setItem([name], value)
+  }
 	
   render() {
     console.log(this.state.date)
@@ -62,8 +78,6 @@ class FilterMap extends Component {
     <div className="filters">
         <label>Filter berdasarkan :</label>
         <br/>
-        <label>Kota :</label>
-        <Select options={optionCity} onChange={e => this.changeCity(e)}/>
         <label>Jenis Tanaman :</label>
         <Select options={optionPlant} onChange={e => this.changePlant(e)}/>
         <label>Waktu panen :</label>
@@ -73,6 +87,12 @@ class FilterMap extends Component {
           onChange={this.onChange}
           value ={this.state.date}
         />
+        <br/>
+        <input
+          name="tanah"
+          type="checkbox"
+          checked={this.state.tanah}
+          onChange={this.handleInputChange} /> Lahan Dijual
     </div>
     );
   }

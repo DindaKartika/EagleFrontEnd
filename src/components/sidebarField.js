@@ -10,7 +10,27 @@ import { withRouter } from "react-router-dom";
 import { connect } from "unistore/react";
 import { actions, store } from "../store";
 import { storage } from "../firebase";
+import Select from 'react-select'
 
+const optionPlant = [
+  {value:'Sayur', label:'---Sayur---', isDisabled:true},
+  {value:'Bayam', label:'Bayam'},
+  {value:'Cabai', label:'Cabai'},
+  {value:'Kangkung', label:'Kangkung'},
+  {value:'Mentimun', label:'Mentimun'},
+  {value:'Sawi', label:'Sawi'},
+  {value:'Terung', label:'Terung'},
+  {value:'Tomat', label:'Tomat'},
+  {value:'Buah', label:'---Buah---', isDisabled:true},
+  {value:'Apel', label:'Apel'},
+  {value:'Durian', label:'Durian'},
+  {value:'Jeruk', label:'Jeruk'},
+  {value:'Mangga', label:'Mangga'},
+  {value:'Melon', label:'Melon'},
+  {value:'Nangka', label:'Nangka'},
+  {value:'Pisang', label:'Pisang'},
+  {value:'Semangka', label:'Semangka'}
+]
 class SidebarField extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +54,12 @@ class SidebarField extends Component {
   changeInput = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  changePlant(event) {
+		this.setState({
+			plant_type: event.value
+		});
+  }
 
   saveDetails = () => {
     const {
@@ -129,14 +155,9 @@ class SidebarField extends Component {
             onChange={e => this.changeInput(e)}
           />
           <br />
-          <label for="plant_type">Jenis tanaman:</label>
+          <label>Jenis tanaman:</label>
           <br />
-          <input
-            type="text"
-            name="plant_type"
-            defaultValue=""
-            onChange={e => this.changeInput(e)}
-          />
+          <Select options={optionPlant} onChange={e => this.changePlant(e)}/>
           <br />
           <label for="planted_at">Tanggal ditanam:</label>
           <br />

@@ -491,6 +491,7 @@ $footer-color: #252525;
 
     input{
         border-radius: 5px 0 0 5px;
+        color: black;
     }
 
     button{
@@ -629,6 +630,12 @@ $footer-color: #252525;
     height: 25px !important;
     width: 25px !important;
 }
+
+.mapboxgl-map{
+    left : 20%;
+    position: fixed;
+}
+
 .mapboxgl-popup-content{
     padding: 10px !important;
 

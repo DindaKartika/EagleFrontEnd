@@ -10,16 +10,10 @@ import KontenSidebar from '../components/kontenSidebar'
 import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
 
-const optionsCity = [
-	{ value: 'malang', label: 'malang' }
-]
-	
-const optionsPlant = [
-	{ value: 'cabe', label: 'cabe' },
-	{ value: 'tomat', label: 'tomat' },
-	{ value: 'terong', label: 'terong' }
-]
-
+const polygonPaint = {
+  'fill-color': '#6F788A',
+  'fill-opacity': 0.7
+};
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -60,9 +54,13 @@ class App extends Component {
 			const Farms = response.data
 			const rows = []
 			for (const [index, value] of Farms.entries()) {
+				const rowCoordinates = []
+				const coordinates = JSON.parse(response.data[index].coordinates)
+				rowCoordinates.push(coordinates)
 				const centers = JSON.parse(response.data[index].center)
 				console.log(centers)
 				const data = {}
+				data['coordinates'] = rowCoordinates
 				data['center'] = centers
 				data['deskripsi'] = response.data[index].deskripsi
 				data['tanaman'] = response.data[index].plant_type
@@ -86,10 +84,11 @@ class App extends Component {
 	}
 
 	viewSidebar(){
+		console.log('tanaman', localStorage.getItem('tanaman'))
+		console.log('tanggal', localStorage.getItem('tanggal'))
+		console.log('tanah', localStorage.getItem('tanah'))
+		console.log('search', localStorage.getItem('search'))
 		const data = {}
-		if (localStorage.getItem('kota') !== ""){
-			data['city'] = localStorage.getItem('kota')
-		}
 		if (localStorage.getItem('tanaman') !== ""){
 			data['plant_type'] = localStorage.getItem('tanaman')
 		}
@@ -118,9 +117,14 @@ class App extends Component {
 			const rows = []
 			const center = self.state.Center
 			for (const [index, value] of Farms.entries()) {
+				const rowCoordinates = []
+				const coordinates = JSON.parse(response.data[index].coordinates)
+				rowCoordinates.push(coordinates)
 				const centers = JSON.parse(response.data[index].center)
 				console.log(centers)
 				const data = {}
+				data['id'] = response.data[index].id_farm
+				data['coordinates'] = rowCoordinates
 				data['center'] = centers
 				data['deskripsi'] = response.data[index].deskripsi
 				data['tanaman'] = response.data[index].plant_type
@@ -129,15 +133,12 @@ class App extends Component {
 				rows.push(data)
 			}
 
-			if (rows != []){
-				console.log('koordinat jadi', rows)
-				self.setState({koordinat : rows})
-				localStorage.setItem('datas', JSON.stringify(rows))
-				console.log('cekdata', localStorage.getItem('datas'))
-			}
-			else{
-				const rows = {'center' : center, 'deskripsi' : "", "tanaman" : "", "pemilik" : "", "username" : ""}
-			}
+			console.log(rows)
+
+			console.log('koordinat jadi', rows)
+			self.setState({koordinat : rows})
+			localStorage.setItem('datas', JSON.stringify(rows))
+			console.log('cekdata', localStorage.getItem('datas'))
 		})
 		.catch(function(error){
 			console.log('error', error);
@@ -182,7 +183,7 @@ class App extends Component {
 	_onMoveEnd= (map,evt) => {
 		console.log('Map clicked!');
 		const features = map.queryRenderedFeatures(evt.point);
-		console.log(features);
+		console.log('cek features awal', features);
 
 		if (features) {
 			const uniqueFeatures = this.getUniqueFeatures(features, "id");
@@ -193,8 +194,13 @@ class App extends Component {
 					ids.push(value.properties.id)
 				}
 			}
-			console.log(ids)
-			this.setState({uniquefeatures : ids})
+			console.log('cek ada feature', ids)
+			if (ids != []){
+				this.setState({uniquefeatures : ids})
+			}
+			else{
+				this.setState({uniquefeatures : [0]})
+			}
 			}
 		}
 
@@ -211,7 +217,7 @@ class App extends Component {
 			return uniqueFeatures;
 		}
 
-	onMapLoad() {
+	onMapLoad(map, evt) {
 		navigator.geolocation.getCurrentPosition(position =>{
 			const lng = position.coords.longitude
 			const lat = position.coords.latitude
@@ -250,35 +256,43 @@ class App extends Component {
 				</div>
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
+					// console.log('cek hasil bayam', uniquefeatures)
 							<KontenSidebar key={key} id={item} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
 							/>
 					)}
 				</div>
 				<div>
 					<Map
-						onStyleLoad={this.onMapLoad}
+						
 						style="mapbox://styles/mapbox/streets-v9"
 						containerStyle={{
 							height: "90vh",
-							width: "100vw"
+							width: "80vw"
 						}}
 						center={Center}
+						onStyleLoad={this.onMapLoad}
 						onMoveEnd ={this._onMoveEnd}
 					>
 						<Layer
               type="symbol"
               id="points"
 							layout={{ "icon-image": "garden-15", "icon-allow-overlap": true }}
+							// type="fill"
+							// paint={polygonPaint}
             >
 							{koordinat.map((item, key) => 
 								<Feature key={key} 
-								coordinates={item.center} 
+								coordinates={item.center}
+								// coordinates={item.coordinates} 
 								onClick ={() => this._onClickMap({key})}
 								onMouseEnter ={() => this._onMouseEnter({key})}
 								onMouseLeave ={this._onMouseLeave}
 								/>
-								)}
+							)}
             </Layer>
+						{/* {koordinat.map((item, key) => 
+							<PopUp center={item.center} deskripsi={item.deskripsi} tanaman={item.tanaman} username={item.username} pemilik={item.pemilik}/>
+						)} */}
 						{this.state.popup && <PopUp center={koordinat[number].center} deskripsi={koordinat[number].deskripsi} tanaman={koordinat[number].tanaman} username={koordinat[number].username} pemilik={koordinat[number].pemilik}/>}
 					</Map>
 				</div>
