@@ -7,6 +7,7 @@ $colorpage:#f4f5f7;
 $colortitle:#d12366;
 $colorbluegreen : #00CED1;
 $popupcolor : #008080;
+$footer-color: #252525;
 
 
 @mixin fontSW ($size, $weight){
@@ -71,6 +72,7 @@ $popupcolor : #008080;
 
 .navbar-wrapper {
     background-color: #f8f9fa !important;
+    // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 
@@ -690,4 +692,40 @@ $popupcolor : #008080;
 
 .color-username{
     color:#22c11d !important;
+}
+
+.footer {
+    background-color: $footer-color;
+    // height: 100px;
+    // margin-top: 40px;
+    color: white;
+    padding-top: 50px;
+    span {
+        color: white;
+    }
+    span:hover {
+        text-decoration: none;
+    }
+ }
+ 
+ .footer-handler {
+    margin-right: auto !important;
+    margin-left: auto !important;
+    // background-color: black;
+ }
+ 
+ .menu-footer {
+    font-size: 14px;
+ }
+ 
+ .copyright-footer {
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 20px;
+    // background-color: black;
+    margin-bottom: 0;
+ }
+
+.logo-footer {
+    max-width: 80%;
 }

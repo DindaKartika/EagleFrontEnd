@@ -32,7 +32,7 @@ class FormRegister extends Component {
                                 <label for="email" className="cols-sm-2 control-label grey bold">E-mail</label>
                                 <div className="cols-sm-10">
                                     <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                        {/* <span className="input-group-addon"><i className="fa fa-envelope fa" aria-hidden="true"></i></span> */}
                                         <input type="text" className="form-control font14px" name="email" id="email" placeholder="Email@domain.com" 
                                         onChange= {e => this.props.setField(e)} required autofocus />
                                     </div>
@@ -42,7 +42,7 @@ class FormRegister extends Component {
                                 <label for="email_confirmation" className="cols-sm-2 control-label grey bold">Confirm E-mail</label>
                                 <div className="cols-sm-10">
                                     <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                        {/* <span className="input-group-addon"><i className="fa fa-envelope fa" aria-hidden="true"></i></span> */}
                                         <input type="text" className="form-control font14px" name="email_confirmation" id="email" 
                                         onChange= {e => this.props.setField(e)} required autofocus placeholder="Email@domain.com" />
                                     </div>
@@ -52,7 +52,7 @@ class FormRegister extends Component {
                                 <label for="username" className="cols-sm-2 control-label grey bold">Username</label>
                                 <div className="cols-sm-10">
                                     <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-users fa" aria-hidden="true"></i></span>
+                                        {/* <span className="input-group-addon"><i className="fa fa-users fa" aria-hidden="true"></i></span> */}
                                         <input type="text" className="form-control font14px" name="username" id="username" 
                                         onChange= {e => this.props.setField(e)} required autofocus placeholder="Enter your Username" />
                                     </div>
@@ -62,7 +62,7 @@ class FormRegister extends Component {
                                 <label for="password" className="cols-sm-2 control-label grey bold">Password</label>
                                 <div className="cols-sm-10">
                                     <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        {/* <span className="input-group-addon"><i className="fa fa-lock fa-lg" aria-hidden="true"></i></span> */}
                                         <input type="password" className="form-control font14px" name="password" id="password" 
                                         onChange= {e => this.props.setField(e)} required autofocus placeholder="Enter your Password" />
                                     </div>
@@ -72,14 +72,14 @@ class FormRegister extends Component {
                                 <label for="password_confirmation" className="cols-sm-2 control-label grey bold">Confirm Password</label>
                                 <div className="cols-sm-10">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        {/* <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> */}
                                         <input type="password" class="form-control font14px" name="password_confirmation" id="password_confirmation" 
                                         onChange= {e => this.props.setField(e)} required autofocus placeholder="Confirm your Password" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group basecolor">
-                                <button type="button" className="btn btn-primary btn-lg btn-block login-button colorsubmit" onClick={()=> this.doRegister()} >DAFTAR</button>
+                            <div class="form-group row justify-content-center">
+                                <button type="button" className="btn btn-common" onClick={()=> this.doRegister()} >DAFTAR</button>
                             </div> 
                             <div className="row justify-content-center">
                                 <span className="grey text-center">
