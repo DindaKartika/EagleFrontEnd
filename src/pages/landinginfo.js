@@ -10,6 +10,7 @@ class LandingInfo extends Component {
       <Header />
       
       {/* <!-- Intro Section Start --> */}
+      <div className="landingpage-wrapper">
       <section class="intro">
         <div class="container">
           <div class="row text-center">
@@ -320,9 +321,10 @@ class LandingInfo extends Component {
         <div class="loader" id="loader-1"></div>
       </div>
       {/* <!-- End Preloader --> */}
+      </div>
 
-      <script src="assets/js/jquery-min.js"></script>
-      <script src="assets/js/main.js"></script>
+      {/* <script src="assets/js/jquery-min.js"></script>
+      <script src="assets/js/main.js"></script> */}
       {/* </script> */}
         
     </div>

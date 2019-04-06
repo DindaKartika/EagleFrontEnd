@@ -16,6 +16,7 @@ import '../css/bootstrap.min.css';
 //MAIN CLASS
 class LandingPage extends Component {
     componentDidMount() {
+        this.props.getIdentity();
         // console.log("Welcome to the landing page")
         (function() {
 
@@ -172,7 +173,7 @@ class LandingPage extends Component {
 
                     <Link to="/maps" className="btn btn-success"><span className="cwhite">Peta</span></Link>
                     <Link to="/newsfeed" className="btn btn-success"><span className="cwhite">Beranda</span></Link>
-                    <Link to="/signin" className="btn btn-success"><span className="cwhite">Masuk</span></Link>
+                    <Link to="/signin" className="btn btn-success" style={{display: "none"}}><span className="cwhite">Masuk</span></Link>
                     {/* <!-- Footer --> */}
 
                     <footer id="footer">
@@ -196,5 +197,5 @@ class LandingPage extends Component {
     }
 
 // export default Profile;
-export default connect( "", actions)
+export default connect( "is_login", actions)
 (withRouter(LandingPage));
