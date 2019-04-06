@@ -225,7 +225,8 @@ export const actions = store => ({
         const allFeed = {
             method: "get",
             // url: "http://localhost:8010/proxy/user/product",
-            url: "http://localhost:5000/feeds?rp=100",
+            url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+            // url: "http://localhost:5000/feeds?rp=10000",
             // headers: {
             //     'Authorization':'Bearer ' + token
             // }
@@ -243,9 +244,9 @@ export const actions = store => ({
 
     getIdentity : async state => {
         const self = this
-        if (localStorage.getItem("token") === null) {
-            this.props.history.push("/signin");
-        }
+        // if (localStorage.getItem("token") === null) {
+        //     self.props.history.push("/signin");
+        // }
         const token = localStorage.getItem("token")
         console.log("Cekt token setelah login", token)
         await axios({
