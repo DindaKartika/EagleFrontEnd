@@ -493,6 +493,9 @@
 .sidebar input {
   color: black;
 }
+.sidebar hr {
+  border: 2px solid #00CED1;
+}
 .sidebar .react-datetime-picker__wrapper {
   border: thin solid lightgrey;
   border-radius: 3px;

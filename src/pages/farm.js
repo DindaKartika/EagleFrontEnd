@@ -9,6 +9,7 @@ import FilterMap from '../components/filter'
 import Select from 'react-select'
 import DatePicker from "react-datepicker";
 import axios from 'axios'
+import { Link } from "react-router-dom";
 
 import mapboxgl from 'mapbox-gl'
 
@@ -66,7 +67,8 @@ class Farm extends Component {
 			sidebar : false,
 			Farms : "",
 			user : "",
-			ubahInfo : false
+			ubahInfo : false,
+			rekomendasi : ""
 			// center : [],
 			// koordinat : []
 		};
@@ -90,6 +92,9 @@ class Farm extends Component {
 				const centers = JSON.parse(response.data.center)
 				console.log(centers)
 				self.setState({center:centers})
+				if (response.data.zona == "zona iklim panas"){self.setState({rekomendasi : "padi, tebu, kelapa, cokelat, dan jagung"})}
+				else if (response.data.zona == "zona iklim sedang"){self.setState({rekomendasi : "Teh, kina, kopi, karet, cokelat, dan sayuran"})}
+				else if (response.data.zona == "zona iklim sejuk"){self.setState({rekomendasi : "Pohon pinus, cemara, dan beberapa jenis sayuran seperti kentang"})}
 			})
 			.catch(function(error){
 				console.log('error', error);
@@ -157,10 +162,11 @@ class Farm extends Component {
 
   render() {
 		console.log(this.state.sidebar)
-		const {center, koordinat, Farms, user, ubahInfo} = this.state
+		const {center, koordinat, Farms, user, ubahInfo, rekomendasi} = this.state
 		console.log('center', center)
 		console.log('koordinat', koordinat)
 		console.log('state', ubahInfo)
+
     return (
       <div className="App">
 				<div className="header">
@@ -169,13 +175,15 @@ class Farm extends Component {
 				<div className="sidebar">
 					<h5>Informasi Lahan:</h5>
 					<label>Nama pemilik: </label>
-					<h5>{user.username}</h5>
+					<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
+					<div style={{display : ((username == user.username) ? 'none' : 'block')}}>
+						<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
+					</div>
 					<label>Deskripsi : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
 					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
 					<label>Jenis tanaman : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
-					{/* <input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="plant" onChange={e => this.changeInput(e)} defaultValue={Farms.plant_type}/> */}
 					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
 						<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
 					</div>
@@ -209,6 +217,9 @@ class Farm extends Component {
 					<div style={{display : (username == user.username ? 'block' : 'none')}}>
 						<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
 						<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+						<hr/>
+						<label>Rekomendasi tanaman : </label>
+						<label>{rekomendasi}</label>
 					</div>
 				</div>
 				<div>

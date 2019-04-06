@@ -15,7 +15,7 @@ const KontenSidebar = props => {
             <label>@{props.username}</label>
             <br/>
             <span>Tipe tanaman pada lahan:</span>
-            <h5>{props.tanaman}</h5>
+            {(props.tanaman == "") ? <h5>-</h5> : <h5>{props.tanaman}</h5>}
             <label>{props.deskripsi}</label>
             </div>
             </Link>

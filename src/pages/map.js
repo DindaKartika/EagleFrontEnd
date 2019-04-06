@@ -60,6 +60,7 @@ class App extends Component {
 				const centers = JSON.parse(response.data[index].center)
 				console.log(centers)
 				const data = {}
+				data['id'] = response.data[index].id_farm
 				data['coordinates'] = rowCoordinates
 				data['center'] = centers
 				data['deskripsi'] = response.data[index].deskripsi
@@ -257,7 +258,7 @@ class App extends Component {
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
 					// console.log('cek hasil bayam', uniquefeatures)
-							<KontenSidebar key={key} id={item} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
+							<KontenSidebar key={key} id={koordinat[item].id} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
 							/>
 					)}
 				</div>

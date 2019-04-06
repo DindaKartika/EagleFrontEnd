@@ -588,6 +588,10 @@ $footer-color: #252525;
         color: black;
     }
 
+    hr{
+        border: 2px solid $colorbluegreen;
+    }
+
     .react-datetime-picker__wrapper{
         border: thin solid lightgrey;
         border-radius: 3px;
