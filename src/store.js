@@ -97,7 +97,7 @@ const initialState = {
 
     // newsfeed start here
     content:"",
-    listAllFeed:[],
+    listAllFeed: [],
     allComment: [],
     dataLike:[],
     id_userComment:"",
@@ -241,6 +241,53 @@ export const actions = store => ({
             console.log(error);
         })
     },
+    // getAllFeed : state => {
+    //     const token = state.token;
+    //     const allFeed = {
+    //         method: "get",
+    //         // url: "http://localhost:8010/proxy/user/product",
+    //         url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+    //         // url: "http://localhost:5000/feeds?rp=10000",
+    //         // headers: {
+    //         //     'Authorization':'Bearer ' + token
+    //         // }
+    //     };
+    //      axios(allFeed)
+    //     .then(function(response){
+    //         // store.setState({listAllFeed: response.data});
+    //         // // store.setState({datacart: response.data});
+    //         // console.log(response.data);
+    //         var feedList = []
+    //         // this.state.listComment.map((item, key) => {
+    //         //     return <ListComment key={key} data={item}/>
+    //         // })
+    //         response.data.map((item, key) => {
+    //             // return <ListComment key={key} data={item}/>
+    //             const url = "http://localhost:5000/comments?id_feed=" + item.id_feed
+    //             axios({
+    //                 method: 'get',
+    //                 url: url
+    //             }).then(function(response) {
+    //                 // console.log("cek feed id", self.props.id_feed)
+    //                 // console.log("Get comment berhasil", response.data)
+    //                 // self.setState({
+    //                 //     dataComment: response.data
+    //                 item.comment = response.data
+    //             }).catch(function(error) {
+    //             console.log("Gagal get comment", error);
+    //             });
+    //             feedList.push(item)
+    //             // console.log(feedList)
+    //         })
+    //         store.setState({
+    //             listAllFeed: feedList
+    //         })
+    //     })
+    //     .catch(function(error){
+    //         console.log(error);
+    //     })
+    //     // console.log("new Feedlist here", this.feedList)
+    // },
 
     getIdentity : async state => {
         const self = this

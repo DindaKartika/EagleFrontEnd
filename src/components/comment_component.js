@@ -36,7 +36,6 @@ class CommentComponent extends Component {
             console.log("Gagal get comment", error);
             });
             
-
             axios({
                 method: 'get',
                 url: 'http://localhost:5000/commentlikes/' + self.props.id,

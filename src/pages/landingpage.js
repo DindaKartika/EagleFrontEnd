@@ -150,10 +150,11 @@ class LandingPage extends Component {
         })();
     }
 
-    redirect() {
-        console.log("test")
-    }
+    // redirect() {
+    //     console.log("test")
+    // }
     render() {
+        // console.log("Cek is login landingpage", this.props.is_login)
         return (
             <div className="landing-page">
                 <div class="is-preload">
@@ -173,7 +174,9 @@ class LandingPage extends Component {
 
                     <Link to="/maps" className="btn btn-success"><span className="cwhite">Peta</span></Link>
                     <Link to="/newsfeed" className="btn btn-success"><span className="cwhite">Beranda</span></Link>
-                    <Link to="/signin" className="btn btn-success" style={{display: "none"}}><span className="cwhite">Masuk</span></Link>
+                    {/* <Link to="/newsfeed" className="btn btn-success"><span className="cwhite">Beranda</span></Link> */}
+                    <Link to="/signin" className="btn btn-success" style={{display: this.props.is_login ? "none" : "inline-block"}}><span className="cwhite">Masuk</span></Link>
+                    <Link to="/profile" className="btn btn-success btn-warning" style={{display: this.props.is_login ? "inline-block" : "none"}}><span className="cwhite">Profile Saya</span></Link>
                     {/* <!-- Footer --> */}
 
                     <footer id="footer">
