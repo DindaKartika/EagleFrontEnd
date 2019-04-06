@@ -10,7 +10,12 @@ import DatePicker from 'react-datepicker'
 // import DateTimePicker from 'react-datetime-picker'
 
 const optionPlant = [
-  {value:'Sayur', label:'---Sayur---', isDisabled:true},
+  {value:'Bahan Pokok', label:'--- Bahan Pokok ---', isDisabled:true},
+  {value:'Beras', label:'Beras'},
+  {value:'Gandum', label:'Gandum'},
+  {value:'Jagung', label:'Jagung'},
+  {value:'Sagu', label:'Sagu'},
+  {value:'Sayur', label:'--- Sayur ---', isDisabled:true},
   {value:'Bayam', label:'Bayam'},
   {value:'Cabai', label:'Cabai'},
   {value:'Kangkung', label:'Kangkung'},
@@ -18,7 +23,7 @@ const optionPlant = [
   {value:'Sawi', label:'Sawi'},
   {value:'Terung', label:'Terung'},
   {value:'Tomat', label:'Tomat'},
-  {value:'Buah', label:'---Buah---', isDisabled:true},
+  {value:'Buah', label:'--- Buah ---', isDisabled:true},
   {value:'Apel', label:'Apel'},
   {value:'Durian', label:'Durian'},
   {value:'Jeruk', label:'Jeruk'},
@@ -26,7 +31,13 @@ const optionPlant = [
   {value:'Melon', label:'Melon'},
   {value:'Nangka', label:'Nangka'},
   {value:'Pisang', label:'Pisang'},
-  {value:'Semangka', label:'Semangka'}
+  {value:'Semangka', label:'Semangka'},
+  {value:'Lain-lain', label:'--- Lain-lain ---', isDisabled:true},
+  {value:'Coklat', label:'Coklat'},
+  {value:'Teh', label:'Teh'},
+  {value:'Tebu', label:'Tebu'},
+  {value:'Kelapa', label:'Kelapa'},
+  {value:'Kopi', label:'Kopi'}
 ]
 
 class FilterMap extends Component {

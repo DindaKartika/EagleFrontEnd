@@ -490,6 +490,9 @@
   font-size: 14px;
   font-weight: bold;
 }
+.sidebar input {
+  color: black;
+}
 .sidebar .react-datetime-picker__wrapper {
   border: thin solid lightgrey;
   border-radius: 3px;
@@ -497,6 +500,10 @@
 }
 .sidebar .react-datetime-picker__wrapper button {
   display: none;
+}
+.sidebar img {
+  width: 40px;
+  vertical-align: middle;
 }
 
 .InputField .mapboxgl-ctrl-top-right {
