@@ -42,6 +42,7 @@ class NewsFeed extends Component {
             console.log(response.data);
             alert("post sukses")
             self.props.getAllFeed();
+            window.location.reload();
             self.props.history.push("/newsfeed");
         });
 
