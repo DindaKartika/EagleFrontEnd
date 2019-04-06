@@ -78,34 +78,64 @@ class NewsFeed extends Component {
 
     };
 
-    handleSearch = e => {
-        console.log("event", e.target.value);
-        let value = e.target.value;
-        this.setState(
-            {
-                search:value
-            },
-            () => {
-                this.searchFeeds(value);
-            }
-        );
-    };
-    searchFeeds = async keyword => {
-        console.log("seachVenue", keyword);
+    handleSearch(e){
+        e.preventDefault();
         const self = this;
-        const url = "http://localhost:5000/feeds?sort=desc&rp=10000";
-        if (keyword.length >2) {
-            try {
-                const response = await axios.get(
-                    url + "&search=" +  keyword 
-                );
-                console.log(response);
-                self.setState ({AllFeed: response.data})
-            } catch (error){
-                console.error(error);
-            }
-        }
+        const {searchcontent} = e.target;
+        const search = searchcontent.value;
+        console.log("cek value search", search);
+
+        // const token = localStorage.getItem("token");
+        // console.log("test token post",token)
+        // console.log("post content", data);
+        let searchFeeds = {
+            method:'get',
+            url:"http://localhost:5000/feeds?sort=desc&rp=10000" + "&search=" +  search,
+            // headers: {
+            //     'Authorization':'Bearer ' + token
+            // },
+            // data : data
+        };
+        console.log("cek url",searchFeeds)
+        axios(searchFeeds)
+        .then(function(response){
+            console.log(response.data);
+            self.setState ({AllFeed: response.data});
+            // window.location.reload();
+            self.props.history.push("/newsfeed");
+        });
+
     };
+
+    // handleSearch = e => {
+    //     e.preventDefault();
+    //     console.log("event", e.target.value);
+    //     let value = e.target.value;
+    //     this.setState(
+    //         // {
+    //         //     search:value
+    //         // },
+    //         () => {
+    //             this.searchFeeds(value);
+    //         }
+    //     );
+    // };
+    // searchFeeds = async keyword => {
+    //     console.log("seachVenue", keyword);
+    //     const self = this;
+    //     const url = "http://localhost:5000/feeds?sort=desc&rp=10000";
+    //     if (keyword.length >2) {
+    //         try {
+    //             const response = await axios.get(
+    //                 url + "&search=" +  keyword 
+    //             );
+    //             console.log(response);
+    //             self.setState ({AllFeed: response.data})
+    //         } catch (error){
+    //             console.error(error);
+    //         }
+    //     }
+    // };
 
     // getAllFeed : state => {
     //     const token = state.token;
@@ -151,11 +181,12 @@ class NewsFeed extends Component {
                         <div className="container">
                             <div className="display" style={{ display: "block" }}>
                             <div class="container">
-                                <form >
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="searchcontent" onChange={e => this.handleSearch(e)} value={this.state.search} placeholder="Search for..."/>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-search" ><i class="fa fa-search fa-fw"></i> Search</button>
+                                <form onSubmit={e => this.handleSearch(e)}>
+                                    <div className="input-group">
+                                        {/* <input type="text" className="form-control" name="searchcontent" onChange={e => this.handleSearch(e)} placeholder="Search for..."/> */}
+                                        <input type="text" className="form-control" name="searchcontent" placeholder="Search for..."/>
+                                        <span className="input-group-btn">
+                                            <button className="btn btn-search" type="submit"><i className="fa fa-search fa-fw"></i> Search</button>
                                         </span>
                                     </div>
                                 </form>

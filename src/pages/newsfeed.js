@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from "unistore/react";
-import { actions } from '../store';
+import { actions, store } from '../store';
 import { withRouter } from "react-router-dom";
 import Header from '../components/header_signin'
 import Footer from '../components/footer';
@@ -35,7 +35,8 @@ class NewsFeed extends Component {
         };
          axios(allFeed)
         .then(function(response){
-            self.setState({AllFeed: response.data});
+            // self.setState({AllFeed: response.data});
+            store.setState({listAllFeed: response.data});
             // store.setState({datacart: response.data});
             console.log(response.data);
         })
@@ -61,7 +62,7 @@ class NewsFeed extends Component {
         console.log("post content", data);
         let postFeed = {
             method:'post',
-            url:'http://localhost:5000/feeds',
+            url:'http://localhost:5000/feeds?sort=desc&rp=10000',
             headers: {
                 'Authorization':'Bearer ' + token
             },
@@ -70,9 +71,22 @@ class NewsFeed extends Component {
         axios(postFeed)
         .then(function(response){
             console.log(response.data);
-            alert("post sukses")
-            self.props.getAllFeed();
-            window.location.reload();
+            // const self = this;
+            const allFeed = {
+                method: "get",
+                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+            };
+             axios(allFeed)
+            .then(function(response){
+                // self.setState({AllFeed: response.data});
+                store.setState({listAllFeed: response.data});
+                console.log("cek after post feeds", response.data);
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+            // self.props.getAllFeed();
+            // window.location.reload();
             self.props.history.push("/newsfeed");
         });
 
@@ -85,80 +99,22 @@ class NewsFeed extends Component {
         const search = searchcontent.value;
         console.log("cek value search", search);
 
-        // const token = localStorage.getItem("token");
-        // console.log("test token post",token)
-        // console.log("post content", data);
         let searchFeeds = {
             method:'get',
             url:"http://localhost:5000/feeds?sort=desc&rp=10000" + "&search=" +  search,
-            // headers: {
-            //     'Authorization':'Bearer ' + token
-            // },
-            // data : data
         };
         console.log("cek url",searchFeeds)
         axios(searchFeeds)
         .then(function(response){
             console.log(response.data);
-            self.setState ({AllFeed: response.data});
+            store.setState({listAllFeed: response.data});
+            // self.setState ({AllFeed: response.data});
             // window.location.reload();
             self.props.history.push("/newsfeed");
         });
 
     };
 
-    // handleSearch = e => {
-    //     e.preventDefault();
-    //     console.log("event", e.target.value);
-    //     let value = e.target.value;
-    //     this.setState(
-    //         // {
-    //         //     search:value
-    //         // },
-    //         () => {
-    //             this.searchFeeds(value);
-    //         }
-    //     );
-    // };
-    // searchFeeds = async keyword => {
-    //     console.log("seachVenue", keyword);
-    //     const self = this;
-    //     const url = "http://localhost:5000/feeds?sort=desc&rp=10000";
-    //     if (keyword.length >2) {
-    //         try {
-    //             const response = await axios.get(
-    //                 url + "&search=" +  keyword 
-    //             );
-    //             console.log(response);
-    //             self.setState ({AllFeed: response.data})
-    //         } catch (error){
-    //             console.error(error);
-    //         }
-    //     }
-    // };
-
-    // getAllFeed : state => {
-    //     const token = state.token;
-    //     const allFeed = {
-    //         method: "get",
-    //         // url: "http://localhost:8010/proxy/user/product",
-    //         url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-    //         // url: "http://localhost:5000/feeds?rp=10000",
-    //         // headers: {
-    //         //     'Authorization':'Bearer ' + token
-    //         // }
-    //     };
-    //      axios(allFeed)
-    //     .then(function(response){
-    //         store.setState({listAllFeed: response.data});
-    //         // store.setState({datacart: response.data});
-    //         console.log(response.data);
-    //     })
-    //     .catch(function(error){
-    //         console.log(error);
-    //     })
-    // },
-    
   render() {
     return (
         <div>
@@ -204,7 +160,7 @@ class NewsFeed extends Component {
                                     <div className="post-item" >
                                         <hr />
                                         {/* {this.props.listAllFeed.map((item, key) => { */}
-                                        {this.state.AllFeed.map((item, key) => {
+                                        {this.props.listAllFeed.map((item, key) => {
                                             // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
                                             return <FeedComponent key={key} data={item}/>; }
                                                     )}

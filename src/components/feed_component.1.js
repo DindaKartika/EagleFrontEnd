@@ -12,49 +12,48 @@ class FeedComponent extends Component {
         super(props);
             this.state = {  
                 dataComment: this.props.allComment,
-                // countLike: this.props.dataLike,
+                countLike: this.props.dataLike,
                 is_like:"false",
                 id_like:""
-                // jumlah:0
             };
         };
-    // componentDidMount = async () => {
-    //     const self = this
-    //     const token = localStorage.getItem("token");
-    //     const url = "http://localhost:5000/comments?id_feed=" + self.props.data.id_feed
-    //     axios({
-    //         method: 'get',
-    //         url: url
-    //         // headers: {
-    //         //   Authorization: 'Bearer ' + token
-    //         // }
-    //     }).then(function(response) {
-    //         console.log("cek feed id", self.props.data.id_feed)
-    //         console.log("Get comment berhasil", response.data)
-    //         self.setState({
-    //             dataComment: response.data
+    componentDidMount = async () => {
+        const self = this
+        const token = localStorage.getItem("token");
+        const url = "http://localhost:5000/comments?id_feed=" + self.props.data.id_feed
+        axios({
+            method: 'get',
+            url: url
+            // headers: {
+            //   Authorization: 'Bearer ' + token
+            // }
+        }).then(function(response) {
+            console.log("cek feed id", self.props.data.id_feed)
+            console.log("Get comment berhasil", response.data)
+            self.setState({
+                dataComment: response.data
                 
-    //         })
-    //     }).catch(function(error) {
-    //     console.log("Gagal get comment", error);
-    //     });
+            })
+        }).catch(function(error) {
+        console.log("Gagal get comment", error);
+        });
         
-    //     // axios get like //
-    //     axios({
-    //         method: 'get',
-    //         url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
-    //         // headers: {s.
-    //         //   Authorization: 'Bearer ' + token
-    //         // }
-    //     }).then(function(response) {
-    //         self.setState({
-    //             countLike: response.data.total,
-    //             id_like:response.data.data[0].id_like
-    //         })
-    //     }).catch(function(error) {
-    //     console.log("Gagal get like", error);
-    //     });
-    // };
+        // axios get like //
+        axios({
+            method: 'get',
+            url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+            // headers: {s.
+            //   Authorization: 'Bearer ' + token
+            // }
+        }).then(function(response) {
+            self.setState({
+                countLike: response.data.total,
+                id_like:response.data.data[0].id_like
+            })
+        }).catch(function(error) {
+        console.log("Gagal get like", error);
+        });
+    };
 
     handleSubmitComment(e){
         e.preventDefault();
@@ -80,19 +79,24 @@ class FeedComponent extends Component {
         axios(postComment)
         .then(function(response){
             console.log(response.data);
-            const allFeed = {
-                method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            };
-             axios(allFeed)
-            .then(function(response){
-                // self.setState({AllFeed: response.data});
-                store.setState({listAllFeed: response.data});
-                console.log("cek after post feeds", response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            })
+            const url = "http://localhost:5000/comments?id_feed=" + self.props.data.id_feed
+            axios({
+                method: 'get',
+                url: url
+                // headers: {
+                //   Authorization: 'Bearer ' + token
+                // }
+            }).then(function(response) {
+                console.log("cek feed id", self.props.data.id_feed)
+                console.log("Get comment berhasil", response.data)
+                self.setState({
+                    dataComment: response.data
+                })
+            }).catch(function(error) {
+            console.log("Gagal get comment", error);
+            });
+            // return
+            // <Redirect to ={{ pathname: "/newsfeed"}} />;
             self.props.history.push("/newsfeed");
         });
 
@@ -117,23 +121,36 @@ class FeedComponent extends Component {
         //get all like
         axios(postLike)
         .then(function(response){
-            const allFeed = {
-                method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            };
-             axios(allFeed)
-            .then(function(response){
-                store.setState({listAllFeed: response.data});
+            console.log("ceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeek", response.data)
+            // localStorage.setItem('is_like', true)
+            self.setState({
+                countLike: response.data.total,
+                is_like:true
             })
-            .catch(function(error){
-                console.log(error);
-            })
+            console.log("cek clik like",response.data);
+            // console.log("cek id like", this.state.id_like);
+            // console.log("cek id like", id_like);
+            axios({
+                method: 'get',
+                url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+                // headers: {
+                //   Authorization: 'Bearer ' + token
+                // }
+            }).then(function(response) {
+                self.setState({
+                    countLike: response.data.total,
+                    id_like:response.data.data[0].id_like
+                })
+            }).catch(function(error) {
+            console.log("Gagal get like", error);
+            });
             self.props.history.push("/newsfeed");
         }).catch(function(error) {
             console.log("Gagal get like", error);
             });
             self.props.history.push("/newsfeed");
         ;
+
     };
 
     handleUnlike(e){
@@ -222,8 +239,7 @@ class FeedComponent extends Component {
                         </p>
                     </div>
                     <div className="card-body header-feed-color">
-                        {/* <span className="format-likes">{this.state.jumlah}</span> */}
-                        <span className="format-likes">{this.props.data.total_like_feed}</span>
+                        <span className="format-likes">{this.state.countLike}</span>
                         <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
                         {/* <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a> */}
                         {/* <a href="#" className="card-link"><i className="fa fa-comment"></i> Comment</a> */}
@@ -241,10 +257,9 @@ class FeedComponent extends Component {
                                     <div className="panel-body">
                                         <hr/>
                                         <ul className="media-list">
-                                        {this.props.data.comment.map((item, key) => {
-                                        return <CommentComponent key={key} displayname ={item.comment_by.display_name} username = {item.comment_by.username} tag = {item.tag} content={item.content} 
-                                                profile_picture={item.comment_by.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}
-                                                total_like_comment={item.total_like_comment}/>; }
+                                        {this.state.dataComment.map((item, key) => {
+                                        return <CommentComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} 
+                                                profile_picture={item.user.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}/>; }
                                             )}
                                         <form onSubmit={e => this.handleSubmitComment(e)}>
                                             <textarea className="form-control" name="content" placeholder="write a comment..." rows="3"></textarea>
@@ -268,5 +283,5 @@ class FeedComponent extends Component {
 }
 
 // export default FeedComponent;
-export default connect( "listAllFeed,token, allComment, current_id", actions)
+export default connect( "token, allComment, dataLike, current_id", actions)
 (withRouter(FeedComponent))
