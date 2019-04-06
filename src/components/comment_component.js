@@ -88,9 +88,10 @@ class CommentComponent extends Component {
             }).catch(function(error) {
             console.log("Gagal get comment", error);
             });
-            self.props.history.push("/newsfeed");
+            // window.location.reload();
         }).catch(function(error) {
             console.log("Gagal get comment", error);})
+            window.location.reload();
 
     };
 
@@ -168,7 +169,8 @@ class CommentComponent extends Component {
                         <span className="format-likes">{this.state.countLikeComment}</span>
                         <a type="btn" className="format-likes" onClick={(e)=>this.handleClickLike(e)} name={this.props.id} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
                         {/* <span className="attribute-text margin-right-20">Likes</span> */}
-                        <a className="attribute-text " onClick={(e)=>this.handleDeleteComment(e)} style={{ display: this.props.current_id !== this.props.id_user ? "none" : "block" }} name={this.props.id}>Delete</a>
+                        {/* <a className="attribute-text " onClick={(e)=>this.handleDeleteComment(e)}  name={this.props.id}>Delete</a> */}
+                        <a className="attribute-text " onClick={(e)=>this.handleDeleteComment(e)} style={{ display: this.props.current_id !== this.props.iduser ? "none" : "block" }} name={this.props.id}>Delete</a>
                     </div>
                 </div>
             </li>

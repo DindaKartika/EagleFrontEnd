@@ -584,6 +584,10 @@ $footer-color: #252525;
         }
     }
 
+    input{
+        color: black;
+    }
+
     .react-datetime-picker__wrapper{
         border: thin solid lightgrey;
         border-radius: 3px;
@@ -596,6 +600,11 @@ $footer-color: #252525;
         // .react-datetime-picker__inputGroup__amPm{
         //     disabled : true
         // }
+    }
+
+    img{
+        width: 40px;
+        vertical-align: middle;
     }
 }
 
