@@ -11,8 +11,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
 
 const polygonPaint = {
-  'fill-color': '#6F788A',
-  'fill-opacity': 0.7
+  'fill-color': '#00CED1',
+  'fill-opacity': 1
 };
 
 const Map = ReactMapboxGl({
