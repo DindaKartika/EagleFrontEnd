@@ -32,6 +32,7 @@ class FeedComponent extends Component {
             console.log("Get comment berhasil", response.data)
             self.setState({
                 dataComment: response.data
+                
             })
         }).catch(function(error) {
         console.log("Gagal get comment", error);

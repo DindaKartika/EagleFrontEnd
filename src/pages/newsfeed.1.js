@@ -12,38 +12,8 @@ import{ Link } from "react-router-dom";
 
 //MAIN CLASS
 class NewsFeed extends Component {
-    constructor (props){
-        super(props);
-        this.state  = {
-            search:"",
-            AllFeed:[]
-        }
-    }
-    
     componentDidMount = () => {
-        // this.props.getAllFeed();
-        // const token = localStorage.getItem("token");
-        const self = this;
-        const allFeed = {
-            method: "get",
-            // url: "http://localhost:8010/proxy/user/product",
-            url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            // url: "http://localhost:5000/feeds?rp=10000",
-            // headers: {
-            //     'Authorization':'Bearer ' + token
-            // }
-        };
-         axios(allFeed)
-        .then(function(response){
-            self.setState({AllFeed: response.data});
-            // store.setState({datacart: response.data});
-            console.log(response.data);
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-
-
+        this.props.getAllFeed();
         };
     // componentDidUpdate = () => {
     //         this.props.getAllFeed();
@@ -78,86 +48,7 @@ class NewsFeed extends Component {
 
     };
 
-    handleSearch(e){
-        e.preventDefault();
-        const self = this;
-        const {searchcontent} = e.target;
-        const search = searchcontent.value;
-        console.log("cek value search", search);
 
-        // const token = localStorage.getItem("token");
-        // console.log("test token post",token)
-        // console.log("post content", data);
-        let searchFeeds = {
-            method:'get',
-            url:"http://localhost:5000/feeds?sort=desc&rp=10000" + "&search=" +  search,
-            // headers: {
-            //     'Authorization':'Bearer ' + token
-            // },
-            // data : data
-        };
-        console.log("cek url",searchFeeds)
-        axios(searchFeeds)
-        .then(function(response){
-            console.log(response.data);
-            self.setState ({AllFeed: response.data});
-            // window.location.reload();
-            self.props.history.push("/newsfeed");
-        });
-
-    };
-
-    // handleSearch = e => {
-    //     e.preventDefault();
-    //     console.log("event", e.target.value);
-    //     let value = e.target.value;
-    //     this.setState(
-    //         // {
-    //         //     search:value
-    //         // },
-    //         () => {
-    //             this.searchFeeds(value);
-    //         }
-    //     );
-    // };
-    // searchFeeds = async keyword => {
-    //     console.log("seachVenue", keyword);
-    //     const self = this;
-    //     const url = "http://localhost:5000/feeds?sort=desc&rp=10000";
-    //     if (keyword.length >2) {
-    //         try {
-    //             const response = await axios.get(
-    //                 url + "&search=" +  keyword 
-    //             );
-    //             console.log(response);
-    //             self.setState ({AllFeed: response.data})
-    //         } catch (error){
-    //             console.error(error);
-    //         }
-    //     }
-    // };
-
-    // getAllFeed : state => {
-    //     const token = state.token;
-    //     const allFeed = {
-    //         method: "get",
-    //         // url: "http://localhost:8010/proxy/user/product",
-    //         url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-    //         // url: "http://localhost:5000/feeds?rp=10000",
-    //         // headers: {
-    //         //     'Authorization':'Bearer ' + token
-    //         // }
-    //     };
-    //      axios(allFeed)
-    //     .then(function(response){
-    //         store.setState({listAllFeed: response.data});
-    //         // store.setState({datacart: response.data});
-    //         console.log(response.data);
-    //     })
-    //     .catch(function(error){
-    //         console.log(error);
-    //     })
-    // },
     
   render() {
     return (
@@ -180,17 +71,6 @@ class NewsFeed extends Component {
                     <div className="col-md-9 feed-post">
                         <div className="container">
                             <div className="display" style={{ display: "block" }}>
-                            <div class="container">
-                                <form onSubmit={e => this.handleSearch(e)}>
-                                    <div className="input-group">
-                                        {/* <input type="text" className="form-control" name="searchcontent" onChange={e => this.handleSearch(e)} placeholder="Search for..."/> */}
-                                        <input type="text" className="form-control" name="searchcontent" placeholder="Search for..."/>
-                                        <span className="input-group-btn">
-                                            <button className="btn btn-search" type="submit"><i className="fa fa-search fa-fw"></i> Search</button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
                                 <form onSubmit={e => this.handleClick(e)}>
                                     <div className="form-group">
                                         <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
@@ -201,10 +81,9 @@ class NewsFeed extends Component {
                                 </form> 
                                 <div className="profile-post" style={{ display: "block" }}>
                                     {/* Display Post  */}
-                                    <div className="post-item" >
+                                    <div className="post-item">
                                         <hr />
-                                        {/* {this.props.listAllFeed.map((item, key) => { */}
-                                        {this.state.AllFeed.map((item, key) => {
+                                        {this.props.listAllFeed.map((item, key) => {
                                             // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
                                             return <FeedComponent key={key} data={item}/>; }
                                                     )}

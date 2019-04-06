@@ -622,4 +622,22 @@
   max-width: 80%;
 }
 
+.btn-search {
+  background-color: #424242 !important;
+  border-radius: 0;
+  color: #fff !important;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #1c1c1c !important;
+}
+
+.btn-search:link, .btn-search:visited {
+  color: #fff !important;
+}
+
+.btn-search:active, .btn-search:hover {
+  background-color: #1c1c1c !important;
+  color: #fff !important;
+}
+
 /*# sourceMappingURL=main.css.map */
