@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from "../components/header_signin";
+import Footer from '../components/footer_styled';
 
 
 class LandingInfo extends Component {
@@ -284,7 +285,8 @@ class LandingInfo extends Component {
       {/* <!-- Map Section End --> */}
 
       {/* <!-- Footer Section Start --> */}
-      <footer class="footer-area section-padding">
+      <Footer/>
+      {/* <footer class="footer-area section-padding">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -303,12 +305,11 @@ class LandingInfo extends Component {
                     <a class="instagram" href="#"><i class="lni-google-plus"></i></a>
                   </li>
                 </ul>
-                {/* <p>Copyright © 2018 <a href="www.uideck.com"></a>| Crafted by <a href="#" target="_blank">UIdeck</a></p> */}
               </div>
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
       {/* <!-- Footer Section End --> */}
 
       {/* <!-- Go to Top Link --> */}

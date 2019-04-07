@@ -17,7 +17,6 @@ body {
   line-height: 25px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  overflow-x: hidden;
 }
 
 .landing-info, .signin {
@@ -742,7 +741,6 @@ body {
 .landing-info .team-item .team-img, .signin .team-item .team-img {
   position: relative;
   cursor: pointer;
-  overflow: hidden;
   border-radius: 4px;
 }
 .landing-info .team-item .team-overlay, .signin .team-item .team-overlay {
@@ -1141,7 +1139,6 @@ body {
   background-size: cover;
   color: #206363;
   padding: 150px 0;
-  overflow: hidden;
   position: relative;
 }
 .signin .card {
