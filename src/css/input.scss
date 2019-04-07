@@ -592,6 +592,10 @@ $footer-color: #252525;
         color: black;
     }
 
+    hr{
+        border: 2px solid $colorbluegreen;
+    }
+
     .react-datetime-picker__wrapper{
         border: thin solid lightgrey;
         border-radius: 3px;
@@ -748,4 +752,44 @@ $footer-color: #252525;
 
 .logo-footer {
     max-width: 80%;
+}
+
+//search button feeds
+
+.btn-search {
+    background: #424242;
+    border-radius: 0;
+    color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #1c1c1c;
+  }
+  .btn-search:link, .btn-search:visited {
+    color: #fff;
+  }
+  .btn-search:active, .btn-search:hover {
+    background: #1c1c1c;
+    color: #fff;
+  }
+
+  
+.PopupProfile{
+    position: absolute;
+    z-index: 1;
+    left: 8vw;
+    top : 22vh;
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin : 3px;
+
+    a{
+        
+        h5{
+            color: black;
+        }
+    }
+
+    button{
+        cursor: pointer;
+    }
 }

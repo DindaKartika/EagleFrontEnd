@@ -37,6 +37,7 @@ class SidebarMap extends Component {
 
   render() {
 		const {Farms} = this.state;
+		console.log('cek isi sidebar', Farms)
     return (
     <div className="sidebar">
 			<h5>List hasil pencarian dan filter:</h5>

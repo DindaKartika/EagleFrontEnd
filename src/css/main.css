@@ -498,6 +498,9 @@
 .sidebar input {
   color: black;
 }
+.sidebar hr {
+  border: 2px solid #00CED1;
+}
 .sidebar .react-datetime-picker__wrapper {
   border: thin solid lightgrey;
   border-radius: 3px;
@@ -632,6 +635,40 @@
 
 .logo-footer {
   max-width: 80%;
+}
+
+.btn-search {
+  background: #424242;
+  border-radius: 0;
+  color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #1c1c1c;
+}
+
+.btn-search:link, .btn-search:visited {
+  color: #fff;
+}
+
+.btn-search:active, .btn-search:hover {
+  background: #1c1c1c;
+  color: #fff;
+}
+
+.PopupProfile {
+  position: absolute;
+  z-index: 1;
+  left: 8vw;
+  top: 22vh;
+  background-color: #f7f7f7;
+  padding: 10px;
+  margin: 3px;
+}
+.PopupProfile a h5 {
+  color: black;
+}
+.PopupProfile button {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */

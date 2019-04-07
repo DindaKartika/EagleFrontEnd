@@ -6,6 +6,7 @@ import Footer from '../components/footer_styled';
 // import './assets/fonts/line-icons.css'
 
 
+
 class LandingInfo extends Component {
   componentDidMount() {
     (function($) {
@@ -332,7 +333,9 @@ class LandingInfo extends Component {
       {/* <!-- Map Section End --> */}
 
       {/* <!-- Footer Section Start --> */}
+
       <Footer />
+
       {/* <!-- Footer Section End --> */}
 
       
@@ -351,7 +354,6 @@ class LandingInfo extends Component {
       {/* <script src="assets/js/jquery-min.js"></script>
       <script src="assets/js/main.js"></script> */}
       {/* </script> */}
-        
     </div>
     );
   }
