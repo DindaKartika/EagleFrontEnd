@@ -1,14 +1,62 @@
 import React, { Component } from 'react';
-import Header from "../components/header_signin";
+import Header from "../components/navbar";
+import jQuery from "jquery";
+import NavbarPage from '../components/navbar';
 import Footer from '../components/footer_styled';
+// import './assets/fonts/line-icons.css'
+
 
 
 class LandingInfo extends Component {
+  componentDidMount() {
+    (function($) {
+  
+      "use strict";  
+    
+      $(window).on('load', function() {
+    
+      //    /* Page Loader active
+      //   ========================================================*/
+        $('#preloader').fadeOut();
+    
+      // Sticky Nav
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() > 200) {
+                $('.scrolling-navbar').addClass('top-nav-collapse');
+            } else {
+                $('.scrolling-navbar').removeClass('top-nav-collapse');
+            }
+        });
+
+          var offset = 200;
+          var duration = 500;
+          $(window).scroll(function() {
+            if ($(this).scrollTop() > offset) {
+              $('.back-to-top').fadeIn(400);
+            } else {
+              $('.back-to-top').fadeOut(400);
+            }
+          });
+    
+          $('.back-to-top').on('click',function(event) {
+            event.preventDefault();
+            $('html, body').animate({
+              scrollTop: 0
+            }, 600);
+            return false;
+          });
+    
+      });      
+    
+    }(jQuery));
+  }
+
   render() {
     return (
       <div className="landing-info">
     {/* <!-- Header Area wrapper Starts --> */}
       <Header />
+      {/* <NavbarPage /> */}
       
       {/* <!-- Intro Section Start --> */}
       <div className="landingpage-wrapper">
@@ -285,33 +333,12 @@ class LandingInfo extends Component {
       {/* <!-- Map Section End --> */}
 
       {/* <!-- Footer Section Start --> */}
-      <Footer/>
-      {/* <footer class="footer-area section-padding">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="footer-text text-center">
-                <ul class="social-icon">
-                  <li>
-                    <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
-                  </li>
-                  <li>
-                    <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
-                  </li>
-                  <li>
-                    <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
-                  </li>
-                  <li>
-                    <a class="instagram" href="#"><i class="lni-google-plus"></i></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer> */}
+
+      <Footer />
+
       {/* <!-- Footer Section End --> */}
 
+      
       {/* <!-- Go to Top Link --> */}
       <a href="#" class="back-to-top">
         <i class="lni-chevron-up"></i>

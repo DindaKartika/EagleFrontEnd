@@ -34,16 +34,15 @@ class Header extends Component {
               </li> */}
               <li className="nav-item ">
                   <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Tentang Kami</Link>
-                  <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Beranda</span></Link>
+                  <Link to="/newsfeed" className="btn btn-outline-success" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Beranda</span></Link>
               </li>
               <li className="nav-item ">
                   <Link to="/myproduct" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Blog</Link>
-                  <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Peta</span></Link>
+                  <Link to="/maps" className="btn btn-outline-success" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Peta</span></Link>
               </li>
             </ul>
             <Link to="/signin" className="btn btn-common" style={{ display: this.props.is_login ? "none" : "block" }}><span className="cwhite">Masuk</span></Link>
-            <Link to="/profile" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">{this.props.current_username}</span></Link>
-            <Link to="/" onClick={() => this.props.postLogout()} className="btn btn-common nav-btn" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Keluar</span></Link>
+            <Link to="/" onClick={() => this.props.postLogout()} className="btn btn-outline-warning" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Keluar</span></Link>
           </div>
         </nav>
       </div>
@@ -52,5 +51,5 @@ class Header extends Component {
 }
 
 // export default Header;
-export default connect( "is_login, current_username", actions)
+export default connect( "is_login", actions)
 (withRouter(Header));
