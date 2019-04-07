@@ -584,6 +584,14 @@ $footer-color: #252525;
         }
     }
 
+    input{
+        color: black;
+    }
+
+    hr{
+        border: 2px solid $colorbluegreen;
+    }
+
     .react-datetime-picker__wrapper{
         border: thin solid lightgrey;
         border-radius: 3px;
@@ -596,6 +604,11 @@ $footer-color: #252525;
         // .react-datetime-picker__inputGroup__amPm{
         //     disabled : true
         // }
+    }
+
+    img{
+        width: 40px;
+        vertical-align: middle;
     }
 }
 
@@ -754,3 +767,25 @@ $footer-color: #252525;
     background: #1c1c1c;
     color: #fff;
   }
+
+  
+.PopupProfile{
+    position: absolute;
+    z-index: 1;
+    left: 8vw;
+    top : 22vh;
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin : 3px;
+
+    a{
+        
+        h5{
+            color: black;
+        }
+    }
+
+    button{
+        cursor: pointer;
+    }
+}

@@ -13,7 +13,12 @@ import { storage } from "../firebase";
 import Select from 'react-select'
 
 const optionPlant = [
-  {value:'Sayur', label:'---Sayur---', isDisabled:true},
+  {value:'Bahan Pokok', label:'--- Bahan Pokok ---', isDisabled:true},
+  {value:'Beras', label:'Beras'},
+  {value:'Gandum', label:'Gandum'},
+  {value:'Jagung', label:'Jagung'},
+  {value:'Sagu', label:'Sagu'},
+  {value:'Sayur', label:'--- Sayur ---', isDisabled:true},
   {value:'Bayam', label:'Bayam'},
   {value:'Cabai', label:'Cabai'},
   {value:'Kangkung', label:'Kangkung'},
@@ -21,7 +26,7 @@ const optionPlant = [
   {value:'Sawi', label:'Sawi'},
   {value:'Terung', label:'Terung'},
   {value:'Tomat', label:'Tomat'},
-  {value:'Buah', label:'---Buah---', isDisabled:true},
+  {value:'Buah', label:'--- Buah ---', isDisabled:true},
   {value:'Apel', label:'Apel'},
   {value:'Durian', label:'Durian'},
   {value:'Jeruk', label:'Jeruk'},
@@ -29,7 +34,13 @@ const optionPlant = [
   {value:'Melon', label:'Melon'},
   {value:'Nangka', label:'Nangka'},
   {value:'Pisang', label:'Pisang'},
-  {value:'Semangka', label:'Semangka'}
+  {value:'Semangka', label:'Semangka'},
+  {value:'Lain-lain', label:'--- Lain-lain ---', isDisabled:true},
+  {value:'Coklat', label:'Coklat'},
+  {value:'Teh', label:'Teh'},
+  {value:'Tebu', label:'Tebu'},
+  {value:'Kelapa', label:'Kelapa'},
+  {value:'Kopi', label:'Kopi'}
 ]
 class SidebarField extends Component {
   constructor(props) {
@@ -78,8 +89,6 @@ class SidebarField extends Component {
     const data = {
       description: deskripsi,
       plant_type: plant_type,
-      planted_at: datePlant.toISOString(),
-      ready_at: dateReady.toISOString(),
       address: address,
       city: city,
       photos: photos
@@ -98,6 +107,47 @@ class SidebarField extends Component {
       .then(response => {
         console.log("testtt dooooooooooooooooooooooooooong", response.data);
         this.props.history.push("/maps/" + id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  saveDetailsNew = () => {
+    const {
+      deskripsi,
+      plant_type,
+      datePlant,
+      dateReady,
+      address,
+      city,
+      photos
+    } = this.state;
+    const id = localStorage.getItem("id_farm");
+    console.log(id);
+    console.log("ready", dateReady);
+    console.log("plant", datePlant);
+    const data = {
+      description: deskripsi,
+      plant_type: plant_type,
+      address: address,
+      city: city,
+      photos: photos
+    };
+    console.log(data);
+
+    const tokens = localStorage.getItem('token')
+
+    const self = this;
+    axios
+      .put("http://0.0.0.0:5000/farms/" + id, data, {
+        headers: {
+          Authorization: "Bearer " + tokens
+        }
+      })
+      .then(response => {
+        console.log("testtt dooooooooooooooooooooooooooong", response.data);
+        window.location.reload();  
       })
       .catch(error => {
         console.log(error);
@@ -220,6 +270,9 @@ class SidebarField extends Component {
           <br />
           <button type="submit" onClick={() => this.saveDetails()}>
             Simpan
+          </button>
+          <button type="submit" onClick={() => this.saveDetailsNew()}>
+            Simpan dan Buat Baru
           </button>
         </form>
       </div>

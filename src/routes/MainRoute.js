@@ -49,8 +49,8 @@ class MainRoute extends Component {
                 <Route exact path="/blog" component={Blog}/>
                 <Route exact path="/landing" component={LandingPage}/>
                 <Route exact path="/landinginfo" component={LandingInfo}/>
-                <Route exact path="/otherprofile" component={OtherProfile}/>
                 <Route exact path="/bookmarks" component={Bookmarks}/>
+                <Route exact path="/otherprofile/:id_profile" component={OtherProfile}/>
                 {/* <Route exact path = "/allproduct" component={AllProduct}/> */}
             </Switch>
         );

@@ -11,8 +11,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { NONAME } from "dns";
 
 const polygonPaint = {
-  'fill-color': '#6F788A',
-  'fill-opacity': 0.7
+  'fill-color': '#00CED1',
+  'fill-opacity': 1
 };
 
 const Map = ReactMapboxGl({
@@ -60,6 +60,8 @@ class App extends Component {
 				const centers = JSON.parse(response.data[index].center)
 				console.log(centers)
 				const data = {}
+				data['id'] = response.data[index].id_farm
+				data['id_pemilik'] = response.data[index].id_user
 				data['coordinates'] = rowCoordinates
 				data['center'] = centers
 				data['deskripsi'] = response.data[index].deskripsi
@@ -122,8 +124,10 @@ class App extends Component {
 				rowCoordinates.push(coordinates)
 				const centers = JSON.parse(response.data[index].center)
 				console.log(centers)
+				console.log(response.data[index])
 				const data = {}
 				data['id'] = response.data[index].id_farm
+				data['id_pemilik'] = response.data[index].id_user
 				data['coordinates'] = rowCoordinates
 				data['center'] = centers
 				data['deskripsi'] = response.data[index].deskripsi
@@ -257,7 +261,7 @@ class App extends Component {
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
 					// console.log('cek hasil bayam', uniquefeatures)
-							<KontenSidebar key={key} id={item} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
+							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
 							/>
 					)}
 				</div>
