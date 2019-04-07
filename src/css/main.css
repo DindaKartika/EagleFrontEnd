@@ -296,6 +296,10 @@
   color: darkgreen;
 }
 
+.profile-page input {
+  color: darkgreen;
+}
+
 .container-fluid.row.justify-content-end.strip {
   margin-right: 0;
   margin-left: 0;
