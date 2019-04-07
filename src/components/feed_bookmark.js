@@ -7,7 +7,7 @@ import CommentComponent from './comment_component';
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 
-class FeedComponent extends Component {
+class FeedBookmark extends Component {
     constructor (props) {
         super(props);
             this.state = {  
@@ -223,8 +223,8 @@ class FeedComponent extends Component {
                         <div className="text-muted h7 mb-2"> <i className="fa fa-clock-o"></i>{this.props.data.created_at.slice(4, 16)} | {this.props.data.created_at.slice(17, 22)}</div>
 
                         <p className="card-text">
-                        {this.props.data.content}
-                        {/* {this.props.data.feed.content} */}
+                        {/* {this.props.data.content} */}
+                        {this.props.data.feed.content}
                         </p>
                     </div>
                     <div className="card-body header-feed-color">
@@ -247,11 +247,11 @@ class FeedComponent extends Component {
                                     <div className="panel-body">
                                         <hr/>
                                         <ul className="media-list">
-                                        {this.props.data.comment.map((item, key) => {
+                                        {/* {this.props.data.comment.map((item, key) => {
                                         return <CommentComponent key={key} displayname ={item.comment_by.display_name} username = {item.comment_by.username} tag = {item.tag} content={item.content} 
                                                 profile_picture={item.comment_by.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}
                                                 total_like_comment={item.total_like_comment}/>; }
-                                            )}
+                                            )} */}
                                         <form onSubmit={e => this.handleSubmitComment(e)}>
                                             <textarea className="form-control" name="content" placeholder="write a comment..." rows="3"></textarea>
                                             <br/>
@@ -273,6 +273,6 @@ class FeedComponent extends Component {
   }
 }
 
-// export default FeedComponent;
+// export default FeedBookmark;
 export default connect( "listAllFeed,token, allComment, current_id", actions)
-(withRouter(FeedComponent))
+(withRouter(FeedBookmark))
