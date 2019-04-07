@@ -356,13 +356,13 @@ class Profile extends Component {
       <div>
         <Header />
         {/* <div class="floating-wpp">Test</div> */}
-        <a
+        {/* <a
           href={waUrl + this.props.current_phone_number}
           class="wa-float"
           target="_blank"
         >
           <i class="fa fa-whatsapp my-wa-float" />
-        </a>
+        </a> */}
         {/* <a href={waUrl + this.props.current_phone_number} target="_blank">
           Whatsapp
         </a> */}
