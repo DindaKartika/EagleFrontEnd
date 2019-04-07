@@ -4,7 +4,7 @@ import axios from 'axios';
 import { connect } from "unistore/react";
 import { actions, store } from '../store';
 import { withRouter } from "react-router-dom";
-import Header from '../components/header_signin'
+import Header from "../components/navbar";
 import Footer from '../components/footer';
 import FeedComponent from '../components/feed_component';
 import CommentComponent from '../components/comment_component';
