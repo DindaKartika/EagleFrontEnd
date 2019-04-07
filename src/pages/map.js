@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import Header from '../components/header_signin'
+import Header from "../components/navbar";
 import FilterMap from '../components/filter'
 import axios from 'axios'
 import PopUp from '../components/popup'

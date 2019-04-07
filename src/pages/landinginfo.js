@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Header from "../components/header_signin";
 import jQuery from "jquery";
-import NavbarPage from '../components/Navbar';
+import NavbarPage from '../components/navbar';
+import Footer from '../components/footer_styled';
+// import './assets/fonts/line-icons.css'
 
 
 class LandingInfo extends Component {
@@ -330,31 +332,7 @@ class LandingInfo extends Component {
       {/* <!-- Map Section End --> */}
 
       {/* <!-- Footer Section Start --> */}
-      <footer class="footer-area section-padding">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="footer-text text-center">
-                <ul class="social-icon">
-                  <li>
-                    <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
-                  </li>
-                  <li>
-                    <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
-                  </li>
-                  <li>
-                    <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
-                  </li>
-                  <li>
-                    <a class="instagram" href="#"><i class="lni-google-plus"></i></a>
-                  </li>
-                </ul>
-                {/* <p>Copyright © 2018 <a href="www.uideck.com"></a>| Crafted by <a href="#" target="_blank">UIdeck</a></p> */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
       {/* <!-- Footer Section End --> */}
 
       

@@ -1,77 +1,55 @@
-import React, { Component } from "react";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon } from "mdbreact";
+import React, { Component } from 'react';
+import{ Link } from "react-router-dom";
+import { connect } from "unistore/react";
+import { actions } from '../store';
+import { withRouter } from "react-router-dom";
 
+class Header extends Component {
+    // postSignout = () => {
+    //     this.props.is_login=false;
+    //     this.props.history.push("/");
+    // };
+  componentDidMount() {
+    this.props.getIdentity();
+  }
 
-class NavbarPage extends Component {
-state = {
-  isOpen: false
-};
-
-toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
-}
-
-render() {
-  return (
-    <MDBNavbar color="default-color" dark expand="md">
-      <MDBNavbarBrand>
-        <strong className="white-text">Navbar</strong>
-      </MDBNavbarBrand>
-      <MDBNavbarToggler onClick={this.toggleCollapse} />
-      <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-        <MDBNavbarNav left>
-          <MDBNavItem active>
-            <MDBNavLink to="#!">Home</MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink to="#!">Features</MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink to="#!">Pricing</MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBDropdown>
-              <MDBDropdownToggle nav caret>
-                <div className="d-none d-md-inline">Dropdown</div>
-              </MDBDropdownToggle>
-              <MDBDropdownMenu className="dropdown-default" right>
-                <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-              </MDBDropdownMenu>
-            </MDBDropdown>
-          </MDBNavItem>
-        </MDBNavbarNav>
-        <MDBNavbarNav right>
-          <MDBNavItem>
-            <MDBNavLink className="waves-effect waves-light" to="#!">
-              <MDBIcon fab icon="twitter" />
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink className="waves-effect waves-light" to="#!">
-              <MDBIcon fab icon="google-plus-g" />
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBDropdown>
-              <MDBDropdownToggle nav caret>
-                <MDBIcon icon="user" />
-              </MDBDropdownToggle>
-              <MDBDropdownMenu className="dropdown-default" right>
-                <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-              </MDBDropdownMenu>
-            </MDBDropdown>
-          </MDBNavItem>
-        </MDBNavbarNav>
-      </MDBCollapse>
-    </MDBNavbar>
+  render() {
+      console.log("cek is login", this.props.is_login)
+    return (
+      <div className="navbar-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          {/* <a class="navbar-brand" href="#">LOGO</a> */}
+          <img className="logo-navbar" src={require("../images/logo/testlogo3.png")} alt="" />
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            {/* <a class="navbar-brand" href="#">LOGO</a> */}
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              {/* <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li> */}
+              {/* <li className="nav-item ">
+                <a class="navbar-brand" href="#">LOGO</a>
+              </li> */}
+              <li className="nav-item ">
+                  <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Tentang Kami</Link>
+                  <Link to="/newsfeed" className="btn btn-outline-success" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Beranda</span></Link>
+              </li>
+              <li className="nav-item ">
+                  <Link to="/myproduct" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Blog</Link>
+                  <Link to="/maps" className="btn btn-outline-success" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Peta</span></Link>
+              </li>
+            </ul>
+            <Link to="/signin" className="btn btn-common" style={{ display: this.props.is_login ? "none" : "block" }}><span className="cwhite">Masuk</span></Link>
+            <Link to="/" onClick={() => this.props.postLogout()} className="btn btn-outline-warning" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Keluar</span></Link>
+          </div>
+        </nav>
+      </div>
     );
   }
 }
 
-export default NavbarPage;
+// export default Header;
+export default connect( "is_login", actions)
+(withRouter(Header));

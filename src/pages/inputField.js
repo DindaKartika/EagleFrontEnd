@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import Header from '../components/header_signin'
+import Header from "../components/navbar";
 import SidebarField from '../components/sidebarField'
 import FilterMap from '../components/filter'
 import axios from 'axios'
