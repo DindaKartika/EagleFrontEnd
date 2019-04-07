@@ -623,21 +623,21 @@
 }
 
 .btn-search {
-  background-color: #424242 !important;
+  background: #424242;
   border-radius: 0;
-  color: #fff !important;
+  color: #fff;
   border-width: 1px;
   border-style: solid;
-  border-color: #1c1c1c !important;
+  border-color: #1c1c1c;
 }
 
 .btn-search:link, .btn-search:visited {
-  color: #fff !important;
+  color: #fff;
 }
 
 .btn-search:active, .btn-search:hover {
-  background-color: #1c1c1c !important;
-  color: #fff !important;
+  background: #1c1c1c;
+  color: #fff;
 }
 
 /*# sourceMappingURL=main.css.map */
