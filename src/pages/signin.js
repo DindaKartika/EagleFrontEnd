@@ -3,6 +3,7 @@ import Header from "../components/header_signin";
 import FormSignIn from "../components/form_signin";
 import Footer from '../components/footer_styled';
 import{ Link } from "react-router-dom";
+// import NavbarPage from '../components/Navbar';
 
 
 class SignIn extends Component {
@@ -11,6 +12,7 @@ class SignIn extends Component {
       <div className="signin">
     {/* <!-- Header Area wrapper Starts --> */}
       <Header />
+      {/* <NavbarPage /> */}
       
       {/* <!-- Intro Section Start --> */}
       <section class="intro">

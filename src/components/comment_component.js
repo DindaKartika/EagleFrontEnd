@@ -16,42 +16,6 @@ class CommentComponent extends Component {
             };
         };
 
-        componentDidMount = async () => {
-            const self = this
-            const token = localStorage.getItem("token");
-            const url = "http://localhost:5000/comments?id_feed=" + self.props.id_feed
-            axios({
-                method: 'get',
-                url: url
-                // headers: {
-                //   Authorization: 'Bearer ' + token
-                // }
-            }).then(function(response) {
-                console.log("cek feed id", self.props.id_feed)
-                console.log("Get comment berhasil", response.data)
-                self.setState({
-                    dataComment: response.data
-                })
-            }).catch(function(error) {
-            console.log("Gagal get comment", error);
-            });
-            
-            axios({
-                method: 'get',
-                url: 'http://localhost:5000/commentlikes/' + self.props.id,
-                // headers: {
-                //   Authorization: 'Bearer ' + token
-                // }
-            }).then(function(response) {
-                console.log("get comment likeeeeeeeeeee", response.data)
-                self.setState({
-                    countLikeComment: response.data.total
-                })
-            }).catch(function(error) {
-            console.log("Gagal get like", error);
-            });
-        };
-
     handleDeleteComment(e){
         e.preventDefault();
         const self = this;
@@ -71,26 +35,24 @@ class CommentComponent extends Component {
         //get all like
         axios(deleteComment)
         .then(function(response){
-            const url = "http://localhost:5000/comments?id_feed=" + self.props.id_feed
-            return axios({
-                method: 'get',
-                url: url
-                // headers: {
-                //   Authorization: 'Bearer ' + token
-                // }
-            }).then(function(response) {
-                console.log("cek feed id", self.props.id_feed)
-                console.log("Get comment berhasil", response.data)
-                store.setState({
-                    allComment: response.data
-                })
-            }).catch(function(error) {
-            console.log("Gagal get comment", error);
-            });
-            // window.location.reload();
+            console.log(response.data);
+            const allFeed = {
+                method: "get",
+                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+            };
+                axios(allFeed)
+            .then(function(response){
+                // self.setState({AllFeed: response.data});
+                store.setState({listAllFeed: response.data});
+                console.log("cek after delete feeds", response.data);
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+            self.props.history.push("/newsfeed");
         }).catch(function(error) {
             console.log("Gagal get comment", error);})
-            window.location.reload();
+            // window.location.reload();
 
     };
 
@@ -113,23 +75,17 @@ class CommentComponent extends Component {
         //get all like
         axios(postLike)
         .then(function(response){
-            self.setState({
-                countLikeComment: response.data.total,
-                is_like:true
+            const allFeed = {
+                method: "get",
+                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+            };
+             axios(allFeed)
+            .then(function(response){
+                store.setState({listAllFeed: response.data});
             })
-            axios({
-                method: 'get',
-                url: 'http://localhost:5000/commentlikes/' + self.props.id,
-                // headers: {
-                //   Authorization: 'Bearer ' + token
-                // }
-            }).then(function(response) {
-                self.setState({
-                    countLikeComment: response.data.total
-                })
-            }).catch(function(error) {
-            console.log("Gagal get like", error);
-            });
+            .catch(function(error){
+                console.log(error);
+            })
             self.props.history.push("/newsfeed");
         }).catch(function(error) {
             console.log("Gagal get like", error);
@@ -165,7 +121,7 @@ class CommentComponent extends Component {
                     </p>
                     <div className="row justify-content-end">
                         <span className="attribute-text margin-right-20">{this.props.tag}</span>
-                        <span className="format-likes">{this.state.countLikeComment}</span>
+                        <span className="format-likes">{this.props.total_like_comment}</span>
                         <a type="btn" className="format-likes" onClick={(e)=>this.handleClickLike(e)} name={this.props.id} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
                         {/* <span className="attribute-text margin-right-20">Likes</span> */}
                         {/* <a className="attribute-text " onClick={(e)=>this.handleDeleteComment(e)}  name={this.props.id}>Delete</a> */}

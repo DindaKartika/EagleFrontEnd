@@ -5,7 +5,7 @@ import { connect } from "unistore/react";
 import { actions, store } from "../store";
 import { withRouter } from "react-router-dom";
 import Header from "../components/header_signin";
-import Footer from "../components/footer";
+import Footer from "../components/footer_styled";
 import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
@@ -417,6 +417,16 @@ class Profile extends Component {
                   >
                     Perbarui profil
                   </button>
+
+                  {/* TEST */}
+                  <div>
+                  
+                    <a href={waUrl + this.props.current_phone_number} target="_blank">
+                    <button className="btn btn-success"><i class="fa fa-whatsapp my-wa-float" /> Hubungi via Whatsapp</button>
+                    </a>
+                    
+                  </div>
+                  {/* TEST */}
                 </div>
                 <div
                   className="display-edit"
@@ -428,6 +438,7 @@ class Profile extends Component {
                   >
                     Batalkan edit
                   </button>
+                  
                 </div>
               </div>
             </div>
