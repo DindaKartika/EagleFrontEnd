@@ -99,7 +99,8 @@ const initialState = {
     content:"",
     listAllFeed:[],
     allComment: [],
-    dataLike:[],
+    countLike:[],
+    // dataLike:[],
     id_userComment:"",
     
     // is_like:false
