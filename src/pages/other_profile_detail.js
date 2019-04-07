@@ -95,9 +95,12 @@ class OtherProfile extends Component {
     // }
     const token = localStorage.getItem("token");
     console.log("Cekt token setelah login", token);
+    const id_profile = window.location.pathname.slice(14)
+    console.log('id other profile', id_profile)
+
     await axios({
       method: "get",
-      url: "http://localhost:5000/users/userprofile/" + self.props.user_id
+      url: "http://localhost:5000/users/userprofile/" + id_profile
       // headers: {
       //   Authorization: "Bearer " + token
       // }

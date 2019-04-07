@@ -493,6 +493,9 @@
 .sidebar input {
   color: black;
 }
+.sidebar hr {
+  border: 2px solid #00CED1;
+}
 .sidebar .react-datetime-picker__wrapper {
   border: thin solid lightgrey;
   border-radius: 3px;
@@ -627,6 +630,22 @@
 
 .logo-footer {
   max-width: 80%;
+}
+
+.PopupProfile {
+  position: absolute;
+  z-index: 1;
+  left: 8vw;
+  top: 22vh;
+  background-color: #f7f7f7;
+  padding: 10px;
+  margin: 3px;
+}
+.PopupProfile a h5 {
+  color: black;
+}
+.PopupProfile button {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */
