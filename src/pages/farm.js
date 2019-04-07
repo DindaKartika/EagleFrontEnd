@@ -44,6 +44,8 @@ const optionPlant = [
   {value:'Kopi', label:'Kopi'}
 ]
 
+const waUrl = "https://web.whatsapp.com/send?phone=";
+
 const Map = ReactMapboxGl({
   accessToken:
     "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0ejY1c3FmMzExejQxcGNmcmZoaGhtMCJ9.FnTBMWoUi17BhvjRQ0e2mw"
@@ -198,20 +200,20 @@ class Farm extends Component {
 					<label>Tanggal ditanam : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.planted_at}</h5>
 					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						{/* <DatePicker
+						<DatePicker
 							selected={Farms.planted_at}
 							onChange={this.onChangePlantedAt}
 							value={Farms.planted_at}
-						/> */}
+						/>
 					</div>
 					<label>Perkiraan tanggal panen : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.ready_at}</h5>
 					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						{/* <DatePicker
+						<DatePicker
 							selected={Farms.ready_at}
 							onChange={this.onChangeReadyAt}
 							value={Farms.planted_at}
-						/> */}
+						/>
 					</div>
 					<label>Alamat : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
@@ -219,6 +221,8 @@ class Farm extends Component {
 					<label>Kota : </label>
 					<h5>{Farms.city}</h5>
 					<label>Luas : </label>
+					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
+					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
 					<label>Alamat : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
 					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
@@ -242,7 +246,13 @@ class Farm extends Component {
 								<h5>{user.display_name}</h5>
 								<h5>@{user.username}</h5>
 							</Link>
-							<button>Kirim Pesan</button>
+							<a
+								href={waUrl + user.phone_number}
+								class="wa-float"
+								target="_blank"
+							>
+								<button>Kirim Pesan</button>
+							</a>
 						</div>
 					</div>
 				</div>
