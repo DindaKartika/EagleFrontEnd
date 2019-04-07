@@ -61,6 +61,7 @@ class App extends Component {
 				console.log(centers)
 				const data = {}
 				data['id'] = response.data[index].id_farm
+				data['id_pemilik'] = response.data[index].id_user
 				data['coordinates'] = rowCoordinates
 				data['center'] = centers
 				data['deskripsi'] = response.data[index].deskripsi
@@ -123,7 +124,7 @@ class App extends Component {
 				rowCoordinates.push(coordinates)
 				const centers = JSON.parse(response.data[index].center)
 				console.log(centers)
-				console.log('id_user', response.data[index].id_user)
+				console.log(response.data[index])
 				const data = {}
 				data['id'] = response.data[index].id_farm
 				data['id_pemilik'] = response.data[index].id_user

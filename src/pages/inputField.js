@@ -25,6 +25,8 @@ const polygonPaint = {
   'fill-opacity': 1
 };
 
+// const elevation = ""
+
 class InputField extends Component {
 	constructor(props) {
 		super(props);
@@ -32,7 +34,8 @@ class InputField extends Component {
 			sidebar : false,
 			koordinat : "",
 			center : [112.63396597896462, -7.97718148341032],
-			koordinats:[]
+			koordinats:[],
+			elevation : 1000
 		};
 
 		this.viewFilter = this.viewFilter.bind(this);
@@ -87,6 +90,8 @@ class InputField extends Component {
 		const count = []
 		count.push(rows)
 
+		const self = this
+
 		if (rows.length > 0) {
 			const polygons = turf.polygon(count)
 			const area = turf.area(polygons);
@@ -106,15 +111,20 @@ class InputField extends Component {
 			.get('https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/' + pusat[0] + ',' + pusat[1] + '.json?&access_token=pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0ejY1c3FmMzExejQxcGNmcmZoaGhtMCJ9.FnTBMWoUi17BhvjRQ0e2mw')
 			// .get('https://api.open-elevation.com/api/v1/lookup?locations=' + pusat[0] + ',' + pusat[1])
 			.then(function(response){
-				const elevation = response.data.features[0].properties.ele
+				// const elevation = response.data.features[0].properties.ele
 				// localStorage.setItem('id_farm', response.data.id_farm)
-				console.log('Elevation', elevation);
+				if (response.data.features[0].properties.ele !== undefined){
+					// console.log('undefined')
+					self.setState({elevation : response.data.features[0].properties.ele})
+				}
+
+				console.log('Elevation', self.state.elevation);
 
 				const data={
 					coordinates: rows,
 					farm_size: rounded_area,
 					center: pusat,
-					ketinggian: elevation
+					ketinggian: self.state.elevation
 				}
 				console.log(data)
 				axios
