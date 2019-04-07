@@ -17,8 +17,8 @@ class Bookmarks extends Component {
         super(props);
         this.state  = {
             search:"",
-            AllFeed:[],
-            listBookmark:[]
+            AllFeed:[]
+            // listBookmark:[]
         }
     }
     
@@ -38,7 +38,7 @@ class Bookmarks extends Component {
          axios(allFeed)
         .then(function(response){
             // self.setState({AllFeed: response.data});
-            self.setState({listBookmark: response.data});
+            store.setState({listBookmark: response.data});
             // store.setState({datacart: response.data});
             console.log(response.data);
         })
@@ -162,7 +162,7 @@ class Bookmarks extends Component {
                                     <div className="post-item" >
                                         <hr />
                                         {/* {this.props.listAllFeed.map((item, key) => { */}
-                                        {this.state.listBookmark.map((item, key) => {
+                                        {this.props.listBookmark.map((item, key) => {
                                             // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
                                             return <FeedBookmark key={key} data={item}/>; }
                                                     )}
@@ -187,5 +187,5 @@ class Bookmarks extends Component {
 }
 
 // export default Profile;
-export default connect( "listAllFeed, token, current_display_name, current_username, current_profile_picture", actions)
+export default connect( "listAllFeed, listBookmark, token, current_display_name, current_username, current_profile_picture", actions)
 (withRouter(Bookmarks));
