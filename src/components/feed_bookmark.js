@@ -14,171 +14,171 @@ class FeedBookmark extends Component {
                 dataComment: this.props.allComment,
                 // countLike: this.props.dataLike,
                 is_like:"false",
-                id_like:""
-                // jumlah:0
+                id_like:"",
+                feedBookmark:[]
             };
         };
 
-    handleSubmitComment(e){
-        e.preventDefault();
-        const self = this;
-        const {content} = e.target;
-        var data ={};
+    // handleSubmitComment(e){
+    //     e.preventDefault();
+    //     const self = this;
+    //     const {content} = e.target;
+    //     var data ={};
         
-        data.content = content.value;
-        data.id_feed = self.props.data.id_feed;
+    //     data.content = content.value;
+    //     data.id_feed = self.props.data.id_feed;
 
-        const token = localStorage.getItem("token");
-        console.log("test token post",token)
-        console.log("post comment", data);
-        let postComment = {
-            method:'post',
-            url:'http://localhost:5000/comments',
-            headers: {
-                'Authorization':'Bearer ' + token,
-                "Content-Type":"application/json"
-            },
-            data : data
-        };
-        axios(postComment)
-        .then(function(response){
-            console.log(response.data);
-            const allFeed = {
-                method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            };
-             axios(allFeed)
-            .then(function(response){
-                // self.setState({AllFeed: response.data});
-                store.setState({listAllFeed: response.data});
-                console.log("cek after post feeds", response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-            self.props.history.push("/newsfeed");
-        });
+    //     const token = localStorage.getItem("token");
+    //     console.log("test token post",token)
+    //     console.log("post comment", data);
+    //     let postComment = {
+    //         method:'post',
+    //         url:'http://localhost:5000/comments',
+    //         headers: {
+    //             'Authorization':'Bearer ' + token,
+    //             "Content-Type":"application/json"
+    //         },
+    //         data : data
+    //     };
+    //     axios(postComment)
+    //     .then(function(response){
+    //         console.log(response.data);
+    //         const allFeed = {
+    //             method: "get",
+    //             url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+    //         };
+    //          axios(allFeed)
+    //         .then(function(response){
+    //             // self.setState({AllFeed: response.data});
+    //             store.setState({listAllFeed: response.data});
+    //             console.log("cek after post feeds", response.data);
+    //         })
+    //         .catch(function(error){
+    //             console.log(error);
+    //         })
+    //         self.props.history.push("/newsfeed");
+    //     });
 
-    };
+    // };
 
-    handleClickLike(e){
-        e.preventDefault();
-        const self = this;
-        const id_feed = e.target.name;
+    // handleClickLike(e){
+    //     e.preventDefault();
+    //     const self = this;
+    //     const id_feed = e.target.name;
 
-        const token = localStorage.getItem("token");
-        console.log("test token post",token)
-        let postLike = {
-            method:'post',
-            url:'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
-            headers: {
-                'Authorization':'Bearer ' + token
-                // "Content-Type":"application/json"
-            }
-        };
-        console.log("cek url post", postLike);
-        //get all like
-        axios(postLike)
-        .then(function(response){
-            const allFeed = {
-                method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            };
-             axios(allFeed)
-            .then(function(response){
-                store.setState({listAllFeed: response.data});
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-            self.props.history.push("/newsfeed");
-        }).catch(function(error) {
-            console.log("Gagal get like", error);
-            });
-            self.props.history.push("/newsfeed");
-        ;
-    };
+    //     const token = localStorage.getItem("token");
+    //     console.log("test token post",token)
+    //     let postLike = {
+    //         method:'post',
+    //         url:'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+    //         headers: {
+    //             'Authorization':'Bearer ' + token
+    //             // "Content-Type":"application/json"
+    //         }
+    //     };
+    //     console.log("cek url post", postLike);
+    //     //get all like
+    //     axios(postLike)
+    //     .then(function(response){
+    //         const allFeed = {
+    //             method: "get",
+    //             url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+    //         };
+    //          axios(allFeed)
+    //         .then(function(response){
+    //             store.setState({listAllFeed: response.data});
+    //         })
+    //         .catch(function(error){
+    //             console.log(error);
+    //         })
+    //         self.props.history.push("/newsfeed");
+    //     }).catch(function(error) {
+    //         console.log("Gagal get like", error);
+    //         });
+    //         self.props.history.push("/newsfeed");
+    //     ;
+    // };
 
-    handleAddBookmark(e){
-        // e.preventDefault();
-        const self = this;
-        // const id_feed = e.target.name;
+    // handleAddBookmark(e){
+    //     // e.preventDefault();
+    //     const self = this;
+    //     // const id_feed = e.target.name;
 
-        const token = localStorage.getItem("token");
-        console.log("test token post",token)
-        console.log("test id user booookmarrrrk", e)
-        let addBookmark = {
-            method:'post',
-            // url:'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
-            url:'http://localhost:5000/bookmarks/' + e,
-            headers: {
-                'Authorization':'Bearer ' + token
-                // "Content-Type":"application/json"
-            }
-        };
-        console.log("cek url bookmark", addBookmark);
-        //get all like
-        axios(addBookmark)
-        .then(function(response){
-            alert("tambah bookmark sukses")
-            // const allFeed = {
-            //     method: "get",
-            //     url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            // };
-            //  axios(allFeed)
-            // .then(function(response){
-            //     store.setState({listAllFeed: response.data});
-            // })
-            // .catch(function(error){
-            //     console.log(error);
-            // })
-            // self.props.history.push("/newsfeed");
-        }).catch(function(error) {
-            console.log("Gagal get like", error);
-            });
-            self.props.history.push("/newsfeed");
-        ;
-    };
+    //     const token = localStorage.getItem("token");
+    //     console.log("test token post",token)
+    //     console.log("test id user booookmarrrrk", e)
+    //     let addBookmark = {
+    //         method:'post',
+    //         // url:'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+    //         url:'http://localhost:5000/bookmarks/' + e,
+    //         headers: {
+    //             'Authorization':'Bearer ' + token
+    //             // "Content-Type":"application/json"
+    //         }
+    //     };
+    //     console.log("cek url bookmark", addBookmark);
+    //     //get all like
+    //     axios(addBookmark)
+    //     .then(function(response){
+    //         alert("tambah bookmark sukses")
+    //         // const allFeed = {
+    //         //     method: "get",
+    //         //     url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+    //         // };
+    //         //  axios(allFeed)
+    //         // .then(function(response){
+    //         //     store.setState({listAllFeed: response.data});
+    //         // })
+    //         // .catch(function(error){
+    //         //     console.log(error);
+    //         // })
+    //         // self.props.history.push("/newsfeed");
+    //     }).catch(function(error) {
+    //         console.log("Gagal get like", error);
+    //         });
+    //         self.props.history.push("/newsfeed");
+    //     ;
+    // };
 
-    handleUnlike(e){
-        e.preventDefault();
-        const self = this;
-        const id_liked = e.target.name;
-        console.log("id untuk like",id_liked)
+    // handleUnlike(e){
+    //     e.preventDefault();
+    //     const self = this;
+    //     const id_liked = e.target.name;
+    //     console.log("id untuk like",id_liked)
 
-        const token = localStorage.getItem("token");
-        console.log("test token post",token)
-        let unlike = {
-            method:'delete',
-            url:'http://localhost:5000/feedlikes/' + self.state.id_like,
-            headers: {
-                'Authorization':'Bearer ' + token
-                // "Content-Type":"application/json"
-            }
-        };
-        console.log("cek url post", unlike);
-        //get all like
-        axios(unlike)
-        .then(function(response){
-            this.props.statusUnlike();
-            alert("unlike sukses")
-            console.log(response.data);
-            axios({
-                method: 'get',
-                url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
-                // headers: {
-                //   Authorization: 'Bearer ' + token
-                // }
-            }).then(function(response) {
-                self.setState({
-                    countLike: response.data.total,
-                })
-            }).catch(function(error) {
-            console.log("Gagal get like", error);
-            });
-            self.props.history.push("/newsfeed");
-        });
-    };
+    //     const token = localStorage.getItem("token");
+    //     console.log("test token post",token)
+    //     let unlike = {
+    //         method:'delete',
+    //         url:'http://localhost:5000/feedlikes/' + self.state.id_like,
+    //         headers: {
+    //             'Authorization':'Bearer ' + token
+    //             // "Content-Type":"application/json"
+    //         }
+    //     };
+    //     console.log("cek url post", unlike);
+    //     //get all like
+    //     axios(unlike)
+    //     .then(function(response){
+    //         this.props.statusUnlike();
+    //         alert("unlike sukses")
+    //         console.log(response.data);
+    //         axios({
+    //             method: 'get',
+    //             url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+    //             // headers: {
+    //             //   Authorization: 'Bearer ' + token
+    //             // }
+    //         }).then(function(response) {
+    //             self.setState({
+    //                 countLike: response.data.total,
+    //             })
+    //         }).catch(function(error) {
+    //         console.log("Gagal get like", error);
+    //         });
+    //         self.props.history.push("/newsfeed");
+    //     });
+    // };
 
     handleProfile(e){
         console.log(e)
@@ -203,7 +203,7 @@ class FeedBookmark extends Component {
                                 </div>
                             </div>
                             <div>
-                                <a onClick={()=>this.handleAddBookmark(this.props.data.id_feed)}>ikuti feeds</a>
+                                <a onClick={()=>this.handleDeleteBookmark(this.props.data.id_feed)}>Berhenti mengikuti</a>
                                 {/* <div className="dropdown">
                                     <button className="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i className="fa fa-ellipsis-h"></i>

@@ -29,7 +29,7 @@ class Bookmarks extends Component {
         const allFeed = {
             method: "get",
             // url: "http://localhost:8010/proxy/user/product",
-            url: "http://localhost:5000/bookmarks?rp=1000",
+            url: "http://localhost:5000/bookmarks?sort=desc&rp=1000",
             // url: "http://localhost:5000/feeds?rp=10000",
             headers: {
                 'Authorization':'Bearer ' + token
@@ -38,7 +38,7 @@ class Bookmarks extends Component {
          axios(allFeed)
         .then(function(response){
             // self.setState({AllFeed: response.data});
-            store.setState({listAllFeed: response.data});
+            self.setState({listBookmark: response.data});
             // store.setState({datacart: response.data});
             console.log(response.data);
         })
@@ -162,7 +162,7 @@ class Bookmarks extends Component {
                                     <div className="post-item" >
                                         <hr />
                                         {/* {this.props.listAllFeed.map((item, key) => { */}
-                                        {this.props.listAllFeed.map((item, key) => {
+                                        {this.state.listBookmark.map((item, key) => {
                                             // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
                                             return <FeedBookmark key={key} data={item}/>; }
                                                     )}
