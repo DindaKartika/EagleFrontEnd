@@ -184,7 +184,7 @@ class FeedComponent extends Component {
     handleProfile(e){
         console.log(e)
         this.props.handleDetailProfile(e);
-        this.props.history.push("/otherprofile");
+        this.props.history.push("/otherprofile/"+e);
     };
 
     changeCommentState() {
@@ -212,17 +212,6 @@ class FeedComponent extends Component {
                             </div>
                             <div>
                                 <a onClick={()=>this.handleAddBookmark(this.props.data.id_feed)}>ikuti feeds</a>
-                                {/* <div className="dropdown">
-                                    <button className="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i className="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div className="h6 dropdown-header">Configuration</div>
-                                        <a className="dropdown-item" href="#">Save</a>
-                                        <a className="dropdown-item" href="#">Hide</a>
-                                        <a className="dropdown-item" href="#">Report</a>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
 
@@ -238,15 +227,9 @@ class FeedComponent extends Component {
                     <div className="card-body header-feed-color">
                         {/* <span className="format-likes">{this.state.jumlah}</span> */}
                         <span className="format-likes">{this.props.data.total_like_feed}</span>
-                        <a  className="card-link" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}><i className="fa fa-gittip" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}></i> Suka</a>
+                        <a  className="card-link margin-right-20" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}><i className="fa fa-gittip" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}></i> Suka</a>
+                        <span className="format-likes">{this.props.data.total_comment}</span>
                         <a  className="card-link" onClick={()=>this.changeCommentState()}><i className="fa fa-comment" onClick={()=>this.changeCommentState()}></i> Tampilkan komentar</a>
-                        {/* <a  className="card-link"><i className="fa fa-mail-forward"></i> Share</a> */}
-
-                        {/* <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike " alt=""/></a> */}
-                        {/* <button className="btn btn-success" onClick={()=>this.changeCommentState()}>Tunjukkan Komentar</button> */}
-                        {/* <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a> */}
-                        {/* <a href="#" className="card-link"><i className="fa fa-comment"></i> Comment</a> */}
-                        {/* <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> */}
                     </div>
                     {/* comment section start here */}
                 <div className="card-footer " style={{display: this.state.comment_state ? "block" : "none"}}>
@@ -286,6 +269,5 @@ class FeedComponent extends Component {
   }
 }
 
-// export default FeedComponent;
 export default connect( "listAllFeed,token, allComment, current_id", actions)
 (withRouter(FeedComponent))

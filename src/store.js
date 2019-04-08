@@ -109,8 +109,12 @@ const initialState = {
     listBookmark:[],
 
     //profile
-    user_id:0
+    user_id:0,
     //news feed end here
+
+    //axios profile
+    listFeed:[],
+    listComment:[]
 
 };
 
