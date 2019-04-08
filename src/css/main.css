@@ -679,6 +679,11 @@
   padding-left: 22px;
 }
 
+.hlm-admin {
+  background-color: white;
+  padding: 10vh 20vw;
+}
+
 .btn {
   font-size: 14px;
   padding: 12px 20px;
@@ -740,7 +745,7 @@
 
 .sidebar-item {
   color: red;
-}  
+}
 
 .card-link {
   cursor: pointer;
