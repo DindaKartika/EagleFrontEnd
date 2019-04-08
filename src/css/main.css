@@ -675,6 +675,7 @@
   cursor: pointer;
 }
 
+
 .btn {
   font-size: 14px;
   padding: 12px 20px;
@@ -736,6 +737,13 @@
 
 .sidebar-item {
   color: red;
+  
+.card-link {
+  cursor: pointer;
+}
+
+.card-link:hover {
+  color: darkcyan;
 }
 
 /*# sourceMappingURL=main.css.map */
