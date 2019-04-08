@@ -139,28 +139,11 @@ class Bookmarks extends Component {
                     <div className="col-md-9 feed-post">
                         <div className="container">
                             <div className="display" style={{ display: "block" }}>
-                            {/* <div class="container">
-                                <form onSubmit={e => this.handleSearch(e)}>
-                                    <div className="input-group">
-                                        <input type="text" className="form-control" name="searchcontent" placeholder="Search for..."/>
-                                        <span className="input-group-btn">
-                                            <button className="btn btn-search" type="submit"><i className="fa fa-search fa-fw"></i> Search</button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
-                                <form onSubmit={e => this.handleClick(e)}>
-                                    <div className="form-group">
-                                        <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
-                                    </div>
-                                    <div className="container-fluid row justify-content-end">
-                                        <button className="btn btn-outline-success addpost-btn" type="submit">Bagikan</button>
-                                    </div>
-                                </form>  */}
                                 <div className="profile-post" style={{ display: "block" }}>
                                     {/* Display Post  */}
                                     <div className="post-item" >
                                         <hr />
+                                        <h1>Feed yang diikuti</h1>
                                         {/* {this.props.listAllFeed.map((item, key) => { */}
                                         {this.props.listBookmark.map((item, key) => {
                                             // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }

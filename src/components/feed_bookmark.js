@@ -158,7 +158,7 @@ class FeedBookmark extends Component {
         }).catch(function(error) {
             console.log("Gagal get like", error);
             });
-            self.props.history.push("/newsfeed");
+            self.props.history.push("/bookmarks");
         ;
     };
 
@@ -268,7 +268,7 @@ class FeedBookmark extends Component {
                                     </div>
                                     <div className="panel-body">
                                         <hr/>
-                                        <ul className="media-list">
+                                        <ul className="media-list" >
                                         {this.props.data.feed_content.comment.map((item, key) => {
                                         return <CommentBookmark key={key} displayname ={item.comment_by.display_name} username = {item.comment_by.username} content={item.content} 
                                                 profile_picture={item.comment_by.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}/>; }
