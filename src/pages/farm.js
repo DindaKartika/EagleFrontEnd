@@ -77,6 +77,7 @@ class Farm extends Component {
 			plantedAt : new Date(),
 			readyAt : new Date(),
 			photos: ""
+
 			// center : [],
 			// koordinat : []
 		};
@@ -356,6 +357,7 @@ class Farm extends Component {
 						>
 							<button className="btn btn-outline-success" style={{width: '200px'}}>Kirim Pesan</button>
 						</a>
+
 					</div>
 				</div>
 			</div>
