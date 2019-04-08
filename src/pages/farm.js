@@ -12,6 +12,7 @@ import axios from 'axios'
 import { Link } from "react-router-dom";
 
 import mapboxgl from 'mapbox-gl'
+import { read } from "fs";
 
 const optionPlant = [
   {value:'Semua', label:'Semua'},
@@ -45,6 +46,8 @@ const optionPlant = [
   {value:'Kopi', label:'Kopi'}
 ]
 
+const waUrl = "https://web.whatsapp.com/send?phone=";
+
 const Map = ReactMapboxGl({
   accessToken:
     "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0ejY1c3FmMzExejQxcGNmcmZoaGhtMCJ9.FnTBMWoUi17BhvjRQ0e2mw"
@@ -70,7 +73,11 @@ class Farm extends Component {
 			user : "",
 			ubahInfo : false,
 			rekomendasi : "",
-			popupProfile : false
+			popupProfile : false,
+			plantedAt : new Date(),
+			readyAt : new Date(),
+			photos: ""
+
 			// center : [],
 			// koordinat : []
 		};
@@ -83,9 +90,16 @@ class Farm extends Component {
 			axios
 			.get('http://0.0.0.0:5000/farms/' + window.location.pathname.slice(6))
 			.then(function(response){
-				self.setState({Farms: response.data});
+				const farms = response.data
+				farms['readyAt'] = response.data.ready_at.slice(5,16)
+				farms['plantedAt'] = response.data.planted_at.slice(5,16)
+				self.setState({Farms: farms});
+				self.setState({plantedAt: new Date(response.data.planted_at)});
+				self.setState({readyAt: new Date(response.data.ready_at)});
+				// console.log('date ready at', new Date(response.data.ready_at))
 				console.log('Farms', response.data);
 				self.setState({user : response.data.user})
+				self.setState({photos : response.data.photos})
 				localStorage.setItem('id_farm', response.data.id_farm)
 				const koordinat = []
 				koordinat.push(JSON.parse(response.data.coordinates))
@@ -119,24 +133,22 @@ class Farm extends Component {
     const {
       deskripsi,
       plant_type,
-      // datePlant,
-      // dateReady,
+			plantedAt,
+			readyAt,
       address,
-      city,
-      photos
+			farm_size,
+			perkiraan_panen
     } = this.state;
     const id = localStorage.getItem("id_farm");
     console.log(id);
-    // console.log("ready", dateReady);
-    // console.log("plant", datePlant);
     const data = {
       description: deskripsi,
       plant_type: plant_type,
-      // planted_at: datePlant.toISOString(),
-      // ready_at: dateReady.toISOString(),
+      planted_at: plantedAt.toISOString(),
+      ready_at: readyAt.toISOString(),
       address: address,
-      city: city,
-      photos: photos
+			farm_size : farm_size,
+			perkiraan_panen : perkiraan_panen
     };
     console.log(data);
 
@@ -164,6 +176,9 @@ class Farm extends Component {
 	NotPopupProfile = () => {
     this.setState({popupProfile : false})
 	};
+
+	onChangePlantedAt = plantedAt => this.setState({ plantedAt });
+	onChangeReadyAt = readyAt => this.setState({ readyAt });
 	
 	changeInput = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -171,97 +186,196 @@ class Farm extends Component {
 
   render() {
 		console.log(this.state.sidebar)
-		const {center, koordinat, Farms, user, ubahInfo, rekomendasi, popupProfile} = this.state
+		const {center, koordinat, Farms, user, ubahInfo, rekomendasi, popupProfile, plantedAt, readyAt} = this.state
 		console.log('center', center)
 		console.log('koordinat', koordinat)
 		console.log('state', ubahInfo)
 
     return (
-      <div className="App">
-				<div className="header">
-					<Header/>
+      	<div className="App">
+			<div className="header">
+				<Header/>
+			</div>
+			<div className="sidebar">
+				{/* <h5>Informasi Lahan:</h5>
+				<label>Nama pemilik: </label>
+				<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
+				<div style={{display : ((username == user.username) ? 'none' : 'block')}} onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
+					<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
 				</div>
-				<div className="sidebar">
-					<h5>Informasi Lahan:</h5>
-					<label>Nama pemilik: </label>
-					<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
-					<div style={{display : ((username == user.username) ? 'none' : 'block')}} onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
-						<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
+				<label>Deskripsi : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
+				<label>Jenis tanaman : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
+				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+					<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+				</div>
+				<label>Tanggal ditanam : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
+				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+					<DatePicker
+						selected={plantedAt}
+						onChange={this.onChangePlantedAt}
+						value={plantedAt}
+					/>
+				</div>
+				<label>Perkiraan tanggal panen : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
+				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+					<DatePicker
+						selected={readyAt}
+						onChange={this.onChangeReadyAt}
+						value={readyAt}
+					/>
+				</div>
+				<label>Alamat : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
+				<label>Kota : </label>
+				<h5>{Farms.city}</h5>
+				<label>Luas : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
+				<label>Ketinggian : </label>
+				<h5>{Farms.ketinggian} mdpl</h5>
+				<label>Perkiraan hasil panen : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
+				<label>Kategori : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
+				<div style={{display : (username == user.username ? 'block' : 'none')}}>
+				<hr/>
+					<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
+					<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+					
+					
+				</div>
+				<hr/>
+				<label>Rekomendasi tanaman : </label>
+					<label>{rekomendasi}</label> */}
+				<div class="card">
+					<img class="card-img-top" src={Farms.photos} alt="Card image cap" style={{width: "100%"}}/>
+					<div class="card-body">
+						{/* <h5 class="card-title">Card title</h5>
+						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
+						<label>Nama pemilik: </label>
+						<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
+						<div style={{display : ((username == user.username) ? 'none' : 'block')}} onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
+					<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
 					</div>
-					<label>Deskripsi : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
-					<label>Jenis tanaman : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
-					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+				<label>Deskripsi : </label>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
 					</div>
-					<label>Tanggal ditanam : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.planted_at}</h5>
-					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						{/* <DatePicker
-							selected={Farms.planted_at}
-							onChange={this.onChangePlantedAt}
-							value={Farms.planted_at}
-						/> */}
-					</div>
-					<label>Perkiraan tanggal panen : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.ready_at}</h5>
-					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						{/* <DatePicker
-							selected={Farms.ready_at}
-							onChange={this.onChangeReadyAt}
-							value={Farms.planted_at}
-						/> */}
-					</div>
-					<label>Alamat : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
-					<label>Kota : </label>
-					<h5>{Farms.city}</h5>
-					<label>Luas : </label>
-					<label>Alamat : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
-					<label>Kategori : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
-					<div style={{display : (username == user.username ? 'block' : 'none')}}>
-						<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
-						<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
-						<hr/>
-						<label>Rekomendasi tanaman : </label>
-						<label>{rekomendasi}</label>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<label>Jenis tanaman : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
+							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+								<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>Tanggal ditanam : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
+							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+								<DatePicker
+									selected={plantedAt}
+									onChange={this.onChangePlantedAt}
+									value={plantedAt}
+								/>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>Perkiraan tanggal panen : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
+							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+								<DatePicker
+									selected={readyAt}
+									onChange={this.onChangeReadyAt}
+									value={readyAt}
+								/>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>Alamat : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
+							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
+							<label>Kota : </label>
+							<h5>{Farms.city}</h5>
+						</li>
+						<li class="list-group-item">
+							<label>Luas : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
+							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
+							<label>Ketinggian : </label>
+							<h5>{Farms.ketinggian} mdpl</h5>
+							<label>Perkiraan hasil panen : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
+							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
+							<label>Kategori : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
+						</li>
+							<li class="list-group-item">
+							<div style={{display : (username == user.username ? 'block' : 'none')}}>
+								<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
+								<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+							</div>
+							<hr/>
+							<label>Rekomendasi tanaman : </label>
+								<label>{rekomendasi}</label>
+						</li>
+
+					</ul>
+					<div class="card-body">
+					<a
+							href={waUrl + user.phone_number}
+							class="wa-float"
+							target="_blank"
+						>
+							<button className="btn btn-outline-success" style={{width: '200px'}}>Kirim Pesan</button>
+						</a>
+						{/* <a href="#" class="card-link">Another link</a> */}
 					</div>
 				</div>
-				<div style={{display: (popupProfile) ? 'block' : 'none' }} className="PopupProfile" onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
-					<div className="row">
-						<div className="col-4">
-							<img src={user.profile_picture}/>
-						</div>
-						<div className="col-8">
-							<Link to={"/otherprofile/" + user.id}>
-								<h5>{user.display_name}</h5>
-								<h5>@{user.username}</h5>
-							</Link>
-							<button>Kirim Pesan</button>
-						</div>
+			</div>
+			<div style={{display: (popupProfile) ? 'block' : 'none' }} className="PopupProfile" onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
+				<div className="row">
+					<div className="col-4">
+						<img src={user.profile_picture} style={{maxWidth: "100%", maxHeight: "100px"}}/>
+					</div>
+					<div className="col-8">
+						<Link to={"/otherprofile/" + user.id}>
+							<h5>{user.display_name}</h5>
+							<h5>@{user.username}</h5>
+						</Link>
+						<a
+							href={waUrl + user.phone_number}
+							class="wa-float"
+							target="_blank"
+						>
+							<button className="btn btn-outline-success" style={{width: '200px'}}>Kirim Pesan</button>
+						</a>
+
 					</div>
 				</div>
-				<div>
-					<Map
-						style="mapbox://styles/mapbox/satellite-v9"
-						containerStyle={{
-							height: "90vh",
-							width: "80vw"
-						}}
-						center={center}
-						zoom={[16.5]}
-					>
-						<Layer type="fill" paint={polygonPaint}>
-							<Feature coordinates={koordinat} />
-						</Layer>
-					</Map>
-				</div>
+			</div>
+			<div>
+				<Map
+					style="mapbox://styles/mapbox/satellite-v9"
+					containerStyle={{
+						height: "90vh",
+						width: "80vw"
+					}}
+					center={center}
+					zoom={[16.5]}
+				>
+					<Layer type="fill" paint={polygonPaint}>
+						<Feature coordinates={koordinat} />
+					</Layer>
+				</Map>
+			</div>
       </div>
     );
   }
