@@ -96,11 +96,8 @@ class CommentComponent extends Component {
     };
 
     handleProfile(e){
-        // e.preventDefault();
-        // let iduser1=e.target.name;
-        // console.log("cekkkk id user", e)
         this.props.handleDetailProfile(e);
-        this.props.history.push("/otherprofile");
+        this.props.history.push("/otherprofile/"+e);
     };
 
   render() {

@@ -68,6 +68,7 @@ class App extends Component {
 				data['tanaman'] = response.data[index].plant_type
 				data['pemilik'] = response.data[index].user.display_name
 				data['username'] = response.data[index].user.username
+				data['status_lahan'] = response.data[index].status_lahan
 				rows.push(data)
 			}
 			console.log('koordinat jadi', rows)
@@ -261,7 +262,8 @@ class App extends Component {
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
 					// console.log('cek hasil bayam', uniquefeatures)
-							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
+        //   <label>Status tanah dijual: {props.status_lahan}</label>
+							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi} status_lahan={koordinat[item].status_lahan}
 							/>
 					)}
 				</div>
