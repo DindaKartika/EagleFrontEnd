@@ -238,18 +238,13 @@ class FeedComponent extends Component {
                     <div className="card-body header-feed-color">
                         {/* <span className="format-likes">{this.state.jumlah}</span> */}
                         <span className="format-likes">{this.props.data.total_like_feed}</span>
-                        <a  className="card-link" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}><i className="fa fa-gittip" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}></i> Suka</a>
-                        <a  className="card-link" onClick={()=>this.changeCommentState()}><i className="fa fa-comment" onClick={()=>this.changeCommentState()}></i> Tampilkan komentar</a>
-                        {/* <a  className="card-link"><i className="fa fa-mail-forward"></i> Share</a> */}
-
-                        {/* <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike " alt=""/></a> */}
-                        {/* <button className="btn btn-success" onClick={()=>this.changeCommentState()}>Tunjukkan Komentar</button> */}
+                        <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
                         {/* <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a> */}
                         {/* <a href="#" className="card-link"><i className="fa fa-comment"></i> Comment</a> */}
                         {/* <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> */}
                     </div>
                     {/* comment section start here */}
-                <div className="card-footer " style={{display: this.state.comment_state ? "block" : "none"}}>
+                <div className="card-footer ">
                     <div class="row bootstrap snippets justify-content-end">
                         <div className="col-md-10 col-md-offset-2 col-sm-12">
                             <div className="comment-wrapper">
@@ -259,7 +254,8 @@ class FeedComponent extends Component {
                                     </div>
                                     <div className="panel-body">
                                         <hr/>
-                                        <ul className="media-list" >
+                                        <button className="btn btn-success" onClick={()=>this.changeCommentState()}>Tunjukkan Komentar</button>
+                                        <ul className="media-list" style={{display: this.state.comment_state ? "block" : "none"}}>
                                         {this.props.data.comment.map((item, key) => {
                                         return <CommentComponent key={key} displayname ={item.comment_by.display_name} username = {item.comment_by.username} tag = {item.tag} content={item.content} 
                                                 profile_picture={item.comment_by.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}

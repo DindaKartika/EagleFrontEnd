@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import Header from '../components/header_signin'
+import Header from '../components/navbar'
 import SidebarMap from '../components/sidebarMap'
 import FilterMap from '../components/filter'
 import Select from 'react-select'
@@ -15,6 +15,7 @@ import mapboxgl from 'mapbox-gl'
 import { read } from "fs";
 
 const optionPlant = [
+  {value:'Semua', label:'Semua'},
   {value:'Bahan Pokok', label:'--- Bahan Pokok ---', isDisabled:true},
   {value:'Beras', label:'Beras'},
   {value:'Gandum', label:'Gandum'},

@@ -146,6 +146,9 @@ class FormSignIn extends Component {
                                         <input type="password" className="form-control font14px" name="password" id="password" placeholder="Masukkan password Anda di sini" onChange= {e => this.props.setField(e)} required/>
                                     </div>
                                 </div>
+                                <div className="row justify-content-center warning" style={{display: "none"}}>
+                                    Login gaga, mohon cek ulang dan coba kembali.
+                                </div>
                             </div>
                             <div class="form-group row justify-content-center">
                                 <button type="button" className="btn btn-common" onClick={()=> this.doLogin()}>Masuk</button> <br/>

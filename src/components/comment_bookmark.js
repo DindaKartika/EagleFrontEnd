@@ -4,7 +4,7 @@ import { actions , store} from '../store';
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-class CommentComponent extends Component {
+class CommentBookmark extends Component {
     constructor (props) {
         super(props);
             this.state = {  
@@ -35,65 +35,71 @@ class CommentComponent extends Component {
         //get all like
         axios(deleteComment)
         .then(function(response){
-            console.log(response.data);
+            const token = localStorage.getItem("token");
             const allFeed = {
                 method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+                // url: "http://localhost:8010/proxy/user/product",
+                url: "http://localhost:5000/bookmarks?sort=desc&rp=1000",
+                // url: "http://localhost:5000/feeds?rp=10000",
+                headers: {
+                    'Authorization':'Bearer ' + token
+                }
             };
-                axios(allFeed)
+             axios(allFeed)
             .then(function(response){
                 // self.setState({AllFeed: response.data});
-                store.setState({listAllFeed: response.data});
-                console.log("cek after delete feeds", response.data);
+                store.setState({listBookmark: response.data});
+                // store.setState({datacart: response.data});
+                console.log(response.data);
             })
             .catch(function(error){
                 console.log(error);
             })
-            self.props.history.push("/newsfeed");
+            self.props.history.push("/bookmarks");
         }).catch(function(error) {
             console.log("Gagal get comment", error);})
             // window.location.reload();
 
     };
 
-    handleClickLike(e){
-        e.preventDefault();
-        const self = this;
-        const id_feed = e.target.name;
+    // handleClickLike(e){
+    //     e.preventDefault();
+    //     const self = this;
+    //     const id_feed = e.target.name;
 
-        const token = localStorage.getItem("token");
-        console.log("test token post",token)
-        let postLike = {
-            method:'post',
-            url:'http://localhost:5000/commentlikes/' + self.props.id,
-            headers: {
-                'Authorization':'Bearer ' + token
-                // "Content-Type":"application/json"
-            }
-        };
-        console.log("cek url post", postLike);
-        //get all like
-        axios(postLike)
-        .then(function(response){
-            const allFeed = {
-                method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            };
-             axios(allFeed)
-            .then(function(response){
-                store.setState({listAllFeed: response.data});
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-            self.props.history.push("/newsfeed");
-        }).catch(function(error) {
-            console.log("Gagal get like", error);
-            });
-            self.props.history.push("/newsfeed");
-        ;
+    //     const token = localStorage.getItem("token");
+    //     console.log("test token post",token)
+    //     let postLike = {
+    //         method:'post',
+    //         url:'http://localhost:5000/commentlikes/' + self.props.id,
+    //         headers: {
+    //             'Authorization':'Bearer ' + token
+    //             // "Content-Type":"application/json"
+    //         }
+    //     };
+    //     console.log("cek url post", postLike);
+    //     //get all like
+    //     axios(postLike)
+    //     .then(function(response){
+    //         const allFeed = {
+    //             method: "get",
+    //             url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+    //         };
+    //          axios(allFeed)
+    //         .then(function(response){
+    //             store.setState({listAllFeed: response.data});
+    //         })
+    //         .catch(function(error){
+    //             console.log(error);
+    //         })
+    //         self.props.history.push("/newsfeed");
+    //     }).catch(function(error) {
+    //         console.log("Gagal get like", error);
+    //         });
+    //         self.props.history.push("/newsfeed");
+    //     ;
 
-    };
+    // };
 
     handleProfile(e){
         // e.preventDefault();
@@ -135,6 +141,6 @@ class CommentComponent extends Component {
   }
 }
 // style={{ display: this.props.current_id == this.props.id ? "none" : "block" }} 
-// export default CommentComponent;
+// export default CommentBookmark;
 export default connect( "token, allComment, dataLike, current_id", actions)
-(withRouter(CommentComponent))
+(withRouter(CommentBookmark))

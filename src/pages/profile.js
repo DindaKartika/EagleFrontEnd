@@ -4,8 +4,8 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions, store } from "../store";
 import { withRouter } from "react-router-dom";
-import Header from "../components/header_signin";
-import Footer from "../components/footer";
+import Header from "../components/navbar";
+import Footer from "../components/footer_styled";
 import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
@@ -353,16 +353,16 @@ class Profile extends Component {
   render() {
     console.log("PROPS", this.props.edit_display_name);
     return (
-      <div>
+      <div className="profile-page">
         <Header />
         {/* <div class="floating-wpp">Test</div> */}
-        <a
+        {/* <a
           href={waUrl + this.props.current_phone_number}
           class="wa-float"
           target="_blank"
         >
           <i class="fa fa-whatsapp my-wa-float" />
-        </a>
+        </a> */}
         {/* <a href={waUrl + this.props.current_phone_number} target="_blank">
           Whatsapp
         </a> */}
@@ -376,11 +376,11 @@ class Profile extends Component {
           {/* Cover Photo goes here! */}
         </div>
         <div className="container-fluid row justify-content-end strip">
-          <button className="btn btn-outline-success addpost-btn">
+          <button className="btn btn-common addpost-btn">
             Tambahkan post
           </button>
           <Link to="/input-field">
-          <button className="btn btn-outline-success addpost-btn">
+          <button className="btn btn-common addpost-btn">
             Tambahkan lahan
           </button>
           </Link>
@@ -406,6 +406,8 @@ class Profile extends Component {
                   Bergabung pada {this.state.created_at.slice(0, 10)}
                 </div>
                 <div className="display-email">{this.state.email}</div>
+                <hr />
+                <div className="display-address" style={{fontSize: '14px'}}>{this.state.headline}</div>
                 <br />
                 <div
                   className="display-edit"
@@ -417,6 +419,16 @@ class Profile extends Component {
                   >
                     Perbarui profil
                   </button>
+
+                  {/* TEST */}
+                  {/* <div>
+                  
+                    <a href={waUrl + this.props.current_phone_number} target="_blank">
+                    <button className="btn btn-success"><i class="fa fa-whatsapp my-wa-float" /> Hubungi via Whatsapp</button>
+                    </a>
+                    
+                  </div> */}
+                  {/* TEST */}
                 </div>
                 <div
                   className="display-edit"
@@ -428,6 +440,7 @@ class Profile extends Component {
                   >
                     Batalkan edit
                   </button>
+                  
                 </div>
               </div>
             </div>
@@ -564,6 +577,7 @@ class Profile extends Component {
                             name="edit_display_name"
                             placeholder={this.state.display_name}
                             onChange={e => this.props.setField(e)}
+                            className="form-control form-control-sm"
                           />
                         </div>
                       </div>
@@ -580,6 +594,7 @@ class Profile extends Component {
                             name="edit_display_name"
                             placeholder={this.state.display_name}
                             onChange={e => this.props.setField(e)}
+                            className="form-control form-control-sm"
                           />
                         </div>
                       </div>
@@ -595,6 +610,7 @@ class Profile extends Component {
                           name="edit_headline"
                           placeholder={this.state.headline}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -670,6 +686,7 @@ class Profile extends Component {
                           name="edit_date_of_birth"
                           placeholder={this.state.date_of_birth}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -684,6 +701,7 @@ class Profile extends Component {
                           name="edit_address"
                           placeholder={this.state.address}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -698,6 +716,7 @@ class Profile extends Component {
                           name="edit_phone_number"
                           placeholder={this.state.phone_number}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -712,6 +731,7 @@ class Profile extends Component {
                           name="edit_job"
                           placeholder={this.state.job}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -729,6 +749,7 @@ class Profile extends Component {
                           name="edit_facebook_link"
                           placeholder={this.state.facebook_link}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -745,6 +766,7 @@ class Profile extends Component {
                           name="edit_instagram_link"
                           placeholder={this.state.instagram_link}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -759,6 +781,7 @@ class Profile extends Component {
                           name="edit_twitter_link"
                           placeholder={this.state.twitter_link}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
