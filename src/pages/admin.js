@@ -5,14 +5,15 @@ import { connect } from "unistore/react";
 import { actions } from '../store';
 import { withRouter } from "react-router-dom";
 import Header from '../components/header_signin'
-import Footer from '../components/footer';
+import Footer from '../components/footer_styled';
 import FeedComponent from '../components/feed_component';
 import CommentComponent from '../components/comment_component';
 import{ Link } from "react-router-dom";
+import KontenAdmin from '../components/kontenAdmin'
 
 //MAIN CLASS
 class Admin extends Component {
-    constructor(props) {
+  constructor(props) {
 		super(props);
 		this.state = {
 			Users : []
@@ -102,15 +103,11 @@ class Admin extends Component {
 							<th>Alamat</th>
 							<th>Aktivitas</th>
 						</tr>
-					</table>
-					{Users.map((item, key) => 
-					// console.log('cek hasil bayam', uniquefeatures)
-							<KontenSidebar key={key} id={item.id} nama={item.display_name} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
+						{Users.map((item, key) => 
+							<KontenAdmin key={key} id={item.id} nama={item.display_name} alamat={item.address} telepon={item.phone_number}
 							/>
-					)}
-
-					<button>Kirim Pesan</button>
-					<button>Cek Balasan</button>
+						)}
+					</table>
 				</div>
 				<Footer />
 			</div>
