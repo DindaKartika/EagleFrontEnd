@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from "../components/header_signin";
+import Header from "../components/navbar";
 import jQuery from "jquery";
 import NavbarPage from '../components/navbar';
 import Footer from '../components/footer_styled';
@@ -354,6 +354,7 @@ class LandingInfo extends Component {
       {/* <script src="assets/js/jquery-min.js"></script>
       <script src="assets/js/main.js"></script> */}
       {/* </script> */}
+        
     </div>
     );
   }
