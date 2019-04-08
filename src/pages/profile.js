@@ -376,11 +376,11 @@ class Profile extends Component {
           {/* Cover Photo goes here! */}
         </div>
         <div className="container-fluid row justify-content-end strip">
-          <button className="btn btn-outline-success addpost-btn">
+          <button className="btn btn-common addpost-btn">
             Tambahkan post
           </button>
           <Link to="/input-field">
-          <button className="btn btn-outline-success addpost-btn">
+          <button className="btn btn-common addpost-btn">
             Tambahkan lahan
           </button>
           </Link>
@@ -406,6 +406,8 @@ class Profile extends Component {
                   Bergabung pada {this.state.created_at.slice(0, 10)}
                 </div>
                 <div className="display-email">{this.state.email}</div>
+                <hr />
+                <div className="display-address" style={{fontSize: '14px'}}>{this.state.headline}</div>
                 <br />
                 <div
                   className="display-edit"
