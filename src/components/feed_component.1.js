@@ -12,13 +12,48 @@ class FeedComponent extends Component {
         super(props);
             this.state = {  
                 dataComment: this.props.allComment,
-                // countLike: this.props.dataLike,
+                countLike: this.props.dataLike,
                 is_like:"false",
-                id_like:"",
-                // jumlah:0
-                comment_state: false
+                id_like:""
             };
         };
+    componentDidMount = async () => {
+        const self = this
+        const token = localStorage.getItem("token");
+        const url = "http://localhost:5000/comments?id_feed=" + self.props.data.id_feed
+        axios({
+            method: 'get',
+            url: url
+            // headers: {
+            //   Authorization: 'Bearer ' + token
+            // }
+        }).then(function(response) {
+            console.log("cek feed id", self.props.data.id_feed)
+            console.log("Get comment berhasil", response.data)
+            self.setState({
+                dataComment: response.data
+                
+            })
+        }).catch(function(error) {
+        console.log("Gagal get comment", error);
+        });
+        
+        // axios get like //
+        axios({
+            method: 'get',
+            url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+            // headers: {s.
+            //   Authorization: 'Bearer ' + token
+            // }
+        }).then(function(response) {
+            self.setState({
+                countLike: response.data.total,
+                id_like:response.data.data[0].id_like
+            })
+        }).catch(function(error) {
+        console.log("Gagal get like", error);
+        });
+    };
 
     handleSubmitComment(e){
         e.preventDefault();
@@ -44,19 +79,24 @@ class FeedComponent extends Component {
         axios(postComment)
         .then(function(response){
             console.log(response.data);
-            const allFeed = {
-                method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            };
-             axios(allFeed)
-            .then(function(response){
-                // self.setState({AllFeed: response.data});
-                store.setState({listAllFeed: response.data});
-                console.log("cek after post feeds", response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            })
+            const url = "http://localhost:5000/comments?id_feed=" + self.props.data.id_feed
+            axios({
+                method: 'get',
+                url: url
+                // headers: {
+                //   Authorization: 'Bearer ' + token
+                // }
+            }).then(function(response) {
+                console.log("cek feed id", self.props.data.id_feed)
+                console.log("Get comment berhasil", response.data)
+                self.setState({
+                    dataComment: response.data
+                })
+            }).catch(function(error) {
+            console.log("Gagal get comment", error);
+            });
+            // return
+            // <Redirect to ={{ pathname: "/newsfeed"}} />;
             self.props.history.push("/newsfeed");
         });
 
@@ -81,64 +121,36 @@ class FeedComponent extends Component {
         //get all like
         axios(postLike)
         .then(function(response){
-            const allFeed = {
-                method: "get",
-                url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            };
-             axios(allFeed)
-            .then(function(response){
-                store.setState({listAllFeed: response.data});
+            console.log("ceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeek", response.data)
+            // localStorage.setItem('is_like', true)
+            self.setState({
+                countLike: response.data.total,
+                is_like:true
             })
-            .catch(function(error){
-                console.log(error);
-            })
+            console.log("cek clik like",response.data);
+            // console.log("cek id like", this.state.id_like);
+            // console.log("cek id like", id_like);
+            axios({
+                method: 'get',
+                url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
+                // headers: {
+                //   Authorization: 'Bearer ' + token
+                // }
+            }).then(function(response) {
+                self.setState({
+                    countLike: response.data.total,
+                    id_like:response.data.data[0].id_like
+                })
+            }).catch(function(error) {
+            console.log("Gagal get like", error);
+            });
             self.props.history.push("/newsfeed");
         }).catch(function(error) {
             console.log("Gagal get like", error);
             });
             self.props.history.push("/newsfeed");
         ;
-    };
 
-    handleAddBookmark(e){
-        // e.preventDefault();
-        const self = this;
-        // const id_feed = e.target.name;
-
-        const token = localStorage.getItem("token");
-        console.log("test token post",token)
-        console.log("test id user booookmarrrrk", e)
-        let addBookmark = {
-            method:'post',
-            // url:'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
-            url:'http://localhost:5000/bookmarks/' + e,
-            headers: {
-                'Authorization':'Bearer ' + token
-                // "Content-Type":"application/json"
-            }
-        };
-        console.log("cek url bookmark", addBookmark);
-        //get all like
-        axios(addBookmark)
-        .then(function(response){
-            alert("tambah bookmark sukses")
-            // const allFeed = {
-            //     method: "get",
-            //     url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            // };
-            //  axios(allFeed)
-            // .then(function(response){
-            //     store.setState({listAllFeed: response.data});
-            // })
-            // .catch(function(error){
-            //     console.log(error);
-            // })
-            // self.props.history.push("/newsfeed");
-        }).catch(function(error) {
-            console.log("Gagal get like", error);
-            });
-            self.props.history.push("/newsfeed");
-        ;
     };
 
     handleUnlike(e){
@@ -184,15 +196,8 @@ class FeedComponent extends Component {
     handleProfile(e){
         console.log(e)
         this.props.handleDetailProfile(e);
-        this.props.history.push("/otherprofile/"+e);
+        this.props.history.push("/otherprofile");
     };
-
-    changeCommentState() {
-        this.setState({
-            comment_state: !this.state.comment_state
-        })
-        console.log("Test state comment", this.state.comment_state)
-    }
 
   render() {
     return (
@@ -211,7 +216,17 @@ class FeedComponent extends Component {
                                 </div>
                             </div>
                             <div>
-                                <a onClick={()=>this.handleAddBookmark(this.props.data.id_feed)}>ikuti feeds</a>
+                                <div className="dropdown">
+                                    <button className="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="fa fa-ellipsis-h"></i>
+                                    </button>
+                                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                        <div className="h6 dropdown-header">Configuration</div>
+                                        <a className="dropdown-item" href="#">Save</a>
+                                        <a className="dropdown-item" href="#">Hide</a>
+                                        <a className="dropdown-item" href="#">Report</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -221,18 +236,17 @@ class FeedComponent extends Component {
 
                         <p className="card-text">
                         {this.props.data.content}
-                        {/* {this.props.data.feed.content} */}
                         </p>
                     </div>
                     <div className="card-body header-feed-color">
-                        {/* <span className="format-likes">{this.state.jumlah}</span> */}
-                        <span className="format-likes">{this.props.data.total_like_feed}</span>
-                        <a  className="card-link margin-right-20" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}><i className="fa fa-gittip" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}></i> Suka</a>
-                        <span className="format-likes">{this.props.data.total_comment}</span>
-                        <a  className="card-link" onClick={()=>this.changeCommentState()}><i className="fa fa-comment" onClick={()=>this.changeCommentState()}></i> Tampilkan komentar</a>
+                        <span className="format-likes">{this.state.countLike}</span>
+                        <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
+                        {/* <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a> */}
+                        {/* <a href="#" className="card-link"><i className="fa fa-comment"></i> Comment</a> */}
+                        {/* <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> */}
                     </div>
                     {/* comment section start here */}
-                <div className="card-footer " style={{display: this.state.comment_state ? "block" : "none"}}>
+                <div className="card-footer ">
                     <div class="row bootstrap snippets justify-content-end">
                         <div className="col-md-10 col-md-offset-2 col-sm-12">
                             <div className="comment-wrapper">
@@ -242,11 +256,10 @@ class FeedComponent extends Component {
                                     </div>
                                     <div className="panel-body">
                                         <hr/>
-                                        <ul className="media-list" >
-                                        {this.props.data.comment.map((item, key) => {
-                                        return <CommentComponent key={key} displayname ={item.comment_by.display_name} username = {item.comment_by.username} tag = {item.tag} content={item.content} 
-                                                profile_picture={item.comment_by.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}
-                                                total_like_comment={item.total_like_comment}/>; }
+                                        <ul className="media-list">
+                                        {this.state.dataComment.map((item, key) => {
+                                        return <CommentComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} 
+                                                profile_picture={item.user.profile_picture} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)} id={item.id} iduser={item.id_user}/>; }
                                             )}
                                         <form onSubmit={e => this.handleSubmitComment(e)}>
                                             <textarea className="form-control" name="content" placeholder="write a comment..." rows="3"></textarea>
@@ -269,5 +282,6 @@ class FeedComponent extends Component {
   }
 }
 
-export default connect( "listAllFeed,token, allComment, current_id", actions)
+// export default FeedComponent;
+export default connect( "token, allComment, dataLike, current_id", actions)
 (withRouter(FeedComponent))

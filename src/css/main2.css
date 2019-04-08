@@ -17,10 +17,9 @@ body {
   line-height: 25px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  overflow-x: hidden;
 }
 
-.landing-info, .signin {
+.landing-info, .signin, .navbar-wrapper {
   background-color: white;
   /* ScrollToTop */
   /* Preloader */
@@ -39,38 +38,38 @@ body {
   /* Contact Forme */
   /* Footer Area Start */
 }
-.landing-info h1, .landing-info h2, .landing-info h3, .landing-info h4, .signin h1, .signin h2, .signin h3, .signin h4 {
+.landing-info h1, .landing-info h2, .landing-info h3, .landing-info h4, .signin h1, .signin h2, .signin h3, .signin h4, .navbar-wrapper h1, .navbar-wrapper h2, .navbar-wrapper h3, .navbar-wrapper h4 {
   font-size: 36px;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
 }
-.landing-info a, .signin a {
+.landing-info a, .signin a, .navbar-wrapper a {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-.landing-info a:hover, .signin a:hover {
+.landing-info a:hover, .signin a:hover, .navbar-wrapper a:hover {
   text-decoration: none;
 }
-.landing-info a a:focus, .signin a a:focus {
+.landing-info a a:focus, .signin a a:focus, .navbar-wrapper a a:focus {
   outline: none;
 }
-.landing-info p, .signin p {
+.landing-info p, .signin p, .navbar-wrapper p {
   font-weight: 400;
   font-family: "Open Sans", sans-serif;
   margin: 0px;
   font-size: 14px;
 }
-.landing-info ul, .landing-info ol, .signin ul, .signin ol {
+.landing-info ul, .landing-info ol, .signin ul, .signin ol, .navbar-wrapper ul, .navbar-wrapper ol {
   list-style: outside none none;
   margin: 0;
   padding: 0;
 }
-.landing-info ul li, .landing-info ol li, .signin ul li, .signin ol li {
+.landing-info ul li, .landing-info ol li, .signin ul li, .signin ol li, .navbar-wrapper ul li, .navbar-wrapper ol li {
   list-style: none;
 }
-.landing-info .hero-heading, .signin .hero-heading {
+.landing-info .hero-heading, .signin .hero-heading, .navbar-wrapper .hero-heading {
   font-size: 40px;
   font-weight: 700;
   color: #fff;
@@ -78,14 +77,14 @@ body {
   line-height: 70px;
   letter-spacing: 0.1rem;
 }
-.landing-info .hero-sub-heading, .signin .hero-sub-heading {
+.landing-info .hero-sub-heading, .signin .hero-sub-heading, .navbar-wrapper .hero-sub-heading {
   font-size: 20px;
   font-weight: 400;
   color: #e6e6e6;
   line-height: 45px;
   letter-spacing: 0.1rem;
 }
-.landing-info .section-titile-bg, .signin .section-titile-bg {
+.landing-info .section-titile-bg, .signin .section-titile-bg, .navbar-wrapper .section-titile-bg {
   display: inline;
   font-size: 115px;
   font-weight: 700;
@@ -97,13 +96,13 @@ body {
   width: 100%;
   text-align: center;
 }
-.landing-info .section-title-header p, .signin .section-title-header p {
+.landing-info .section-title-header p, .signin .section-title-header p, .navbar-wrapper .section-title-header p {
   text: center;
   font-weight: 400;
   line-height: 26px;
   padding-bottom: 36px;
 }
-.landing-info .section-title, .signin .section-title {
+.landing-info .section-title, .signin .section-title, .navbar-wrapper .section-title {
   font-size: 36px;
   color: #333;
   line-height: 52px;
@@ -113,7 +112,7 @@ body {
   position: relative;
   margin: 0;
 }
-.landing-info .section-title:before, .signin .section-title:before {
+.landing-info .section-title:before, .signin .section-title:before, .navbar-wrapper .section-title:before {
   position: absolute;
   content: "";
   height: 1px;
@@ -124,7 +123,7 @@ body {
   transform: translateX(-50%);
   background-color: #1fcaa7;
 }
-.landing-info .section-info, .signin .section-info {
+.landing-info .section-info, .signin .section-info, .navbar-wrapper .section-info {
   font-size: 14px;
   text: center;
   font-weight: 400;
@@ -132,12 +131,12 @@ body {
   padding-bottom: 20px;
   margin-bottom: 30px;
 }
-.landing-info .subtitle, .signin .subtitle {
+.landing-info .subtitle, .signin .subtitle, .navbar-wrapper .subtitle {
   font-size: 15px;
   font-weight: 500;
   margin-bottom: 15px;
 }
-.landing-info .btn, .signin .btn {
+.landing-info .btn, .signin .btn, .navbar-wrapper .btn {
   font-size: 14px;
   padding: 12px 20px;
   border-radius: 0px;
@@ -153,54 +152,55 @@ body {
 }
 .landing-info .btn:focus,
 .landing-info .btn:active, .signin .btn:focus,
-.signin .btn:active {
+.signin .btn:active, .navbar-wrapper .btn:focus,
+.navbar-wrapper .btn:active {
   box-shadow: none;
   outline: none;
   color: #fff;
 }
-.landing-info .btn-common, .signin .btn-common {
+.landing-info .btn-common, .signin .btn-common, .navbar-wrapper .btn-common {
   background-color: #1fcaa7;
   position: relative;
   z-index: 1;
   border-radius: 4px;
 }
-.landing-info .btn-common:hover, .signin .btn-common:hover {
+.landing-info .btn-common:hover, .signin .btn-common:hover, .navbar-wrapper .btn-common:hover {
   color: #fff;
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
 }
-.landing-info .btn-border, .signin .btn-border {
+.landing-info .btn-border, .signin .btn-border, .navbar-wrapper .btn-border {
   color: #fff;
   background-color: transparent;
   border: 2px solid #fff;
   border-radius: 4px;
   padding: 10px 20px;
 }
-.landing-info .btn-border:hover, .signin .btn-border:hover {
+.landing-info .btn-border:hover, .signin .btn-border:hover, .navbar-wrapper .btn-border:hover {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.2);
 }
-.landing-info .btn-lg, .signin .btn-lg {
+.landing-info .btn-lg, .signin .btn-lg, .navbar-wrapper .btn-lg {
   padding: 14px 33px;
   text-transform: uppercase;
   font-size: 16px;
 }
-.landing-info button:focus, .signin button:focus {
+.landing-info button:focus, .signin button:focus, .navbar-wrapper button:focus {
   outline: none !important;
 }
-.landing-info .close-button, .signin .close-button {
+.landing-info .close-button, .signin .close-button, .navbar-wrapper .close-button {
   color: #1fcaa7;
 }
-.landing-info a.back-to-top, .signin a.back-to-top {
+.landing-info a.back-to-top, .signin a.back-to-top, .navbar-wrapper a.back-to-top {
   display: none;
   position: fixed;
   bottom: 18px;
   right: 15px;
   text-decoration: none;
 }
-.landing-info a.back-to-top i, .signin a.back-to-top i {
+.landing-info a.back-to-top i, .signin a.back-to-top i, .navbar-wrapper a.back-to-top i {
   display: block;
   font-size: 22px;
   width: 40px;
@@ -216,10 +216,10 @@ body {
   -o-transition: all 0.2s ease-in-out;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
 }
-.landing-info a.back-to-top:hover, .landing-info a.back-to-top:focus, .signin a.back-to-top:hover, .signin a.back-to-top:focus {
+.landing-info a.back-to-top:hover, .landing-info a.back-to-top:focus, .signin a.back-to-top:hover, .signin a.back-to-top:focus, .navbar-wrapper a.back-to-top:hover, .navbar-wrapper a.back-to-top:focus {
   text-decoration: none;
 }
-.landing-info #preloader, .signin #preloader {
+.landing-info #preloader, .signin #preloader, .navbar-wrapper #preloader {
   position: fixed;
   top: 0;
   left: 0;
@@ -228,7 +228,7 @@ body {
   background-color: #fff;
   z-index: 9999999;
 }
-.landing-info .loader, .signin .loader {
+.landing-info .loader, .signin .loader, .navbar-wrapper .loader {
   top: 50%;
   width: 50px;
   height: 50px;
@@ -236,7 +236,7 @@ body {
   position: relative;
   margin: 0 auto;
 }
-.landing-info #loader-1:before, .landing-info #loader-1:after, .signin #loader-1:before, .signin #loader-1:after {
+.landing-info #loader-1:before, .landing-info #loader-1:after, .signin #loader-1:before, .signin #loader-1:after, .navbar-wrapper #loader-1:before, .navbar-wrapper #loader-1:after {
   content: "";
   position: absolute;
   top: -10px;
@@ -247,25 +247,25 @@ body {
   border: 7px solid transparent;
   border-top-color: #1fcaa7;
 }
-.landing-info #loader-1:before, .signin #loader-1:before {
+.landing-info #loader-1:before, .signin #loader-1:before, .navbar-wrapper #loader-1:before {
   z-index: 100;
   animation: spin 2s infinite;
 }
-.landing-info #loader-1:after, .signin #loader-1:after {
+.landing-info #loader-1:after, .signin #loader-1:after, .navbar-wrapper #loader-1:after {
   border: 7px solid #fafafa;
 }
-.landing-info .section-padding, .signin .section-padding {
+.landing-info .section-padding, .signin .section-padding, .navbar-wrapper .section-padding {
   padding: 60px 0;
 }
-.landing-info .fadeIn, .signin .fadeIn {
+.landing-info .fadeIn, .signin .fadeIn, .navbar-wrapper .fadeIn {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
 }
-.landing-info .navbar-brand, .signin .navbar-brand {
+.landing-info .navbar-brand, .signin .navbar-brand, .navbar-wrapper .navbar-brand {
   position: relative;
   padding: 0px;
 }
-.landing-info .top-nav-collapse, .signin .top-nav-collapse {
+.landing-info .top-nav-collapse, .signin .top-nav-collapse, .navbar-wrapper .top-nav-collapse {
   background: #fff;
   z-index: 999999;
   top: 0px !important;
@@ -279,31 +279,31 @@ body {
   animation-name: fadeInDown;
   background: #fff !important;
 }
-.landing-info .top-nav-collapse .navbar-brand, .signin .top-nav-collapse .navbar-brand {
+.landing-info .top-nav-collapse .navbar-brand, .signin .top-nav-collapse .navbar-brand, .navbar-wrapper .top-nav-collapse .navbar-brand {
   top: 0px;
 }
-.landing-info .top-nav-collapse .navbar-brand img, .signin .top-nav-collapse .navbar-brand img {
+.landing-info .top-nav-collapse .navbar-brand img, .signin .top-nav-collapse .navbar-brand img, .navbar-wrapper .top-nav-collapse .navbar-brand img {
   width: 65%;
 }
-.landing-info .top-nav-collapse .navbar-nav .nav-link, .signin .top-nav-collapse .navbar-nav .nav-link {
+.landing-info .top-nav-collapse .navbar-nav .nav-link, .signin .top-nav-collapse .navbar-nav .nav-link, .navbar-wrapper .top-nav-collapse .navbar-nav .nav-link {
   color: #333 !important;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
-.landing-info .top-nav-collapse .navbar-nav .nav-link:hover, .signin .top-nav-collapse .navbar-nav .nav-link:hover {
+.landing-info .top-nav-collapse .navbar-nav .nav-link:hover, .signin .top-nav-collapse .navbar-nav .nav-link:hover, .navbar-wrapper .top-nav-collapse .navbar-nav .nav-link:hover {
   cursor: pointer;
   color: #1fcaa7 !important;
 }
-.landing-info .top-nav-collapse .navbar-nav li.active a.nav-link, .signin .top-nav-collapse .navbar-nav li.active a.nav-link {
+.landing-info .top-nav-collapse .navbar-nav li.active a.nav-link, .signin .top-nav-collapse .navbar-nav li.active a.nav-link, .navbar-wrapper .top-nav-collapse .navbar-nav li.active a.nav-link {
   color: #1fcaa7 !important;
 }
-.landing-info .indigo, .signin .indigo {
+.landing-info .indigo, .signin .indigo, .navbar-wrapper .indigo {
   background: #fff;
 }
-.landing-info .menu-bg, .signin .menu-bg {
+.landing-info .menu-bg, .signin .menu-bg, .navbar-wrapper .menu-bg {
   background: transparent;
 }
-.landing-info .navbar-expand-lg .navbar-nav .nav-link i, .signin .navbar-expand-lg .navbar-nav .nav-link i {
+.landing-info .navbar-expand-lg .navbar-nav .nav-link i, .signin .navbar-expand-lg .navbar-nav .nav-link i, .navbar-wrapper .navbar-expand-lg .navbar-nav .nav-link i {
   font-size: 28px;
   color: #1fcaa7;
   vertical-align: middle;
@@ -311,10 +311,10 @@ body {
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.landing-info .navbar-expand-lg .navbar-nav .nav-link i:hover, .signin .navbar-expand-lg .navbar-nav .nav-link i:hover {
+.landing-info .navbar-expand-lg .navbar-nav .nav-link i:hover, .signin .navbar-expand-lg .navbar-nav .nav-link i:hover, .navbar-wrapper .navbar-expand-lg .navbar-nav .nav-link i:hover {
   color: #1fcaa7;
 }
-.landing-info .navbar-expand-lg .navbar-nav .nav-link, .signin .navbar-expand-lg .navbar-nav .nav-link {
+.landing-info .navbar-expand-lg .navbar-nav .nav-link, .signin .navbar-expand-lg .navbar-nav .nav-link, .navbar-wrapper .navbar-expand-lg .navbar-nav .nav-link {
   color: #333;
   font-weight: 700;
   padding: 0 17px;
@@ -332,20 +332,22 @@ body {
 .landing-info .navbar-expand-lg .navbar-nav li .active > a,
 .landing-info .navbar-expand-lg .navbar-nav li a:focus, .signin .navbar-expand-lg .navbar-nav li a:hover,
 .signin .navbar-expand-lg .navbar-nav li .active > a,
-.signin .navbar-expand-lg .navbar-nav li a:focus {
+.signin .navbar-expand-lg .navbar-nav li a:focus, .navbar-wrapper .navbar-expand-lg .navbar-nav li a:hover,
+.navbar-wrapper .navbar-expand-lg .navbar-nav li .active > a,
+.navbar-wrapper .navbar-expand-lg .navbar-nav li a:focus {
   color: #1fcaa7;
   outline: none;
 }
-.landing-info .navbar, .signin .navbar {
+.landing-info .navbar, .signin .navbar, .navbar-wrapper .navbar {
   padding: 0;
 }
-.landing-info .navbar li.active a.nav-link, .signin .navbar li.active a.nav-link {
+.landing-info .navbar li.active a.nav-link, .signin .navbar li.active a.nav-link, .navbar-wrapper .navbar li.active a.nav-link {
   color: #1fcaa7;
 }
-.landing-info .dropdown-toggle::after, .signin .dropdown-toggle::after {
+.landing-info .dropdown-toggle::after, .signin .dropdown-toggle::after, .navbar-wrapper .dropdown-toggle::after {
   display: none;
 }
-.landing-info .dropdown-menu, .signin .dropdown-menu {
+.landing-info .dropdown-menu, .signin .dropdown-menu, .navbar-wrapper .dropdown-menu {
   margin: 0;
   padding: 0;
   display: none;
@@ -363,7 +365,7 @@ body {
   -o-animation: fadeIn 0.4s;
   -ms-animation: fadeIn 0.4s;
 }
-.landing-info .dropdown-menu:before, .signin .dropdown-menu:before {
+.landing-info .dropdown-menu:before, .signin .dropdown-menu:before, .navbar-wrapper .dropdown-menu:before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -374,7 +376,7 @@ body {
   border-left: 10px solid transparent;
   border-bottom: 10px solid #fff;
 }
-.landing-info .dropdown:hover .dropdown-menu, .signin .dropdown:hover .dropdown-menu {
+.landing-info .dropdown:hover .dropdown-menu, .signin .dropdown:hover .dropdown-menu, .navbar-wrapper .dropdown:hover .dropdown-menu {
   display: block;
   position: absolute;
   text-align: left;
@@ -386,7 +388,7 @@ body {
   -o-animation: fadeIn 0.4s;
   -ms-animation: fadeIn 0.4s;
 }
-.landing-info .dropdown .dropdown-menu .dropdown-item, .signin .dropdown .dropdown-menu .dropdown-item {
+.landing-info .dropdown .dropdown-menu .dropdown-item, .signin .dropdown .dropdown-menu .dropdown-item, .navbar-wrapper .dropdown .dropdown-menu .dropdown-item {
   width: 100%;
   padding: 12px 20px;
   font-size: 14px;
@@ -404,12 +406,12 @@ body {
   -o-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
 }
-.landing-info .dropdown .dropdown-menu .dropdown-item:last-child, .signin .dropdown .dropdown-menu .dropdown-item:last-child {
+.landing-info .dropdown .dropdown-menu .dropdown-item:last-child, .signin .dropdown .dropdown-menu .dropdown-item:last-child, .navbar-wrapper .dropdown .dropdown-menu .dropdown-item:last-child {
   border-bottom: none;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-.landing-info .dropdown .dropdown-menu .dropdown-item:first-child, .signin .dropdown .dropdown-menu .dropdown-item:first-child {
+.landing-info .dropdown .dropdown-menu .dropdown-item:first-child, .signin .dropdown .dropdown-menu .dropdown-item:first-child, .navbar-wrapper .dropdown .dropdown-menu .dropdown-item:first-child {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
@@ -417,40 +419,41 @@ body {
 .landing-info .dropdown .dropdown-item:hover,
 .landing-info .dropdown .dropdown-item.active, .signin .dropdown .dropdown-item:focus,
 .signin .dropdown .dropdown-item:hover,
-.signin .dropdown .dropdown-item.active {
+.signin .dropdown .dropdown-item.active, .navbar-wrapper .dropdown .dropdown-item:focus,
+.navbar-wrapper .dropdown .dropdown-item:hover,
+.navbar-wrapper .dropdown .dropdown-item.active {
   color: #1fcaa7;
 }
-.landing-info .dropdown-item.active, .landing-info .dropdown-item:active, .signin .dropdown-item.active, .signin .dropdown-item:active {
+.landing-info .dropdown-item.active, .landing-info .dropdown-item:active, .signin .dropdown-item.active, .signin .dropdown-item:active, .navbar-wrapper .dropdown-item.active, .navbar-wrapper .dropdown-item:active {
   background: transparent;
 }
-.landing-info .fadeInUpMenu, .signin .fadeInUpMenu {
+.landing-info .fadeInUpMenu, .signin .fadeInUpMenu, .navbar-wrapper .fadeInUpMenu {
   -webkit-animation-name: fadeInUpMenu;
   animation-name: fadeInUpMenu;
 }
-.landing-info .slicknav_btn, .signin .slicknav_btn {
+.landing-info .slicknav_btn, .signin .slicknav_btn, .navbar-wrapper .slicknav_btn {
   border-color: #1fcaa7;
 }
-.landing-info .slicknav_menu .slicknav_icon-bar, .signin .slicknav_menu .slicknav_icon-bar {
+.landing-info .slicknav_menu .slicknav_icon-bar, .signin .slicknav_menu .slicknav_icon-bar, .navbar-wrapper .slicknav_menu .slicknav_icon-bar {
   background: #1fcaa7;
 }
-.landing-info .navbar-toggler, .signin .navbar-toggler {
+.landing-info .navbar-toggler, .signin .navbar-toggler, .navbar-wrapper .navbar-toggler {
   display: none;
 }
-.landing-info .mobile-menu, .signin .mobile-menu {
+.landing-info .mobile-menu, .signin .mobile-menu, .navbar-wrapper .mobile-menu {
   display: none;
 }
-.landing-info .slicknav_menu, .signin .slicknav_menu {
+.landing-info .slicknav_menu, .signin .slicknav_menu, .navbar-wrapper .slicknav_menu {
   display: none;
 }
-.landing-info .intro, .signin .intro {
+.landing-info .intro, .signin .intro, .navbar-wrapper .intro {
   background: url(../images/img/banner.jpg) no-repeat;
   background-size: cover;
   color: #206363;
   padding: 150px 0;
-  overflow: hidden;
   position: relative;
 }
-.landing-info .intro .overlay, .signin .intro .overlay {
+.landing-info .intro .overlay, .signin .intro .overlay, .navbar-wrapper .intro .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -459,16 +462,16 @@ body {
   background: #0c0808;
   opacity: 0.9;
 }
-.landing-info .intro .heading-count h2, .signin .intro .heading-count h2 {
+.landing-info .intro .heading-count h2, .signin .intro .heading-count h2, .navbar-wrapper .intro .heading-count h2 {
   font-size: 80px;
   margin-bottom: 10px;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
 }
-.landing-info .intro .target-scroll, .signin .intro .target-scroll {
+.landing-info .intro .target-scroll, .signin .intro .target-scroll, .navbar-wrapper .intro .target-scroll {
   margin-top: 40px;
   display: inline-block;
 }
-.landing-info .intro .target-scroll i, .signin .intro .target-scroll i {
+.landing-info .intro .target-scroll i, .signin .intro .target-scroll i, .navbar-wrapper .intro .target-scroll i {
   color: #fff;
   font-size: 40px;
   -webkit-transition: all 0.2s linear;
@@ -476,30 +479,30 @@ body {
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-.landing-info .intro .target-scroll i:hover, .signin .intro .target-scroll i:hover {
+.landing-info .intro .target-scroll i:hover, .signin .intro .target-scroll i:hover, .navbar-wrapper .intro .target-scroll i:hover {
   color: #ddd;
 }
-.landing-info .intro .btn, .signin .intro .btn {
+.landing-info .intro .btn, .signin .intro .btn, .navbar-wrapper .intro .btn {
   margin: 10px;
 }
-.landing-info #sponsors, .signin #sponsors {
+.landing-info #sponsors, .signin #sponsors, .navbar-wrapper #sponsors {
   background: #f2f2f2;
 }
-.landing-info #sponsors .spnsors-logo, .signin #sponsors .spnsors-logo {
+.landing-info #sponsors .spnsors-logo, .signin #sponsors .spnsors-logo, .navbar-wrapper #sponsors .spnsors-logo {
   display: inline-block;
   border: 1px solid #E8E8E8;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;
 }
-.landing-info .bg-wraper, .signin .bg-wraper {
+.landing-info .bg-wraper, .signin .bg-wraper, .navbar-wrapper .bg-wraper {
   position: fixed;
   top: 0;
   height: 100%;
   min-height: 700px;
   width: 100%;
 }
-.landing-info .countdown-timer, .signin .countdown-timer {
+.landing-info .countdown-timer, .signin .countdown-timer, .navbar-wrapper .countdown-timer {
   color: #fff;
   position: absolute;
   margin: 0 auto;
@@ -507,31 +510,31 @@ body {
   text-align: center;
   width: 100%;
 }
-.landing-info .countdown-timer .heading-count, .signin .countdown-timer .heading-count {
+.landing-info .countdown-timer .heading-count, .signin .countdown-timer .heading-count, .navbar-wrapper .countdown-timer .heading-count {
   padding: 10px 68px;
   text-align: center;
 }
-.landing-info .countdown-timer .heading-count h2, .signin .countdown-timer .heading-count h2 {
+.landing-info .countdown-timer .heading-count h2, .signin .countdown-timer .heading-count h2, .navbar-wrapper .countdown-timer .heading-count h2 {
   font-size: 42px;
   color: #fff;
   line-height: 30px;
   margin-bottom: 15px;
 }
-.landing-info .countdown-timer p, .signin .countdown-timer p {
+.landing-info .countdown-timer p, .signin .countdown-timer p, .navbar-wrapper .countdown-timer p {
   font-size: 14px;
   color: #fff;
   line-height: 22px;
 }
-.landing-info .countdown-timer .button-group, .signin .countdown-timer .button-group {
+.landing-info .countdown-timer .button-group, .signin .countdown-timer .button-group, .navbar-wrapper .countdown-timer .button-group {
   margin-top: 30px;
 }
-.landing-info .countdown-timer .btn, .signin .countdown-timer .btn {
+.landing-info .countdown-timer .btn, .signin .countdown-timer .btn, .navbar-wrapper .countdown-timer .btn {
   margin: 10px;
 }
-.landing-info .time-count div, .signin .time-count div {
+.landing-info .time-count div, .signin .time-count div, .navbar-wrapper .time-count div {
   text-align: center;
 }
-.landing-info .time-entry, .signin .time-entry {
+.landing-info .time-entry, .signin .time-entry, .navbar-wrapper .time-entry {
   display: inline-block;
   margin: 15px;
   padding: 20px;
@@ -542,7 +545,7 @@ body {
   font-size: 15px;
   line-height: 22px;
 }
-.landing-info .time-entry span, .signin .time-entry span {
+.landing-info .time-entry span, .signin .time-entry span, .navbar-wrapper .time-entry span {
   font-size: 45px;
   font-family: "Montserrat", sans-serif;
   line-height: 45px;
@@ -551,21 +554,21 @@ body {
   color: #fff;
   margin-bottom: 10px;
 }
-.landing-info .time-entry:first-child, .signin .time-entry:first-child {
+.landing-info .time-entry:first-child, .signin .time-entry:first-child, .navbar-wrapper .time-entry:first-child {
   border-left: none;
 }
-.landing-info .countdown, .signin .countdown {
+.landing-info .countdown, .signin .countdown, .navbar-wrapper .countdown {
   width: 100%;
   margin: 25px auto;
   display: inline-block;
 }
-.landing-info .countdown .time-count, .signin .countdown .time-count {
+.landing-info .countdown .time-count, .signin .countdown .time-count, .navbar-wrapper .countdown .time-count {
   padding: 0;
   position: relative;
   display: inline-block;
   text-align: center;
 }
-.landing-info .countdown .time-count .time-entry, .signin .countdown .time-count .time-entry {
+.landing-info .countdown .time-count .time-entry, .signin .countdown .time-count .time-entry, .navbar-wrapper .countdown .time-count .time-entry {
   position: relative;
   display: inline-block;
   width: 130px;
@@ -577,7 +580,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 5px 50px -10px #000;
 }
-.landing-info .countdown .time-count .time-entry span, .signin .countdown .time-count .time-entry span {
+.landing-info .countdown .time-count .time-entry span, .signin .countdown .time-count .time-entry span, .navbar-wrapper .countdown .time-count .time-entry span {
   font-size: 45px;
   font-weight: 700;
   color: #fff;
@@ -585,15 +588,15 @@ body {
   display: block;
   width: 100%;
 }
-.landing-info .line-right, .signin .line-right {
+.landing-info .line-right, .signin .line-right, .navbar-wrapper .line-right {
   margin: 30px 0;
 }
-.landing-info .line-right .time-count, .signin .line-right .time-count {
+.landing-info .line-right .time-count, .signin .line-right .time-count, .navbar-wrapper .line-right .time-count {
   position: relative;
   display: inline-block;
   text-align: center;
 }
-.landing-info .line-right .time-count .time-entry, .signin .line-right .time-count .time-entry {
+.landing-info .line-right .time-count .time-entry, .signin .line-right .time-count .time-entry, .navbar-wrapper .line-right .time-count .time-entry {
   position: relative;
   display: inline-block;
   width: 130px;
@@ -604,7 +607,7 @@ body {
   background: #1fcaa7;
   box-shadow: 0 5px 50px -10px #fff;
 }
-.landing-info .line-right .time-count .time-entry span, .signin .line-right .time-count .time-entry span {
+.landing-info .line-right .time-count .time-entry span, .signin .line-right .time-count .time-entry span, .navbar-wrapper .line-right .time-count .time-entry span {
   font-size: 45px;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
@@ -612,15 +615,15 @@ body {
   display: block;
   width: 100%;
 }
-.landing-info .subscribe-form h4, .signin .subscribe-form h4 {
+.landing-info .subscribe-form h4, .signin .subscribe-form h4, .navbar-wrapper .subscribe-form h4 {
   font-size: 18px;
   margin-bottom: 30px;
   font-weight: 500;
 }
-.landing-info .subscribe-form .form-inline, .signin .subscribe-form .form-inline {
+.landing-info .subscribe-form .form-inline, .signin .subscribe-form .form-inline, .navbar-wrapper .subscribe-form .form-inline {
   position: relative;
 }
-.landing-info .subscribe-form .form-inline .btn, .signin .subscribe-form .form-inline .btn {
+.landing-info .subscribe-form .form-inline .btn, .signin .subscribe-form .form-inline .btn, .navbar-wrapper .subscribe-form .form-inline .btn {
   position: absolute;
   right: 0;
   top: 0;
@@ -633,7 +636,7 @@ body {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.landing-info .subscribe-form .form-control, .signin .subscribe-form .form-control {
+.landing-info .subscribe-form .form-control, .signin .subscribe-form .form-control, .navbar-wrapper .subscribe-form .form-control {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -649,7 +652,7 @@ body {
   width: 100%;
   color: #fff;
 }
-.landing-info .social a, .signin .social a {
+.landing-info .social a, .signin .social a, .navbar-wrapper .social a {
   display: inline-block;
   color: #fff;
   margin-right: 5px;
@@ -662,25 +665,25 @@ body {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
 }
-.landing-info .social .facebook:hover, .signin .social .facebook:hover {
+.landing-info .social .facebook:hover, .signin .social .facebook:hover, .navbar-wrapper .social .facebook:hover {
   color: #3B5998;
 }
-.landing-info .social .twitter:hover, .signin .social .twitter:hover {
+.landing-info .social .twitter:hover, .signin .social .twitter:hover, .navbar-wrapper .social .twitter:hover {
   color: #00aced;
 }
-.landing-info .social .instagram:hover, .signin .social .instagram:hover {
+.landing-info .social .instagram:hover, .signin .social .instagram:hover, .navbar-wrapper .social .instagram:hover {
   color: #fb3958;
 }
-.landing-info .social .foursqare:hover, .signin .social .foursqare:hover {
+.landing-info .social .foursqare:hover, .signin .social .foursqare:hover, .navbar-wrapper .social .foursqare:hover {
   color: #25a0ca;
 }
-.landing-info .social .google:hover, .signin .social .google:hover {
+.landing-info .social .google:hover, .signin .social .google:hover, .navbar-wrapper .social .google:hover {
   color: #d34836;
 }
-.landing-info #services .icon, .signin #services .icon {
+.landing-info #services .icon, .signin #services .icon, .navbar-wrapper #services .icon {
   margin-bottom: 10px;
 }
-.landing-info #services .icon i, .signin #services .icon i {
+.landing-info #services .icon i, .signin #services .icon i, .navbar-wrapper #services .icon i {
   width: 50px;
   height: 50px;
   display: inline-block;
@@ -701,23 +704,23 @@ body {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
 }
-.landing-info #services .services-item, .signin #services .services-item {
+.landing-info #services .services-item, .signin #services .services-item, .navbar-wrapper #services .services-item {
   text-align: center;
   padding: 30px 0;
 }
-.landing-info #services .services-item h3, .signin #services .services-item h3 {
+.landing-info #services .services-item h3, .signin #services .services-item h3, .navbar-wrapper #services .services-item h3 {
   margin-bottom: 10px;
 }
-.landing-info #services .services-item h3 a, .signin #services .services-item h3 a {
+.landing-info #services .services-item h3 a, .signin #services .services-item h3 a, .navbar-wrapper #services .services-item h3 a {
   color: #343434;
   font-weight: 700;
   font-size: 20px;
   text-align: center;
 }
-.landing-info #services .services-item h3 a:hover, .signin #services .services-item h3 a:hover {
+.landing-info #services .services-item h3 a:hover, .signin #services .services-item h3 a:hover, .navbar-wrapper #services .services-item h3 a:hover {
   color: #1fcaa7;
 }
-.landing-info .services-item:hover .icon i, .signin .services-item:hover .icon i {
+.landing-info .services-item:hover .icon i, .signin .services-item:hover .icon i, .navbar-wrapper .services-item:hover .icon i {
   background: transparent;
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
@@ -725,13 +728,13 @@ body {
   -o-transform: scale(1.1);
   transform: scale(1.1);
 }
-.landing-info #team, .signin #team {
+.landing-info #team, .signin #team, .navbar-wrapper #team {
   background: #f2f2f2;
 }
-.landing-info .team-item:hover, .signin .team-item:hover {
+.landing-info .team-item:hover, .signin .team-item:hover, .navbar-wrapper .team-item:hover {
   box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.35);
 }
-.landing-info .team-item, .signin .team-item {
+.landing-info .team-item, .signin .team-item, .navbar-wrapper .team-item {
   margin: 15px 0;
   border-radius: 4px;
   box-shadow: 0 25px 35px -20px rgba(0, 0, 0, 0.35);
@@ -740,13 +743,12 @@ body {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
 }
-.landing-info .team-item .team-img, .signin .team-item .team-img {
+.landing-info .team-item .team-img, .signin .team-item .team-img, .navbar-wrapper .team-item .team-img {
   position: relative;
   cursor: pointer;
-  overflow: hidden;
   border-radius: 4px;
 }
-.landing-info .team-item .team-overlay, .signin .team-item .team-overlay {
+.landing-info .team-item .team-overlay, .signin .team-item .team-overlay, .navbar-wrapper .team-item .team-overlay {
   height: 100%;
   position: absolute;
   top: 0;
@@ -759,7 +761,7 @@ body {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
 }
-.landing-info .team-item .overlay-social-icon, .signin .team-item .overlay-social-icon {
+.landing-info .team-item .overlay-social-icon, .signin .team-item .overlay-social-icon, .navbar-wrapper .team-item .overlay-social-icon {
   color: #fff;
   top: 45%;
   position: absolute;
@@ -767,7 +769,7 @@ body {
   margin: 0 auto;
   width: 100%;
 }
-.landing-info .team-item .overlay-social-icon .social-icons, .signin .team-item .overlay-social-icon .social-icons {
+.landing-info .team-item .overlay-social-icon .social-icons, .signin .team-item .overlay-social-icon .social-icons, .navbar-wrapper .team-item .overlay-social-icon .social-icons {
   padding-left: 0;
   -webkit-transform: translateY(-30px);
   -moz-transform: translateY(-30px);
@@ -777,15 +779,15 @@ body {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
 }
-.landing-info .team-item .overlay-social-icon .social-icons li, .signin .team-item .overlay-social-icon .social-icons li {
+.landing-info .team-item .overlay-social-icon .social-icons li, .signin .team-item .overlay-social-icon .social-icons li, .navbar-wrapper .team-item .overlay-social-icon .social-icons li {
   display: inline-block;
   margin: 0 4px;
 }
-.landing-info .team-item .overlay-social-icon .social-icons li a, .signin .team-item .overlay-social-icon .social-icons li a {
+.landing-info .team-item .overlay-social-icon .social-icons li a, .signin .team-item .overlay-social-icon .social-icons li a, .navbar-wrapper .team-item .overlay-social-icon .social-icons li a {
   letter-spacing: 0px;
   outline: 0 !important;
 }
-.landing-info .team-item .overlay-social-icon .social-icons li a i, .signin .team-item .overlay-social-icon .social-icons li a i {
+.landing-info .team-item .overlay-social-icon .social-icons li a i, .signin .team-item .overlay-social-icon .social-icons li a i, .navbar-wrapper .team-item .overlay-social-icon .social-icons li a i {
   font-size: 20px;
   color: #fff;
   width: 36px;
@@ -799,54 +801,54 @@ body {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
 }
-.landing-info .team-item .overlay-social-icon .social-icons li a:hover .lni-facebook-filled, .signin .team-item .overlay-social-icon .social-icons li a:hover .lni-facebook-filled {
+.landing-info .team-item .overlay-social-icon .social-icons li a:hover .lni-facebook-filled, .signin .team-item .overlay-social-icon .social-icons li a:hover .lni-facebook-filled, .navbar-wrapper .team-item .overlay-social-icon .social-icons li a:hover .lni-facebook-filled {
   background: #3B5998;
 }
-.landing-info .team-item .overlay-social-icon .social-icons li a:hover .lni-twitter-filled, .signin .team-item .overlay-social-icon .social-icons li a:hover .lni-twitter-filled {
+.landing-info .team-item .overlay-social-icon .social-icons li a:hover .lni-twitter-filled, .signin .team-item .overlay-social-icon .social-icons li a:hover .lni-twitter-filled, .navbar-wrapper .team-item .overlay-social-icon .social-icons li a:hover .lni-twitter-filled {
   background: #00aced;
 }
-.landing-info .team-item .overlay-social-icon .social-icons li a:hover .lni-instagram-filled, .signin .team-item .overlay-social-icon .social-icons li a:hover .lni-instagram-filled {
+.landing-info .team-item .overlay-social-icon .social-icons li a:hover .lni-instagram-filled, .signin .team-item .overlay-social-icon .social-icons li a:hover .lni-instagram-filled, .navbar-wrapper .team-item .overlay-social-icon .social-icons li a:hover .lni-instagram-filled {
   background: #fb3958;
 }
-.landing-info .team-item .info-text, .signin .team-item .info-text {
+.landing-info .team-item .info-text, .signin .team-item .info-text, .navbar-wrapper .team-item .info-text {
   padding: 15px 20px;
   background: #fff;
 }
-.landing-info .team-item .info-text h3, .signin .team-item .info-text h3 {
+.landing-info .team-item .info-text h3, .signin .team-item .info-text h3, .navbar-wrapper .team-item .info-text h3 {
   font-size: 16px;
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 5px;
 }
-.landing-info .team-item .info-text h3 a, .signin .team-item .info-text h3 a {
+.landing-info .team-item .info-text h3 a, .signin .team-item .info-text h3 a, .navbar-wrapper .team-item .info-text h3 a {
   color: #333;
 }
-.landing-info .team-item .info-text h3 a:hover, .signin .team-item .info-text h3 a:hover {
+.landing-info .team-item .info-text h3 a:hover, .signin .team-item .info-text h3 a:hover, .navbar-wrapper .team-item .info-text h3 a:hover {
   color: #1fcaa7;
 }
-.landing-info .team-item .info-text p, .signin .team-item .info-text p {
+.landing-info .team-item .info-text p, .signin .team-item .info-text p, .navbar-wrapper .team-item .info-text p {
   margin: 0;
   color: #888;
 }
-.landing-info .team-item:hover .team-overlay, .signin .team-item:hover .team-overlay {
+.landing-info .team-item:hover .team-overlay, .signin .team-item:hover .team-overlay, .navbar-wrapper .team-item:hover .team-overlay {
   opacity: 1;
 }
-.landing-info .team-item:hover .social-icons, .signin .team-item:hover .social-icons {
+.landing-info .team-item:hover .social-icons, .signin .team-item:hover .social-icons, .navbar-wrapper .team-item:hover .social-icons {
   -webkit-transform: translateY(0px);
   -moz-transform: translateY(0px);
   transform: translateY(0px);
 }
-.landing-info #conatiner-map, .signin #conatiner-map {
+.landing-info #conatiner-map, .signin #conatiner-map, .navbar-wrapper #conatiner-map {
   width: 100%;
   height: 530px;
 }
-.landing-info .contact-right, .signin .contact-right {
+.landing-info .contact-right, .signin .contact-right, .navbar-wrapper .contact-right {
   padding-left: 5%;
 }
-.landing-info .contact-right .contact-box, .signin .contact-right .contact-box {
+.landing-info .contact-right .contact-box, .signin .contact-right .contact-box, .navbar-wrapper .contact-right .contact-box {
   margin-bottom: 40px;
 }
-.landing-info .contact-right .contact-box h4, .signin .contact-right .contact-box h4 {
+.landing-info .contact-right .contact-box h4, .signin .contact-right .contact-box h4, .navbar-wrapper .contact-right .contact-box h4 {
   clear: both;
   color: #333;
   font-weight: 700;
@@ -854,30 +856,30 @@ body {
   line-height: 22px;
   margin-bottom: 10px;
 }
-.landing-info .contact-right .contact-box p, .signin .contact-right .contact-box p {
+.landing-info .contact-right .contact-box p, .signin .contact-right .contact-box p, .navbar-wrapper .contact-right .contact-box p {
   font-size: 15px;
   color: #888;
 }
-.landing-info .contact-right .contact-box p a, .signin .contact-right .contact-box p a {
+.landing-info .contact-right .contact-box p a, .signin .contact-right .contact-box p a, .navbar-wrapper .contact-right .contact-box p a {
   color: #888;
 }
-.landing-info .contact-right .contact-box p a:hover, .signin .contact-right .contact-box p a:hover {
+.landing-info .contact-right .contact-box p a:hover, .signin .contact-right .contact-box p a:hover, .navbar-wrapper .contact-right .contact-box p a:hover {
   color: #1fcaa7;
 }
-.landing-info .subscribe-inner, .signin .subscribe-inner {
+.landing-info .subscribe-inner, .signin .subscribe-inner, .navbar-wrapper .subscribe-inner {
   padding: 80px 0;
   box-shadow: 1px 3px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
-.landing-info .subscribe-inner .subscribe-title, .signin .subscribe-inner .subscribe-title {
+.landing-info .subscribe-inner .subscribe-title, .signin .subscribe-inner .subscribe-title, .navbar-wrapper .subscribe-inner .subscribe-title {
   font-size: 36px;
   margin-bottom: 30px;
 }
-.landing-info .subscribe-inner p, .signin .subscribe-inner p {
+.landing-info .subscribe-inner p, .signin .subscribe-inner p, .navbar-wrapper .subscribe-inner p {
   color: #888;
   margin-bottom: 30px;
 }
-.landing-info .subscribe-inner .form-control, .signin .subscribe-inner .form-control {
+.landing-info .subscribe-inner .form-control, .signin .subscribe-inner .form-control, .navbar-wrapper .subscribe-inner .form-control {
   position: relative;
   background: #fff;
   border: 1px solid #f1f1f1;
@@ -890,41 +892,41 @@ body {
   width: 67%;
   margin: 0 20px;
 }
-.landing-info .subscribe-inner .form-control:focus, .signin .subscribe-inner .form-control:focus {
+.landing-info .subscribe-inner .form-control:focus, .signin .subscribe-inner .form-control:focus, .navbar-wrapper .subscribe-inner .form-control:focus {
   color: #333;
   background-color: #fff;
   border-color: #1fcaa7;
   outline: 0;
 }
-.landing-info .subscribe-inner .form-inline, .signin .subscribe-inner .form-inline {
+.landing-info .subscribe-inner .form-inline, .signin .subscribe-inner .form-inline, .navbar-wrapper .subscribe-inner .form-inline {
   position: relative;
   margin-bottom: 30px;
   margin: 0 auto;
   width: 75%;
 }
-.landing-info .subscribe-inner .icon-s, .signin .subscribe-inner .icon-s {
+.landing-info .subscribe-inner .icon-s, .signin .subscribe-inner .icon-s, .navbar-wrapper .subscribe-inner .icon-s {
   position: absolute;
   top: 13px;
   left: 36px;
 }
-.landing-info .subscribe-inner .icon-s i, .signin .subscribe-inner .icon-s i {
+.landing-info .subscribe-inner .icon-s i, .signin .subscribe-inner .icon-s i, .navbar-wrapper .subscribe-inner .icon-s i {
   font-size: 20px;
 }
-.landing-info #google-map-area, .signin #google-map-area {
+.landing-info #google-map-area, .signin #google-map-area, .navbar-wrapper #google-map-area {
   position: relative;
 }
-.landing-info #google-map-area .container-fluid, .signin #google-map-area .container-fluid {
+.landing-info #google-map-area .container-fluid, .signin #google-map-area .container-fluid, .navbar-wrapper #google-map-area .container-fluid {
   padding-left: 0;
   padding-right: 0;
 }
-.landing-info .text-danger, .signin .text-danger {
+.landing-info .text-danger, .signin .text-danger, .navbar-wrapper .text-danger {
   margin-top: 20px;
   font-size: 18px;
 }
-.landing-info .heading, .signin .heading {
+.landing-info .heading, .signin .heading, .navbar-wrapper .heading {
   margin-bottom: 30px;
 }
-.landing-info .form-control, .signin .form-control {
+.landing-info .form-control, .signin .form-control, .navbar-wrapper .form-control {
   display: block;
   width: 100%;
   line-height: 26px;
@@ -942,27 +944,27 @@ body {
   -ms-transition: all 500ms ease;
   -o-transition: all 500ms ease;
 }
-.landing-info .form-control:focus, .signin .form-control:focus {
+.landing-info .form-control:focus, .signin .form-control:focus, .navbar-wrapper .form-control:focus {
   border-color: #1fcaa7;
   outline: 0;
 }
-.landing-info .pagination .page-item .page-link, .signin .pagination .page-item .page-link {
+.landing-info .pagination .page-item .page-link, .signin .pagination .page-item .page-link, .navbar-wrapper .pagination .page-item .page-link {
   margin: 3px;
   padding: 15px 20px;
   color: #1fcaa7;
   background: #fff;
 }
-.landing-info .pagination .page-item .page-link:hover, .signin .pagination .page-item .page-link:hover {
+.landing-info .pagination .page-item .page-link:hover, .signin .pagination .page-item .page-link:hover, .navbar-wrapper .pagination .page-item .page-link:hover {
   background: #1fcaa7;
   color: #fff;
 }
-.landing-info .footer-area, .signin .footer-area {
+.landing-info .footer-area, .signin .footer-area, .navbar-wrapper .footer-area {
   background: #252525;
 }
-.landing-info .footer-area .social-icon li, .signin .footer-area .social-icon li {
+.landing-info .footer-area .social-icon li, .signin .footer-area .social-icon li, .navbar-wrapper .footer-area .social-icon li {
   display: inline-block;
 }
-.landing-info .footer-area .social-icon li a, .signin .footer-area .social-icon li a {
+.landing-info .footer-area .social-icon li a, .signin .footer-area .social-icon li a, .navbar-wrapper .footer-area .social-icon li a {
   color: #000;
   background: #fff;
   width: 35px;
@@ -978,88 +980,88 @@ body {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
 }
-.landing-info .footer-area .social-icon li a:hover, .signin .footer-area .social-icon li a:hover {
+.landing-info .footer-area .social-icon li a:hover, .signin .footer-area .social-icon li a:hover, .navbar-wrapper .footer-area .social-icon li a:hover {
   color: #fff;
 }
-.landing-info .footer-area .social-icon li .facebook:hover, .signin .footer-area .social-icon li .facebook:hover {
+.landing-info .footer-area .social-icon li .facebook:hover, .signin .footer-area .social-icon li .facebook:hover, .navbar-wrapper .footer-area .social-icon li .facebook:hover {
   background: #3B5998;
 }
-.landing-info .footer-area .social-icon li .twitter:hover, .signin .footer-area .social-icon li .twitter:hover {
+.landing-info .footer-area .social-icon li .twitter:hover, .signin .footer-area .social-icon li .twitter:hover, .navbar-wrapper .footer-area .social-icon li .twitter:hover {
   background: #00aced;
 }
-.landing-info .footer-area .social-icon li .instagram:hover, .signin .footer-area .social-icon li .instagram:hover {
+.landing-info .footer-area .social-icon li .instagram:hover, .signin .footer-area .social-icon li .instagram:hover, .navbar-wrapper .footer-area .social-icon li .instagram:hover {
   background: #fb3958;
 }
-.landing-info .footer-area .social-icon li .foursqare:hover, .signin .footer-area .social-icon li .foursqare:hover {
+.landing-info .footer-area .social-icon li .foursqare:hover, .signin .footer-area .social-icon li .foursqare:hover, .navbar-wrapper .footer-area .social-icon li .foursqare:hover {
   background: #25a0ca;
 }
-.landing-info .footer-area .social-icon li .google:hover, .signin .footer-area .social-icon li .google:hover {
+.landing-info .footer-area .social-icon li .google:hover, .signin .footer-area .social-icon li .google:hover, .navbar-wrapper .footer-area .social-icon li .google:hover {
   background: #d34836;
 }
-.landing-info .footer-area .social-icon li .spotify:hover, .signin .footer-area .social-icon li .spotify:hover {
+.landing-info .footer-area .social-icon li .spotify:hover, .signin .footer-area .social-icon li .spotify:hover, .navbar-wrapper .footer-area .social-icon li .spotify:hover {
   background: #1db954;
 }
-.landing-info .footer-area .footer-text p, .signin .footer-area .footer-text p {
+.landing-info .footer-area .footer-text p, .signin .footer-area .footer-text p, .navbar-wrapper .footer-area .footer-text p {
   font-size: 14px;
   margin-top: 20px;
   color: #fff;
 }
-.landing-info .footer-area .footer-text p a, .signin .footer-area .footer-text p a {
+.landing-info .footer-area .footer-text p a, .signin .footer-area .footer-text p a, .navbar-wrapper .footer-area .footer-text p a {
   color: #1fcaa7;
 }
-.landing-info .footer-area .footer-text .nav-inline .nav-link, .signin .footer-area .footer-text .nav-inline .nav-link {
+.landing-info .footer-area .footer-text .nav-inline .nav-link, .signin .footer-area .footer-text .nav-inline .nav-link, .navbar-wrapper .footer-area .footer-text .nav-inline .nav-link {
   padding: 11px 7px;
   color: #888;
 }
-.landing-info .footer-area .footer-text .nav-inline .nav-link:hover, .signin .footer-area .footer-text .nav-inline .nav-link:hover {
+.landing-info .footer-area .footer-text .nav-inline .nav-link:hover, .signin .footer-area .footer-text .nav-inline .nav-link:hover, .navbar-wrapper .footer-area .footer-text .nav-inline .nav-link:hover {
   color: #1fcaa7;
 }
-.landing-info .footer-2, .signin .footer-2 {
+.landing-info .footer-2, .signin .footer-2, .navbar-wrapper .footer-2 {
   background: #252525;
 }
-.landing-info .footer-2 img, .signin .footer-2 img {
+.landing-info .footer-2 img, .signin .footer-2 img, .navbar-wrapper .footer-2 img {
   margin-top: -8px;
 }
-.landing-info .footer-2 h3, .signin .footer-2 h3 {
+.landing-info .footer-2 h3, .signin .footer-2 h3, .navbar-wrapper .footer-2 h3 {
   font-size: 20px;
   color: #fff;
   font-weight: 700;
   padding-bottom: 10px;
   letter-spacing: 0.5px;
 }
-.landing-info .footer-2 p, .signin .footer-2 p {
+.landing-info .footer-2 p, .signin .footer-2 p, .navbar-wrapper .footer-2 p {
   font-size: 14px;
   color: #fff;
   line-height: 20px;
   margin: 0;
   padding-right: 50px;
 }
-.landing-info .footer-2 ul li a, .signin .footer-2 ul li a {
+.landing-info .footer-2 ul li a, .signin .footer-2 ul li a, .navbar-wrapper .footer-2 ul li a {
   color: #fff;
   font-size: 13px;
   font-weight: 400;
 }
-.landing-info .footer-2 ul li a:hover, .signin .footer-2 ul li a:hover {
+.landing-info .footer-2 ul li a:hover, .signin .footer-2 ul li a:hover, .navbar-wrapper .footer-2 ul li a:hover {
   color: #1fcaa7;
 }
-.landing-info #copyright, .signin #copyright {
+.landing-info #copyright, .signin #copyright, .navbar-wrapper #copyright {
   background: #333;
 }
-.landing-info #copyright p, .signin #copyright p {
+.landing-info #copyright p, .signin #copyright p, .navbar-wrapper #copyright p {
   line-height: 42px;
   color: #fff;
   margin: 0;
 }
-.landing-info #copyright p a, .signin #copyright p a {
+.landing-info #copyright p a, .signin #copyright p a, .navbar-wrapper #copyright p a {
   color: #fff;
 }
-.landing-info #copyright p a:hover, .signin #copyright p a:hover {
+.landing-info #copyright p a:hover, .signin #copyright p a:hover, .navbar-wrapper #copyright p a:hover {
   color: #1fcaa7;
 }
-.landing-info .landing-info, .signin .landing-info {
+.landing-info .landing-info, .signin .landing-info, .navbar-wrapper .landing-info {
   background-color: white;
 }
-.landing-info .landing-info h2, .signin .landing-info h2 {
+.landing-info .landing-info h2, .signin .landing-info h2, .navbar-wrapper .landing-info h2 {
   color: black;
 }
 
@@ -1142,7 +1144,6 @@ body {
   background-size: cover;
   color: #206363;
   padding: 150px 0;
-  overflow: hidden;
   position: relative;
 }
 .signin .card {

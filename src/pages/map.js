@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import Header from '../components/header_signin'
+import Header from "../components/navbar";
 import FilterMap from '../components/filter'
 import axios from 'axios'
 import PopUp from '../components/popup'
@@ -68,6 +68,7 @@ class App extends Component {
 				data['tanaman'] = response.data[index].plant_type
 				data['pemilik'] = response.data[index].user.display_name
 				data['username'] = response.data[index].user.username
+				data['status_lahan'] = response.data[index].status_lahan
 				rows.push(data)
 			}
 			console.log('koordinat jadi', rows)
@@ -261,7 +262,8 @@ class App extends Component {
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
 					// console.log('cek hasil bayam', uniquefeatures)
-							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi}
+        //   <label>Status tanah dijual: {props.status_lahan}</label>
+							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi} status_lahan={koordinat[item].status_lahan}
 							/>
 					)}
 				</div>
@@ -278,22 +280,56 @@ class App extends Component {
 						onMoveEnd ={this._onMoveEnd}
 					>
 						<Layer
-              type="symbol"
-              id="points"
+						// Point
+						// type="symbol"
+						// id="points"
+						// 	layout={{ "icon-image": "garden-15", "icon-allow-overlap": true }}
+
+						// Poligon
+							type="fill"
+							paint={polygonPaint}
+						>
+								{koordinat.map((item, key) => 
+									<Feature key={key} 
+									// Point
+									// coordinates={item.center}
+									// ---------------------------
+
+									// Poligon
+									coordinates={item.coordinates} 
+									// ---------------------------
+									onClick ={() => this._onClickMap({key})}
+									onMouseEnter ={() => this._onMouseEnter({key})}
+									onMouseLeave ={this._onMouseLeave}
+									/>
+								)}
+						</Layer>
+						<Layer
+						// Point
+						type="symbol"
+						id="points"
 							layout={{ "icon-image": "garden-15", "icon-allow-overlap": true }}
+
+						// Poligon
 							// type="fill"
 							// paint={polygonPaint}
-            >
-							{koordinat.map((item, key) => 
-								<Feature key={key} 
-								coordinates={item.center}
-								// coordinates={item.coordinates} 
-								onClick ={() => this._onClickMap({key})}
-								onMouseEnter ={() => this._onMouseEnter({key})}
-								onMouseLeave ={this._onMouseLeave}
-								/>
-							)}
-            </Layer>
+						>
+								{koordinat.map((item, key) => 
+									<Feature key={key} 
+									// Point
+									coordinates={item.center}
+									// ---------------------------
+
+									// Poligon
+									// coordinates={item.coordinates} 
+									// ---------------------------
+									onClick ={() => this._onClickMap({key})}
+									onMouseEnter ={() => this._onMouseEnter({key})}
+									onMouseLeave ={this._onMouseLeave}
+									/>
+								)}
+						</Layer>
+						
 						{/* {koordinat.map((item, key) => 
 							<PopUp center={item.center} deskripsi={item.deskripsi} tanaman={item.tanaman} username={item.username} pemilik={item.pemilik}/>
 						)} */}

@@ -40,7 +40,7 @@ class SidebarMap extends Component {
 		console.log('cek isi sidebar', Farms)
     return (
     <div className="sidebar">
-			<h5>List hasil pencarian dan filter:</h5>
+			<h5 style={{paddingTop: "100px"}}>List hasil pencarian dan filter:</h5>
       <div className="row">
 				{Farms.map((item, key) => {
 					console.log(item)

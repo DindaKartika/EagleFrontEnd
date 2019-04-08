@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import Header from '../components/header_signin'
+import Header from '../components/navbar'
 import SidebarMap from '../components/sidebarMap'
 import FilterMap from '../components/filter'
 import Select from 'react-select'
@@ -15,6 +15,7 @@ import mapboxgl from 'mapbox-gl'
 import { read } from "fs";
 
 const optionPlant = [
+  {value:'Semua', label:'Semua'},
   {value:'Bahan Pokok', label:'--- Bahan Pokok ---', isDisabled:true},
   {value:'Beras', label:'Beras'},
   {value:'Gandum', label:'Gandum'},
@@ -74,7 +75,9 @@ class Farm extends Component {
 			rekomendasi : "",
 			popupProfile : false,
 			plantedAt : new Date(),
-			readyAt : new Date()
+			readyAt : new Date(),
+			photos: "",
+			perkiraan_panen: 0
 			// center : [],
 			// koordinat : []
 		};
@@ -96,6 +99,7 @@ class Farm extends Component {
 				// console.log('date ready at', new Date(response.data.ready_at))
 				console.log('Farms', response.data);
 				self.setState({user : response.data.user})
+				self.setState({photos : response.data.photos})
 				localStorage.setItem('id_farm', response.data.id_farm)
 				const koordinat = []
 				koordinat.push(JSON.parse(response.data.coordinates))
@@ -188,101 +192,189 @@ class Farm extends Component {
 		console.log('state', ubahInfo)
 
     return (
-      <div className="App">
-				<div className="header">
-					<Header/>
+      	<div className="App">
+			<div className="header">
+				<Header/>
+			</div>
+			<div className="sidebar">
+				{/* <h5>Informasi Lahan:</h5>
+				<label>Nama pemilik: </label>
+				<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
+				<div style={{display : ((username == user.username) ? 'none' : 'block')}} onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
+					<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
 				</div>
-				<div className="sidebar">
-					<h5>Informasi Lahan:</h5>
-					<label>Nama pemilik: </label>
-					<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
-					<div style={{display : ((username == user.username) ? 'none' : 'block')}} onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
-						<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
+				<label>Deskripsi : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
+				<label>Jenis tanaman : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
+				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+					<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+				</div>
+				<label>Tanggal ditanam : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
+				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+					<DatePicker
+						selected={plantedAt}
+						onChange={this.onChangePlantedAt}
+						value={plantedAt}
+					/>
+				</div>
+				<label>Perkiraan tanggal panen : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
+				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+					<DatePicker
+						selected={readyAt}
+						onChange={this.onChangeReadyAt}
+						value={readyAt}
+					/>
+				</div>
+				<label>Alamat : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
+				<label>Kota : </label>
+				<h5>{Farms.city}</h5>
+				<label>Luas : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
+				<label>Ketinggian : </label>
+				<h5>{Farms.ketinggian} mdpl</h5>
+				<label>Perkiraan hasil panen : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
+				<label>Kategori : </label>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
+				<div style={{display : (username == user.username ? 'block' : 'none')}}>
+				<hr/>
+					<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
+					<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+					
+					
+				</div>
+				<hr/>
+				<label>Rekomendasi tanaman : </label>
+					<label>{rekomendasi}</label> */}
+				<div class="card">
+					<img class="card-img-top" src={Farms.photos} alt="Card image cap" style={{width: "100%"}}/>
+					<div class="card-body">
+						{/* <h5 class="card-title">Card title</h5>
+						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
+						<label>Nama pemilik: </label>
+						<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
+						<div style={{display : ((username == user.username) ? 'none' : 'block')}} onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
+					<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
 					</div>
-					<label>Deskripsi : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
-					<label>Jenis tanaman : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
-					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+				<label>Deskripsi : </label>
+				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
+				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
 					</div>
-					<label>Tanggal ditanam : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
-					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						<DatePicker
-							selected={plantedAt}
-							onChange={this.onChangePlantedAt}
-							value={plantedAt}
-						/>
-					</div>
-					<label>Perkiraan tanggal panen : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
-					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						<DatePicker
-							selected={readyAt}
-							onChange={this.onChangeReadyAt}
-							value={readyAt}
-						/>
-					</div>
-					<label>Alamat : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
-					<label>Kota : </label>
-					<h5>{Farms.city}</h5>
-					<label>Luas : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
-					<label>Ketinggian : </label>
-					<h5>{Farms.ketinggian} mdpl</h5>
-					<label>Perkiraan hasil panen : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
-					<label>Kategori : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
-					<div style={{display : (username == user.username ? 'block' : 'none')}}>
-						<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
-						<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
-						<hr/>
-						<label>Rekomendasi tanaman : </label>
-						<label>{rekomendasi}</label>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<label>Jenis tanaman : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
+							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+								<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>Tanggal ditanam : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
+							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+								<DatePicker
+									selected={plantedAt}
+									onChange={this.onChangePlantedAt}
+									value={plantedAt}
+								/>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>Perkiraan tanggal panen : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
+							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+								<DatePicker
+									selected={readyAt}
+									onChange={this.onChangeReadyAt}
+									value={readyAt}
+								/>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>Alamat : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
+							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
+							<label>Kota : </label>
+							<h5>{Farms.city}</h5>
+						</li>
+						<li class="list-group-item">
+							<label>Luas : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
+							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
+							<label>Ketinggian : </label>
+							<h5>{Farms.ketinggian} mdpl</h5>
+							<label>Perkiraan hasil panen : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
+							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
+							<label>Kategori : </label>
+							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
+						</li>
+							<li class="list-group-item">
+							<div style={{display : (username == user.username ? 'block' : 'none')}}>
+								<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
+								<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+							</div>
+							<hr/>
+							<label>Rekomendasi tanaman : </label>
+								<label>{rekomendasi}</label>
+						</li>
+
+					</ul>
+					<div class="card-body">
+					<a
+							href={waUrl + user.phone_number}
+							class="wa-float"
+							target="_blank"
+						>
+							<button className="btn btn-outline-success" style={{width: '200px'}}>Kirim Pesan</button>
+						</a>
+						{/* <a href="#" class="card-link">Another link</a> */}
 					</div>
 				</div>
-				<div style={{display: (popupProfile) ? 'block' : 'none' }} className="PopupProfile" onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
-					<div className="row">
-						<div className="col-4">
-							<img src={user.profile_picture}/>
-						</div>
-						<div className="col-8">
-							<Link to={"/otherprofile/" + user.id}>
-								<h5>{user.display_name}</h5>
-								<h5>@{user.username}</h5>
-							</Link>
-							<a
-								href={waUrl + user.phone_number}
-								class="wa-float"
-								target="_blank"
-							>
-								<button>Kirim Pesan</button>
-							</a>
-						</div>
+			</div>
+			<div style={{display: (popupProfile) ? 'block' : 'none' }} className="PopupProfile" onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
+				<div className="row">
+					<div className="col-4">
+						<img src={user.profile_picture} style={{maxWidth: "100%", maxHeight: "100px"}}/>
+					</div>
+					<div className="col-8">
+						<Link to={"/otherprofile/" + user.id}>
+							<h5>{user.display_name}</h5>
+							<h5>@{user.username}</h5>
+						</Link>
+						<a
+							href={waUrl + user.phone_number}
+							class="wa-float"
+							target="_blank"
+						>
+							<button className="btn btn-outline-success" style={{width: '200px'}}>Kirim Pesan</button>
+						</a>
 					</div>
 				</div>
-				<div>
-					<Map
-						style="mapbox://styles/mapbox/satellite-v9"
-						containerStyle={{
-							height: "90vh",
-							width: "80vw"
-						}}
-						center={center}
-						zoom={[16.5]}
-					>
-						<Layer type="fill" paint={polygonPaint}>
-							<Feature coordinates={koordinat} />
-						</Layer>
-					</Map>
-				</div>
+			</div>
+			<div>
+				<Map
+					style="mapbox://styles/mapbox/satellite-v9"
+					containerStyle={{
+						height: "90vh",
+						width: "80vw"
+					}}
+					center={center}
+					zoom={[16.5]}
+				>
+					<Layer type="fill" paint={polygonPaint}>
+						<Feature coordinates={koordinat} />
+					</Layer>
+				</Map>
+			</div>
       </div>
     );
   }

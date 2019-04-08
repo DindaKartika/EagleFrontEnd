@@ -4,12 +4,31 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions, store } from "../store";
 import { withRouter } from "react-router-dom";
-import Header from "../components/header_signin";
-import Footer from "../components/footer";
+import Header from "../components/navbar";
+import Footer from "../components/footer_styled";
 import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
 import { Link } from "react-router-dom";
+import {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  PinterestShareButton,
+  VKShareButton,
+  OKShareButton,
+  RedditShareButton,
+  TumblrShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  ViberShareButton,
+  WorkplaceShareButton,
+  LineShareButton,
+  EmailShareButton,
+} from 'react-share';
 
 const waUrl = "https://web.whatsapp.com/send?phone=";
 
@@ -147,7 +166,7 @@ class Profile extends Component {
   getFeed = async () => {
     const self = this;
     const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/feeds?id_user=" + self.state.id;
+    const url = "http://localhost:5000/feeds?sort=desc&rp=10000&id_user=" + self.state.id;
     axios({
       method: "get",
       url: url,
@@ -157,7 +176,7 @@ class Profile extends Component {
     })
       .then(function(response) {
         // console.log("Get feeds berhasil", response.data)
-        self.setState({
+        store.setState({
           listFeed: response.data
         });
       })
@@ -350,19 +369,66 @@ class Profile extends Component {
     );
   };
 
+  handleClick(e){
+    e.preventDefault();
+    const self = this;
+    const {content} = e.target;
+    var data ={};
+    
+    data.content = content.value;
+
+    const token = localStorage.getItem("token");
+    console.log("test token post",token)
+    console.log("post content", data);
+    let postFeed = {
+        method:'post',
+        url:'http://localhost:5000/feeds',
+        headers: {
+            'Authorization':'Bearer ' + token
+        },
+        data : data
+    };
+    axios(postFeed)
+    .then(function(response){
+        console.log(response.data);
+        // const self = this;
+        const token = localStorage.getItem("token");
+        const url = "http://localhost:5000/feeds?sort=desc&rp=10000&id_user=" + self.state.id;
+        axios({
+          method: "get",
+          url: url,
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        })
+          .then(function(response) {
+            // console.log("Get feeds berhasil", response.data)
+            store.setState({
+              listFeed: response.data
+            });
+          })
+          .catch(function(error) {
+            console.log("Gagal get feeds", error);
+          });
+          self.props.history.push("/profile");
+    });
+
+};
+
   render() {
     console.log("PROPS", this.props.edit_display_name);
+    const shareUrl = "facebook.com"
     return (
-      <div>
+      <div className="profile-page">
         <Header />
         {/* <div class="floating-wpp">Test</div> */}
-        <a
+        {/* <a
           href={waUrl + this.props.current_phone_number}
           class="wa-float"
           target="_blank"
         >
           <i class="fa fa-whatsapp my-wa-float" />
-        </a>
+        </a> */}
         {/* <a href={waUrl + this.props.current_phone_number} target="_blank">
           Whatsapp
         </a> */}
@@ -376,11 +442,11 @@ class Profile extends Component {
           {/* Cover Photo goes here! */}
         </div>
         <div className="container-fluid row justify-content-end strip">
-          <button className="btn btn-outline-success addpost-btn">
+          <button className="btn btn-common addpost-btn">
             Tambahkan post
           </button>
           <Link to="/input-field">
-          <button className="btn btn-outline-success addpost-btn">
+          <button className="btn btn-common addpost-btn">
             Tambahkan lahan
           </button>
           </Link>
@@ -406,6 +472,8 @@ class Profile extends Component {
                   Bergabung pada {this.state.created_at.slice(0, 10)}
                 </div>
                 <div className="display-email">{this.state.email}</div>
+                <hr />
+                <div className="display-address" style={{fontSize: '14px'}}>{this.state.headline}</div>
                 <br />
                 <div
                   className="display-edit"
@@ -417,6 +485,18 @@ class Profile extends Component {
                   >
                     Perbarui profil
                   </button>
+
+                  <FacebookShareButton url={shareUrl} />
+
+                  {/* TEST */}
+                  {/* <div>
+                  
+                    <a href={waUrl + this.props.current_phone_number} target="_blank">
+                    <button className="btn btn-success"><i class="fa fa-whatsapp my-wa-float" /> Hubungi via Whatsapp</button>
+                    </a>
+                    
+                  </div> */}
+                  {/* TEST */}
                 </div>
                 <div
                   className="display-edit"
@@ -428,6 +508,7 @@ class Profile extends Component {
                   >
                     Batalkan edit
                   </button>
+                  
                 </div>
               </div>
             </div>
@@ -437,6 +518,16 @@ class Profile extends Component {
                   className="display"
                   style={{ display: this.state.edit ? "none" : "block" }}
                 >
+
+                <form onSubmit={e => this.handleClick(e)}>
+                    <div className="form-group">
+                        <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
+                    </div>
+                    <div className="container-fluid row justify-content-end">
+                        <button className="btn btn-outline-success addpost-btn" type="submit">Bagikan</button>
+                    </div>
+                </form>
+
                   <div className="row">
                     <button
                       className={
@@ -477,7 +568,7 @@ class Profile extends Component {
                       <div className="row">Postingan</div>
                       <hr />
                       {/* Loop content post start here */}
-                      {this.state.listFeed.map((item, key) => {
+                      {this.props.listFeed.map((item, key) => {
                         // console.log("cek mapping function", item.content)
                         return <ListFeed key={key} data={item} />;
                       })}
@@ -564,6 +655,7 @@ class Profile extends Component {
                             name="edit_display_name"
                             placeholder={this.state.display_name}
                             onChange={e => this.props.setField(e)}
+                            className="form-control form-control-sm"
                           />
                         </div>
                       </div>
@@ -580,6 +672,7 @@ class Profile extends Component {
                             name="edit_display_name"
                             placeholder={this.state.display_name}
                             onChange={e => this.props.setField(e)}
+                            className="form-control form-control-sm"
                           />
                         </div>
                       </div>
@@ -595,6 +688,7 @@ class Profile extends Component {
                           name="edit_headline"
                           placeholder={this.state.headline}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -670,6 +764,7 @@ class Profile extends Component {
                           name="edit_date_of_birth"
                           placeholder={this.state.date_of_birth}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -684,6 +779,7 @@ class Profile extends Component {
                           name="edit_address"
                           placeholder={this.state.address}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -698,6 +794,7 @@ class Profile extends Component {
                           name="edit_phone_number"
                           placeholder={this.state.phone_number}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -712,6 +809,7 @@ class Profile extends Component {
                           name="edit_job"
                           placeholder={this.state.job}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -729,6 +827,7 @@ class Profile extends Component {
                           name="edit_facebook_link"
                           placeholder={this.state.facebook_link}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -745,6 +844,7 @@ class Profile extends Component {
                           name="edit_instagram_link"
                           placeholder={this.state.instagram_link}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -759,6 +859,7 @@ class Profile extends Component {
                           name="edit_twitter_link"
                           placeholder={this.state.twitter_link}
                           onChange={e => this.props.setField(e)}
+                          className="form-control form-control-sm"
                         />
                       </div>
                     </div>
@@ -789,6 +890,6 @@ class Profile extends Component {
 
 // export default Profile;
 export default connect(
-  "current_display_name, current_phone_number, edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link",
+  "current_display_name, listFeed, current_phone_number, edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link",
   actions
 )(withRouter(Profile));
