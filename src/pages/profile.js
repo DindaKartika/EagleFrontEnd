@@ -10,6 +10,25 @@ import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
 import { Link } from "react-router-dom";
+import {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  PinterestShareButton,
+  VKShareButton,
+  OKShareButton,
+  RedditShareButton,
+  TumblrShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  ViberShareButton,
+  WorkplaceShareButton,
+  LineShareButton,
+  EmailShareButton,
+} from 'react-share';
 
 const waUrl = "https://web.whatsapp.com/send?phone=";
 
@@ -398,6 +417,7 @@ class Profile extends Component {
 
   render() {
     console.log("PROPS", this.props.edit_display_name);
+    const shareUrl = "facebook.com"
     return (
       <div className="profile-page">
         <Header />
@@ -465,6 +485,8 @@ class Profile extends Component {
                   >
                     Perbarui profil
                   </button>
+
+                  <FacebookShareButton url={shareUrl} />
 
                   {/* TEST */}
                   {/* <div>

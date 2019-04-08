@@ -76,8 +76,8 @@ class Farm extends Component {
 			popupProfile : false,
 			plantedAt : new Date(),
 			readyAt : new Date(),
-			photos: ""
-
+			photos: "",
+			perkiraan_panen: 0
 			// center : [],
 			// koordinat : []
 		};
@@ -357,7 +357,6 @@ class Farm extends Component {
 						>
 							<button className="btn btn-outline-success" style={{width: '200px'}}>Kirim Pesan</button>
 						</a>
-
 					</div>
 				</div>
 			</div>
