@@ -750,4 +750,9 @@
   color: darkcyan;
 }
 
+.btn.btn-outline-success.sidebar-map {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
 /*# sourceMappingURL=main.css.map */
