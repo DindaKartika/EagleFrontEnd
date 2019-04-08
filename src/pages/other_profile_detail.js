@@ -4,8 +4,8 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions, store } from "../store";
 import { withRouter } from "react-router-dom";
-import Header from "../components/header_signin";
-import Footer from "../components/footer";
+import Header from "../components/navbar";
+import Footer from "../components/footer_styled";
 import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
@@ -187,13 +187,13 @@ class OtherProfile extends Component {
       <div>
         <Header />
         {/* <div class="floating-wpp">Test</div> */}
-        <a
+        {/* <a
           href={waUrl + this.props.current_phone_number}
           class="wa-float"
           target="_blank"
         >
           <i class="fa fa-whatsapp my-wa-float" />
-        </a>
+        </a> */}
         {/* <a href={waUrl + this.props.current_phone_number} target="_blank">
           Whatsapp
         </a> */}
@@ -231,6 +231,15 @@ class OtherProfile extends Component {
                 <div className="display-email">{this.state.email}</div>
                 <br />
               </div>
+              {/* TEST */}
+              <div>
+                  
+                  <a href={waUrl + this.props.current_phone_number} target="_blank">
+                  <button className="btn btn-success"><i class="fa fa-whatsapp my-wa-float" /> Hubungi via Whatsapp</button>
+                  </a>
+                  
+                </div>
+                {/* TEST */}
             </div>
             <div className="col-md-9 feed-post">
               <div className="container">

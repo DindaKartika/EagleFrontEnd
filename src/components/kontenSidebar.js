@@ -11,28 +11,47 @@ const username  =localStorage.getItem('username')
 const KontenSidebar = props => {
   console.log('cek username', username)
   return (
-    <div>
+    // <div>
+    //   <Link to={"/maps/" + props.id}>
+    //     <div className="sidebar-item">
+    //     <h4>{props.pemilik}</h4>
+    //     <label>@{props.username}</label>
+    //     <br/>
+    //     <span>Tipe tanaman pada lahan:</span>
+    //     {(props.tanaman == "") ? <h5>-</h5> : <h5>{props.tanaman}</h5>}
+    //     <label>{props.deskripsi}</label>
+    //     </div>
+    //   </Link>
+    //   <div style={{display : (username == props.username) ? 'block' : 'none'}}>
+    //     <Link to="/profile">
+    //       <button>Kunjungi Profil</button>
+    //     </Link>
+    //   </div>
+    //   <div style={{display : (username == props.username) ? 'none' : 'block'}}>
+    //     <Link to={"/otherprofile/" + props.id_pemilik}>
+    //       <button>Kunjungi Profil</button>
+    //     </Link>
+    //   </div>
+    // </div>
+
+  <div class="card border-dark mb-3">
+    <div class="card-header">
       <Link to={"/maps/" + props.id}>
-        <div className="sidebar-item">
-        <h4>{props.pemilik}</h4>
+      <label>Nomor Identitas Lahan {props.id}</label>
+      </Link>
+    </div>
+    <div class="card-body text-dark">
+      {/* <h5 class="card-title">Dark card title</h5> */}
+      <h6>Pemilik Lahan:</h6>
+      <h4>{props.pemilik}</h4>
         <label>@{props.username}</label>
         <br/>
         <span>Tipe tanaman pada lahan:</span>
         {(props.tanaman == "") ? <h5>-</h5> : <h5>{props.tanaman}</h5>}
         <label>{props.deskripsi}</label>
-        </div>
-      </Link>
-      <div style={{display : (username == props.username) ? 'block' : 'none'}}>
-        <Link to="/profile">
-          <button>Kunjungi Profil</button>
-        </Link>
-      </div>
-      <div style={{display : (username == props.username) ? 'none' : 'block'}}>
-        <Link to={"/otherprofile/" + props.id_pemilik}>
-          <button>Kunjungi Profil</button>
-        </Link>
-      </div>
+      {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
     </div>
+  </div>
   );
 
 }
