@@ -161,8 +161,9 @@ class App extends Component {
 			console.log(rows)
 
 			console.log('koordinat jadi', rows)
-			self.setState({uniquefeatures : rows})
-			self.setState({koordinat : rows})
+			// self.setState({uniquefeatures : rows})
+			// self.setState({koordinat : rows})
+			self.setState({uniquefeatures : rows, koordinat : rows})
 			localStorage.setItem('datas', JSON.stringify(rows))
 			console.log('cekdata', localStorage.getItem('datas'))
 			// self.setState({uniquefeatures : rows})
