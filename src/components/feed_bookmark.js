@@ -15,7 +15,8 @@ class FeedBookmark extends Component {
                 dataComment: this.props.allComment,
                 // countLike: this.props.dataLike,
                 is_like:"false",
-                id_like:""
+                id_like:"",
+                comment_state: false
                 // feedBookmark:[]
             };
         };
@@ -162,45 +163,12 @@ class FeedBookmark extends Component {
         ;
     };
 
-    // handleUnlike(e){
-    //     e.preventDefault();
-    //     const self = this;
-    //     const id_liked = e.target.name;
-    //     console.log("id untuk like",id_liked)
-
-    //     const token = localStorage.getItem("token");
-    //     console.log("test token post",token)
-    //     let unlike = {
-    //         method:'delete',
-    //         url:'http://localhost:5000/feedlikes/' + self.state.id_like,
-    //         headers: {
-    //             'Authorization':'Bearer ' + token
-    //             // "Content-Type":"application/json"
-    //         }
-    //     };
-    //     console.log("cek url post", unlike);
-    //     //get all like
-    //     axios(unlike)
-    //     .then(function(response){
-    //         this.props.statusUnlike();
-    //         alert("unlike sukses")
-    //         console.log(response.data);
-    //         axios({
-    //             method: 'get',
-    //             url: 'http://localhost:5000/feedlikes/' + self.props.data.id_feed,
-    //             // headers: {
-    //             //   Authorization: 'Bearer ' + token
-    //             // }
-    //         }).then(function(response) {
-    //             self.setState({
-    //                 countLike: response.data.total,
-    //             })
-    //         }).catch(function(error) {
-    //         console.log("Gagal get like", error);
-    //         });
-    //         self.props.history.push("/newsfeed");
-    //     });
-    // };
+    changeCommentState() {
+        this.setState({
+            comment_state: !this.state.comment_state
+        })
+        console.log("Test state comment", this.state.comment_state)
+    }
 
     handleProfile(e){
         console.log(e)
@@ -252,13 +220,15 @@ class FeedBookmark extends Component {
                     <div className="card-body header-feed-color">
                         {/* <span className="format-likes">{this.state.jumlah}</span> */}
                         <span className="format-likes">{this.props.data.feed_content.total_likes}</span>
-                        <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a>
+                        <a  className="card-link" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}><i className="fa fa-gittip" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}></i> Suka</a>
+                        <a  className="card-link" onClick={()=>this.changeCommentState()}><i className="fa fa-comment" onClick={()=>this.changeCommentState()}></i> Tampilkan komentar</a>
+                        {/* <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a> */}
                         {/* <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a> */}
                         {/* <a href="#" className="card-link"><i className="fa fa-comment"></i> Comment</a> */}
                         {/* <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> */}
                     </div>
                     {/* comment section start here */}
-                <div className="card-footer ">
+                <div className="card-footer " style={{display: this.state.comment_state ? "block" : "none"}}>
                     <div class="row bootstrap snippets justify-content-end">
                         <div className="col-md-10 col-md-offset-2 col-sm-12">
                             <div className="comment-wrapper">
