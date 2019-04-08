@@ -173,7 +173,7 @@ class FeedBookmark extends Component {
     handleProfile(e){
         console.log(e)
         this.props.handleDetailProfile(e);
-        this.props.history.push("/otherprofile");
+        this.props.history.push("/otherprofile/"+e);
     };
 
   render() {
@@ -220,7 +220,8 @@ class FeedBookmark extends Component {
                     <div className="card-body header-feed-color">
                         {/* <span className="format-likes">{this.state.jumlah}</span> */}
                         <span className="format-likes">{this.props.data.feed_content.total_likes}</span>
-                        <a  className="card-link" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}><i className="fa fa-gittip" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}></i> Suka</a>
+                        <a  className="card-link margin-right-20" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}><i className="fa fa-gittip" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed}></i> Suka</a>
+                        <span className="format-likes">{this.props.data.feed_content.total_comment}</span>
                         <a  className="card-link" onClick={()=>this.changeCommentState()}><i className="fa fa-comment" onClick={()=>this.changeCommentState()}></i> Tampilkan komentar</a>
                         {/* <a type="btn" onClick={(e)=>this.handleClickLike(e)} name={this.props.data.id_feed} ><img src={require('../images/ico/likeafter.png')} className="imglike margin-bottom-5" alt=""/></a> */}
                         {/* <a href="#" className="card-link"><i className="fa fa-gittip"></i> Like</a> */}

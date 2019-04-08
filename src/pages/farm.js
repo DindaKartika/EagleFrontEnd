@@ -76,7 +76,8 @@ class Farm extends Component {
 			popupProfile : false,
 			plantedAt : new Date(),
 			readyAt : new Date(),
-			photos: ""
+			photos: "",
+			perkiraan_panen: 0
 			// center : [],
 			// koordinat : []
 		};
