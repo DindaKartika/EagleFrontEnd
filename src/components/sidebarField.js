@@ -55,8 +55,11 @@ class SidebarField extends Component {
       photos: "",
       perkiraan_panen : 0,
       image: null,
-      progressFotoLahan: 0
+      progressFotoLahan: 0,
+      tanah : false,
+      status_lahan : "tidak"
     };
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   onChangePlant = datePlant => this.setState({ datePlant });
@@ -81,7 +84,8 @@ class SidebarField extends Component {
       address,
       city,
       perkiraan_panen,
-      photos
+      photos,
+      tanah
     } = this.state;
     const id = localStorage.getItem("id_farm");
     console.log(id);
@@ -93,7 +97,8 @@ class SidebarField extends Component {
       address: address,
       city: city,
       perkiraan_panen: perkiraan_panen,
-      photos: photos
+      photos: photos,
+      status_lahan : String(tanah)
     };
     console.log(data);
 
@@ -124,7 +129,8 @@ class SidebarField extends Component {
       address,
       city,
       perkiraan_panen,
-      photos
+      photos,
+      tanah
     } = this.state;
     const id = localStorage.getItem("id_farm");
     console.log(id);
@@ -136,7 +142,8 @@ class SidebarField extends Component {
       address: address,
       city: city,
       perkiraan_panen: perkiraan_panen,
-      photos: photos
+      photos: photos,
+      status_lahan : String(tanah)
     };
     console.log(data);
 
@@ -192,6 +199,16 @@ class SidebarField extends Component {
       }
     );
   };
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
 
   render() {
     const coord = localStorage.getItem("koordinat");
@@ -256,6 +273,12 @@ class SidebarField extends Component {
             onChange={e => this.changeInput(e)}
           />
           <br />
+          <input
+          name="tanah"
+          type="checkbox"
+          checked={this.state.tanah}
+          onChange={this.handleInputChange} /> Lahan Dijual
+          <br/>
           <label for="photos">Foto lahan:</label>
           <br />
           <progress value={this.state.progressFotoLahan} max="100" />

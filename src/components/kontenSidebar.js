@@ -9,8 +9,6 @@ import "./../css/main.css";
 const username  =localStorage.getItem('username')
 
 const KontenSidebar = props => {
-  console.log('cek username', username)
-  console.log('baca data', props.data)
   const id = props.data.id
   const pemilik = props.data.pemilik
   const username = props.data.username
@@ -18,7 +16,6 @@ const KontenSidebar = props => {
   const deskripsi = props.data.deskripsi
   const id_pemilik = props.data.id_pemilik
   const status_lahan = props.data.status_lahan
-  console.log('tes lagi', id)
   return (
   <div class="card border-dark mb-3">
     <div class="card-header">
@@ -64,13 +61,6 @@ const KontenSidebar = props => {
 
 KontenSidebar.propTypes = {
   data : PropTypes.string
-  // id:PropTypes.number,
-  // id_pemilik:PropTypes.number,
-  // pemilik:PropTypes.string,
-  // username:PropTypes.string,
-  // tanaman:PropTypes.string,
-  // deskripsi:PropTypes.string,
-  // status_lahan:PropTypes.string
 }
 
 export default KontenSidebar;

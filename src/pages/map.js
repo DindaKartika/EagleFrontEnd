@@ -36,6 +36,9 @@ class App extends Component {
 		};
 
 		localStorage.setItem('search', '')
+		localStorage.setItem('tanaman', '')
+		localStorage.setItem('tanggal', '')
+		localStorage.setItem('tanah', '')
 
 		this.viewFilter = this.viewFilter.bind(this);
 		this.viewSidebar = this.viewSidebar.bind(this);
@@ -103,6 +106,11 @@ class App extends Component {
 		}
 		if (localStorage.getItem('search') !== ""){
 			data['search'] = localStorage.getItem('search')
+		}
+		if (localStorage.getItem('tanah') !== ""){
+			if (localStorage.getItem('tanah') == "true"){
+				data['status_lahan'] = 'dijual'
+			}
 		}
 
 		console.log('data search', data)
@@ -216,15 +224,10 @@ class App extends Component {
 					data['id'] = value.properties.id
 					data['tanaman'] = datas[value.properties.id].tanaman
 					ids.push(data)
-					// ids.push(datas.tanaman)
 				}
 			}
 			console.log('cek ada feature', ids)
 			this.setState({uniquefeatures : ids})
-
-			// const plants = localStorage.getItem('tanaman')
-			// const filters = ids.filter(plant => plant == plants)
-			// console.log(filters)
 			}
 		}
 
@@ -266,7 +269,6 @@ class App extends Component {
 		console.log('index popup', number)
 		console.log('buat popup', koordinat[number])
 		console.log('cek features', uniquefeatures)
-		// self.setState({uniquefeatures})
     return (
       <div className="App">
 				<div className="header">
@@ -281,11 +283,8 @@ class App extends Component {
 				</div>
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
-					// console.log(key)
-						// if (koordinat.key != undefined){
 							<KontenSidebar key={key} data={koordinat[key]}
 							/>
-						// }
 					)}
 				</div>
 				<div>
