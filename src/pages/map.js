@@ -36,6 +36,9 @@ class App extends Component {
 		};
 
 		localStorage.setItem('search', '')
+		localStorage.setItem('tanaman', '')
+		localStorage.setItem('tanggal', '')
+		localStorage.setItem('tanah', '')
 
 		this.viewFilter = this.viewFilter.bind(this);
 		this.viewSidebar = this.viewSidebar.bind(this);
@@ -104,8 +107,24 @@ class App extends Component {
 		if (localStorage.getItem('search') !== ""){
 			data['search'] = localStorage.getItem('search')
 		}
+		if (localStorage.getItem('tanah') !== ""){
+			if (localStorage.getItem('tanah') == "true"){
+				data['status_lahan'] = 'dijual'
+			}
+		}
 
 		console.log('data search', data)
+
+		// const plants = localStorage.getItem('tanaman')
+		// const datas = this.state.uniquefeatures
+		// const filters = []
+		// for (const [index, value] of datas.entries()) {
+		// 	const uniqfilter = {}
+		// 	if (value['tanaman'] == plants){
+		// 		filters.push(value)
+		// 	}
+		// }
+		// console.log('filter search', filters)
 
 		const self = this
 
@@ -135,15 +154,19 @@ class App extends Component {
 				data['tanaman'] = response.data[index].plant_type
 				data['pemilik'] = response.data[index].user.display_name
 				data['username'] = response.data[index].user.username
+				data['status_lahan'] = response.data[index].status_lahan
 				rows.push(data)
 			}
 
 			console.log(rows)
 
 			console.log('koordinat jadi', rows)
-			self.setState({koordinat : rows})
+			// self.setState({uniquefeatures : rows})
+			// self.setState({koordinat : rows})
+			self.setState({uniquefeatures : rows, koordinat : rows})
 			localStorage.setItem('datas', JSON.stringify(rows))
 			console.log('cekdata', localStorage.getItem('datas'))
+			// self.setState({uniquefeatures : rows})
 		})
 		.catch(function(error){
 			console.log('error', error);
@@ -189,6 +212,8 @@ class App extends Component {
 		console.log('Map clicked!');
 		const features = map.queryRenderedFeatures(evt.point);
 		console.log('cek features awal', features);
+		const datas = this.state.koordinat
+		console.log(datas)
 
 		if (features) {
 			const uniqueFeatures = this.getUniqueFeatures(features, "id");
@@ -196,16 +221,14 @@ class App extends Component {
 			for (const [index, value] of uniqueFeatures.entries()) {
 				if (value.properties.id !== undefined){
 					console.log(value.properties.id)
-					ids.push(value.properties.id)
+					const data = {}
+					data['id'] = value.properties.id
+					data['tanaman'] = datas[value.properties.id].tanaman
+					ids.push(data)
 				}
 			}
 			console.log('cek ada feature', ids)
-			if (ids != []){
-				this.setState({uniquefeatures : ids})
-			}
-			else{
-				this.setState({uniquefeatures : [0]})
-			}
+			this.setState({uniquefeatures : ids})
 			}
 		}
 
@@ -246,7 +269,7 @@ class App extends Component {
 		console.log('koord', koordinat)
 		console.log('index popup', number)
 		console.log('buat popup', koordinat[number])
-		
+		console.log('cek features', uniquefeatures)
     return (
       <div className="App">
 				<div className="header">
@@ -261,9 +284,7 @@ class App extends Component {
 				</div>
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
-					// console.log('cek hasil bayam', uniquefeatures)
-        //   <label>Status tanah dijual: {props.status_lahan}</label>
-							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi} status_lahan={koordinat[item].status_lahan}
+							<KontenSidebar key={key} data={koordinat[key]}
 							/>
 					)}
 				</div>

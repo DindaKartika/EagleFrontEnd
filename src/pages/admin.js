@@ -29,28 +29,6 @@ class Admin extends Component {
 		self.setState({Users: response.data});
 		console.log('users', response.data);
 		const Users = response.data
-		// const rows = []
-		// for (const [index, value] of Farms.entries()) {
-		// 	const rowCoordinates = []
-		// 	const coordinates = JSON.parse(response.data[index].coordinates)
-		// 	rowCoordinates.push(coordinates)
-		// 	const centers = JSON.parse(response.data[index].center)
-		// 	console.log(centers)
-		// 	const data = {}
-		// 	data['id'] = response.data[index].id_farm
-		// 	data['id_pemilik'] = response.data[index].id_user
-		// 	data['coordinates'] = rowCoordinates
-		// 	data['center'] = centers
-		// 	data['deskripsi'] = response.data[index].deskripsi
-		// 	data['tanaman'] = response.data[index].plant_type
-		// 	data['pemilik'] = response.data[index].user.display_name
-		// 	data['username'] = response.data[index].user.username
-		// 	rows.push(data)
-		// }
-		// console.log('koordinat jadi', rows)
-		// self.setState({koordinat : rows})
-		// localStorage.setItem('datas', JSON.stringify(rows))
-		// console.log('cekdata', localStorage.getItem('datas'))
 	})
 	.catch(function(error){
 		console.log('error', error);
