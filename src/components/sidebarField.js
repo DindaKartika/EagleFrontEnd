@@ -53,7 +53,7 @@ class SidebarField extends Component {
       address: "",
       city: "",
       photos: "",
-
+      perkiraan_panen : 0,
       image: null,
       progressFotoLahan: 0
     };
@@ -80,6 +80,7 @@ class SidebarField extends Component {
       dateReady,
       address,
       city,
+      perkiraan_panen,
       photos
     } = this.state;
     const id = localStorage.getItem("id_farm");
@@ -91,6 +92,7 @@ class SidebarField extends Component {
       plant_type: plant_type,
       address: address,
       city: city,
+      perkiraan_panen: perkiraan_panen,
       photos: photos
     };
     console.log(data);
@@ -121,6 +123,7 @@ class SidebarField extends Component {
       dateReady,
       address,
       city,
+      perkiraan_panen,
       photos
     } = this.state;
     const id = localStorage.getItem("id_farm");
@@ -132,6 +135,7 @@ class SidebarField extends Component {
       plant_type: plant_type,
       address: address,
       city: city,
+      perkiraan_panen: perkiraan_panen,
       photos: photos
     };
     console.log(data);
@@ -211,11 +215,6 @@ class SidebarField extends Component {
           <br />
           <label for="planted_at">Tanggal ditanam:</label>
           <br />
-          {/* <DateTimePicker
-          onChange={this.onChangePlant}
-          value={this.state.datePlant}
-          disableClock={true}
-        /> */}
           <DatePicker
             selected={this.state.datePlant}
             onChange={this.onChangePlant}
@@ -224,17 +223,20 @@ class SidebarField extends Component {
           <br />
           <label for="ready_at">Perkiraan tanggal panen:</label>
           <br />
-          {/* <DateTimePicker className="css-10nd86i"
-            onChange={this.onChangeReady}
-            value={this.state.dateReady}
-            disableClock={true}
-            // minDate={new Date()}
-        /> */}
           <DatePicker
             selected={this.state.dateReady}
             onChange={this.onChangeReady}
             value={this.state.dateReady}
           />
+          <br />
+          <label for="perkiraan_panen">Perkiraan Hasil Panen:</label>
+          <br />
+          <input
+            type="text"
+            name="perkiraan_panen"
+            defaultValue=""
+            onChange={e => this.changeInput(e)}
+          /> kg
           <br />
           <label for="address">Alamat lengkap:</label>
           <br />

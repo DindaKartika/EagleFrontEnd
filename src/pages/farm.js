@@ -12,6 +12,7 @@ import axios from 'axios'
 import { Link } from "react-router-dom";
 
 import mapboxgl from 'mapbox-gl'
+import { read } from "fs";
 
 const optionPlant = [
   {value:'Semua', label:'Semua'},
@@ -45,6 +46,8 @@ const optionPlant = [
   {value:'Kopi', label:'Kopi'}
 ]
 
+const waUrl = "https://web.whatsapp.com/send?phone=";
+
 const Map = ReactMapboxGl({
   accessToken:
     "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0ejY1c3FmMzExejQxcGNmcmZoaGhtMCJ9.FnTBMWoUi17BhvjRQ0e2mw"
@@ -70,7 +73,9 @@ class Farm extends Component {
 			user : "",
 			ubahInfo : false,
 			rekomendasi : "",
-			popupProfile : false
+			popupProfile : false,
+			plantedAt : new Date(),
+			readyAt : new Date()
 			// center : [],
 			// koordinat : []
 		};
@@ -83,7 +88,13 @@ class Farm extends Component {
 			axios
 			.get('http://0.0.0.0:5000/farms/' + window.location.pathname.slice(6))
 			.then(function(response){
-				self.setState({Farms: response.data});
+				const farms = response.data
+				farms['readyAt'] = response.data.ready_at.slice(5,16)
+				farms['plantedAt'] = response.data.planted_at.slice(5,16)
+				self.setState({Farms: farms});
+				self.setState({plantedAt: new Date(response.data.planted_at)});
+				self.setState({readyAt: new Date(response.data.ready_at)});
+				// console.log('date ready at', new Date(response.data.ready_at))
 				console.log('Farms', response.data);
 				self.setState({user : response.data.user})
 				localStorage.setItem('id_farm', response.data.id_farm)
@@ -119,24 +130,22 @@ class Farm extends Component {
     const {
       deskripsi,
       plant_type,
-      // datePlant,
-      // dateReady,
+			plantedAt,
+			readyAt,
       address,
-      city,
-      photos
+			farm_size,
+			perkiraan_panen
     } = this.state;
     const id = localStorage.getItem("id_farm");
     console.log(id);
-    // console.log("ready", dateReady);
-    // console.log("plant", datePlant);
     const data = {
       description: deskripsi,
       plant_type: plant_type,
-      // planted_at: datePlant.toISOString(),
-      // ready_at: dateReady.toISOString(),
+      planted_at: plantedAt.toISOString(),
+      ready_at: readyAt.toISOString(),
       address: address,
-      city: city,
-      photos: photos
+			farm_size : farm_size,
+			perkiraan_panen : perkiraan_panen
     };
     console.log(data);
 
@@ -164,6 +173,9 @@ class Farm extends Component {
 	NotPopupProfile = () => {
     this.setState({popupProfile : false})
 	};
+
+	onChangePlantedAt = plantedAt => this.setState({ plantedAt });
+	onChangeReadyAt = readyAt => this.setState({ readyAt });
 	
 	changeInput = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -171,7 +183,7 @@ class Farm extends Component {
 
   render() {
 		console.log(this.state.sidebar)
-		const {center, koordinat, Farms, user, ubahInfo, rekomendasi, popupProfile} = this.state
+		const {center, koordinat, Farms, user, ubahInfo, rekomendasi, popupProfile, plantedAt, readyAt} = this.state
 		console.log('center', center)
 		console.log('koordinat', koordinat)
 		console.log('state', ubahInfo)
@@ -197,22 +209,22 @@ class Farm extends Component {
 						<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
 					</div>
 					<label>Tanggal ditanam : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.planted_at}</h5>
+					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
 					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						{/* <DatePicker
-							selected={Farms.planted_at}
+						<DatePicker
+							selected={plantedAt}
 							onChange={this.onChangePlantedAt}
-							value={Farms.planted_at}
-						/> */}
+							value={plantedAt}
+						/>
 					</div>
 					<label>Perkiraan tanggal panen : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.ready_at}</h5>
+					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
 					<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-						{/* <DatePicker
-							selected={Farms.ready_at}
+						<DatePicker
+							selected={readyAt}
 							onChange={this.onChangeReadyAt}
-							value={Farms.planted_at}
-						/> */}
+							value={readyAt}
+						/>
 					</div>
 					<label>Alamat : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
@@ -220,9 +232,13 @@ class Farm extends Component {
 					<label>Kota : </label>
 					<h5>{Farms.city}</h5>
 					<label>Luas : </label>
-					<label>Alamat : </label>
-					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
-					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
+					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
+					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
+					<label>Ketinggian : </label>
+					<h5>{Farms.ketinggian} mdpl</h5>
+					<label>Perkiraan hasil panen : </label>
+					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
+					<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
 					<label>Kategori : </label>
 					<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
 					<div style={{display : (username == user.username ? 'block' : 'none')}}>
@@ -243,7 +259,13 @@ class Farm extends Component {
 								<h5>{user.display_name}</h5>
 								<h5>@{user.username}</h5>
 							</Link>
-							<button>Kirim Pesan</button>
+							<a
+								href={waUrl + user.phone_number}
+								class="wa-float"
+								target="_blank"
+							>
+								<button>Kirim Pesan</button>
+							</a>
 						</div>
 					</div>
 				</div>

@@ -663,7 +663,7 @@
   position: absolute;
   z-index: 1;
   left: 8vw;
-  top: 22vh;
+  top: 21vh;
   background-color: #f7f7f7;
   padding: 10px;
   margin: 3px;
@@ -673,8 +673,11 @@
 }
 .PopupProfile button {
   cursor: pointer;
+  background-image: url("../images/logo/whatsapp_PNG1.webp");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  padding-left: 22px;
 }
-
 
 .btn {
   font-size: 14px;
@@ -737,7 +740,8 @@
 
 .sidebar-item {
   color: red;
-  
+}
+
 .card-link {
   cursor: pointer;
 }
