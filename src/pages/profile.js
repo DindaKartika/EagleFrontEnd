@@ -10,6 +10,7 @@ import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
 import { Link } from "react-router-dom";
+import Chart from "react-apexcharts";
 
 const waUrl = "https://web.whatsapp.com/send?phone=";
 
