@@ -354,6 +354,12 @@ $footer-color: #252525;
     }
 }
 
+.profile-page {
+    input {
+        color: darkgreen;
+    }
+}
+
 .container-fluid.row.justify-content-end.strip {
     margin-right: 0;
     margin-left: 0;
@@ -792,4 +798,93 @@ $footer-color: #252525;
     button{
         cursor: pointer;
     }
+}
+
+.btn {
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 0px;
+    cursor: pointer;
+    font-weight: 400;
+    color: #fff;
+    // text-transform: uppercase;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    display: inline-block;
+  }
+  
+  .btn:focus,
+  .btn:active {
+    box-shadow: none !important;
+    outline: none !important;
+    color: #fff !important;
+  }
+  
+  .btn-common {
+    background-color: #1fcaa7 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+    margin-right: 20px;
+  }
+  
+  .btn-common:hover {
+    color: #fff !important;
+    background-color: #0e9d81 !important;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1) !important;
+    transition: all .2s ease-in-out !important;
+    -moz-transition: all .2s ease-in-out !important;
+    -webkit-transition: all .2s ease-in-out !important;
+  }
+
+  .btn-search:hover {
+    color: #fff !important;
+    background-color: #0e9d81 !important;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1) !important;
+    transition: all .2s ease-in-out !important;
+    -moz-transition: all .2s ease-in-out !important;
+    -webkit-transition: all .2s ease-in-out !important;
+    border-radius: 0;
+  }
+
+  .btn-search:focus,
+  .btn-search:active {
+    color: #fff !important;
+    background-color: #1fcaa7 !important;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1) !important;
+    transition: all .2s ease-in-out !important;
+    -moz-transition: all .2s ease-in-out !important;
+    -webkit-transition: all .2s ease-in-out !important;
+  }
+
+//   .content-section {
+//     background: linear-gradient(
+//         rgba(255, 255, 255, 0.8), 
+//         rgba(255, 255, 255, 0.8)
+//       ), url(../images/img/bg.png) no-repeat;
+//     //   background-size: cover;
+//       color: rgb(32, 99, 99);
+//     //   padding: 150px 0;
+//       // overflow: hidden;
+//       position: relative;
+//   }
+
+.sidebar-item {
+    color: red;
+}
+
+.card-link{
+    cursor: pointer;
+}
+
+.card-link:hover {
+    color: darkcyan;
+}
+
+.btn.btn-outline-success.sidebar-map {
+    font-size: 12px;
+    margin-bottom: 10px
 }

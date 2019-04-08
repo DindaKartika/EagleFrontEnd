@@ -105,6 +105,8 @@ const initialState = {
     
     // is_like:false
     // listAllComment:[]
+    
+    listBookmark:[],
 
     //profile
     user_id:0

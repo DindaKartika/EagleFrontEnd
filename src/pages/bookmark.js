@@ -4,8 +4,8 @@ import axios from 'axios';
 import { connect } from "unistore/react";
 import { actions, store } from '../store';
 import { withRouter } from "react-router-dom";
-import Header from '../components/header_signin'
-import Footer from '../components/footer';
+import Header from '../components/navbar'
+import Footer from '../components/footer_styled';
 import FeedComponent from '../components/feed_component';
 import FeedBookmark from '../components/feed_bookmark';
 import CommentComponent from '../components/comment_component';
@@ -17,8 +17,8 @@ class Bookmarks extends Component {
         super(props);
         this.state  = {
             search:"",
-            AllFeed:[],
-            listBookmark:[]
+            AllFeed:[]
+            // listBookmark:[]
         }
     }
     
@@ -38,7 +38,7 @@ class Bookmarks extends Component {
          axios(allFeed)
         .then(function(response){
             // self.setState({AllFeed: response.data});
-            self.setState({listBookmark: response.data});
+            store.setState({listBookmark: response.data});
             // store.setState({datacart: response.data});
             console.log(response.data);
         })
@@ -139,30 +139,13 @@ class Bookmarks extends Component {
                     <div className="col-md-9 feed-post">
                         <div className="container">
                             <div className="display" style={{ display: "block" }}>
-                            {/* <div class="container">
-                                <form onSubmit={e => this.handleSearch(e)}>
-                                    <div className="input-group">
-                                        <input type="text" className="form-control" name="searchcontent" placeholder="Search for..."/>
-                                        <span className="input-group-btn">
-                                            <button className="btn btn-search" type="submit"><i className="fa fa-search fa-fw"></i> Search</button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
-                                <form onSubmit={e => this.handleClick(e)}>
-                                    <div className="form-group">
-                                        <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
-                                    </div>
-                                    <div className="container-fluid row justify-content-end">
-                                        <button className="btn btn-outline-success addpost-btn" type="submit">Bagikan</button>
-                                    </div>
-                                </form>  */}
                                 <div className="profile-post" style={{ display: "block" }}>
                                     {/* Display Post  */}
                                     <div className="post-item" >
                                         <hr />
+                                        <h1>Feed yang diikuti</h1>
                                         {/* {this.props.listAllFeed.map((item, key) => { */}
-                                        {this.state.listBookmark.map((item, key) => {
+                                        {this.props.listBookmark.map((item, key) => {
                                             // return <FeedComponent key={key} displayname ={item.user.display_name} username = {item.user.username} tag = {item.tag} content={item.content} date={item.created_at.slice(4, 16)} time={item.created_at.slice(17, 22)}/>; }
                                             return <FeedBookmark key={key} data={item}/>; }
                                                     )}
@@ -187,5 +170,5 @@ class Bookmarks extends Component {
 }
 
 // export default Profile;
-export default connect( "listAllFeed, token, current_display_name, current_username, current_profile_picture", actions)
+export default connect( "listAllFeed, listBookmark, token, current_display_name, current_username, current_profile_picture", actions)
 (withRouter(Bookmarks));
