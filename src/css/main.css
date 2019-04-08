@@ -671,4 +671,12 @@
   cursor: pointer;
 }
 
+.card-link {
+  cursor: pointer;
+}
+
+.card-link:hover {
+  color: darkcyan;
+}
+
 /*# sourceMappingURL=main.css.map */
