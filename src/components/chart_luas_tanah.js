@@ -33,6 +33,14 @@ const optionPlant = [
   { value: "Kelapa", label: "Kelapa" }
 ];
 
+const optionCity = [
+  { value: "", label: "Nasional" },
+  { value: "Jawa Timur", label: "--- Jawa Timur ---", isDisabled: true },
+  { value: "Malang", label: "Malang" },
+  { value: "Surabaya", label: "Surabaya" },
+  { value: "Sidoarjo", label: "Sidoarjo" }
+];
+
 class ChartLuasTanah extends Component {
   constructor(props) {
     super(props);
@@ -56,27 +64,6 @@ class ChartLuasTanah extends Component {
     };
   }
 
-//   componentDidMount = () => {
-//     const self = this;
-//     axios
-//       .get("http://0.0.0.0:5000/analyze", {
-//         params: {
-//           jenis_tanaman: "wortel"
-//         }
-//       })
-//       .then(function(response) {
-//         let temp = JSON.parse(JSON.stringify(self.state)).series;
-//         temp[0].data = response.data.luas_tanah;
-//         self.setState({
-//           options: { xaxis: { categories: response.data.dates } },
-//           series: temp
-//         });
-//       })
-//       .catch(function(error) {
-//         console.log(error);
-//       });
-//   };
-
   changePlant(event) {
     const self = this;
     axios
@@ -90,13 +77,58 @@ class ChartLuasTanah extends Component {
         temp[0].data = response.data.luas_tanah;
         self.setState({
           options: { xaxis: { categories: response.data.past_output_dates } },
-          series: temp
+          series: temp,
+          jenis_tanaman: event.value
         });
       })
       .catch(function(error) {
         console.log(error);
       });
   }
+
+  changeCity(event) {
+    const self = this;
+    if (event.value != "") {
+      axios
+        .get("http://0.0.0.0:5000/analyzekota", {
+          params: {
+            jenis_tanaman: self.state.jenis_tanaman,
+            kota: event.value
+          }
+        })
+        .then(function(response) {
+          let temp = JSON.parse(JSON.stringify(self.state)).series;
+          temp[0].data = response.data.luas_tanah;
+          self.setState({
+            options: { xaxis: { categories: response.data.past_output_dates } },
+            series: temp
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    } else {
+      axios
+        .get("http://0.0.0.0:5000/analyze", {
+          params: {
+            jenis_tanaman: self.state.jenis_tanaman
+          }
+        })
+        .then(function(response) {
+          let temp = JSON.parse(JSON.stringify(self.state)).series;
+          temp[0].data = response.data.luas_tanah;
+          self.setState({
+            options: { xaxis: { categories: response.data.past_output_dates } },
+            series: temp,
+            jenis_tanaman: event.value
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  }
+
   render() {
     return (
       <div className="Analyze">
@@ -104,6 +136,8 @@ class ChartLuasTanah extends Component {
           <div className="mixed-chart">
             <label>Jenis Tanaman :</label>
             <Select options={optionPlant} onChange={e => this.changePlant(e)} />
+            <label>Nama Kota :</label>
+            <Select options={optionCity} onChange={e => this.changeCity(e)} />
             <Chart
               options={this.state.options}
               series={this.state.series}

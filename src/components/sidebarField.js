@@ -48,7 +48,7 @@ class SidebarField extends Component {
       address: "",
       city: "",
       photos: "",
-      perkiraan_panen : 0,
+      perkiraan_panen : null,
       image: null,
       progressFotoLahan: 0,
       tanah : false,
