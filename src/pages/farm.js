@@ -138,7 +138,7 @@ class Farm extends Component {
       plant_type,
 			plantedAt,
 			readyAt,
-      address,
+            address,
 			farm_size,
 			perkiraan_panen,
 			tanah

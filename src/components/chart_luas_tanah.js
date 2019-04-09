@@ -56,26 +56,26 @@ class ChartLuasTanah extends Component {
     };
   }
 
-  componentDidMount = () => {
-    const self = this;
-    axios
-      .get("http://0.0.0.0:5000/analyze", {
-        params: {
-          jenis_tanaman: "wortel"
-        }
-      })
-      .then(function(response) {
-        let temp = JSON.parse(JSON.stringify(self.state)).series;
-        temp[0].data = response.data.luas_tanah;
-        self.setState({
-          options: { xaxis: { categories: response.data.dates } },
-          series: temp
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
+//   componentDidMount = () => {
+//     const self = this;
+//     axios
+//       .get("http://0.0.0.0:5000/analyze", {
+//         params: {
+//           jenis_tanaman: "wortel"
+//         }
+//       })
+//       .then(function(response) {
+//         let temp = JSON.parse(JSON.stringify(self.state)).series;
+//         temp[0].data = response.data.luas_tanah;
+//         self.setState({
+//           options: { xaxis: { categories: response.data.dates } },
+//           series: temp
+//         });
+//       })
+//       .catch(function(error) {
+//         console.log(error);
+//       });
+//   };
 
   changePlant(event) {
     const self = this;
@@ -89,7 +89,7 @@ class ChartLuasTanah extends Component {
         let temp = JSON.parse(JSON.stringify(self.state)).series;
         temp[0].data = response.data.luas_tanah;
         self.setState({
-          options: { xaxis: { categories: response.data.dates } },
+          options: { xaxis: { categories: response.data.past_output_dates } },
           series: temp
         });
       })

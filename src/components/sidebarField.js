@@ -58,7 +58,9 @@ class SidebarField extends Component {
   }
 
   onChangePlant = datePlant => this.setState({ datePlant });
-  onChangeReady = dateReady => this.setState({ dateReady });
+  onChangeReady = dateReady => {
+  console.log("test date", dateReady);
+  this.setState({ dateReady });}
 
   changeInput = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -91,6 +93,8 @@ class SidebarField extends Component {
       plant_type: plant_type,
       address: address,
       city: city,
+      planted_at : datePlant.toISOString(),
+      ready_at : dateReady.toISOString(),
       perkiraan_panen: perkiraan_panen,
       photos: photos,
       status_lahan : String(tanah)
@@ -135,6 +139,8 @@ class SidebarField extends Component {
       description: deskripsi,
       plant_type: plant_type,
       address: address,
+      planted_at : datePlant.toISOString(),
+      ready_at : dateReady.toISOString(),
       city: city,
       perkiraan_panen: perkiraan_panen,
       photos: photos,
