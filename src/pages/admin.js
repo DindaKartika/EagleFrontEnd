@@ -129,11 +129,11 @@ class Admin extends Component {
           </table>
           <div className="row">
             <div className="col-md-12">
-              <h2>Grafik Luas Tanah</h2>
+              <p className="h2">Grafik Luas Tanah</p>
               <ChartLuasTanah />
             </div>
             <div className="col-md-12">
-              <h2>Grafik Total Panen</h2>
+              <p className="h2">Grafik Total Panen</p>
               <ChartTotalPanen />
             </div>
           </div>
