@@ -114,7 +114,9 @@ const initialState = {
 
     //axios profile
     listFeed:[],
-    listComment:[]
+    listComment:[],
+
+    Farms:[]
 
 };
 

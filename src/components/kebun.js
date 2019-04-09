@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../css/main.css';
 import '../css/bootstrap.min.css'
 import{ Link } from "react-router-dom";
+import { actions, store } from '../store';
+import { connect } from "unistore/react";
+import { withRouter } from "react-router-dom";
 
 import DateTime from "react-datetime";
 import AsyncSelect from 'react-select/lib/Async';
@@ -28,7 +31,7 @@ class FilterMap extends Component {
         params:{id_user : id}
         })
     .then(function(response){
-        self.setState({Farms: response.data});
+        store.setState({Farms: response.data});
         console.log('farms', response.data);
     })
     .catch(function(error){
@@ -41,7 +44,7 @@ class FilterMap extends Component {
 		const {Farms} = this.state
     return (
     <div>
-			{Farms.map((item, key) => 
+			{this.props.Farms.map((item, key) => 
 				<KontenKebun key={key} id={item.id_farm} deskripsi={item.deskripsi} alamat={item.address} kota={item.city} tanaman={item.plant_type} luas_tanah={item.farm_size} estimasi_panen={item.ready_at}
 				/>
 			)}
@@ -50,4 +53,7 @@ class FilterMap extends Component {
   }
 }
 
-export default FilterMap;
+// export default FilterMap;
+export default connect(
+  "Farms", actions
+)(withRouter(FilterMap));
