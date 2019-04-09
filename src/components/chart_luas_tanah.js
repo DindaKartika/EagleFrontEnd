@@ -8,25 +8,29 @@ import { withRouter } from "react-router-dom";
 import Chart from "react-apexcharts";
 
 const optionPlant = [
-  { value: "Jagung", label: "Jagung" },
-  { value: "Kacang Hijau", label: "Kacang Hijau" },
-  { value: "Kacang Tanah", label: "Kacang Tanah" },
-  { value: "Kedelai", label: "Kedelai" },
+  { value: "Bahan Pokok", label: "--- Bahan Pokok ---", isDisabled: true },
   { value: "Padi", label: "Padi" },
+  { value: "Jagung", label: "Jagung" },
   { value: "Ubi", label: "Ubi" },
-  { value: "Bawang Merah", label: "Bawang Merah" },
-  { value: "Bawang Putih", label: "Bawang Putih" },
-  { value: "Cabai", label: "Cabai" },
-  { value: "Kacang Panjang", label: "Kacang Panjang" },
-  { value: "Kangkung", label: "Kangkung" },
   { value: "Kentang", label: "Kentang" },
-  { value: "Mentimun", label: "Mentimun" },
+  { value: "Sayur", label: "--- Sayur ---", isDisabled: true },
+  { value: "Kangkung", label: "Kangkung" },
   { value: "Kubis", label: "Kubis" },
   { value: "Lobak", label: "Lobak" },
+  { value: "Mentimun", label: "Mentimun" },
   { value: "Sawi", label: "Sawi" },
   { value: "Terung", label: "Terung" },
   { value: "Tomat", label: "Tomat" },
-  { value: "Wortel", label: "Wortel" }
+  { value: "Wortel", label: "Wortel" },
+  { value: "Lain-lain", label: "--- Lain-lain ---", isDisabled: true },
+  { value: "Bawang Merah", label: "Bawang Merah" },
+  { value: "Bawang Putih", label: "Bawang Putih" },
+  { value: "Cabai", label: "Cabai" },
+  { value: "Kacang Hijau", label: "Kacang Hijau" },
+  { value: "Kacang Panjang", label: "Kacang Panjang" },
+  { value: "Kacang Tanah", label: "Kacang Tanah" },
+  { value: "Kedelai", label: "Kedelai" },
+  { value: "Kelapa", label: "Kelapa" }
 ];
 
 class ChartLuasTanah extends Component {
