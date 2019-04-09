@@ -14,33 +14,28 @@ import Select from 'react-select'
 
 const optionPlant = [
   {value:'Bahan Pokok', label:'--- Bahan Pokok ---', isDisabled:true},
-  {value:'Beras', label:'Beras'},
-  {value:'Gandum', label:'Gandum'},
+  {value:'Padi', label:'Padi'},
   {value:'Jagung', label:'Jagung'},
-  {value:'Sagu', label:'Sagu'},
+  {value:'Ubi', label:'Ubi'},
+  {value:'Kentang', label:'Kentang'},
   {value:'Sayur', label:'--- Sayur ---', isDisabled:true},
-  {value:'Bayam', label:'Bayam'},
-  {value:'Cabai', label:'Cabai'},
   {value:'Kangkung', label:'Kangkung'},
+  {value:'Kubis', label:'Kubis'},
+  {value:'Lobak', label:'Lobak'},
   {value:'Mentimun', label:'Mentimun'},
   {value:'Sawi', label:'Sawi'},
   {value:'Terung', label:'Terung'},
   {value:'Tomat', label:'Tomat'},
-  {value:'Buah', label:'--- Buah ---', isDisabled:true},
-  {value:'Apel', label:'Apel'},
-  {value:'Durian', label:'Durian'},
-  {value:'Jeruk', label:'Jeruk'},
-  {value:'Mangga', label:'Mangga'},
-  {value:'Melon', label:'Melon'},
-  {value:'Nangka', label:'Nangka'},
-  {value:'Pisang', label:'Pisang'},
-  {value:'Semangka', label:'Semangka'},
+  {value:'Wortel', label:'Wortel'},
   {value:'Lain-lain', label:'--- Lain-lain ---', isDisabled:true},
-  {value:'Coklat', label:'Coklat'},
-  {value:'Teh', label:'Teh'},
-  {value:'Tebu', label:'Tebu'},
-  {value:'Kelapa', label:'Kelapa'},
-  {value:'Kopi', label:'Kopi'}
+  {value:'Bawang Merah', label:'Bawang Merah'},
+  {value:'Bawang Putih', label:'Bawang Putih'},
+  {value:'Cabai', label:'Cabai'},
+  {value:'Kacang Hijau', label:'Kacang Hijau'},
+  {value:'Kacang Panjang', label:'Kacang Panjang'},
+  {value:'Kacang Tanah', label:'Kacang Tanah'},
+  {value:'Kedelai', label:'Kedelai'},
+  {value:'Kelapa', label:'Kelapa'}
 ]
 class SidebarField extends Component {
   constructor(props) {
@@ -55,8 +50,11 @@ class SidebarField extends Component {
       photos: "",
       perkiraan_panen : 0,
       image: null,
-      progressFotoLahan: 0
+      progressFotoLahan: 0,
+      tanah : false,
+      status_lahan : "tidak"
     };
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   onChangePlant = datePlant => this.setState({ datePlant });
@@ -81,7 +79,8 @@ class SidebarField extends Component {
       address,
       city,
       perkiraan_panen,
-      photos
+      photos,
+      tanah
     } = this.state;
     const id = localStorage.getItem("id_farm");
     console.log(id);
@@ -93,7 +92,8 @@ class SidebarField extends Component {
       address: address,
       city: city,
       perkiraan_panen: perkiraan_panen,
-      photos: photos
+      photos: photos,
+      status_lahan : String(tanah)
     };
     console.log(data);
 
@@ -124,7 +124,8 @@ class SidebarField extends Component {
       address,
       city,
       perkiraan_panen,
-      photos
+      photos,
+      tanah
     } = this.state;
     const id = localStorage.getItem("id_farm");
     console.log(id);
@@ -136,7 +137,8 @@ class SidebarField extends Component {
       address: address,
       city: city,
       perkiraan_panen: perkiraan_panen,
-      photos: photos
+      photos: photos,
+      status_lahan : String(tanah)
     };
     console.log(data);
 
@@ -192,6 +194,16 @@ class SidebarField extends Component {
       }
     );
   };
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
 
   render() {
     const coord = localStorage.getItem("koordinat");
@@ -256,6 +268,12 @@ class SidebarField extends Component {
             onChange={e => this.changeInput(e)}
           />
           <br />
+          <input
+          name="tanah"
+          type="checkbox"
+          checked={this.state.tanah}
+          onChange={this.handleInputChange} /> Lahan Dijual
+          <br/>
           <label for="photos">Foto lahan:</label>
           <br />
           <progress value={this.state.progressFotoLahan} max="100" />
