@@ -339,7 +339,7 @@ $footer-color: #252525;
         }
         .display-username {
             font-size: 16px;
-            color: darkgreen;
+            color: #0e9d81;
         }
         .display-address {
             font-size: 16px;
@@ -349,7 +349,7 @@ $footer-color: #252525;
         }
         .display-email {
             font-size: 16px;
-            color: darkgreen;
+            color: #0e9d81;
         }
     }
 }
@@ -783,7 +783,7 @@ $footer-color: #252525;
     position: absolute;
     z-index: 1;
     left: 8vw;
-    top : 21vh;
+    top : 22vh;
     background-color: #f7f7f7;
     padding: 10px;
     margin : 3px;
@@ -797,17 +797,9 @@ $footer-color: #252525;
 
     button{
         cursor: pointer;
-        background-image: url('../images/logo/whatsapp_PNG1.webp');
-        background-size: 20px;
-        background-repeat: no-repeat;
-        padding-left: 22px;
     }
 }
 
-.hlm-admin{
-    background-color: white;
-    padding : 10vh 20vw;
-}
 .btn {
     font-size: 14px;
     padding: 12px 20px;
@@ -894,5 +886,38 @@ $footer-color: #252525;
 
 .btn.btn-outline-success.sidebar-map {
     font-size: 12px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
+
+.shareButton {
+    width: 40px;
+}
+
+.sharePannel {
+    display: flex;
+}
+
+.Demo__some-network {
+    vertical-align: top;
+    // display: inline-block;
+    margin-right: 15px;
+    text-align: center;
+  }
+  
+  .Demo__some-network__share-count {
+    margin-top: 3px;
+    font-size: 12px;
+  }
+  
+  .Demo__some-network__share-button {
+    cursor: pointer;
+  }
+  
+  .Demo__some-network__share-button:hover:not(:active) {
+    opacity: 0.75;
+  }
+  
+  .Demo__some-network__custom-icon {
+    width:32px;
+    height:32px;
+  }

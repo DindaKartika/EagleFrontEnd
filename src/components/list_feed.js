@@ -59,6 +59,7 @@ class ListFeed extends Component {
     };
 
     handleSubmitComment(e){
+        // console.log(window.location.pathname)
         e.preventDefault();
         const self = this;
         const {content} = e.target;
@@ -98,9 +99,15 @@ class ListFeed extends Component {
             }).catch(function(error) {
             console.log("Gagal get comment", error);
             });
-            if(self.props.current_id !== self.props.data.id_user){self.props.history.push("/otherprofile/"+self.props.data.id_user)}
+
+            if(self.props.current_id !== self.props.data.id_user){
+                // self.props.history.push(window.location.pathname)
+                // console.log("test if success paht", window.location.pathname)
+                window.location.reload()
+            }
             else{self.props.history.push("/profile")}
             // self.props.history.push("/profile");
+            console.log("Not ok", window.location.pathname)
         });
 
     };
@@ -143,7 +150,16 @@ class ListFeed extends Component {
         }).catch(function(error) {
             console.log("Gagal get like", error);
             });
-            self.props.history.push("/profile");
+
+            if(self.props.current_id !== self.props.data.id_user){
+                // self.props.history.push(window.location.pathname)
+                // console.log("test if success paht", window.location.pathname)
+                window.location.reload()
+            }
+            else{
+                self.props.history.push("/profile")
+            }
+            console.log("Not ok", window.location.pathname)
         ;
     };
 

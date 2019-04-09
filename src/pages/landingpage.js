@@ -181,7 +181,7 @@ class LandingPage extends Component {
 
                     <footer id="footer">
                     <ul class="icons">
-                        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
                         <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
                         <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
                         <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>

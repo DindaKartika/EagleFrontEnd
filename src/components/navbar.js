@@ -22,7 +22,7 @@ class Header extends Component {
             <span class="navbar-toggler-icon"></span>
           </button>
           {/* <a class="navbar-brand" href="#">LOGO</a> */}
-          <img className="logo-navbar" src={require("../images/logo/testlogo3.png")} alt="" />
+          <Link to="/"><img className="logo-navbar" src={require("../images/logo/testlogo3.png")} alt="" /></Link>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             {/* <a class="navbar-brand" href="#">LOGO</a> */}
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -33,11 +33,11 @@ class Header extends Component {
                 <a class="navbar-brand" href="#">LOGO</a>
               </li> */}
               <li className="nav-item ">
-                  <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Tentang Kami</Link>
+                  <Link to="/landinginfo" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Info</Link>
                   <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Beranda</span></Link>
               </li>
               <li className="nav-item ">
-                  <Link to="/myproduct" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Blog</Link>
+                  <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Peta</Link>
                   <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Peta</span></Link>
               </li>
             </ul>

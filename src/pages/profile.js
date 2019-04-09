@@ -28,9 +28,37 @@ import {
   WorkplaceShareButton,
   LineShareButton,
   EmailShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  GooglePlusIcon,
+  LinkedinIcon,
+  PinterestIcon,
+  VKIcon,
+  OKIcon,
+  TelegramIcon,
+  WhatsappIcon,
+  RedditIcon,
+  TumblrIcon,
+  MailruIcon,
+  EmailIcon,
+  LivejournalIcon,
+  ViberIcon,
+  WorkplaceIcon,
+  LineIcon,
+  FacebookShareCount,
+  GooglePlusShareCount,
+  LinkedinShareCount,
+  PinterestShareCount,
+  VKShareCount,
+  OKShareCount,
+  RedditShareCount,
+TumblrShareCount,
 } from 'react-share';
 
-const waUrl = "https://web.whatsapp.com/send?phone=";
+// const waUrl = "https://web.whatsapp.com/send?phone=";
+// const shareUrl = 'https://lahanku.id/profile/' + this.props.current_id;
+const shareUrl = 'https://lahanku.id/profile/';
+const title = 'GitHub';
 
 //MAIN CLASS
 class Profile extends Component {
@@ -416,8 +444,10 @@ class Profile extends Component {
 };
 
   render() {
-    console.log("PROPS", this.props.edit_display_name);
-    const shareUrl = "facebook.com"
+    const shareUrl = 'https://lahanku.id/profile/' + this.props.current_id;
+    const title = 'Lahanku.id - Data lahan Indonesia';
+    // console.log("PROPS", this.props.edit_display_name);
+    // const shareUrl = "facebook.com"
     return (
       <div className="profile-page">
         <Header />
@@ -436,15 +466,16 @@ class Profile extends Component {
           className="cover-photo"
           style={{
             backgroundImage: "url(" + this.state.cover_photo + ")",
-            backgroundSize: "cover"
+            backgroundSize: "cover",
+
           }}
         >
           {/* Cover Photo goes here! */}
         </div>
         <div className="container-fluid row justify-content-end strip">
-          <button className="btn btn-common addpost-btn">
+          {/* <button className="btn btn-common addpost-btn">
             Tambahkan post
-          </button>
+          </button> */}
           <Link to="/input-field">
           <button className="btn btn-common addpost-btn">
             Tambahkan lahan
@@ -480,13 +511,46 @@ class Profile extends Component {
                   style={{ display: this.state.edit ? "none" : "block" }}
                 >
                   <button
-                    className="btn btn-success"
+                    className="btn btn-common"
+                    style={{marginBottom: "20px"}}
                     onClick={() => this.changeEditState()}
                   >
                     Perbarui profil
                   </button>
 
-                  <FacebookShareButton url={shareUrl} />
+                  {/* <FacebookShareButton url={shareUrl} /> */}
+                  <p style={{fontSize: "14px"}}>Bagikan link profil ini via:</p>
+                  <div className="sharePannel">
+                  <div className="shareButton">
+                    <TwitterShareButton
+                      url="localhost:3000"
+                      title={shareUrl + "\n Profil pengguna Lahanku.id yang keren!"}
+                      className="Demo__some-network__share-button">
+                      <TwitterIcon
+                        size={32}
+                        round />
+                    </TwitterShareButton>
+                  </div>
+                  <div className="shareButton">
+                    <FacebookShareButton
+                      url={shareUrl + "\n Profil pengguna Lahanku.id yang keren!"}
+                      quote={title}
+                      className="Demo__some-network__share-button">
+                      <FacebookIcon
+                        size={32}
+                        round />
+                    </FacebookShareButton>
+                  </div>
+                  <div className="shareButton">
+                    <WhatsappShareButton
+                      url="{shareUrl}"
+                      title="{title}"
+                      // separator=":: "
+                      className="Demo__some-network__share-button">
+                      <WhatsappIcon size={32} round />
+                    </WhatsappShareButton>
+                    </div>
+                  </div>
 
                   {/* TEST */}
                   {/* <div>
@@ -524,7 +588,7 @@ class Profile extends Component {
                         <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
                     </div>
                     <div className="container-fluid row justify-content-end">
-                        <button className="btn btn-outline-success addpost-btn" type="submit">Bagikan</button>
+                        <button className="btn btn-common addpost-btn" type="submit">Bagikan</button>
                     </div>
                 </form>
 
@@ -532,8 +596,8 @@ class Profile extends Component {
                     <button
                       className={
                         this.state.show === "post"
-                          ? "btn btn-outline-success profile-content-controller active"
-                          : "btn btn-outline-success profile-content-controller"
+                          ? "btn btn-common profile-content-controller active"
+                          : "btn btn-common profile-content-controller"
                       }
                       onClick={() => this.changeShowState("post")}
                     >
@@ -542,19 +606,19 @@ class Profile extends Component {
                     <button
                       className={
                         this.state.show === "farm"
-                          ? "btn btn-outline-success profile-content-controller active"
-                          : "btn btn-outline-success profile-content-controller"
+                          ? "btn btn-common profile-content-controller active"
+                          : "btn btn-common profile-content-controller"
                       }
                       onClick={() => this.changeShowState("farm")}
                     >
                       Info lahan
                     </button>
-                    <button
-                      className="btn btn-outline-success profile-content-controller"
+                    {/* <button
+                      className="btn btn-common profile-content-controller"
                       disabled
                     >
                       Produk
-                    </button>
+                    </button> */}
                   </div>
                   <hr />
                   <div
@@ -566,6 +630,23 @@ class Profile extends Component {
                     {/* Display Post  */}
                     <div className="post-item">
                       <div className="row">Postingan</div>
+                      {/* ====================================================================== */}
+                      <div className="row">
+                      <div className="Demo__container">
+        
+
+        {/* <div className="Demo__some-network">
+          <WeiboShareButton
+            url={shareUrl}
+            title={title}
+            pic={`${String(window.location)}/${exampleImage}`}
+            className="Demo__some-network__share-button">
+            <img className="Demo__some-network__custom-icon" src="http://icons.iconarchive.com/icons/martz90/circle-addon2/512/weibo-icon.png" alt="Weibo share button" />
+          </WeiboShareButton>
+        </div> */}
+</div>
+                      </div>
+                      {/* ====================================================================== */}
                       <hr />
                       {/* Loop content post start here */}
                       {this.props.listFeed.map((item, key) => {
@@ -890,6 +971,6 @@ class Profile extends Component {
 
 // export default Profile;
 export default connect(
-  "current_display_name, listFeed, current_phone_number, edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link",
+  "current_display_name, listFeed, current_phone_number, edit_display_name, edit_headline, edit_profile_picture, edit_cover_photo, edit_gender, edit_date_of_birth, edit_address, edit_phone_number, edit_job, edit_facebook_link, edit_instagram_link, edit_twitter_link, current_id",
   actions
 )(withRouter(Profile));

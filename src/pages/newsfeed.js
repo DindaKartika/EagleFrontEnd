@@ -130,7 +130,7 @@ class NewsFeed extends Component {
                         <div className="side-detail-profile">
                             <div>{this.props.current_display_name}</div>
                             <div>@{this.props.current_username}</div>
-                            <Link to="/bookmarks" className="btn btn-primary">Lihat feed yang diikuti</Link>
+                            <Link to="/bookmarks" className="btn btn-common" style={{marginTop: "20px"}}>List Feed Favorit</Link>
                             <br />
                         </div>
                     </div>

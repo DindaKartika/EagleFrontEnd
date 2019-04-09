@@ -321,7 +321,7 @@ class LandingInfo extends Component {
       {/* <!-- Contact Section End --> */}
 
       {/* <!-- Map Section Start --> */}
-      <section id="google-map-area">
+      {/* <section id="google-map-area">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
@@ -329,7 +329,7 @@ class LandingInfo extends Component {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* <!-- Map Section End --> */}
 
       {/* <!-- Footer Section Start --> */}

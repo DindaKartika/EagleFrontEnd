@@ -149,7 +149,7 @@ class OtherProfile extends Component {
   getFeed = async () => {
     const self = this;
     const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/feeds?id_user=" + self.props.user_id;
+    const url = "http://localhost:5000/feeds?id_user=" + self.state.id;
     axios({
       method: "get",
       url: url,
@@ -158,7 +158,7 @@ class OtherProfile extends Component {
       }
     })
       .then(function(response) {
-        // console.log("Get feeds berhasil", response.data)
+        console.log("Get feeds berhasil", response.data)
         self.setState({
           listFeed: response.data
         });
