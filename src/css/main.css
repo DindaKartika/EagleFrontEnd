@@ -783,4 +783,16 @@
   height: 32px;
 }
 
+li.list-group-item {
+  display: flex;
+}
+
+.react-datepicker-wrapper {
+  max-width: 100%;
+}
+
+.handle-input-farm div, .handle-input-farm input {
+  max-width: 100%;
+}
+
 /*# sourceMappingURL=main.css.map */

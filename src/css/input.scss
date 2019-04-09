@@ -921,3 +921,17 @@ $footer-color: #252525;
     width:32px;
     height:32px;
   }
+
+  li.list-group-item {
+      display: flex;
+  }
+
+  .react-datepicker-wrapper {
+      max-width: 100%;
+  }
+
+  .handle-input-farm {
+      div, input {
+        max-width: 100%;
+      }
+  }
