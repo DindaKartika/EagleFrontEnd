@@ -1,25 +1,41 @@
 // LIST IMPORT MODULE
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from '../store';
+import { actions } from "../store";
 import { withRouter } from "react-router-dom";
-import Header from '../components/header_signin'
-import Footer from '../components/footer_styled';
-import FeedComponent from '../components/feed_component';
-import CommentComponent from '../components/comment_component';
-import{ Link } from "react-router-dom";
-import KontenAdmin from '../components/kontenAdmin'
+import Header from "../components/header_signin";
+import Footer from "../components/footer_styled";
+import FeedComponent from "../components/feed_component";
+import CommentComponent from "../components/comment_component";
+import { Link } from "react-router-dom";
+import KontenAdmin from "../components/kontenAdmin";
+import ChartLuasTanah from "../components/chart_luas_tanah";
+import ChartTotalPanen from "../components/chart_total_panen";
 
 //MAIN CLASS
 class Admin extends Component {
   constructor(props) {
-		super(props);
-		this.state = {
-			Users : []
-		};
-	}
-
+    super(props);
+    this.state = {
+      Users: [],
+      options: {
+        chart: {
+          id: "basic-bar"
+        },
+        xaxis: {
+          categories: []
+        }
+      },
+      series: [
+        {
+          name: "luas lahan (meter persegi)",
+          type: "column",
+          data: []
+        }
+      ]
+    };
+  }
 
 	componentDidMount = () => {
 			const self = this;
@@ -35,61 +51,74 @@ class Admin extends Component {
 	})
 	};
 
-    // handleClick(e){
-    //     e.preventDefault();
-    //     const self = this;
-    //     const {content} = e.target;
-    //     var data ={};
-        
-    //     data.content = content.value;
+  // handleClick(e){
+  //     e.preventDefault();
+  //     const self = this;
+  //     const {content} = e.target;
+  //     var data ={};
 
-    //     const token = localStorage.getItem("token");
-    //     console.log("test token post",token)
-    //     console.log("post content", data);
-    //     let postFeed = {
-    //         method:'post',
-    //         url:'http://localhost:5000/feeds',
-    //         headers: {
-    //             'Authorization':'Bearer ' + token
-    //         },
-    //         data : data
-    //     };
-    //     axios(postFeed)
-    //     .then(function(response){
-    //         console.log(response.data);
-    //         alert("post sukses")
-    //         self.props.getAllFeed();
-    //         window.location.reload();
-    //         self.props.history.push("/newsfeed");
-    //     });
+  //     data.content = content.value;
 
-    // };
+  //     const token = localStorage.getItem("token");
+  //     console.log("test token post",token)
+  //     console.log("post content", data);
+  //     let postFeed = {
+  //         method:'post',
+  //         url:'http://localhost:5000/feeds',
+  //         headers: {
+  //             'Authorization':'Bearer ' + token
+  //         },
+  //         data : data
+  //     };
+  //     axios(postFeed)
+  //     .then(function(response){
+  //         console.log(response.data);
+  //         alert("post sukses")
+  //         self.props.getAllFeed();
+  //         window.location.reload();
+  //         self.props.history.push("/newsfeed");
+  //     });
 
+  // };
 
-    
   render() {
-    const {Users} = this.state
+    const { Users } = this.state;
     return (
-			<div>
-				<Header />
-				<div className="hlm-admin">
-					<h3>List User</h3> 
-					<table>
-						<tr>
-							<th>ID</th>
-							<th>Nama</th>
-							<th>Alamat</th>
-							<th>Aktivitas</th>
-						</tr>
-						{Users.map((item, key) => 
-							<KontenAdmin key={key} id={item.id} nama={item.display_name} alamat={item.address} telepon={item.phone_number}
-							/>
-						)}
-					</table>
-				</div>
-				<Footer />
-			</div>
-    )
+      <div>
+        <Header />
+        <div className="hlm-admin">
+          <h3>List User</h3>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Nama</th>
+              <th>Alamat</th>
+              <th>Aktivitas</th>
+            </tr>
+            {Users.map((item, key) => (
+              <KontenAdmin
+                key={key}
+                id={item.id}
+                nama={item.display_name}
+                alamat={item.address}
+                telepon={item.phone_number}
+              />
+            ))}
+          </table>
+          <div className="row">
+            <div className="col-md-12">
+              <p className="h2">Grafik Luas Tanah</p>
+              <ChartLuasTanah />
+            </div>
+            <div className="col-md-12">
+              <p className="h2">Grafik Total Panen</p>
+              <ChartTotalPanen />
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 }
 
