@@ -71,7 +71,7 @@ class Farm extends Component {
 			plantedAt : new Date(),
 			readyAt : new Date(),
 			photos: "",
-			perkiraan_panen: 0,
+			perkiraan_panen: null,
 			tanah : false
 			// center : [],
 			// koordinat : []
