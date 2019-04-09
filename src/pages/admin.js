@@ -4,7 +4,7 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../store";
 import { withRouter } from "react-router-dom";
-import Header from "../components/header_signin";
+import Header from "../components/navbar";
 import Footer from "../components/footer_styled";
 import FeedComponent from "../components/feed_component";
 import CommentComponent from "../components/comment_component";
@@ -18,38 +18,23 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Users: [],
-      options: {
-        chart: {
-          id: "basic-bar"
-        },
-        xaxis: {
-          categories: []
-        }
-      },
-      series: [
-        {
-          name: "luas lahan (meter persegi)",
-          type: "column",
-          data: []
-        }
-      ]
+      Users: []
     };
   }
 
-	componentDidMount = () => {
-			const self = this;
-	axios
-	.get('http://0.0.0.0:5000/users/userprofile')
-	.then(function(response){
-		self.setState({Users: response.data});
-		console.log('users', response.data);
-		const Users = response.data
-	})
-	.catch(function(error){
-		console.log('error', error);
-	})
-	};
+  componentDidMount = () => {
+    const self = this;
+    axios
+      .get("http://0.0.0.0:5000/users/userprofile")
+      .then(function(response) {
+        self.setState({ Users: response.data });
+        console.log("users", response.data);
+        const Users = response.data;
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
+  };
 
   // handleClick(e){
   //     e.preventDefault();
