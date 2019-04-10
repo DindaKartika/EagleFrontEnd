@@ -118,7 +118,7 @@ class ListComment extends Component {
                     <span className="text-muted pull-right">
                         <small className="text-muted">{this.props.date} | {this.props.time}</small>
                     </span>
-                    <strong className="text-success" onClick={()=>this.handleProfile(this.props.iduser)} >@{this.props.username}</strong>
+                    <strong className="text-common" onClick={()=>this.handleProfile(this.props.iduser)} >@{this.props.username}</strong>
                     <p>
                     {this.props.content}
                     </p>

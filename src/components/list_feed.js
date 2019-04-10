@@ -233,7 +233,7 @@ class ListFeed extends Component {
                                             <form onSubmit={e => this.handleSubmitComment(e)}>
                                                 <textarea className="form-control" name="content" placeholder="write a comment..." rows="3"></textarea>
                                                 <br/>
-                                                <button class="btn btn-outline-secondary position-right" type="submit">Comment</button>
+                                                <button class="btn btn-common position-right" type="submit">Comment</button>
                                                 {/* <button type="button" className="btn btn-info pull-right">Post</button> */}
                                                 <div className="clearfix"></div>
                                             </form>

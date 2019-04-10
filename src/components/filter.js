@@ -87,11 +87,11 @@ class FilterMap extends Component {
     console.log(this.state.date)
     return (
     <div className="filters">
-        <label>Filter berdasarkan :</label>
+        <label style={{position:"relative"}}>Filter berdasarkan :</label>
         <br/>
-        <label>Jenis Tanaman :</label>
+        <label style={{position:"relative", marginBottom: "5px"}}>Jenis Tanaman :</label>
         <Select options={optionPlant} onChange={e => this.changePlant(e)}/>
-        <label>Waktu panen :</label>
+        <label style={{position:"relative", marginBottom: "5px"}}>Waktu panen :</label>
         <br/>
         <DatePicker
           selected={this.state.date}
@@ -99,11 +99,41 @@ class FilterMap extends Component {
           value ={this.state.date}
         />
         <br/>
+        {/* <div className="custom-check"> */}
+        <div style={{display: "flex", marginTop: "10px"}}>
         <input
           name="tanah"
           type="checkbox"
           checked={this.state.tanah}
-          onChange={this.handleInputChange} /> Lahan Dijual
+          onChange={this.handleInputChange} 
+          style={{width: "20px"}}/> Lahan Dijual
+          </div>
+          {/* <span class="checkmark"></span>
+          </div> */}
+          {/* <label class="custom-check" style={{position: "relative"}}>Lahan Dijual
+            <input type="checkbox" 
+            checked={this.state.tanah}
+            onChange={this.handleInputChange}
+            class="checkmark"/>
+            <span class="checkmark"></span>
+          </label> */}
+          {/* <form>
+    
+            <div class="group">      
+              <input type="text" required />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label>Name</label>
+            </div>
+              
+            <div class="group">      
+              <input type="text" required />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label>Email</label>
+            </div>
+            
+          </form> */}
     </div>
     );
   }

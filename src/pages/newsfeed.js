@@ -153,7 +153,7 @@ class NewsFeed extends Component {
                                         <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
                                     </div>
                                     <div className="container-fluid row justify-content-end">
-                                        <button className="btn btn-outline-success addpost-btn" type="submit">Bagikan</button>
+                                        <button className="btn btn-common addpost-btn" type="submit">Bagikan</button>
                                     </div>
                                 </form> 
                                 <div className="profile-post" style={{ display: "block" }}>

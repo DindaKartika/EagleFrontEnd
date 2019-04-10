@@ -10,7 +10,8 @@ import Select from 'react-select'
 import DatePicker from "react-datepicker";
 import axios from 'axios'
 import { Link } from "react-router-dom";
-// import ControlRange from '@mapbox/mr-ui/control-range';
+import ControlRange from '@mapbox/mr-ui/control-range';
+// import Button from '@mapbox/mr-ui/button';
 
 import mapboxgl from 'mapbox-gl'
 import { read } from "fs";
@@ -333,7 +334,7 @@ class Farm extends Component {
 							<div className="col-md-2"><i className="material-icons">texture</i></div>
 							<div className="col-md-10">
 								<label>Luas : </label>
-								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} m<sup>2</sup></h5>
 								<input style={{display: !(ubahInfo) ? 'none' : 'block', maxWidth: "100%" }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
 								<label>Ketinggian : </label>
 								<h5>{Farms.ketinggian} mdpl</h5>
@@ -441,7 +442,18 @@ class Farm extends Component {
 					<Layer type="fill" paint={polygonPaint}>
 						<Feature coordinates={koordinat} />
 					</Layer>
-					
+					<ControlRange
+						position="top-right"
+						id="name"
+						min={10}
+						max={1000}
+						step={10}
+						onChange={
+						(value, id) => {
+							console.log(value, id);
+						}
+						}
+					/>
 				</Map>
 			</div>
       </div>

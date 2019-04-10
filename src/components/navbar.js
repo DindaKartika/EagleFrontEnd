@@ -34,15 +34,15 @@ class Header extends Component {
               </li> */}
               <li className="nav-item ">
                   <Link to="/landinginfo" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Info</Link>
-                  <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Beranda</span></Link>
+                  <Link to="/newsfeed" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite"><i className="material-icons" style={{fontSize: "18px"}}>subtitles</i> Beranda</span></Link>
               </li>
               <li className="nav-item ">
                   <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Peta</Link>
-                  <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Peta</span></Link>
+                  <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite"><i className="material-icons" style={{fontSize: "18px"}}>map</i> Peta</span></Link>
               </li>
             </ul>
-            <Link to="/signin" className="btn btn-common" style={{ display: this.props.is_login ? "none" : "block" }}><span className="cwhite">Masuk</span></Link>
-            <Link to="/profile" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">{this.props.current_username}</span></Link>
+            <Link to="/signin" className="btn btn-common" style={{ display: this.props.is_login ? "none" : "block", color:"#1fcaa7"}}><span className="cwhite">Masuk</span></Link>
+            <Link to="/profile" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite" style={{color:"#1fcaa7"}}><i className="material-icons" style={{fontSize: "18px", verticalAlign: "middle", marginRight: "10px"}}>person</i>{this.props.current_username}</span></Link>
             <Link to="/" onClick={() => this.props.postLogout()} className="btn btn-common nav-btn" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite">Keluar</span></Link>
           </div>
         </nav>
