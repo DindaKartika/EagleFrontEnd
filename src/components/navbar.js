@@ -40,6 +40,10 @@ class Header extends Component {
                   <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Peta</Link>
                   <Link to="/maps" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite"><i className="material-icons" style={{fontSize: "18px"}}>map</i> Peta</span></Link>
               </li>
+              <li className="nav-item ">
+                  <Link to="/data" className="nav-link" style={{ display: this.props.is_login ? "none" : "block" }}>Data</Link>
+                  <Link to="/data" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite"><i className="material-icons" style={{fontSize: "18px"}}>bar_chart</i> Data</span></Link>
+              </li>
             </ul>
             <Link to="/signin" className="btn btn-common" style={{ display: this.props.is_login ? "none" : "block", color:"#1fcaa7"}}><span className="cwhite">Masuk</span></Link>
             <Link to="/profile" className="nav-link" style={{ display: this.props.is_login ? "block" : "none" }}><span className="cwhite" style={{color:"#1fcaa7"}}><i className="material-icons" style={{fontSize: "18px", verticalAlign: "middle", marginRight: "10px"}}>person</i>{this.props.current_username}</span></Link>

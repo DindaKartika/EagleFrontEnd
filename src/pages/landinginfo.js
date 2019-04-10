@@ -96,7 +96,7 @@ class LandingInfo extends Component {
                 Apa itu Lahanku
               </h6>
               <h2 class="section-title">
-                kami berdedikasi untuk memajukan industri pertanian Indonesia
+                Kami berdedikasi untuk memajukan industri pertanian Indonesia
               </h2>
               <div class="section-info">
                 Membantu menyelesaikan permasalahan ketidak seimbangan antara stok dan permintaan pasar pangan (supply and demand) di seluruh daerah Indonesia

@@ -1083,8 +1083,17 @@ li.list-group-item {
   margin-left: -10vw;
   margin-right: -10vw;
 }
-.container-grafik .apexcharts-title-text {
-  font-size: 20px;
+.container-grafik .Analyze {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+.container-grafik .Analyze .apexcharts-title-text {
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 2px;
+}
+.container-grafik .Analyze .apexcharts-legend.position-bottom.center {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

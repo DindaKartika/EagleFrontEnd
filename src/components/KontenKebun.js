@@ -58,13 +58,13 @@ class KontenKebun extends Component{
           <div>Luas tanah: {this.props.luas_tanah} m<sup>2</sup></div>
           <div>Estimasi panen: {this.props.estimasi_panen}</div>
           </div>
-          <div>
+          <div style={{display : "flex"}}>
           <Link to={"/maps/" + this.props.id}>
-            <button className="btn btn-success margin-right-20">
+            <button className="btn btn-common">
               Lihat di peta
             </button>
           </Link>
-          <button onClick={()=>this.handleDeleteLahan(this.props.id)} className="btn btn-success">
+          <button onClick={()=>this.handleDeleteLahan(this.props.id)} className="btn btn-common">
             Hapus Lahan
           </button>
           </div>

@@ -59,6 +59,7 @@ class ChartLuasTanah extends Component {
               enabled: false
           }
         },
+        colors: ['#77B6EA', '#545454'],
         dataLabels: {
             enabled: false
         },
@@ -80,6 +81,11 @@ class ChartLuasTanah extends Component {
         }
       },
       series: [
+        {
+          name: "luas lahan (meter persegi)",
+          // type: "column",
+          data: []
+        },
         {
           name: "luas lahan (meter persegi)",
           // type: "column",
@@ -158,7 +164,7 @@ class ChartLuasTanah extends Component {
     return (
       <div className="Analyze">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-9">
             <div className="mixed-chart" style={{width: "100%"}}>
               <Chart
                 options={this.state.options}
@@ -168,11 +174,17 @@ class ChartLuasTanah extends Component {
               />
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <label>Jenis Tanaman :</label>
             <Select options={optionPlant} onChange={e => this.changePlant(e)} />
             <label>Nama Kota :</label>
             <Select options={optionCity} onChange={e => this.changeCity(e)} />
+            <br/>
+            <div >
+              <label>Legenda</label>
+              <br/>
+              <label>{this.state.jenis_tanaman}</label>
+            </div>
           </div>
         </div>
       </div>
