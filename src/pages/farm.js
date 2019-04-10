@@ -10,9 +10,20 @@ import Select from 'react-select'
 import DatePicker from "react-datepicker";
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import ControlRange from '@mapbox/mr-ui/control-range';
+// import Button from '@mapbox/mr-ui/button';
 
 import mapboxgl from 'mapbox-gl'
 import { read } from "fs";
+
+import {
+	FacebookShareButton,
+	TwitterShareButton,
+	WhatsappShareButton,
+	FacebookIcon,
+	TwitterIcon,
+	WhatsappIcon,
+  } from 'react-share';
 
 const optionPlant = [
   {value:'Bahan Pokok', label:'--- Bahan Pokok ---', isDisabled:true},
@@ -49,7 +60,7 @@ const Map = ReactMapboxGl({
 
 const polygonPaint = {
   'fill-color': '#00CED1',
-  'fill-opacity': 1
+  'fill-opacity': 0.2
 };
 
 const username  =localStorage.getItem('username')
@@ -82,7 +93,7 @@ class Farm extends Component {
     
     UNSAFE_componentWillMount () {
 			const self = this;
-			console.log(window.location.pathname.slice(6))
+			// console.log(window.location.pathname.slice(6))
 			axios
 			.get('http://0.0.0.0:5000/farms/' + window.location.pathname.slice(6))
 			.then(function(response){
@@ -93,16 +104,16 @@ class Farm extends Component {
 				self.setState({plantedAt: new Date(response.data.planted_at)});
 				self.setState({readyAt: new Date(response.data.ready_at)});
 				// console.log('date ready at', new Date(response.data.ready_at))
-				console.log('Farms', response.data);
+				// console.log('Farms', response.data);
 				self.setState({user : response.data.user})
 				self.setState({photos : response.data.photos})
 				localStorage.setItem('id_farm', response.data.id_farm)
 				const koordinat = []
 				koordinat.push(JSON.parse(response.data.coordinates))
-				console.log('coord jadi', koordinat)
+				// console.log('coord jadi', koordinat)
 				self.setState({koordinat: koordinat})
 				const centers = JSON.parse(response.data.center)
-				console.log(centers)
+				// console.log(centers)
 				self.setState({center:centers})
 				if (response.data.zona == "zona iklim panas"){self.setState({rekomendasi : "padi, tebu, kelapa, cokelat, dan jagung"})}
 				else if (response.data.zona == "zona iklim sedang"){self.setState({rekomendasi : "Teh, kina, kopi, karet, cokelat, dan sayuran"})}
@@ -144,7 +155,7 @@ class Farm extends Component {
 			tanah
     } = this.state;
     const id = localStorage.getItem("id_farm");
-    console.log(id);
+    // console.log(id);
     const data = {
       description: deskripsi,
       plant_type: plant_type,
@@ -155,7 +166,7 @@ class Farm extends Component {
 			perkiraan_panen : perkiraan_panen,
 			status_lahan : String(tanah)
     };
-    console.log(data);
+    // console.log(data);
 
     const tokens = localStorage.getItem('token')
 
@@ -167,7 +178,7 @@ class Farm extends Component {
         }
       })
       .then(response => {
-        console.log("testtt dooooooooooooooooooooooooooong", response.data);
+        // console.log("testtt dooooooooooooooooooooooooooong", response.data);
         window.location.reload()
       })
       .catch(error => {
@@ -200,11 +211,13 @@ class Farm extends Component {
   }
 
   render() {
-		console.log(this.state.sidebar)
-		const {center, koordinat, Farms, user, ubahInfo, rekomendasi, popupProfile, plantedAt, readyAt, tanah} = this.state
-		console.log('center', center)
-		console.log('koordinat', koordinat)
-		console.log('state', ubahInfo)
+		// console.log(this.state.sidebar)
+		const {center, koordinat, Farms, user, ubahInfo, rekomendasi, popupProfile, plantedAt, readyAt} = this.state
+		// console.log('center', center)
+		// console.log('koordinat', koordinat)
+		// console.log('state', ubahInfo)
+		const shareUrl = 'https://lahanku.id/maps/' + window.location.pathname.slice(6);
+    	const title = 'Lahanku.id - Data lahan Indonesia';
 
     return (
       	<div className="App">
@@ -228,68 +241,130 @@ class Farm extends Component {
 					</div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">
-							<label>Jenis tanaman : </label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
-							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-								<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+							<div className="col-md-2"><i className="material-icons">scatter_plot</i></div>
+							<div className="col-md-10">
+								<label>Jenis tanaman : </label>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
+								<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+									<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
+								</div>
 							</div>
 						</li>
 						<li class="list-group-item">
-							<label>Tanggal ditanam : </label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
-							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-								<DatePicker
-									selected={plantedAt}
-									onChange={this.onChangePlantedAt}
-									value={plantedAt}
-								/>
+							<div className="col-md-2"><i className="material-icons">update</i></div>
+							<div className="col-md-10">
+								<label>Tanggal ditanam : </label>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
+								<div style={{display: !(ubahInfo) ? 'none' : 'block' }} className="handle-input-farm">
+									<DatePicker
+										selected={plantedAt}
+										onChange={this.onChangePlantedAt}
+										value={plantedAt}
+									/>
+								</div>
 							</div>
 						</li>
 						<li class="list-group-item">
-							<label>Perkiraan tanggal panen : </label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
-							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-								<DatePicker
-									selected={readyAt}
-									onChange={this.onChangeReadyAt}
-									value={readyAt}
-								/>
+							<div className="col-md-2"><i className="material-icons">date_range</i></div>
+							<div className="col-md-10">
+								<label>Perkiraan tanggal panen : </label>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
+								<div style={{display: !(ubahInfo) ? 'none' : 'block' }} className="handle-input-farm">
+									<DatePicker
+										selected={readyAt}
+										onChange={this.onChangeReadyAt}
+										value={readyAt}
+									/>
+								</div>
 							</div>
 						</li>
 						<li class="list-group-item">
-							<label>Alamat : </label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
-							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
-							<label>Kota : </label>
-							<h5>{Farms.city}</h5>
-						</li>
-						<li class="list-group-item">
-							<label>Luas : </label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
-							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
-							<label>Ketinggian : </label>
-							<h5>{Farms.ketinggian} mdpl</h5>
-							<label>Perkiraan hasil panen : </label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
-							<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
-							<label>Kategori : </label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
-						</li>
-						<li class="list-group-item">
-							<label>Status Lahan</label>
-							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.status_lahan}</h5>
-							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-								<input name="tanah" type="checkbox" checked={tanah} onChange={this.handleInputChange} /> Lahan Dijual
+							<div className="col-md-2"><i className="material-icons">pin_drop</i></div>
+							<div className="col-md-10">
+								<label>Alamat : </label>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
+								<input style={{display: !(ubahInfo) ? 'none' : 'block', maxWidth: "100%"}} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
+								<label>Kota : </label>
+								<h5>{Farms.city}</h5>
 							</div>
 						</li>
 						<li class="list-group-item">
-							<div style={{display : (username == user.username ? 'block' : 'none')}}>
-								<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
-								<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+							<div className="col-md-2"><i className="material-icons">texture</i></div>
+							<div className="col-md-10">
+								<label>Luas : </label>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} m<sup>2</sup></h5>
+								<input style={{display: !(ubahInfo) ? 'none' : 'block', maxWidth: "100%" }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
+								<label>Ketinggian : </label>
+								<h5>{Farms.ketinggian} mdpl</h5>
+								<label>Perkiraan hasil panen : </label>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
+								<input style={{display: !(ubahInfo) ? 'none' : 'block', maxWidth: "100%" }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
+								<label>Kategori : </label>
+								<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
 							</div>
-							<hr/>
-							<label>Rekomendasi tanaman : </label>
-								<label>{rekomendasi}</label>
+						</li>
+							<li class="list-group-item">
+							<div className="col-md-2"><i className="material-icons">help_outline</i></div>
+							<div className="col-md-10">
+								<div style={{display : (username == user.username ? 'block' : 'none')}}>
+									<button className="btn btn-common" style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
+									<button className="btn btn-common" style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+								</div>
+								<hr/>
+								<label>Rekomendasi tanaman : </label>
+									<label>{rekomendasi}</label>
+
+{/* // 						<li class="list-group-item">
+// 							<label>Status Lahan</label>
+// 							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.status_lahan}</h5>
+// 							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+// 								<input name="tanah" type="checkbox" checked={tanah} onChange={this.handleInputChange} /> Lahan Dijual
+// 							</div>
+// 						</li>
+// 						<li class="list-group-item">
+// 							<div style={{display : (username == user.username ? 'block' : 'none')}}>
+// 								<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
+// 								<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button> */}
+
+							</div>
+						</li>
+						<li>
+							<li class="list-group-item">
+								<div className="col-md-12">
+									<p style={{fontSize: "14px"}}>Bagikan link lahan ini via:</p>
+									<div className="sharePannel">
+										<div className="shareButton">
+											<TwitterShareButton
+											url="localhost:3000"
+											title={shareUrl + "\n Lahan ini strategis dan produktif, ayo kunjungi Lahanku.id!"}
+											className="Demo__some-network__share-button">
+											<TwitterIcon
+												size={32}
+												round />
+											</TwitterShareButton>
+										</div>
+										<div className="shareButton">
+											<FacebookShareButton
+											url={shareUrl + "\n Lahan ini strategis dan produktif, ayo kunjungi Lahanku.id!"}
+											quote={title}
+											className="Demo__some-network__share-button">
+											<FacebookIcon
+												size={32}
+												round />
+											</FacebookShareButton>
+										</div>
+										<div className="shareButton">
+											<WhatsappShareButton
+											url="{shareUrl}"
+											title="{title}"
+											// separator=":: "
+											className="Demo__some-network__share-button">
+											<WhatsappIcon size={32} round />
+											</WhatsappShareButton>
+										</div>
+									</div>
+								</div>
+							</li>
 						</li>
 
 					</ul>
@@ -299,7 +374,7 @@ class Farm extends Component {
 							class="wa-float"
 							target="_blank"
 						>
-							<button className="btn btn-outline-success" style={{width: '200px'}}>Kirim Pesan</button>
+							<button className="btn btn-common" style={{width: '200px'}}>Kirim Pesan</button>
 						</a>
 						{/* <a href="#" class="card-link">Another link</a> */}
 					</div>
@@ -338,6 +413,18 @@ class Farm extends Component {
 					<Layer type="fill" paint={polygonPaint}>
 						<Feature coordinates={koordinat} />
 					</Layer>
+					<ControlRange
+						position="top-right"
+						id="name"
+						min={10}
+						max={1000}
+						step={10}
+						onChange={
+						(value, id) => {
+							console.log(value, id);
+						}
+						}
+					/>
 				</Map>
 			</div>
       </div>

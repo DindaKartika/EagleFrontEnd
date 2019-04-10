@@ -289,15 +289,17 @@ class SidebarField extends Component {
             id="photos"
             name="fotoLahan"
             onChange={this.handleFotoLahanChange}
+            className="file" 
+            style={{marginTop : "10px"}} 
           />
-          <button onClick={this.handleUploadFotoLahan}>
+          <button className="btn btn-common" style={{marginTop : "10px"}} onClick={this.handleUploadFotoLahan}>
             Upload foto lahan
           </button>
           <br />
-          <button type="submit" onClick={() => this.saveDetails()}>
+          <button type="submit" className="btn btn-common" style={{marginTop : "10px"}} onClick={() => this.saveDetails()}>
             Simpan
           </button>
-          <button type="submit" onClick={() => this.saveDetailsNew()}>
+          <button type="submit" className="btn btn-common" style={{marginTop : "10px"}} onClick={() => this.saveDetailsNew()}>
             Simpan dan Buat Baru
           </button>
         </form>

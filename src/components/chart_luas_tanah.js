@@ -47,17 +47,48 @@ class ChartLuasTanah extends Component {
     this.state = {
       jenis_tanaman: "",
       options: {
+      //   chart: {
+      //     id: "basic-bar"
+      //   },
+      //   xaxis: {
+      //     categories: []
+      //   }
+      // },
         chart: {
-          id: "basic-bar"
+          zoom: {
+              enabled: false
+          }
+        },
+        colors: ['#77B6EA', '#545454'],
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Grafik Total Luas Tanah (30 Hari Kebelakang)',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
         },
         xaxis: {
-          categories: []
+            categories: [],
         }
       },
       series: [
         {
           name: "luas lahan (meter persegi)",
-          type: "column",
+          // type: "column",
+          data: []
+        },
+        {
+          name: "luas lahan (meter persegi)",
+          // type: "column",
           data: []
         }
       ]
@@ -133,18 +164,27 @@ class ChartLuasTanah extends Component {
     return (
       <div className="Analyze">
         <div className="row">
-          <div className="mixed-chart">
+          <div className="col-md-9">
+            <div className="mixed-chart" style={{width: "100%"}}>
+              <Chart
+                options={this.state.options}
+                series={this.state.series}
+                type="line"
+                // width="800"
+              />
+            </div>
+          </div>
+          <div className="col-md-3">
             <label>Jenis Tanaman :</label>
             <Select options={optionPlant} onChange={e => this.changePlant(e)} />
             <label>Nama Kota :</label>
             <Select options={optionCity} onChange={e => this.changeCity(e)} />
-            <Chart
-              options={this.state.options}
-              series={this.state.series}
-              type="bar"
-              width="850"
-              height="400"
-            />
+            <br/>
+            <div >
+              <label>Legenda</label>
+              <br/>
+              <label>{this.state.jenis_tanaman}</label>
+            </div>
           </div>
         </div>
       </div>

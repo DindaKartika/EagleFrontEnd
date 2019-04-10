@@ -114,7 +114,9 @@ const initialState = {
 
     //axios profile
     listFeed:[],
-    listComment:[]
+    listComment:[],
+
+    Farms:[]
 
 };
 
@@ -142,7 +144,8 @@ export const actions = store => ({
     signIn:  async state => {
         const self = this;
         // const urlLogin="http://localhost:8010/proxy/login";
-        const urlLogin="http://localhost:5000/login";
+        const urlLogin="http://172.11.111.53:5000/login";
+        // const urlLogin="http://localhost:5000/login";
         // const urlLogin="localhost:5000/login";
         const data = {username:state.username, password:state.password}
         let signIn = {

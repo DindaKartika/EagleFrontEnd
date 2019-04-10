@@ -130,7 +130,7 @@ class NewsFeed extends Component {
                         <div className="side-detail-profile">
                             <div>{this.props.current_display_name}</div>
                             <div>@{this.props.current_username}</div>
-                            <Link to="/bookmarks" className="btn btn-primary">Lihat feed yang diikuti</Link>
+                            <Link to="/bookmarks" className="btn btn-common" style={{marginTop: "20px"}}>List Feed Favorit</Link>
                             <br />
                         </div>
                     </div>
@@ -153,7 +153,7 @@ class NewsFeed extends Component {
                                         <input className="form-control input-lg size-input-feed" id="inputlg" name="content" type="text"/>
                                     </div>
                                     <div className="container-fluid row justify-content-end">
-                                        <button className="btn btn-outline-success addpost-btn" type="submit">Bagikan</button>
+                                        <button className="btn btn-common addpost-btn" type="submit">Bagikan</button>
                                     </div>
                                 </form> 
                                 <div className="profile-post" style={{ display: "block" }}>

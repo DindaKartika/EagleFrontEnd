@@ -16,50 +16,87 @@ const KontenSidebar = props => {
   const deskripsi = props.data.deskripsi
   const id_pemilik = props.data.id_pemilik
   const status_lahan = props.data.status_lahan
+  const farm_size = props.data.luas
   return (
-  <div class="card border-dark mb-3">
-    <div class="card-header">
-      <Link to={"/maps/" +id}>
-      <label>Nomor Identitas Lahan {id}</label>
-      </Link>
-    </div>
-    <div class="card-body text-dark row">
-      {/* <h5 class="card-title">Dark card title</h5> */}
-      <div className="col-md-8">
-        <h6>Pemilik Lahan:</h6>
-        <h4>{pemilik}</h4>
-        
-          <label>@{username}</label>
-          <br/>
-          <span>Tipe tanaman pada lahan:</span>
-          {(tanaman == "") ? <h5>-</h5> : <h5>{tanaman}</h5>}
-          <label>{deskripsi}</label>
+    <div class="card mb-3" style={{paddingBottom: "20px"}}>
+        <div class="card-header" >
+          <span style={{fontSize: "12px"}}>Tipe tanaman pada lahan: {(tanaman == "") ? <span>-</span> :<span>{props.tanaman}</span>}</span>
         </div>
-        <div className="col-md-4">
+        <div class="card-body" style={{display: 'flex'}}>
+          <div className="col-md-8">
+            <label>Pemilik Lahan :</label>
+              <h4><strong>{pemilik}</strong></h4>
+              <label style={{display: (pemilik=="")? 'block':'none'}}>@{username}</label>
+            <label>Luas lahan :</label>
+            <h4>{farm_size} m<sup>2</sup></h4>
+          </div>
+          <div className="col-md-4">
+            <h6>Pemilik Lahan:</h6>
+              <img src={
+                (tanaman=='Beras') ? "https://img.icons8.com/office/80/000000/barley.png":
+                ((tanaman=='Cabai') ? 'none' : 'none')}/>
+          </div>
+        </div>
+        <div className="card-link">
           <Link to={"/otherprofile/" + id_pemilik}>
-            <button className="btn btn-outline-success sidebar-map">Info Pemilik Lahan</button>
+            <button className="btn btn-secondary">Info Pemilik Lahan</button>
           </Link>
           <Link to={"/maps/" + id}>
-            <button className="btn btn-outline-success sidebar-map">Info Lahan</button>
+            <button className="btn btn-secondary">Info Lahan</button>
           </Link>
         </div>
-        <div>
-          <hr />
-          <label>Status tanah dijual: <br/>{status_lahan}</label>
-          {/* <label>Status produk lahan dijual: {props.status_lahan}</label> */}
-        </div>
-        {/* <div className="col-md-4">
+      </div>
+
+  // <div class="card border-dark mb-3">
+  //   <div class="card-header" style={{backgroundColor: "#1fcaa7"}}>
+  //     <span style={{fontSize: "12px"}}>Tipe tanaman pada lahan: {(props.tanaman == "") ? <span>-</span> :<span>{props.tanaman}</span>}</span>
+  //   </div>
+  //   <div class="card-body text-dark row">
+  //     <div className="col-md-4">
+        
+  //     </div>
+  //     <div className="col-md-8">
+  //       <h6>Pemilik Lahan:</h6>
+  //         <h4><strong>{props.pemilik}</strong></h4>
+  //         <label style={{display: (props.pemilik=="")? 'block':'none'}}>@{props.username}</label>
+  //         {props.luas_lahan} m<sup>2</sup>
+  //     </div>
+  //     <div className="card-link">
+  //       <Link to={"/otherprofile/" + props.id_pemilik}>
+  //         <button className="link-card">Info Pemilik Lahan</button>
+  //       </Link>
+  //       <Link to={"/maps/" + props.id}>
+  //         <button className="link-card">Info Lahan</button>
+  //       </Link>
+  //     </div>
+      
+    //    <div>
+    //     <hr />
+    //     <label>Status tanah dijual: <br/>{props.status_lahan}</label>
+    //   </div>
+    //      <div className="col-md-4">
+
+
+
           
-        </div>   */}
-        </div>
-      {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
-    </div>
+    //     </div> 
+    //     </div>
+    //   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    // </div>
     
   );
 
 }
 
 KontenSidebar.propTypes = {
+  // id:PropTypes.number,
+  // id_pemilik:PropTypes.number,
+  // pemilik:PropTypes.string,
+  // username:PropTypes.string,
+  // tanaman:PropTypes.string,
+  // deskripsi:PropTypes.string,
+  // status_lahan:PropTypes.string,
+  // luas_lahan:PropTypes.number,
   data : PropTypes.string
 }
 

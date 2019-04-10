@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import ListComment from './list_comment'
 
-class ListFeed extends Component {
+class ListOther extends Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -59,7 +59,6 @@ class ListFeed extends Component {
     };
 
     handleSubmitComment(e){
-        // console.log(window.location.pathname)
         e.preventDefault();
         const self = this;
         const {content} = e.target;
@@ -99,15 +98,9 @@ class ListFeed extends Component {
             }).catch(function(error) {
             console.log("Gagal get comment", error);
             });
-
-            if(self.props.current_id !== self.props.data.id_user){
-                // self.props.history.push(window.location.pathname)
-                // console.log("test if success paht", window.location.pathname)
-                window.location.reload()
-            }
-            else{self.props.history.push("/profile")}
-            // self.props.history.push("/profile");
-            console.log("Not ok", window.location.pathname)
+            // if(self.props.current_id !== self.props.data.id_user){self.props.history.push("/otherprofile/"+self.props.data.id_user)}
+            // else{self.props.history.push("/profile")}
+            self.props.history.push("/otherprofile/"+self.props.data.id_user);
         });
 
     };
@@ -150,16 +143,8 @@ class ListFeed extends Component {
         }).catch(function(error) {
             console.log("Gagal get like", error);
             });
-
-            if(self.props.current_id !== self.props.data.id_user){
-                // self.props.history.push(window.location.pathname)
-                // console.log("test if success paht", window.location.pathname)
-                window.location.reload()
-            }
-            else{
-                self.props.history.push("/profile")
-            }
-            console.log("Not ok", window.location.pathname)
+            // self.props.history.push("/profile");
+            self.props.history.push("/otherprofile/"+self.props.data.id_user);
         ;
     };
 
@@ -233,7 +218,7 @@ class ListFeed extends Component {
                                             <form onSubmit={e => this.handleSubmitComment(e)}>
                                                 <textarea className="form-control" name="content" placeholder="write a comment..." rows="3"></textarea>
                                                 <br/>
-                                                <button class="btn btn-common position-right" type="submit">Comment</button>
+                                                <button class="btn btn-outline-secondary position-right" type="submit">Comment</button>
                                                 {/* <button type="button" className="btn btn-info pull-right">Post</button> */}
                                                 <div className="clearfix"></div>
                                             </form>
@@ -256,4 +241,4 @@ class ListFeed extends Component {
 // export default ListOffer;
 export default connect(
     "listFeed, current_id", actions)
-    (withRouter(ListFeed));
+    (withRouter(ListOther));
