@@ -25,7 +25,7 @@ class ListComment extends Component {
         console.log("test token post",token)
         let deleteComment = {
             method:'delete',
-            url:'http://localhost:5000/comments/' + self.props.id,
+            url:'http://3.1.9.239/comments/' + self.props.id,
             headers: {
                 'Authorization':'Bearer ' + token,
                 "Content-Type":"application/json"

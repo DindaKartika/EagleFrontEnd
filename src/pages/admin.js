@@ -26,7 +26,8 @@ class Admin extends Component {
   componentDidMount = () => {
     const self = this;
     axios
-      .get("http://0.0.0.0:5000/users/userprofile")
+      // .get("http://0.0.0.0:5000/users/userprofile")
+      .get("http://3.1.9.239/users/userprofile")
       .then(function(response) {
         self.setState({ Users: response.data });
         console.log("users", response.data);
