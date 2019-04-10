@@ -1220,3 +1220,12 @@ input:focus ~ .highlight {
     font-size: 12px;
     margin-right: 10px;
 }
+
+.container-grafik{
+    margin-left : -10vw;
+    margin-right : -10vw;
+
+    .apexcharts-title-text{
+        font-size : 20px;
+    }
+}

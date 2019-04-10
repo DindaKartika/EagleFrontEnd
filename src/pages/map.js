@@ -85,6 +85,7 @@ class App extends Component {
 				data['pemilik'] = response.data[index].user.display_name
 				data['username'] = response.data[index].user.username
 				data['status_lahan'] = response.data[index].status_lahan
+				data['luas'] = response.data[index].farm_size
 				rows.push(data)
 			}
 			console.log('koordinat jadi', rows)
@@ -168,6 +169,7 @@ class App extends Component {
 				data['pemilik'] = response.data[index].user.display_name
 				data['username'] = response.data[index].user.username
 				data['status_lahan'] = response.data[index].status_lahan
+				data['luas'] = response.data[index].farm_size
 				rows.push(data)
 			}
 
@@ -311,9 +313,9 @@ class App extends Component {
 					// console.log('cek hasil bayam', uniquefeatures)
 		//   <label>Status tanah dijual: {props.status_lahan}</label>
 							// console.log(koordinat[item].id),
-							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi} status_lahan={koordinat[item].status_lahan} luas_lahan={koordinat[item].farm_size}
+							// <KontenSidebar key={key} id={koordinat[key].id} id_pemilik={koordinat[key].id_pemilik} pemilik={koordinat[key].pemilik} username={koordinat[key].username} tanaman={koordinat[key].tanaman} deskripsi={koordinat[key].deskripsi} status_lahan={koordinat[item].status_lahan} 
 
-// 							<KontenSidebar key={key} data={koordinat[key]}
+							<KontenSidebar key={key} data={koordinat[key]}
 
 							/>
 					)}
@@ -381,22 +383,22 @@ class App extends Component {
 								)}
 						</Layer>
 						<Layer
-          id="3d-buildings"
-          sourceId="composite"
-          sourceLayer="building"
-          filter={['==', 'extrude', 'true']}
-          type="fill-extrusion"
-          minZoom={14}
-          paint={paintLayer}
-        />
-						
-						{/* {koordinat.map((item, key) => 
-							<PopUp center={item.center} deskripsi={item.deskripsi} tanaman={item.tanaman} username={item.username} pemilik={item.pemilik}/>
-						)} */}
-						{this.state.popup && <PopUp center={koordinat[number].center} deskripsi={koordinat[number].deskripsi} tanaman={koordinat[number].tanaman} username={koordinat[number].username} pemilik={koordinat[number].pemilik}/>}
+			id="3d-buildings"
+			sourceId="composite"
+			sourceLayer="building"
+			filter={['==', 'extrude', 'true']}
+			type="fill-extrusion"
+			minZoom={14}
+			paint={paintLayer}
+			/>
+							
+				{/* {koordinat.map((item, key) => 
+					<PopUp center={item.center} deskripsi={item.deskripsi} tanaman={item.tanaman} username={item.username} pemilik={item.pemilik}/>
+				)} */}
+				{this.state.popup && <PopUp center={koordinat[number].center} deskripsi={koordinat[number].deskripsi} tanaman={koordinat[number].tanaman} username={koordinat[number].username} pemilik={koordinat[number].pemilik}/>}
 					</Map>
 				</div>
-      </div>
+		</div>
     );
   }
 }
