@@ -211,7 +211,7 @@ class FeedComponent extends Component {
                                 </div>
                             </div>
                             <div>
-                                <a onClick={()=>this.handleAddBookmark(this.props.data.id_feed)}>ikuti feeds</a>
+                                <a onClick={()=>this.handleAddBookmark(this.props.data.id_feed)} className="follow-button">ikuti feeds</a>
                             </div>
                         </div>
 

@@ -22,7 +22,7 @@ const KontenKebun = props => {
         </div>
         <div>
         <Link to={"/maps/" + props.id}>
-          <button className="btn btn-success">
+          <button className="btn btn-common">
             Lihat di peta
           </button>
         </Link>

@@ -20,6 +20,19 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoiZGthcnRpa2EiLCJhIjoiY2p0ejY1c3FmMzExejQxcGNmcmZoaGhtMCJ9.FnTBMWoUi17BhvjRQ0e2mw"
 });
 
+const paintLayer = {
+	'fill-extrusion-color': '#aaa',
+	'fill-extrusion-height': {
+	  type: 'identity',
+	  property: 'height'
+	},
+	'fill-extrusion-base': {
+	  type: 'identity',
+	  property: 'min_height'
+	},
+	'fill-extrusion-opacity': 0.6
+  };
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -262,29 +275,46 @@ class App extends Component {
 	
 
   render() {
-		console.log(this.state.sidebar)
-		const {startDate} = this.state
-		console.log('tanggal', startDate.toISOString())
+		// console.log(this.state.sidebar)
+		// const {startDate} = this.state
+		// console.log('tanggal', startDate.toISOString())
 		const {koordinat, Center, Farms, number, uniquefeatures} = this.state
-		console.log('koord', koordinat)
-		console.log('index popup', number)
-		console.log('buat popup', koordinat[number])
-		console.log('cek features', uniquefeatures)
+		// console.log('koord', koordinat)
+		// console.log('index popup', number)
+		// console.log('buat popup', koordinat[number])
+
     return (
       <div className="App">
 				<div className="header">
 					<Header/>
 				</div>
-				<div className="search">
+				{/* <div className="search">
 					<form onSubmit={e => e.preventDefault()}>
 						<input type="search" onClick={this.viewFilter} placeholder="Cari" name="search" onChange={e => this.changeInput(e)}/>
-						<button type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
+						<button className="btn btn-common" type="submit" onClick={this.viewSidebar}><img src={'http://www.clker.com/cliparts/W/V/Z/X/h/t/search-icon-marine-md.png'}/></button>
+						{this.state.filter && <FilterMap/>}
+					</form>
+				</div> */}
+				<div class="search">
+					<form onSubmit={e => e.preventDefault()}>
+					<div style={{display: "flex"}}>
+						<input type="search" class="form-control" onClick={this.viewFilter} placeholder="Cari" name="search" onChange={e => this.changeInput(e)}/>
+						<button style={{marginRight: 0}} class="btn btn-common" type="button" onClick={this.viewSidebar}><i class="material-icons">search</i></button>
+					</div>
 						{this.state.filter && <FilterMap/>}
 					</form>
 				</div>
+				
 				<div className="sidebar">
 					{uniquefeatures.map((item, key) => 
-							<KontenSidebar key={key} data={koordinat[key]}
+
+					// console.log('cek hasil bayam', uniquefeatures)
+		//   <label>Status tanah dijual: {props.status_lahan}</label>
+							// console.log(koordinat[item].id),
+							<KontenSidebar key={key} id={koordinat[item].id} id_pemilik={koordinat[item].id_pemilik} pemilik={koordinat[item].pemilik} username={koordinat[item].username} tanaman={koordinat[item].tanaman} deskripsi={koordinat[item].deskripsi} status_lahan={koordinat[item].status_lahan} luas_lahan={koordinat[item].farm_size}
+
+// 							<KontenSidebar key={key} data={koordinat[key]}
+
 							/>
 					)}
 				</div>
@@ -350,6 +380,15 @@ class App extends Component {
 									/>
 								)}
 						</Layer>
+						<Layer
+          id="3d-buildings"
+          sourceId="composite"
+          sourceLayer="building"
+          filter={['==', 'extrude', 'true']}
+          type="fill-extrusion"
+          minZoom={14}
+          paint={paintLayer}
+        />
 						
 						{/* {koordinat.map((item, key) => 
 							<PopUp center={item.center} deskripsi={item.deskripsi} tanaman={item.tanaman} username={item.username} pemilik={item.pemilik}/>

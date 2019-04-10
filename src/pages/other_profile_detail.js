@@ -10,6 +10,14 @@ import ListFeed from "../components/list_feed";
 import { storage } from "../firebase";
 import Kebun from "../components/kebun"
 import { Link } from "react-router-dom";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share';
 
 const waUrl = "https://web.whatsapp.com/send?phone=";
 
@@ -149,7 +157,7 @@ class OtherProfile extends Component {
   getFeed = async () => {
     const self = this;
     const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/feeds?id_user=" + self.props.user_id;
+    const url = "http://localhost:5000/feeds?id_user=" + self.state.id;
     axios({
       method: "get",
       url: url,
@@ -158,7 +166,7 @@ class OtherProfile extends Component {
       }
     })
       .then(function(response) {
-        // console.log("Get feeds berhasil", response.data)
+        console.log("Get feeds berhasil", response.data)
         self.setState({
           listFeed: response.data
         });
@@ -182,7 +190,9 @@ class OtherProfile extends Component {
 
 
   render() {
-    console.log("PROPS", this.props.edit_display_name);
+    // console.log("PROPS", this.props.edit_display_name);
+    const shareUrl = 'https://lahanku.id/otherprogile/' + window.location.pathname.slice(14);
+    const title = 'Lahanku.id - Data lahan Indonesia';
     return (
       <div>
         <Header />
@@ -235,11 +245,43 @@ class OtherProfile extends Component {
               <div>
                   
                   <a href={waUrl + this.props.current_phone_number} target="_blank">
-                  <button className="btn btn-success"><i class="fa fa-whatsapp my-wa-float" /> Hubungi via Whatsapp</button>
+                  <button className="btn btn-common"><i class="fa fa-whatsapp my-wa-float" /> Hubungi via Whatsapp</button>
                   </a>
                   
                 </div>
                 {/* TEST */}
+                <p style={{fontSize: "14px"}}>Bagikan link profil ini via:</p>
+                  <div className="sharePannel">
+                  <div className="shareButton">
+                    <TwitterShareButton
+                      url="localhost:3000"
+                      title={shareUrl + "\n Profil pengguna Lahanku.id yang keren!"}
+                      className="Demo__some-network__share-button">
+                      <TwitterIcon
+                        size={32}
+                        round />
+                    </TwitterShareButton>
+                  </div>
+                  <div className="shareButton">
+                    <FacebookShareButton
+                      url={shareUrl + "\n Profil pengguna Lahanku.id yang keren!"}
+                      quote={title}
+                      className="Demo__some-network__share-button">
+                      <FacebookIcon
+                        size={32}
+                        round />
+                    </FacebookShareButton>
+                  </div>
+                  <div className="shareButton">
+                    <WhatsappShareButton
+                      url="{shareUrl}"
+                      title="{title}"
+                      // separator=":: "
+                      className="Demo__some-network__share-button">
+                      <WhatsappIcon size={32} round />
+                    </WhatsappShareButton>
+                    </div>
+                  </div>
             </div>
             <div className="col-md-9 feed-post">
               <div className="container">
@@ -251,8 +293,8 @@ class OtherProfile extends Component {
                     <button
                       className={
                         this.state.show === "post"
-                          ? "btn btn-outline-success profile-content-controller active"
-                          : "btn btn-outline-success profile-content-controller"
+                          ? "btn btn-common profile-content-controller active"
+                          : "btn btn-common profile-content-controller"
                       }
                       onClick={() => this.changeShowState("post")}
                     >
@@ -261,19 +303,19 @@ class OtherProfile extends Component {
                     <button
                       className={
                         this.state.show === "farm"
-                          ? "btn btn-outline-success profile-content-controller active"
-                          : "btn btn-outline-success profile-content-controller"
+                          ? "btn btn-common profile-content-controller active"
+                          : "btn btn-common profile-content-controller"
                       }
                       onClick={() => this.changeShowState("farm")}
                     >
                       Info lahan
                     </button>
-                    <button
-                      className="btn btn-outline-success profile-content-controller"
+                    {/* <button
+                      className="btn btn-common profile-content-controller"
                       disabled
                     >
                       Produk
-                    </button>
+                    </button> */}
                   </div>
                   <hr />
                   <div
