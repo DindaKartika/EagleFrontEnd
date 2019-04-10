@@ -26,35 +26,29 @@ import {
   } from 'react-share';
 
 const optionPlant = [
-  {value:'Semua', label:'Semua'},
   {value:'Bahan Pokok', label:'--- Bahan Pokok ---', isDisabled:true},
-  {value:'Beras', label:'Beras'},
-  {value:'Gandum', label:'Gandum'},
+  {value:'Padi', label:'Padi'},
   {value:'Jagung', label:'Jagung'},
-  {value:'Sagu', label:'Sagu'},
+  {value:'Ubi', label:'Ubi'},
+  {value:'Kentang', label:'Kentang'},
   {value:'Sayur', label:'--- Sayur ---', isDisabled:true},
-  {value:'Bayam', label:'Bayam'},
-  {value:'Cabai', label:'Cabai'},
   {value:'Kangkung', label:'Kangkung'},
+  {value:'Kubis', label:'Kubis'},
+  {value:'Lobak', label:'Lobak'},
   {value:'Mentimun', label:'Mentimun'},
   {value:'Sawi', label:'Sawi'},
   {value:'Terung', label:'Terung'},
   {value:'Tomat', label:'Tomat'},
-  {value:'Buah', label:'--- Buah ---', isDisabled:true},
-  {value:'Apel', label:'Apel'},
-  {value:'Durian', label:'Durian'},
-  {value:'Jeruk', label:'Jeruk'},
-  {value:'Mangga', label:'Mangga'},
-  {value:'Melon', label:'Melon'},
-  {value:'Nangka', label:'Nangka'},
-  {value:'Pisang', label:'Pisang'},
-  {value:'Semangka', label:'Semangka'},
+  {value:'Wortel', label:'Wortel'},
   {value:'Lain-lain', label:'--- Lain-lain ---', isDisabled:true},
-  {value:'Coklat', label:'Coklat'},
-  {value:'Teh', label:'Teh'},
-  {value:'Tebu', label:'Tebu'},
-  {value:'Kelapa', label:'Kelapa'},
-  {value:'Kopi', label:'Kopi'}
+  {value:'Bawang Merah', label:'Bawang Merah'},
+  {value:'Bawang Putih', label:'Bawang Putih'},
+  {value:'Cabai', label:'Cabai'},
+  {value:'Kacang Hijau', label:'Kacang Hijau'},
+  {value:'Kacang Panjang', label:'Kacang Panjang'},
+  {value:'Kacang Tanah', label:'Kacang Tanah'},
+  {value:'Kedelai', label:'Kedelai'},
+  {value:'Kelapa', label:'Kelapa'}
 ]
 
 const waUrl = "https://web.whatsapp.com/send?phone=";
@@ -88,11 +82,13 @@ class Farm extends Component {
 			plantedAt : new Date(),
 			readyAt : new Date(),
 			photos: "",
-			perkiraan_panen: 0
+			perkiraan_panen: null,
+			tanah : false
 			// center : [],
 			// koordinat : []
 		};
 		this.UbahInfo = this.UbahInfo.bind(this)
+		this.handleInputChange = this.handleInputChange.bind(this)
     }
     
     UNSAFE_componentWillMount () {
@@ -122,6 +118,13 @@ class Farm extends Component {
 				if (response.data.zona == "zona iklim panas"){self.setState({rekomendasi : "padi, tebu, kelapa, cokelat, dan jagung"})}
 				else if (response.data.zona == "zona iklim sedang"){self.setState({rekomendasi : "Teh, kina, kopi, karet, cokelat, dan sayuran"})}
 				else if (response.data.zona == "zona iklim sejuk"){self.setState({rekomendasi : "Pohon pinus, cemara, dan beberapa jenis sayuran seperti kentang"})}
+				if (response.data.status_lahan == 'dijual'){
+					self.setState({tanah : true})
+				}
+				else if (response.data.status_lahan == 'tidak'){
+					self.setState({tanah : false})
+				}
+				// (response.data.status_lahan == 'dijual') ? (this.setState({tanah : true})) : (this.setState({tanah : true}))
 			})
 			.catch(function(error){
 				console.log('error', error);
@@ -146,9 +149,10 @@ class Farm extends Component {
       plant_type,
 			plantedAt,
 			readyAt,
-      address,
+            address,
 			farm_size,
-			perkiraan_panen
+			perkiraan_panen,
+			tanah
     } = this.state;
     const id = localStorage.getItem("id_farm");
     // console.log(id);
@@ -159,7 +163,8 @@ class Farm extends Component {
       ready_at: readyAt.toISOString(),
       address: address,
 			farm_size : farm_size,
-			perkiraan_panen : perkiraan_panen
+			perkiraan_panen : perkiraan_panen,
+			status_lahan : String(tanah)
     };
     // console.log(data);
 
@@ -193,7 +198,17 @@ class Farm extends Component {
 	
 	changeInput = e => {
     this.setState({ [e.target.name]: e.target.value });
-  };
+	};
+	
+	handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
 
   render() {
 		// console.log(this.state.sidebar)
@@ -210,63 +225,6 @@ class Farm extends Component {
 				<Header/>
 			</div>
 			<div className="sidebar">
-				{/* <h5>Informasi Lahan:</h5>
-				<label>Nama pemilik: </label>
-				<h5 style={{display : (username == user.username ? 'block' : 'none')}}>{user.username}</h5>
-				<div style={{display : ((username == user.username) ? 'none' : 'block')}} onMouseEnter={() => this.PopupProfile()} onMouseLeave={() => this.NotPopupProfile()}>
-					<Link to={"/otherprofile/" + user.id}><h5>{user.username}</h5></Link>
-				</div>
-				<label>Deskripsi : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.deskripsi}</h5>
-				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="deskripsi" onChange={e => this.changeInput(e)} defaultValue={Farms.deskripsi}/>
-				<label>Jenis tanaman : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plant_type}</h5>
-				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-					<Select options={optionPlant} onChange={e => this.changePlant(e)} placeholder={Farms.plant_type}/>	
-				</div>
-				<label>Tanggal ditanam : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.plantedAt}</h5>
-				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-					<DatePicker
-						selected={plantedAt}
-						onChange={this.onChangePlantedAt}
-						value={plantedAt}
-					/>
-				</div>
-				<label>Perkiraan tanggal panen : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.readyAt}</h5>
-				<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
-					<DatePicker
-						selected={readyAt}
-						onChange={this.onChangeReadyAt}
-						value={readyAt}
-					/>
-				</div>
-				<label>Alamat : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.address}</h5>
-				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="address" onChange={e => this.changeInput(e)} defaultValue={Farms.address}/>
-				<label>Kota : </label>
-				<h5>{Farms.city}</h5>
-				<label>Luas : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.farm_size} M<sup>2</sup></h5>
-				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="farm_size" onChange={e => this.changeInput(e)} defaultValue={Farms.farm_size}/>
-				<label>Ketinggian : </label>
-				<h5>{Farms.ketinggian} mdpl</h5>
-				<label>Perkiraan hasil panen : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.perkiraan_panen} kg</h5>
-				<input style={{display: !(ubahInfo) ? 'none' : 'block' }} type="text" name="perkiraan_panen" onChange={e => this.changeInput(e)} defaultValue={Farms.perkiraan_panen}/>
-				<label>Kategori : </label>
-				<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.category}</h5>
-				<div style={{display : (username == user.username ? 'block' : 'none')}}>
-				<hr/>
-					<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
-					<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
-					
-					
-				</div>
-				<hr/>
-				<label>Rekomendasi tanaman : </label>
-					<label>{rekomendasi}</label> */}
 				<div class="card">
 					<img class="card-img-top" src={Farms.photos} alt="Card image cap" style={{width: "100%"}}/>
 					<div class="card-body">
@@ -355,6 +313,19 @@ class Farm extends Component {
 								<hr/>
 								<label>Rekomendasi tanaman : </label>
 									<label>{rekomendasi}</label>
+
+// 						<li class="list-group-item">
+// 							<label>Status Lahan</label>
+// 							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.status_lahan}</h5>
+// 							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
+// 								<input name="tanah" type="checkbox" checked={tanah} onChange={this.handleInputChange} /> Lahan Dijual
+// 							</div>
+// 						</li>
+// 						<li class="list-group-item">
+// 							<div style={{display : (username == user.username ? 'block' : 'none')}}>
+// 								<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
+// 								<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+
 							</div>
 						</li>
 						<li>

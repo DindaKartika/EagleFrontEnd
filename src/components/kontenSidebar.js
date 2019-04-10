@@ -9,6 +9,13 @@ import "./../css/main.css";
 const username  =localStorage.getItem('username')
 
 const KontenSidebar = props => {
+  const id = props.data.id
+  const pemilik = props.data.pemilik
+  const username = props.data.username
+  const tanaman = props.data.tanaman
+  const deskripsi = props.data.deskripsi
+  const id_pemilik = props.data.id_pemilik
+  const status_lahan = props.data.status_lahan
   // console.log('cek username', username)
   // console.log("test luas lahan", props.luas_lahan)
   return (
@@ -89,6 +96,9 @@ const KontenSidebar = props => {
     //     <label>Status tanah dijual: <br/>{props.status_lahan}</label>
     //   </div>
     //      <div className="col-md-4">
+
+
+
           
     //     </div> 
     //     </div>
@@ -107,7 +117,8 @@ KontenSidebar.propTypes = {
   tanaman:PropTypes.string,
   deskripsi:PropTypes.string,
   status_lahan:PropTypes.string,
-  luas_lahan:PropTypes.number
+  luas_lahan:PropTypes.number,
+  data : PropTypes.string
 }
 
 export default KontenSidebar;
