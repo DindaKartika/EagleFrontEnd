@@ -142,7 +142,8 @@ class ChartLuasTanah extends Component {
               options={this.state.options}
               series={this.state.series}
               type="bar"
-              width="800"
+              width="850"
+              height="400"
             />
           </div>
         </div>

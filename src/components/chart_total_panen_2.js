@@ -41,30 +41,75 @@ const optionCity = [
   { value: "Sidoarjo", label: "Sidoarjo" }
 ];
 
-class ChartTotalPanen extends Component {
+class ChartTotalPanen2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jenis_tanaman: "",
-      options: {
-        chart: {
-          id: "basic-bar"
+      jenis_tanaman_1: "",
+      jenis_tanaman_2: "",
+    options: {
+        dataLabels: {
+          enabled: false
+        },
+
+        stroke: {
+          width: [1, 1, 4]
         },
         xaxis: {
-          categories: []
+          categories: [],
+        },
+        yaxis: [
+          {
+            axisTicks: {
+              show: true,
+            },
+            axisBorder: {
+              show: true,
+              color: '#008FFB'
+            },
+            labels: {
+              style: {
+                color: '#008FFB',
+              }
+            },
+            title: {
+              text: "Perkiraan hasil panen (kg)",
+              style: {
+                  fontSize: '20px',
+                color: '#008FFB',
+              }
+            },
+            tooltip: {
+              enabled: true
+            }
+          }
+        ],
+        tooltip: {
+          fixed: {
+            enabled: true,
+            position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+            offsetY: 30,
+            offsetX: 60
+          },
+        },
+        legend: {
+          horizontalAlign: 'left',
+          offsetX: 40
         }
       },
-      series: [
-        {
-          name: "total panen (kg)",
-          type: "column",
-          data: []
-        }
-      ]
-    };
+      series: [{
+        name: 'Jenis Tanaman 1',
+        type: 'column',
+        data: []
+      }, {
+        name: 'Jenis Tanaman 2',
+        type: 'column',
+        data: []
+      }],
+    }
   }
 
-  changePlant(event) {
+  changePlant1(event) {
     const self = this;
     axios
       .get("http://0.0.0.0:5000/analyze", {
@@ -75,10 +120,34 @@ class ChartTotalPanen extends Component {
       .then(function(response) {
         let temp = JSON.parse(JSON.stringify(self.state)).series;
         temp[0].data = response.data.avg_panen;
+        temp[0].name = event.value;
         self.setState({
           options: { xaxis: { categories: response.data.future_output_dates } },
           series: temp,
+          jenis_tanaman_1: event.value
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  changePlant2(event) {
+    const self = this;
+    axios
+      .get("http://0.0.0.0:5000/analyze", {
+        params: {
           jenis_tanaman: event.value
+        }
+      })
+      .then(function(response) {
+        let temp = JSON.parse(JSON.stringify(self.state)).series;
+        temp[1].data = response.data.avg_panen;
+        temp[1].name = event.value;
+        self.setState({
+          options: { xaxis: { categories: response.data.future_output_dates } },
+          series: temp,
+          jenis_tanaman_2: event.value
         });
       })
       .catch(function(error) {
@@ -92,7 +161,7 @@ class ChartTotalPanen extends Component {
       axios
         .get("http://0.0.0.0:5000/analyzekota", {
           params: {
-            jenis_tanaman: self.state.jenis_tanaman,
+            jenis_tanaman: self.state.jenis_tanaman_1,
             kota: event.value
           }
         })
@@ -107,16 +176,56 @@ class ChartTotalPanen extends Component {
         .catch(function(error) {
           console.log(error);
         });
+
+        axios
+        .get("http://0.0.0.0:5000/analyzekota", {
+          params: {
+            jenis_tanaman: self.state.jenis_tanaman_2,
+            kota: event.value
+          }
+        })
+        .then(function(response) {
+          let temp = JSON.parse(JSON.stringify(self.state)).series;
+          temp[1].data = response.data.avg_panen;
+          self.setState({
+            options: { xaxis: { categories: response.data.future_output_dates } },
+            series: temp
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     } else {
       axios
         .get("http://0.0.0.0:5000/analyze", {
           params: {
-            jenis_tanaman: self.state.jenis_tanaman
+            jenis_tanaman_1: self.state.jenis_tanaman
           }
         })
         .then(function(response) {
           let temp = JSON.parse(JSON.stringify(self.state)).series;
           temp[0].data = response.data.avg_panen;
+          temp[0].name = event.value;
+          self.setState({
+            options: { xaxis: { categories: response.data.future_output_dates } },
+            series: temp,
+            jenis_tanaman: event.value
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+        axios
+        .get("http://0.0.0.0:5000/analyze", {
+          params: {
+            jenis_tanaman_2: self.state.jenis_tanaman
+          }
+        })
+        .then(function(response) {
+          let temp = JSON.parse(JSON.stringify(self.state)).series;
+          temp[0].data = response.data.avg_panen;
+          temp[0].name = event.value;
           self.setState({
             options: { xaxis: { categories: response.data.future_output_dates } },
             series: temp,
@@ -134,16 +243,17 @@ class ChartTotalPanen extends Component {
       <div className="Analyze">
         <div className="row">
           <div className="mixed-chart">
-            <label>Jenis Tanaman :</label>
-            <Select options={optionPlant} onChange={e => this.changePlant(e)} />
+            <label>Jenis Tanaman 1:</label>
+            <Select options={optionPlant} onChange={e => this.changePlant1(e)} />
+            <label>Jenis Tanaman 2:</label>
+            <Select options={optionPlant} onChange={e => this.changePlant2(e)} />
             <label>Nama Kota :</label>
             <Select options={optionCity} onChange={e => this.changeCity(e)} />
             <Chart
               options={this.state.options}
               series={this.state.series}
-              type="bar"
-              width="850"
-              height="400"
+              type="line"
+              width="800"
             />
           </div>
         </div>
@@ -155,4 +265,4 @@ class ChartTotalPanen extends Component {
 export default connect(
   "",
   actions
-)(withRouter(ChartTotalPanen));
+)(withRouter(ChartTotalPanen2));
