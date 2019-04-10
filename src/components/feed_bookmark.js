@@ -35,7 +35,7 @@ class FeedBookmark extends Component {
         console.log("post comment", data);
         let postComment = {
             method:'post',
-            url:'http://3.1.9.239/comments',
+            url:'http://api.lahanku.id/comments',
             headers: {
                 'Authorization':'Bearer ' + token,
                 "Content-Type":"application/json"
@@ -48,8 +48,8 @@ class FeedBookmark extends Component {
             const allFeed = {
                 method: "get",
                 // url: "http://localhost:8010/proxy/user/product",
-                url: "http://3.1.9.239/bookmarks?sort=desc&rp=1000",
-                // url: "http://3.1.9.239/feeds?rp=10000",
+                url: "http://api.lahanku.id/bookmarks?sort=desc&rp=1000",
+                // url: "http://api.lahanku.id/feeds?rp=10000",
                 headers: {
                     'Authorization':'Bearer ' + token
                 }
@@ -77,7 +77,7 @@ class FeedBookmark extends Component {
         console.log("test token post",token)
         let postLike = {
             method:'post',
-            url:'http://3.1.9.239/feedlikes/' + self.props.data.id_feed,
+            url:'http://api.lahanku.id/feedlikes/' + self.props.data.id_feed,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -91,8 +91,8 @@ class FeedBookmark extends Component {
             const allFeed = {
                 method: "get",
                 // url: "http://localhost:8010/proxy/user/product",
-                url: "http://3.1.9.239/bookmarks?sort=desc&rp=1000",
-                // url: "http://3.1.9.239/feeds?rp=10000",
+                url: "http://api.lahanku.id/bookmarks?sort=desc&rp=1000",
+                // url: "http://api.lahanku.id/feeds?rp=10000",
                 headers: {
                     'Authorization':'Bearer ' + token
                 }
@@ -125,8 +125,8 @@ class FeedBookmark extends Component {
         console.log("test id user booookmarrrrk", e)
         let addBookmark = {
             method:'delete',
-            // url:'http://3.1.9.239/feedlikes/' + self.props.data.id_feed,
-            url:'http://3.1.9.239/bookmarks/' + e,
+            // url:'http://api.lahanku.id/feedlikes/' + self.props.data.id_feed,
+            url:'http://api.lahanku.id/bookmarks/' + e,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -140,8 +140,8 @@ class FeedBookmark extends Component {
             const allFeed = {
                 method: "get",
                 // url: "http://localhost:8010/proxy/user/product",
-                url: "http://3.1.9.239/bookmarks?sort=desc&rp=1000",
-                // url: "http://3.1.9.239/feeds?rp=10000",
+                url: "http://api.lahanku.id/bookmarks?sort=desc&rp=1000",
+                // url: "http://api.lahanku.id/feeds?rp=10000",
                 headers: {
                     'Authorization':'Bearer ' + token
                 }

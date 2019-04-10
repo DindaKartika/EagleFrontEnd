@@ -34,7 +34,7 @@ class FeedComponent extends Component {
         console.log("post comment", data);
         let postComment = {
             method:'post',
-            url:'http://3.1.9.239/comments',
+            url:'http://api.lahanku.id/comments',
             headers: {
                 'Authorization':'Bearer ' + token,
                 "Content-Type":"application/json"
@@ -46,7 +46,7 @@ class FeedComponent extends Component {
             console.log(response.data);
             const allFeed = {
                 method: "get",
-                url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
+                url: "http://api.lahanku.id/feeds?sort=desc&rp=10000",
             };
              axios(allFeed)
             .then(function(response){
@@ -71,7 +71,7 @@ class FeedComponent extends Component {
         console.log("test token post",token)
         let postLike = {
             method:'post',
-            url:'http://3.1.9.239/feedlikes/' + self.props.data.id_feed,
+            url:'http://api.lahanku.id/feedlikes/' + self.props.data.id_feed,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -83,7 +83,7 @@ class FeedComponent extends Component {
         .then(function(response){
             const allFeed = {
                 method: "get",
-                url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
+                url: "http://api.lahanku.id/feeds?sort=desc&rp=10000",
             };
              axios(allFeed)
             .then(function(response){
@@ -110,8 +110,8 @@ class FeedComponent extends Component {
         console.log("test id user booookmarrrrk", e)
         let addBookmark = {
             method:'post',
-            // url:'http://3.1.9.239/feedlikes/' + self.props.data.id_feed,
-            url:'http://3.1.9.239/bookmarks/' + e,
+            // url:'http://api.lahanku.id/feedlikes/' + self.props.data.id_feed,
+            url:'http://api.lahanku.id/bookmarks/' + e,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -124,7 +124,7 @@ class FeedComponent extends Component {
             alert("tambah bookmark sukses")
             // const allFeed = {
             //     method: "get",
-            //     url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
+            //     url: "http://api.lahanku.id/feeds?sort=desc&rp=10000",
             // };
             //  axios(allFeed)
             // .then(function(response){
@@ -151,7 +151,7 @@ class FeedComponent extends Component {
         console.log("test token post",token)
         let unlike = {
             method:'delete',
-            url:'http://3.1.9.239/feedlikes/' + self.state.id_like,
+            url:'http://api.lahanku.id/feedlikes/' + self.state.id_like,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -166,7 +166,7 @@ class FeedComponent extends Component {
             console.log(response.data);
             axios({
                 method: 'get',
-                url: 'http://3.1.9.239/feedlikes/' + self.props.data.id_feed,
+                url: 'http://api.lahanku.id/feedlikes/' + self.props.data.id_feed,
                 // headers: {
                 //   Authorization: 'Bearer ' + token
                 // }

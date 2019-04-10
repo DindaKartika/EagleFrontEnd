@@ -23,7 +23,7 @@ class SidebarMap extends Component {
 
 		console.log(data)
 		axios
-		.get('http://0.0.0.0:5000/farms', {
+		.get('http://api.lahanku.id/farms', {
 			params:data
 	})
 		.then(function(response){

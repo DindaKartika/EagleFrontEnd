@@ -25,7 +25,7 @@ class CommentComponent extends Component {
         console.log("test token post",token)
         let deleteComment = {
             method:'delete',
-            url:'http://3.1.9.239/comments/' + self.props.id,
+            url:'http://api.lahanku.id/comments/' + self.props.id,
             headers: {
                 'Authorization':'Bearer ' + token,
                 "Content-Type":"application/json"
@@ -38,7 +38,7 @@ class CommentComponent extends Component {
             console.log(response.data);
             const allFeed = {
                 method: "get",
-                url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
+                url: "http://api.lahanku.id/feeds?sort=desc&rp=10000",
             };
                 axios(allFeed)
             .then(function(response){
@@ -65,7 +65,7 @@ class CommentComponent extends Component {
         console.log("test token post",token)
         let postLike = {
             method:'post',
-            url:'http://3.1.9.239/commentlikes/' + self.props.id,
+            url:'http://api.lahanku.id/commentlikes/' + self.props.id,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -77,7 +77,7 @@ class CommentComponent extends Component {
         .then(function(response){
             const allFeed = {
                 method: "get",
-                url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
+                url: "http://api.lahanku.id/feeds?sort=desc&rp=10000",
             };
              axios(allFeed)
             .then(function(response){

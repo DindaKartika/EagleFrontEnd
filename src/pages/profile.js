@@ -108,7 +108,7 @@ class Profile extends Component {
     console.log("Cekt token setelah login", token);
     await axios({
       method: "get",
-      url: "http://localhost:5000/users/profile",
+      url: "http://api.lahanku.id/users/profile",
       headers: {
         Authorization: "Bearer " + token
       }
@@ -158,7 +158,7 @@ class Profile extends Component {
   getFeed = async () => {
     const self = this;
     const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/feeds?sort=desc&rp=10000&id_user=" + self.state.id;
+    const url = "http://api.lahanku.id/feeds?sort=desc&rp=10000&id_user=" + self.state.id;
     axios({
       method: "get",
       url: url,
@@ -254,7 +254,7 @@ class Profile extends Component {
     }
     await axios({
       method: "get",
-      url: "http://localhost:5000/users/profile",
+      url: "http://api.lahanku.id/users/profile",
       headers: {
         Authorization: "Bearer " + token
       }
@@ -276,7 +276,7 @@ class Profile extends Component {
         };
         return axios({
           method: "patch",
-          url: "http://localhost:5000/users/profile/" + self.state.id,
+          url: "http://api.lahanku.id/users/profile/" + self.state.id,
           data: data,
           headers: {
             Authorization: "Bearer " + token
@@ -374,7 +374,7 @@ class Profile extends Component {
     console.log("post content", data);
     let postFeed = {
         method:'post',
-        url:'http://localhost:5000/feeds',
+        url:'http://api.lahanku.id/feeds',
         headers: {
             'Authorization':'Bearer ' + token
         },
@@ -385,7 +385,7 @@ class Profile extends Component {
         console.log(response.data);
         // const self = this;
         const token = localStorage.getItem("token");
-        const url = "http://localhost:5000/feeds?sort=desc&rp=10000&id_user=" + self.state.id;
+        const url = "http://api.lahanku.id/feeds?sort=desc&rp=10000&id_user=" + self.state.id;
         axios({
           method: "get",
           url: url,
@@ -408,6 +408,7 @@ class Profile extends Component {
 };
 
   render() {
+    console.log("test login state")
     const shareUrl = 'https://lahanku.id/profile/' + this.props.current_id;
     const title = 'Lahanku.id - Data lahan Indonesia';
     // console.log("PROPS", this.props.edit_display_name);
@@ -487,7 +488,7 @@ class Profile extends Component {
                   <div className="sharePannel">
                   <div className="shareButton">
                     <TwitterShareButton
-                      url="localhost:3000"
+                      url="lahanku.id"
                       title={shareUrl + "\n Profil pengguna Lahanku.id yang keren!"}
                       className="Demo__some-network__share-button">
                       <TwitterIcon

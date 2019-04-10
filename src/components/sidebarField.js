@@ -105,7 +105,7 @@ class SidebarField extends Component {
 
     const self = this;
     axios
-      .put("http://0.0.0.0:5000/farms/" + id, data, {
+      .put("http://api.lahanku.id/farms/" + id, data, {
         headers: {
           Authorization: "Bearer " + tokens
         }
@@ -152,7 +152,7 @@ class SidebarField extends Component {
 
     const self = this;
     axios
-      .put("http://0.0.0.0:5000/farms/" + id, data, {
+      .put("http://api.lahanku.id/farms/" + id, data, {
         headers: {
           Authorization: "Bearer " + tokens
         }

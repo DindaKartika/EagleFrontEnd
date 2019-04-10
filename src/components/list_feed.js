@@ -22,10 +22,10 @@ class ListFeed extends Component {
         const self = this;
 
         const token = localStorage.getItem("token");
-        console.log("test token post",token)
+        // console.log("test token post",token)
         let deleteFeed = {
             method:'delete',
-            url:'http://3.1.9.239/feeds/' + e,
+            url:'http://api.lahanku.id/feeds/' + e,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -37,7 +37,7 @@ class ListFeed extends Component {
         .then(function(response){
             const token = localStorage.getItem("token")
             // const url = "http://3.1.9.239/comments?id_feed=" + self.props.data.id_feed
-            const url = "http://3.1.9.239/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
+            const url = "http://api.lahanku.id/eeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
             axios({
                 method: 'get',
                 url: url,
@@ -83,7 +83,7 @@ class ListFeed extends Component {
             // const self = this;
             const token = localStorage.getItem("token");
             // const url = "http://3.1.9.239/comments?id_feed=" + self.props.data.id_feed
-            const url = "http://3.1.9.239/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
+            const url = "http://api.lahanku.id/eeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
             axios({
                 method: 'get',
                 url: url,
@@ -121,7 +121,7 @@ class ListFeed extends Component {
         console.log("test token post",token)
         let postLike = {
             method:'post',
-            url:'http://3.1.9.239/feedlikes/' + self.props.data.id_feed,
+            url:'http://api.lahanku.id/eedlikes/' + self.props.data.id_feed,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -133,7 +133,7 @@ class ListFeed extends Component {
         .then(function(response){
             const token = localStorage.getItem("token")
             // const url = "http://3.1.9.239/comments?id_feed=" + self.props.data.id_feed
-            const url = "http://3.1.9.239/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
+            const url = "http://api.lahanku.id/eeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
             axios({
                 method: 'get',
                 url: url,
