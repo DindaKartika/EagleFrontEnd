@@ -132,7 +132,7 @@ class Bookmarks extends Component {
                         <div className="side-detail-profile">
                             <div>{this.props.current_display_name}</div>
                             <div>@{this.props.current_username}</div>
-                            <Link to="/newsfeed" className="btn btn-primary">kembali ke newsfeed</Link>
+                            <Link to="/newsfeed" className="btn btn-common" style={{marginTop: "20px"}}>kembali ke newsfeed</Link>
                             <br />
                         </div>
                     </div>

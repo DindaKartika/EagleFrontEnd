@@ -44,56 +44,118 @@ const optionCity = [
 class ChartLuasTanah extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      jenis_tanaman: "",
-      options: {
-      //   chart: {
-      //     id: "basic-bar"
-      //   },
-      //   xaxis: {
-      //     categories: []
-      //   }
-      // },
-        chart: {
-          zoom: {
-              enabled: false
-          }
-        },
-        colors: ['#77B6EA', '#545454'],
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'straight'
-        },
-        title: {
-            text: 'Grafik Total Luas Tanah (30 Hari Kebelakang)',
-            align: 'left'
-        },
-        grid: {
-            row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-            },
-        },
-        xaxis: {
-            categories: [],
-        }
+//     this.state = {
+//       jenis_tanaman: "",
+//       options: {
+//       //   chart: {
+//       //     id: "basic-bar"
+//       //   },
+//       //   xaxis: {
+//       //     categories: []
+//       //   }
+//       // },
+//         chart: {
+//           zoom: {
+//               enabled: false
+//           }
+//         },
+//         colors: ['#77B6EA', '#545454'],
+//         dataLabels: {
+//             enabled: false
+//         },
+//         stroke: {
+//             curve: 'straight'
+//         },
+//         title: {
+//             text: 'Grafik Total Luas Tanah (30 Hari Kebelakang)',
+//             align: 'left'
+//         },
+//         grid: {
+//             row: {
+//                 colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+//                 opacity: 0.5
+//             },
+//         },
+//         xaxis: {
+//             categories: [],
+//         }
+//       },
+//       series: [
+//         {
+//           name: "luas lahan (meter persegi)",
+//           // type: "column",
+//           data: []
+//         },
+//         {
+//           name: "luas lahan (meter persegi)",
+//           // type: "column",
+//           data: []
+//         }
+//       ]
+//     };
+//   }
+
+this.state = {
+    jenis_tanaman: "",
+    total_lahan: 0,
+    total_user: 0,
+  options: {
+      dataLabels: {
+        enabled: false
       },
-      series: [
+
+      stroke: {
+        width: [1, 1, 4]
+      },
+      xaxis: {
+        categories: [],
+      },
+      yaxis: [
         {
-          name: "luas lahan (meter persegi)",
-          // type: "column",
-          data: []
-        },
-        {
-          name: "luas lahan (meter persegi)",
-          // type: "column",
-          data: []
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+            color: '#008FFB'
+          },
+          labels: {
+            style: {
+              color: '#008FFB',
+            }
+          },
+          title: {
+            text: "Total luas lahan (m2)",
+            style: {
+                fontSize: '20px',
+              color: '#008FFB',
+            }
+          },
+          tooltip: {
+            enabled: true
+          }
         }
-      ]
-    };
+      ],
+      tooltip: {
+        fixed: {
+          enabled: true,
+          position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+          offsetY: 30,
+          offsetX: 60
+        },
+      },
+      legend: {
+        horizontalAlign: 'left',
+        offsetX: 40
+      }
+    },
+    series: [{
+      name: 'Jenis Tanaman',
+      type: 'column',
+      data: []
+    }],
   }
+}
 
   changePlant(event) {
     const self = this;
@@ -106,10 +168,13 @@ class ChartLuasTanah extends Component {
       .then(function(response) {
         let temp = JSON.parse(JSON.stringify(self.state)).series;
         temp[0].data = response.data.luas_tanah;
+        temp[0].name = event.value;
         self.setState({
           options: { xaxis: { categories: response.data.past_output_dates } },
           series: temp,
-          jenis_tanaman: event.value
+          jenis_tanaman: event.value,
+          total_user: response.data.total_user,
+          total_lahan: response.data.total_lahan
         });
       })
       .catch(function(error) {
@@ -132,7 +197,9 @@ class ChartLuasTanah extends Component {
           temp[0].data = response.data.luas_tanah;
           self.setState({
             options: { xaxis: { categories: response.data.past_output_dates } },
-            series: temp
+            series: temp,
+            total_user: response.data.total_user,
+            total_lahan: response.data.total_lahan
           });
         })
         .catch(function(error) {
@@ -151,7 +218,9 @@ class ChartLuasTanah extends Component {
           self.setState({
             options: { xaxis: { categories: response.data.past_output_dates } },
             series: temp,
-            jenis_tanaman: event.value
+            jenis_tanaman: event.value,
+            total_user: response.data.total_user,
+            total_lahan: response.data.total_lahan
           });
         })
         .catch(function(error) {
@@ -183,7 +252,8 @@ class ChartLuasTanah extends Component {
             <div >
               <label>Legenda</label>
               <br/>
-              <label>{this.state.jenis_tanaman}</label>
+              <label>Total luas lahan {this.state.jenis_tanaman}</label>
+              <p>{this.state.total_lahan} m<sup>2</sup></p>
             </div>
           </div>
         </div>

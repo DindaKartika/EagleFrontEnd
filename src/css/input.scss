@@ -482,7 +482,7 @@ $footer-color: #252525;
 }
 
 .margin-right-20{
-    margin-right: 20px;
+    margin-right: 20px !important;
 }
 
 .margin-auto{
@@ -1222,8 +1222,8 @@ input:focus ~ .highlight {
 }
 
 .container-grafik{
-    margin-left : -10vw;
-    margin-right : -10vw;
+    // margin-left : -10vw;
+    // margin-right : -10vw;
 
     .Analyze{
         padding-top : 5vh;
@@ -1241,6 +1241,15 @@ input:focus ~ .highlight {
     }
     
 }
+
+.cursor-feed{
+    cursor: pointer;
+}
+
+.cursor-feed:hover {
+    color: darkcyan;
+}
+
 
 // .file{
 //     button {
