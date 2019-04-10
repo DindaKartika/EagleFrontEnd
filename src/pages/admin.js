@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import KontenAdmin from "../components/kontenAdmin";
 import ChartLuasTanah from "../components/chart_luas_tanah";
 import ChartTotalPanen from "../components/chart_total_panen";
+import ChartTotalPanen2 from "../components/chart_total_panen_2";
 
 //MAIN CLASS
 class Admin extends Component {
@@ -98,6 +99,10 @@ class Admin extends Component {
             <div className="col-md-12">
               <p className="h2">Grafik Perkiraan Panen per Hari (30 Hari Kedepan)</p>
               <ChartTotalPanen />
+            </div>
+            <div className="col-md-12">
+              <p className="h2">Grafik Perkiraan Panen per Hari (30 Hari Kedepan)</p>
+              <ChartTotalPanen2 />
             </div>
           </div>
         </div>
