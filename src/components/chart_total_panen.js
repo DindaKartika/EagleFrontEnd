@@ -47,11 +47,35 @@ class ChartTotalPanen extends Component {
     this.state = {
       jenis_tanaman: "",
       options: {
+        // chart: {
+        //   id: "basic-bar"
+        // },
+        // xaxis: {
+        //   categories: []
+        // }
         chart: {
-          id: "basic-bar"
+          zoom: {
+              enabled: false
+          }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Grafik Perkiraan Panen per Hari (30 Hari Kedepan)',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
         },
         xaxis: {
-          categories: []
+            categories: [],
         }
       },
       series: [
@@ -133,7 +157,7 @@ class ChartTotalPanen extends Component {
     return (
       <div className="Analyze">
         <div className="row">
-          <div className="mixed-chart">
+          <div className="mixed-chart" style={{width: "100%"}}>
             <label>Jenis Tanaman :</label>
             <Select options={optionPlant} onChange={e => this.changePlant(e)} />
             <label>Nama Kota :</label>
@@ -141,8 +165,8 @@ class ChartTotalPanen extends Component {
             <Chart
               options={this.state.options}
               series={this.state.series}
-              type="bar"
-              width="800"
+              type="line"
+              // width="800"
             />
           </div>
         </div>

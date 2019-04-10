@@ -19,7 +19,8 @@ import LandingInfo from '../pages/landinginfo';
 import OtherProfile from '../pages/other_profile_detail';
 import Admin from '../pages/admin'
 import Bookmarks from '../pages/bookmark';
-import Analyze from '../pages/analyze'
+import Analyze from '../pages/analyze';
+import Data from '../pages/data';
 
 import '../css/landing.css';
 import '../css/main2.css';
@@ -55,6 +56,7 @@ class MainRoute extends Component {
                 <Route exact path="/otherprofile/:id_profile" component={OtherProfile}/>
                 <Route exact path="/analyze" component={Analyze}/>
                 <Route exact path="/admin" component={Admin}/>
+                <Route exact path="/data" component={Data}/>
                 {/* <Route exact path = "/allproduct" component={AllProduct}/> */}
             </Switch>
         );

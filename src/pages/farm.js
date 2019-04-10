@@ -314,7 +314,7 @@ class Farm extends Component {
 								<label>Rekomendasi tanaman : </label>
 									<label>{rekomendasi}</label>
 
-// 						<li class="list-group-item">
+{/* // 						<li class="list-group-item">
 // 							<label>Status Lahan</label>
 // 							<h5 style={{display: (ubahInfo) ? 'none' : 'block' }}>{Farms.status_lahan}</h5>
 // 							<div style={{display: !(ubahInfo) ? 'none' : 'block' }}>
@@ -324,7 +324,7 @@ class Farm extends Component {
 // 						<li class="list-group-item">
 // 							<div style={{display : (username == user.username ? 'block' : 'none')}}>
 // 								<button style={{display: (ubahInfo) ? 'none' : 'block' }} onClick={this.UbahInfo}>Edit</button>
-// 								<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button>
+// 								<button style={{display: !(ubahInfo) ? 'none' : 'block' }} onClick={() => this.EditInfo()}>Simpan</button> */}
 
 							</div>
 						</li>

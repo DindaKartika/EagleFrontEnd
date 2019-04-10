@@ -1079,4 +1079,12 @@ li.list-group-item {
   margin-right: 10px;
 }
 
+.container-grafik {
+  margin-left: -10vw;
+  margin-right: -10vw;
+}
+.container-grafik .apexcharts-title-text {
+  font-size: 20px;
+}
+
 /*# sourceMappingURL=main.css.map */
