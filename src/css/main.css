@@ -283,7 +283,7 @@
 }
 .content-section .container-profile .display-username {
   font-size: 16px;
-  color: darkgreen;
+  color: #0e9d81;
 }
 .content-section .container-profile .display-address {
   font-size: 16px;
@@ -293,7 +293,7 @@
 }
 .content-section .container-profile .display-email {
   font-size: 16px;
-  color: darkgreen;
+  color: #0e9d81;
 }
 
 .profile-page input {
@@ -539,7 +539,7 @@
 .title-blogs {
   font-size: 30px;
   font-family: "Roboto", "sans-serif";
-  color: grey;
+  color: #1fcaa7;
   font-weight: bold;
 }
 
@@ -606,7 +606,7 @@
 }
 
 .color-username {
-  color: #22c11d !important;
+  color: #1fcaa7 !important;
 }
 
 .footer {
@@ -663,7 +663,7 @@
   position: absolute;
   z-index: 1;
   left: 8vw;
-  top: 21vh;
+  top: 22vh;
   background-color: #f7f7f7;
   padding: 10px;
   margin: 3px;
@@ -673,15 +673,6 @@
 }
 .PopupProfile button {
   cursor: pointer;
-  background-image: url("../images/logo/whatsapp_PNG1.webp");
-  background-size: 20px;
-  background-repeat: no-repeat;
-  padding-left: 22px;
-}
-
-.hlm-admin {
-  background-color: white;
-  padding: 10vh 20vw;
 }
 
 .btn {
@@ -758,6 +749,334 @@
 .btn.btn-outline-success.sidebar-map {
   font-size: 12px;
   margin-bottom: 10px;
+}
+
+.shareButton {
+  width: 40px;
+}
+
+.sharePannel {
+  display: flex;
+}
+
+.Demo__some-network {
+  vertical-align: top;
+  margin-right: 15px;
+  text-align: center;
+}
+
+.Demo__some-network__share-count {
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.Demo__some-network__share-button {
+  cursor: pointer;
+}
+
+.Demo__some-network__share-button:hover:not(:active) {
+  opacity: 0.75;
+}
+
+.Demo__some-network__custom-icon {
+  width: 32px;
+  height: 32px;
+}
+
+li.list-group-item {
+  display: flex;
+}
+
+.react-datepicker-wrapper {
+  max-width: 100%;
+}
+
+.handle-input-farm div, .handle-input-farm input {
+  max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* basic stylings ------------------------------------------ */
+.filters {
+  font-family: "Roboto";
+  margin: 30px auto 0;
+  display: block;
+  background: #FFF;
+  padding: 10px 50px 50px;
+  /* form starting stylings ------------------------------- */
+  /* LABEL ======================================= */
+  /* active state */
+  /* BOTTOM BARS ================================= */
+  /* active state */
+  /* HIGHLIGHTER ================================== */
+  /* active state */
+}
+.filters input {
+  border-color: #1fcaa7;
+}
+.filters h2 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.filters h2 small {
+  font-weight: normal;
+  color: #888;
+  display: block;
+}
+.filters .group {
+  position: relative;
+  margin-bottom: 45px;
+}
+.filters input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+.filters input:focus {
+  outline: none;
+}
+.filters label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.filters input:focus ~ label, .filters input:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #5264AE;
+}
+.filters .bar {
+  position: relative;
+  display: block;
+  width: 300px;
+}
+.filters .bar:before, .filters .bar:after {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.filters .bar:before {
+  left: 50%;
+}
+.filters .bar:after {
+  right: 50%;
+}
+.filters input:focus ~ .bar:before, .filters input:focus ~ .bar:after {
+  width: 50%;
+}
+.filters .highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.filters input:focus ~ .highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+.search-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2f3640;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+}
+
+.search-box:hover > .search-txt {
+  width: 240px;
+  padding: 0 6px;
+}
+
+.search-box:hover > .search-btn {
+  background: white;
+}
+
+.search-btn {
+  color: #e84118;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2f3640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-txt {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+}
+
+.custom-check {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.custom-check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.custom-check:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.custom-check input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.custom-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.custom-check .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.follow-button {
+  cursor: pointer;
+}
+
+.follow-button:hover {
+  background-color: #cafaf0;
+}
+
+.link-card {
+  border: none;
+  background: none;
+  margin-right: 20px;
+  color: #333 !important;
+  border-bottom: solid, 2px;
+  border-color: #1fcaa7;
+  border: solid 1px;
+  border-radius: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.link-card:hover {
+  cursor: pointer;
+  color: #1fcaa7 !important;
+}
+
+.card-body.text-dark.row {
+  margin-top: 0;
+  padding-top: 10px;
+}
+
+.card-link {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.btn.btn-secondary {
+  font-size: 12px;
+  margin-right: 10px;
 }
 
 /*# sourceMappingURL=main.css.map */

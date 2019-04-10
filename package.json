@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.1.1",
+    "@mapbox/mr-ui": "^0.6.1",
     "@turf/turf": "^5.1.6",
     "apexcharts": "^3.6.6",
     "axios": "^0.18.0",
