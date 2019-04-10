@@ -125,8 +125,8 @@ class ListComment extends Component {
                     <div className="row justify-content-end">
                         <span className="attribute-text margin-right-20">{this.props.tag}</span>
                         <span className="format-likes">{this.props.total_like_comment}</span>
-                        <a  className="card-link margin-right-20" onClick={(e)=>this.handleClickLike(e)} name={this.props.id}><i className="fa fa-gittip"></i> Suka</a>
-                        <a className="attribute-text " onClick={(e)=>this.handleDeleteComment(e)} style={{ display: this.props.current_id !== this.props.iduser ? "none" : "block" }} name={this.props.id}>Delete</a>
+                        <a  className="cursor-feed margin-right-20" onClick={(e)=>this.handleClickLike(e)} name={this.props.id}><i className="fa fa-gittip"></i> Suka</a>
+                        <a className="attribute-text cursor-feed" onClick={(e)=>this.handleDeleteComment(e)} style={{ display: this.props.current_id !== this.props.iduser ? "none" : "block" }} name={this.props.id}>Delete</a>
                     </div>
                 </div>
             </li>
