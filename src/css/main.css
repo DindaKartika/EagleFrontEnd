@@ -414,7 +414,7 @@
 }
 
 .margin-right-20 {
-  margin-right: 20px;
+  margin-right: 20px !important;
 }
 
 .margin-auto {
@@ -1090,6 +1090,14 @@ li.list-group-item {
 }
 .container-grafik .Analyze .apexcharts-legend.position-bottom.center {
   display: none;
+}
+
+.cursor-feed {
+  cursor: pointer;
+}
+
+.cursor-feed:hover {
+  color: darkcyan;
 }
 
 /*# sourceMappingURL=main.css.map */
