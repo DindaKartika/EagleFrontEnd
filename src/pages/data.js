@@ -76,14 +76,14 @@ class LandingInfo extends Component {
               <div class="row countdown justify-content-center">
                 <div id="clock" class="time-count"></div>
               </div>
-              <a href="#contact" class="btn btn-common">Hubungi Kami</a>
+              {/* <a href="#contact" class="btn btn-common">Hubungi Kami</a>
               <a href="#team" class="btn btn-border">Tentang Kami</a>
               <div class="social mt-4">
                 <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
                 <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
                 <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
                 <a class="google" href="#"><i class="lni-google-plus"></i></a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@ class LandingInfo extends Component {
                 Apa itu Lahanku
               </h6>
               <h2 class="section-title">
-                kami berdedikasi untuk memajukan industri pertanian Indonesia
+                Kami berdedikasi untuk memajukan industri pertanian Indonesia
               </h2>
               <div class="section-info">
                 Membantu menyelesaikan permasalahan ketidak seimbangan antara stok dan permintaan pasar pangan (supply and demand) di seluruh daerah Indonesia
