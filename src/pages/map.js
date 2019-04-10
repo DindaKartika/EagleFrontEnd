@@ -63,7 +63,7 @@ class App extends Component {
 	UNSAFE_componentWillMount () {
 		const self = this;
 		axios
-		.get('http://0.0.0.0:5000/farms')
+		.get('http://3.1.9.239/farms')
 		.then(function(response){
 			self.setState({Farms: response.data});
 			console.log('farms', response.data);
@@ -143,7 +143,7 @@ class App extends Component {
 		const self = this
 
 		axios
-		.get('http://0.0.0.0:5000/farms', {
+		.get('http://3.1.9.239/farms', {
 			params:data
 			})
 		.then(function(response){

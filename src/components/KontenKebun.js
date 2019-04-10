@@ -18,7 +18,7 @@ class KontenKebun extends Component{
     const token = localStorage.getItem("token");
     let deleteFarms = {
         method:'delete',
-        url:'http://localhost:5000/farms/' + e,
+        url:'http://3.1.9.239/farms/' + e,
         headers: {
             'Authorization':'Bearer ' + token
         }

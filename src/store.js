@@ -144,9 +144,9 @@ export const actions = store => ({
     signIn:  async state => {
         const self = this;
         // const urlLogin="http://localhost:8010/proxy/login";
-        const urlLogin="http://172.11.111.53:5000/login";
-        // const urlLogin="http://localhost:5000/login";
-        // const urlLogin="localhost:5000/login";
+        const urlLogin="http://3.1.9.239/login";
+        // const urlLogin="http://3.1.9.239/login";
+        // const urlLogin="3.1.9.239/login";
         const data = {username:state.username, password:state.password}
         let signIn = {
             method:'post',
@@ -178,8 +178,8 @@ export const actions = store => ({
 
     register:  async state => {
         const self = this;
-        const urlLogin="http://localhost:5000/users/register";
-        // const urlLogin="localhost:5000/login";
+        const urlLogin="http://3.1.9.239/users/register";
+        // const urlLogin="3.1.9.239/login";
         const data = {username:state.username, password:state.password, email:state.email}
         let signIn = {
             method:'post',
@@ -235,8 +235,8 @@ export const actions = store => ({
         const allFeed = {
             method: "get",
             // url: "http://localhost:8010/proxy/user/product",
-            url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-            // url: "http://localhost:5000/feeds?rp=10000",
+            url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
+            // url: "http://3.1.9.239/feeds?rp=10000",
             // headers: {
             //     'Authorization':'Bearer ' + token
             // }
@@ -256,8 +256,8 @@ export const actions = store => ({
     //     const allFeed = {
     //         method: "get",
     //         // url: "http://localhost:8010/proxy/user/product",
-    //         url: "http://localhost:5000/feeds?sort=desc&rp=10000",
-    //         // url: "http://localhost:5000/feeds?rp=10000",
+    //         url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
+    //         // url: "http://3.1.9.239/feeds?rp=10000",
     //         // headers: {
     //         //     'Authorization':'Bearer ' + token
     //         // }
@@ -273,7 +273,7 @@ export const actions = store => ({
     //         // })
     //         response.data.map((item, key) => {
     //             // return <ListComment key={key} data={item}/>
-    //             const url = "http://localhost:5000/comments?id_feed=" + item.id_feed
+    //             const url = "http://3.1.9.239/comments?id_feed=" + item.id_feed
     //             axios({
     //                 method: 'get',
     //                 url: url
@@ -308,7 +308,7 @@ export const actions = store => ({
         console.log("Cekt token setelah login", token)
         await axios({
             method: 'get',
-            url: 'http://localhost:5000/users/profile',
+            url: 'http://3.1.9.239/users/profile',
             headers: {
               Authorization: 'Bearer ' + token
             }

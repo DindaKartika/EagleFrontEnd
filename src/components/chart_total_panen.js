@@ -97,7 +97,7 @@ class ChartTotalPanen extends Component {
   changePlant(event) {
     const self = this;
     axios
-      .get("http://0.0.0.0:5000/analyze", {
+      .get("http://3.1.9.239/analyze", {
         params: {
           jenis_tanaman: event.value
         }
@@ -120,7 +120,7 @@ class ChartTotalPanen extends Component {
     const self = this;
     if (event.value != "") {
       axios
-        .get("http://0.0.0.0:5000/analyzekota", {
+        .get("http://3.1.9.239/analyzekota", {
           params: {
             jenis_tanaman: self.state.jenis_tanaman,
             kota: event.value
@@ -139,7 +139,7 @@ class ChartTotalPanen extends Component {
         });
     } else {
       axios
-        .get("http://0.0.0.0:5000/analyze", {
+        .get("http://3.1.9.239/analyze", {
           params: {
             jenis_tanaman: self.state.jenis_tanaman
           }
