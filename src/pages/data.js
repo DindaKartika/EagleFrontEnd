@@ -63,56 +63,17 @@ class LandingInfo extends Component {
       
       {/* <!-- Intro Section Start --> */}
       <div className="landingpage-wrapper">
-      <section class="intro">
-        <div class="container">
-          <div class="row text-center">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="heading-count">
-                <h2><img className="" src={require("../images/logo/testlogo3.png")} alt="" /></h2>
-                <p>Tempat berbagi aktivitas mengenai lahan milik Anda</p>
-              </div>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="row countdown justify-content-center">
-                <div id="clock" class="time-count"></div>
-              </div>
-              {/* <a href="#contact" class="btn btn-common">Hubungi Kami</a>
-              <a href="#team" class="btn btn-border">Tentang Kami</a>
-              <div class="social mt-4">
-                <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
-                <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
-                <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
-                <a class="google" href="#"><i class="lni-google-plus"></i></a>
-              </div> */}
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* <!-- Intro Section End --> */}
-
+      
       <section id="services" class="section-padding" >
         <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-8 col-xs-12 text-center">
-              <h6 class="subtitle">
-                Apa itu Lahanku
-              </h6>
-              <h2 class="section-title">
-                Kami berdedikasi untuk memajukan industri pertanian Indonesia
-              </h2>
-              <div class="section-info">
-                Membantu menyelesaikan permasalahan ketidak seimbangan antara stok dan permintaan pasar pangan (supply and demand) di seluruh daerah Indonesia
-              </div>
-            </div>            
-          </div>
           <div className="container-grafik">
             <div className="row">
               <div className="col-md-12">
-                {/* <p className="h2">Grafik Total Luas Tanah (30 Hari Kebelakang)</p> */}
+                <h3 >Grafik Total Luas Tanah (30 Hari Kebelakang)</h3>
                 <ChartLuasTanah />
               </div>
               <div className="col-md-12">
-                {/* <p className="h2">Grafik Perkiraan Panen per Hari (30 Hari Kedepan)</p> */}
+                <h3 >Grafik Perkiraan Panen per Hari (30 Hari Kedepan)</h3>
                 <ChartTotalPanen />
               </div>
             </div>

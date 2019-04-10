@@ -44,62 +44,182 @@ const optionCity = [
 class ChartTotalPanen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      jenis_tanaman: "",
-      options: {
-        // chart: {
-        //   id: "basic-bar"
-        // },
-        // xaxis: {
-        //   categories: []
-        // }
-        chart: {
-          zoom: {
-              enabled: false
-          }
-        },
-        colors: ['#77B6EA', '#545454'],
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'straight'
-        },
-        title: {
-            text: 'Grafik Perkiraan Panen per Hari (30 Hari Kedepan)',
-            align: 'left'
-        },
-        grid: {
-            row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-            },
-        },
-        xaxis: {
-            categories: [],
-        }
+//     this.state = {
+//       jenis_tanaman_1: "",
+//       jenis_tanaman_2: "",
+//       options: {
+//         // chart: {
+//         //   id: "basic-bar"
+//         // },
+//         // xaxis: {
+//         //   categories: []
+//         // }
+//         chart: {
+//           zoom: {
+//               enabled: false
+//           }
+//         },
+//         colors: ['#77B6EA', '#545454'],
+//         dataLabels: {
+//             enabled: false
+//         },
+//         stroke: {
+//             curve: 'straight'
+//         },
+//         title: {
+//             text: 'Grafik Perkiraan Panen per Hari (30 Hari Kedepan)',
+//             align: 'left'
+//         },
+//         grid: {
+//             row: {
+//                 colors: ['#f3f3f3', 'transparent'],
+//                 opacity: 0.5
+//             },
+//         },
+//         xaxis: {
+//             categories: [],
+//         }
+//       },
+//       series: [
+//         {
+//           name: "total panen (kg)",
+//           // type: "column",
+//           data: []
+//         },
+//         {
+//           name: "total panen (kg)",
+//           // type: "column",
+//           data: []
+//         }
+//       ]
+//     };
+//   }
+this.state = {
+    jenis_tanaman_1: "",
+    jenis_tanaman_2: "",
+    total_panen_1: 0,
+    total_panen_2: 0,
+    total_user: 0,
+  options: {
+      dataLabels: {
+        enabled: false
       },
-      series: [
-        {
-          name: "total panen (kg)",
-          // type: "column",
-          data: []
-        },
-        {
-          name: "total panen (kg)",
-          // type: "column",
-          data: []
-        }
-      ]
-    };
-  }
 
-  changePlant(event) {
-    const self = this;
+      stroke: {
+        width: [1, 1, 4]
+      },
+      xaxis: {
+        categories: [],
+      },
+      yaxis: [
+        {
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+            color: '#008FFB'
+          },
+          labels: {
+            style: {
+              color: '#008FFB',
+            }
+          },
+          title: {
+            text: "Perkiraan hasil panen (kg)",
+            style: {
+                fontSize: '20px',
+              color: '#008FFB',
+            }
+          },
+          tooltip: {
+            enabled: true
+          }
+        }
+      ],
+      tooltip: {
+        fixed: {
+          enabled: true,
+          position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+          offsetY: 30,
+          offsetX: 60
+        },
+      },
+      legend: {
+        horizontalAlign: 'left',
+        offsetX: 40
+      }
+    },
+    series: [{
+      name: 'Jenis Tanaman 1',
+      type: 'column',
+      data: []
+    }, {
+      name: 'Jenis Tanaman 2',
+      type: 'column',
+      data: []
+    }],
+  }
+}
+
+changePlant1(event) {
+  const self = this;
+  axios
+    .get("http://0.0.0.0:5000/analyze", {
+      params: {
+        jenis_tanaman: event.value
+      }
+    })
+    .then(function(response) {
+      let temp = JSON.parse(JSON.stringify(self.state)).series;
+      temp[0].data = response.data.avg_panen;
+      temp[0].name = event.value;
+      self.setState({
+        options: { xaxis: { categories: response.data.future_output_dates } },
+        series: temp,
+        jenis_tanaman_1: event.value,
+        total_user: response.data.total_user,
+        total_panen_1: response.data.total_panen
+      });
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}
+
+changePlant2(event) {
+  const self = this;
+  axios
+    .get("http://0.0.0.0:5000/analyze", {
+      params: {
+        jenis_tanaman: event.value
+      }
+    })
+    .then(function(response) {
+      let temp = JSON.parse(JSON.stringify(self.state)).series;
+      temp[1].data = response.data.avg_panen;
+      temp[1].name = event.value;
+      self.setState({
+        options: { xaxis: { categories: response.data.future_output_dates } },
+        series: temp,
+        jenis_tanaman_2: event.value,
+        total_user: response.data.total_user,
+        total_panen_2: response.data.total_panen
+      });
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}
+
+changeCity(event) {
+  const self = this;
+  if (event.value != "") {
     axios
-      .get("http://0.0.0.0:5000/analyze", {
+      .get("http://0.0.0.0:5000/analyzekota", {
         params: {
-          jenis_tanaman: event.value
+          jenis_tanaman: self.state.jenis_tanaman_1,
+          kota: event.value
         }
       })
       .then(function(response) {
@@ -108,56 +228,80 @@ class ChartTotalPanen extends Component {
         self.setState({
           options: { xaxis: { categories: response.data.future_output_dates } },
           series: temp,
-          jenis_tanaman: event.value
+          total_user: response.data.total_user,
+          total_panen_1: response.data.total_panen
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+      axios
+      .get("http://0.0.0.0:5000/analyzekota", {
+        params: {
+          jenis_tanaman: self.state.jenis_tanaman_2,
+          kota: event.value
+        }
+      })
+      .then(function(response) {
+        let temp = JSON.parse(JSON.stringify(self.state)).series;
+        temp[1].data = response.data.avg_panen;
+        self.setState({
+          options: { xaxis: { categories: response.data.future_output_dates } },
+          series: temp,
+          total_user: response.data.total_user,
+          total_panen_2: response.data.total_panen
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  } else {
+    axios
+      .get("http://0.0.0.0:5000/analyze", {
+        params: {
+          jenis_tanaman_1: self.state.jenis_tanaman
+        }
+      })
+      .then(function(response) {
+        let temp = JSON.parse(JSON.stringify(self.state)).series;
+        temp[0].data = response.data.avg_panen;
+        temp[0].name = event.value;
+        self.setState({
+          options: { xaxis: { categories: response.data.future_output_dates } },
+          series: temp,
+          jenis_tanaman: event.value,
+          total_user: response.data.total_user,
+          total_panen_1: response.data.total_panen
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+      axios
+      .get("http://0.0.0.0:5000/analyze", {
+        params: {
+          jenis_tanaman_2: self.state.jenis_tanaman
+        }
+      })
+      .then(function(response) {
+        let temp = JSON.parse(JSON.stringify(self.state)).series;
+        temp[0].data = response.data.avg_panen;
+        temp[0].name = event.value;
+        self.setState({
+          options: { xaxis: { categories: response.data.future_output_dates } },
+          series: temp,
+          jenis_tanaman: event.value,
+          total_user: response.data.total_user,
+          total_panen_2: response.data.total_panen
         });
       })
       .catch(function(error) {
         console.log(error);
       });
   }
-
-  changeCity(event) {
-    const self = this;
-    if (event.value != "") {
-      axios
-        .get("http://0.0.0.0:5000/analyzekota", {
-          params: {
-            jenis_tanaman: self.state.jenis_tanaman,
-            kota: event.value
-          }
-        })
-        .then(function(response) {
-          let temp = JSON.parse(JSON.stringify(self.state)).series;
-          temp[0].data = response.data.avg_panen;
-          self.setState({
-            options: { xaxis: { categories: response.data.future_output_dates } },
-            series: temp
-          });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    } else {
-      axios
-        .get("http://0.0.0.0:5000/analyze", {
-          params: {
-            jenis_tanaman: self.state.jenis_tanaman
-          }
-        })
-        .then(function(response) {
-          let temp = JSON.parse(JSON.stringify(self.state)).series;
-          temp[0].data = response.data.avg_panen;
-          self.setState({
-            options: { xaxis: { categories: response.data.future_output_dates } },
-            series: temp,
-            jenis_tanaman: event.value
-          });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    }
-  }
+}
 
   render() {
     return (
@@ -174,15 +318,25 @@ class ChartTotalPanen extends Component {
             </div>
           </div>
           <div className="col-md-3">
-            <label>Jenis Tanaman :</label>
+            {/* <label>Jenis Tanaman :</label>
             <Select options={optionPlant} onChange={e => this.changePlant(e)} />
+            <label>Nama Kota :</label>
+            <Select options={optionCity} onChange={e => this.changeCity(e)} /> */}
+            <label>Jenis Tanaman 1:</label>
+            <Select options={optionPlant} onChange={e => this.changePlant1(e)} />
+            <label>Jenis Tanaman 2:</label>
+            <Select options={optionPlant} onChange={e => this.changePlant2(e)} />
             <label>Nama Kota :</label>
             <Select options={optionCity} onChange={e => this.changeCity(e)} />
             <br/>
             <div>
               <label>Legenda</label>
               <br/>
-              <label>{this.state.jenis_tanaman}</label>
+              <label><span>Perkiraan total panen </span>{this.state.jenis_tanaman_1}</label>
+              <p>{this.state.total_panen_1} Kg</p>
+              <br/>
+              <label>Perkiraan total panen {this.state.jenis_tanaman_2}</label>
+              <p>{this.state.total_panen_2} Kg</p>
             </div>
           </div>
         </div>
