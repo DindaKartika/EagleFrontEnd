@@ -165,7 +165,7 @@ this.state = {
 changePlant1(event) {
   const self = this;
   axios
-    .get("http://api.lahanku.id/analyze", {
+    .get("https://api.lahanku.id/analyze", {
       params: {
         jenis_tanaman: event.value
       }
@@ -190,7 +190,7 @@ changePlant1(event) {
 changePlant2(event) {
   const self = this;
   axios
-    .get("http://api.lahanku.id/analyze", {
+    .get("https://api.lahanku.id/analyze", {
       params: {
         jenis_tanaman: event.value
       }
@@ -216,7 +216,7 @@ changeCity(event) {
   const self = this;
   if (event.value != "") {
     axios
-      .get("http://api.lahanku.id/analyze", {
+      .get("https://api.lahanku.id/analyze", {
         params: {
           jenis_tanaman: self.state.jenis_tanaman_1,
           kota: event.value
@@ -237,7 +237,7 @@ changeCity(event) {
       });
 
       axios
-      .get("http://api.lahanku.id/analyzekota", {
+      .get("https://api.lahanku.id/analyzekota", {
         params: {
           jenis_tanaman: self.state.jenis_tanaman_2,
           kota: event.value
@@ -258,7 +258,7 @@ changeCity(event) {
       });
   } else {
     axios
-      .get("http://api.lahanku.id/analyzekota", {
+      .get("https://api.lahanku.id/analyzekota", {
         params: {
           jenis_tanaman_1: self.state.jenis_tanaman
         }
@@ -280,7 +280,7 @@ changeCity(event) {
       });
 
       axios
-        .get("http://api.lahanku.id/analyze", {
+        .get("https://api.lahanku.id/analyze", {
         params: {
           jenis_tanaman_2: self.state.jenis_tanaman
         }

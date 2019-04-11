@@ -95,7 +95,7 @@ class Farm extends Component {
 			const self = this;
 			// console.log(window.location.pathname.slice(6))
 			axios
-			.get('http://3.1.9.239/farms/' + window.location.pathname.slice(6))
+			.get('https://api.lahanku.id/farms/' + window.location.pathname.slice(6))
 			.then(function(response){
 				const farms = response.data
 				farms['readyAt'] = response.data.ready_at.slice(5,16)
@@ -172,7 +172,7 @@ class Farm extends Component {
 
     const self = this;
     axios
-      .put("http://3.1.9.239/farms/" + id, data, {
+      .put("https://api.lahanku.id/farms/" + id, data, {
         headers: {
           Authorization: "Bearer " + tokens
         }

@@ -2,23 +2,6 @@
 import createStore from 'unistore';
 import axios from "axios"
 
-const base_url = "http://0.0.0.0:5555/api/public/products"
-
-// ORIGIN
-// const url_login = "https://panenin.com/api/public/login"
-// const url_register = "https://panenin.com/api/public/register"
-// const url_addproduct = "http://anenin.com/proxy/api/public/products"
-
-
-// LOCAL ENVIRONMENT
-// const url_login = "http://localhost:8010/proxy/api/public/login"
-// const url_register = "http://localhost:8010/proxy/api/public/register"
-// const url_addproduct = "http://localhost:8010/proxy/api/public/products"
-
-// DEPLOY ENVIRONMENT
-// const url_login = "https://cors-anywhere.herokuapp.com/https://panenin.com/api/public/login"
-// const url_register = "https://cors-anywhere.herokuapp.com/https://panenin.com/api/public/register"
-// const url_addproduct = "https://cors-anywhere.herokuapp.com/https://panenin.com/api/public/products"
 
 const token = localStorage.getItem('token');
 
@@ -88,7 +71,6 @@ const initialState = {
     password_confirmation: "",
 
     page: 1,
-    url: base_url,
     current_userid: "",
 
     respond_offer: "",
@@ -144,8 +126,8 @@ export const actions = store => ({
     signIn:  async state => {
         const self = this;
         // const urlLogin="http://localhost:8010/proxy/login";
-        const urlLogin="http://3.1.9.239/login";
-        // const urlLogin="http://3.1.9.239/login";
+        const urlLogin="https://api.lahanku.id/login";
+        // const urlLogin="https://api.lahanku.id/login";
         // const urlLogin="3.1.9.239/login";
         const data = {username:state.username, password:state.password}
         let signIn = {
@@ -178,7 +160,7 @@ export const actions = store => ({
 
     register:  async state => {
         const self = this;
-        const urlLogin="http://3.1.9.239/users/register";
+        const urlLogin="https://api.lahanku.id/users/register";
         // const urlLogin="3.1.9.239/login";
         const data = {username:state.username, password:state.password, email:state.email}
         let signIn = {
@@ -235,8 +217,8 @@ export const actions = store => ({
         const allFeed = {
             method: "get",
             // url: "http://localhost:8010/proxy/user/product",
-            url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
-            // url: "http://3.1.9.239/feeds?rp=10000",
+            url: "https://api.lahanku.id/feeds?sort=desc&rp=10000",
+            // url: "https://api.lahanku.id/feeds?rp=10000",
             // headers: {
             //     'Authorization':'Bearer ' + token
             // }
@@ -256,8 +238,8 @@ export const actions = store => ({
     //     const allFeed = {
     //         method: "get",
     //         // url: "http://localhost:8010/proxy/user/product",
-    //         url: "http://3.1.9.239/feeds?sort=desc&rp=10000",
-    //         // url: "http://3.1.9.239/feeds?rp=10000",
+    //         url: "https://api.lahanku.id/feeds?sort=desc&rp=10000",
+    //         // url: "https://api.lahanku.id/feeds?rp=10000",
     //         // headers: {
     //         //     'Authorization':'Bearer ' + token
     //         // }
@@ -273,7 +255,7 @@ export const actions = store => ({
     //         // })
     //         response.data.map((item, key) => {
     //             // return <ListComment key={key} data={item}/>
-    //             const url = "http://3.1.9.239/comments?id_feed=" + item.id_feed
+    //             const url = "https://api.lahanku.id/comments?id_feed=" + item.id_feed
     //             axios({
     //                 method: 'get',
     //                 url: url
@@ -308,7 +290,7 @@ export const actions = store => ({
         console.log("Cekt token setelah login", token)
         await axios({
             method: 'get',
-            url: 'http://3.1.9.239/users/profile',
+            url: 'https://api.lahanku.id/users/profile',
             headers: {
               Authorization: 'Bearer ' + token
             }

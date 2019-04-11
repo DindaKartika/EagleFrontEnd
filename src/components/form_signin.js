@@ -98,7 +98,7 @@ class FormSignIn extends Component {
         }).then( async (response) => {
             await axios({
                 method: 'post',
-                url: "http://3.1.9.239/login/email",
+                url: "https://api.lahanku.id/login/email",
                 data: {
                     email: response.data.email,
                     display_name: response.data.name,

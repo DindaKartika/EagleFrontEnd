@@ -44,7 +44,7 @@ class InputField extends Component {
 	UNSAFE_componentWillMount () {
 		const self = this;
 		axios
-		.get('http://3.1.9.239/farms')
+		.get('https://api.lahanku.id/farms')
 		.then(function(response){
 			self.setState({Farms: response.data});
 			console.log('farms', response.data);
@@ -128,7 +128,7 @@ class InputField extends Component {
 				}
 				console.log(data)
 				axios
-					.post('http://3.1.9.239/farms', data, {
+					.post('https://api.lahanku.id/farms', data, {
 					headers:{
 							'Authorization' : 'Bearer ' + tokens
 					}

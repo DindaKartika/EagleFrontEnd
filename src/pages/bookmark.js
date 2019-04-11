@@ -28,9 +28,9 @@ class Bookmarks extends Component {
         const self = this;
         const allFeed = {
             method: "get",
-            // url: "http://localhost:8010/proxy/user/product",
-            url: "http://localhost:5000/bookmarks?sort=desc&rp=1000",
-            // url: "http://localhost:5000/feeds?rp=10000",
+            // url: "https://api.lahanku.id/proxy/user/product",
+            url: "https://api.lahanku.id/bookmarks?sort=desc&rp=1000",
+            // url: "https://api.lahanku.id/feeds?rp=10000",
             headers: {
                 'Authorization':'Bearer ' + token
             }
@@ -64,7 +64,7 @@ class Bookmarks extends Component {
     //     console.log("post content", data);
     //     let postFeed = {
     //         method:'post',
-    //         url:'http://localhost:5000/feeds?sort=desc&rp=10000',
+    //         url:'https://api.lahanku.id/feeds?sort=desc&rp=10000',
     //         headers: {
     //             'Authorization':'Bearer ' + token
     //         },
@@ -76,7 +76,7 @@ class Bookmarks extends Component {
     //         // const self = this;
     //         const allFeed = {
     //             method: "get",
-    //             url: "http://localhost:5000/feeds?sort=desc&rp=10000",
+    //             url: "https://api.lahanku.id/feeds?sort=desc&rp=10000",
     //         };
     //          axios(allFeed)
     //         .then(function(response){
@@ -103,7 +103,7 @@ class Bookmarks extends Component {
 
     //     let searchFeeds = {
     //         method:'get',
-    //         url:"http://localhost:5000/feeds?sort=desc&rp=10000" + "&search=" +  search,
+    //         url:"https://api.lahanku.id/feeds?sort=desc&rp=10000" + "&search=" +  search,
     //     };
     //     console.log("cek url",searchFeeds)
     //     axios(searchFeeds)

@@ -108,7 +108,7 @@ class OtherProfile extends Component {
 
     await axios({
       method: "get",
-      url: "http://localhost:5000/users/userprofile/" + id_profile
+      url: "https://api.lahanku.id/users/userprofile/" + id_profile
       // headers: {
       //   Authorization: "Bearer " + token
       // }
@@ -157,7 +157,7 @@ class OtherProfile extends Component {
   getFeed = async () => {
     const self = this;
     const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/feeds?id_user=" + self.state.id;
+    const url = "https://api.lahanku.id/feeds?id_user=" + self.state.id;
     axios({
       method: "get",
       url: url,

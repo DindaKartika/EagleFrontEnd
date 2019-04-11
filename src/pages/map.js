@@ -63,7 +63,7 @@ class App extends Component {
 	UNSAFE_componentWillMount () {
 		const self = this;
 		axios
-		.get('https://api.panenin.com/farms')
+		.get('https://api.lahanku.id/farms')
 		.then(function(response){
 			self.setState({Farms: response.data});
 			console.log('farms', response.data);
@@ -143,7 +143,7 @@ class App extends Component {
 		const self = this
 
 		axios
-		.get('https://api.panenin.com/farms', {
+		.get('https://api.lahanku.id/farms', {
 			params:data
 			})
 		.then(function(response){

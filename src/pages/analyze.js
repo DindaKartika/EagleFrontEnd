@@ -38,7 +38,7 @@
 //   componentDidMount = () => {
 //     const self = this;
 //     axios
-//       .get("http://0.0.0.0:5000/analyze", {
+//       .get("https://api.lahanku.id/analyze", {
 //         params: {
 //           jenis_tanaman: "wortel"
 //         }

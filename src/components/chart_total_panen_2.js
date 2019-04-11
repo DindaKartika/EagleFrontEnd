@@ -112,7 +112,7 @@ class ChartTotalPanen2 extends Component {
   changePlant1(event) {
     const self = this;
     axios
-      .get("http://0.0.0.0:5000/analyze", {
+      .get("https://api.lahanku.id//analyze", {
         params: {
           jenis_tanaman: event.value
         }
@@ -135,7 +135,7 @@ class ChartTotalPanen2 extends Component {
   changePlant2(event) {
     const self = this;
     axios
-      .get("http://0.0.0.0:5000/analyze", {
+      .get("https://api.lahanku.id/analyze", {
         params: {
           jenis_tanaman: event.value
         }
@@ -159,7 +159,7 @@ class ChartTotalPanen2 extends Component {
     const self = this;
     if (event.value != "") {
       axios
-        .get("http://0.0.0.0:5000/analyzekota", {
+        .get("https://api.lahanku.id//analyzekota", {
           params: {
             jenis_tanaman: self.state.jenis_tanaman_1,
             kota: event.value
@@ -178,7 +178,7 @@ class ChartTotalPanen2 extends Component {
         });
 
         axios
-        .get("http://0.0.0.0:5000/analyzekota", {
+        .get("https://api.lahanku.id//analyzekota", {
           params: {
             jenis_tanaman: self.state.jenis_tanaman_2,
             kota: event.value
@@ -197,7 +197,7 @@ class ChartTotalPanen2 extends Component {
         });
     } else {
       axios
-        .get("http://0.0.0.0:5000/analyze", {
+        .get("https://api.lahanku.id//analyze", {
           params: {
             jenis_tanaman_1: self.state.jenis_tanaman
           }
@@ -217,7 +217,7 @@ class ChartTotalPanen2 extends Component {
         });
 
         axios
-        .get("http://0.0.0.0:5000/analyze", {
+        .get("https://api.lahanku.id//analyze", {
           params: {
             jenis_tanaman_2: self.state.jenis_tanaman
           }

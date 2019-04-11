@@ -18,7 +18,7 @@ class KontenKebun extends Component{
     const token = localStorage.getItem("token");
     let deleteFarms = {
         method:'delete',
-        url:'http://3.1.9.239/farms/' + e,
+        url:'https://api.lahanku.id/farms/' + e,
         headers: {
             'Authorization':'Bearer ' + token
         }
@@ -29,7 +29,7 @@ class KontenKebun extends Component{
         console.log(window.location.pathname.slice(6))
         const id = localStorage.getItem('id')
         axios
-        .get('http://0.0.0.0:5000/farms', {
+        .get('https://api.lahanku.id/farms', {
             params:{id_user : id}
             })
         .then(function(response){

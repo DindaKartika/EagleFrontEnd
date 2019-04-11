@@ -25,7 +25,7 @@ class CommentBookmark extends Component {
         console.log("test token post",token)
         let deleteComment = {
             method:'delete',
-            url:'http://api.lahanku.id/comments/' + self.props.id,
+            url:'https://api.lahanku.id/comments/' + self.props.id,
             headers: {
                 'Authorization':'Bearer ' + token,
                 "Content-Type":"application/json"
@@ -38,9 +38,9 @@ class CommentBookmark extends Component {
             const token = localStorage.getItem("token");
             const allFeed = {
                 method: "get",
-                // url: "http://localhost:8010/proxy/user/product",
-                url: "http://api.lahanku.id/bookmarks?sort=desc&rp=1000",
-                // url: "http://api.lahanku.id/feeds?rp=10000",
+                // url: "https://api.lahanku.id/proxy/user/product",
+                url: "https://api.lahanku.id/bookmarks?sort=desc&rp=1000",
+                // url: "https://api.lahanku.id/feeds?rp=10000",
                 headers: {
                     'Authorization':'Bearer ' + token
                 }
@@ -71,7 +71,7 @@ class CommentBookmark extends Component {
     //     console.log("test token post",token)
     //     let postLike = {
     //         method:'post',
-    //         url:'http://api.lahanku.id/commentlikes/' + self.props.id,
+    //         url:'https://api.lahanku.id/commentlikes/' + self.props.id,
     //         headers: {
     //             'Authorization':'Bearer ' + token
     //             // "Content-Type":"application/json"
@@ -83,7 +83,7 @@ class CommentBookmark extends Component {
     //     .then(function(response){
     //         const allFeed = {
     //             method: "get",
-    //             url: "http://api.lahanku.id/feeds?sort=desc&rp=10000",
+    //             url: "https://api.lahanku.id/feeds?sort=desc&rp=10000",
     //         };
     //          axios(allFeed)
     //         .then(function(response){

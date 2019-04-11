@@ -32,9 +32,11 @@ const KontenSidebar = props => {
           </div>
           <div className="col-md-4">
             <h6>Pemilik Lahan:</h6>
-              <img src={
+              {/* <img src={
                 (tanaman=='Beras') ? "https://img.icons8.com/office/80/000000/barley.png":
-                ((tanaman=='Cabai') ? 'none' : 'none')}/>
+                ((tanaman=='Cabai') ? 'none' : 'none')}/> */}
+                <img src={require('../images/ico/icons8-barley-80.png')}/>
+                
           </div>
         </div>
         <div className="card-link">

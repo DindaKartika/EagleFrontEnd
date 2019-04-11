@@ -25,7 +25,7 @@ class ListOther extends Component {
         console.log("test token post",token)
         let deleteFeed = {
             method:'delete',
-            url:'http://3.1.9.239/feeds/' + e,
+            url:'https://api.lahanku.id/feeds/' + e,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -36,8 +36,8 @@ class ListOther extends Component {
         axios(deleteFeed)
         .then(function(response){
             const token = localStorage.getItem("token")
-            // const url = "http://3.1.9.239/comments?id_feed=" + self.props.data.id_feed
-            const url = "http://3.1.9.239/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
+            // const url = "https://api.lahanku.id/comments?id_feed=" + self.props.data.id_feed
+            const url = "https://api.lahanku.id/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
             axios({
                 method: 'get',
                 url: url,
@@ -70,7 +70,7 @@ class ListOther extends Component {
         const token = localStorage.getItem("token");
         let postComment = {
             method:'post',
-            url:'http://3.1.9.239/comments',
+            url:'https://api.lahanku.id/comments',
             headers: {
                 'Authorization':'Bearer ' + token,
                 "Content-Type":"application/json"
@@ -81,8 +81,8 @@ class ListOther extends Component {
         .then(function(response){
             // const self = this;
             const token = localStorage.getItem("token");
-            // const url = "http://3.1.9.239/comments?id_feed=" + self.props.data.id_feed
-            const url = "http://3.1.9.239/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
+            // const url = "https://api.lahanku.id/comments?id_feed=" + self.props.data.id_feed
+            const url = "https://api.lahanku.id/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
             axios({
                 method: 'get',
                 url: url,
@@ -114,7 +114,7 @@ class ListOther extends Component {
         console.log("test token post",token)
         let postLike = {
             method:'post',
-            url:'http://3.1.9.239/feedlikes/' + self.props.data.id_feed,
+            url:'https://api.lahanku.id/feedlikes/' + self.props.data.id_feed,
             headers: {
                 'Authorization':'Bearer ' + token
                 // "Content-Type":"application/json"
@@ -125,8 +125,8 @@ class ListOther extends Component {
         axios(postLike)
         .then(function(response){
             const token = localStorage.getItem("token")
-            // const url = "http://3.1.9.239/comments?id_feed=" + self.props.data.id_feed
-            const url = "http://3.1.9.239/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
+            // const url = "https://api.lahanku.id/comments?id_feed=" + self.props.data.id_feed
+            const url = "https://api.lahanku.id/feeds?sort=desc&rp=10000&id_user=" + self.props.data.id_user;
             axios({
                 method: 'get',
                 url: url,
