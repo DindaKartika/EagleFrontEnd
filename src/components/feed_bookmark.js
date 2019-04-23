@@ -47,9 +47,7 @@ class FeedBookmark extends Component {
             const token = localStorage.getItem("token");
             const allFeed = {
                 method: "get",
-                // url: "http://localhost:8010/proxy/user/product",
                 url: "https://api.lahanku.id/bookmarks?sort=desc&rp=1000",
-                // url: "https://api.lahanku.id/feeds?rp=10000",
                 headers: {
                     'Authorization':'Bearer ' + token
                 }
@@ -90,9 +88,7 @@ class FeedBookmark extends Component {
             const token = localStorage.getItem("token");
             const allFeed = {
                 method: "get",
-                // url: "http://localhost:8010/proxy/user/product",
                 url: "https://api.lahanku.id/bookmarks?sort=desc&rp=1000",
-                // url: "https://api.lahanku.id/feeds?rp=10000",
                 headers: {
                     'Authorization':'Bearer ' + token
                 }
@@ -139,7 +135,6 @@ class FeedBookmark extends Component {
             const token = localStorage.getItem("token");
             const allFeed = {
                 method: "get",
-                // url: "http://localhost:8010/proxy/user/product",
                 url: "https://api.lahanku.id/bookmarks?sort=desc&rp=1000",
                 // url: "https://api.lahanku.id/feeds?rp=10000",
                 headers: {
